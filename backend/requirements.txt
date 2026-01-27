@@ -1,0 +1,9 @@
+django
+gunicorn
+djangorestframework
+django-cors-headers
+djangorestframework-simplejwt
+google-generativeai
+python-dotenv
+openai
+resend

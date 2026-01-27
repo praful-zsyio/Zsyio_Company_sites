@@ -1,0 +1,5 @@
+0000000000000000000000000000000000000000 ebceeca9e128f8d043f71c4d4bd975923faefc6a Praful8763s <prafulsonwane13@gmail.com> 1769281763 +0530	commit (initial): feat: Initialize Django backend project structure with core applications and their initial models, views, serializers, and migrations.
+ebceeca9e128f8d043f71c4d4bd975923faefc6a 32d8997e0078f3f881b6202a6365ec0a72b85f45 Praful8763s <prafulsonwane13@gmail.com> 1769283546 +0530	commit: Update backend code
+32d8997e0078f3f881b6202a6365ec0a72b85f45 338f9291abfed074a9d9dd421815657a4697d576 Praful8763s <prafulsonwane13@gmail.com> 1769284340 +0530	commit: Update backend code
+338f9291abfed074a9d9dd421815657a4697d576 862b50155a6f1548ba0685210a5a31dd13bf1944 Praful8763s <prafulsonwane13@gmail.com> 1769284466 +0530	commit: Update backend code
+862b50155a6f1548ba0685210a5a31dd13bf1944 5fb8c37559ed45bc2dd36bb544ef9ea59ba09a75 Praful8763s <prafulsonwane13@gmail.com> 1769284767 +0530	commit: Fix Resend API key configuration and add gitignore

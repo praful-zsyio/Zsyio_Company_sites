@@ -1,0 +1,13 @@
+﻿git : Everything up-to-date
+At line:1 char:1
++ git push Praful8763s 
+master > push_log.txt 2>&1
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          
+    : NotSpecified: (Every  
+  thing up-to-date:String   
+ ) [], RemoteException
+    + FullyQualifiedErrorId 
+    : NativeCommandError
+ 
