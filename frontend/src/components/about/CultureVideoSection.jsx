@@ -1,5 +1,5 @@
 import React from "react";
-const video = "https://res.cloudinary.com/damlvqiwv/video/upload/f_auto,q_auto/v1769755044/static_assets/cwd9mwam1ogxbiluxqwj.mp4";
+import video from "../../assets/Zsyio1.mp4";
 
 const CultureVideoSection = () => {
   return (

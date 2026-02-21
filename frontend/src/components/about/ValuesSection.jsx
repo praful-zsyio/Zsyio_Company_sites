@@ -1,6 +1,6 @@
 import React from "react";
 import { Lightbulb, ShieldCheck, Gem, Handshake } from "lucide-react";
-import { useData } from "../../context/DataContext";
+import { coreValues } from "../../data/aboutData/aboutValues";
 
 const iconMap = {
   Lightbulb,
@@ -81,8 +81,6 @@ const ValueCard = ({ icon, title, description }) => {
 };
 
 const ValuesSection = () => {
-  const { globalData } = useData();
-  const coreValues = globalData?.aboutData?.values || [];
   return (
     <section
       className="
@@ -112,7 +110,7 @@ const ValuesSection = () => {
       <div className="container mx-auto px-6 max-w-6xl">
         {/* Heading block */}
         <header className="text-center mb-12 md:mb-16 space-y-4">
-
+         
 
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight animate-in-view">
             Our Core Values

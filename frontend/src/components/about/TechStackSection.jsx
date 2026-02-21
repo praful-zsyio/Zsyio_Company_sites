@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { getCategorizedTechnologies } from "../../services/api";
-import * as LucideIcons from "lucide-react";
-import { useData } from "../../context/DataContext";
+import React from "react";
+import { techStackGroups } from "../../data/aboutData/aboutTechStack";
 
 const TechStackGroup = ({ title, items }) => {
   return (
@@ -23,7 +21,7 @@ const TechStackGroup = ({ title, items }) => {
         className="
           pointer-events-none absolute inset-0 opacity-0
           group-hover:opacity-100 transition-opacity duration-300
-          bg-[radial-gradient(circle_at_top,rgba(56,189,248,0.18),transparent_65%)]
+          bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.18),_transparent_65%)]
         "
         aria-hidden="true"
       />
@@ -39,33 +37,21 @@ const TechStackGroup = ({ title, items }) => {
         </header>
 
         <div className="flex flex-wrap gap-2.5 md:gap-3">
-          {items.map((item, idx) => {
-            // Check if item is object (dynamic) or string (hardcoded fallback)
-            const name = typeof item === 'string' ? item : item.name;
-            const iconName = typeof item === 'string' ? null : item.icon;
-            const color = typeof item === 'string' ? null : item.color;
-            const Icon = LucideIcons[iconName] || null;
-
-            return (
-              <span
-                key={idx}
-                className="
-                  inline-flex items-center gap-1.5
-                  rounded-full border border-[hsl(var(--surface2))]
-                  bg-[hsl(var(--base))]/80
-                  px-3 py-1.5
-                  text-xs md:text-sm
-                  text-[hsl(var(--subtext0))]"
-              >
-                {Icon ? (
-                  <Icon style={{ color }} className="w-3 h-3 md:w-3.5 md:h-3.5" />
-                ) : (
-                  <span className="h-1.5 w-1.5 rounded-full bg-[hsl(var(--blue))]" />
-                )}
-                {name}
-              </span>
-            );
-          })}
+          {items.map((item) => (
+            <span
+              key={item}
+              className="
+                inline-flex items-center gap-1.5
+                rounded-full border border-[hsl(var(--surface2))]
+                bg-[hsl(var(--base))]/80
+                px-3 py-1.5
+                text-xs md:text-sm
+                text-[hsl(var(--subtext0))]"
+            >
+              <span className="h-1.5 w-1.5 rounded-full bg-[hsl(var(--blue))]" />
+              {item}
+            </span>
+          ))}
         </div>
       </div>
     </article>
@@ -73,38 +59,23 @@ const TechStackGroup = ({ title, items }) => {
 };
 
 const TechStackSection = () => {
-  const [techStackGroups, setTechStackGroups] = useState([]);
-
-  useEffect(() => {
-    getCategorizedTechnologies()
-      .then((res) => {
-        if (Array.isArray(res.data)) {
-          // Normalize names for consistent titles
-          const normalized = res.data.map(g => ({
-            ...g,
-            title: g.category // Backend uses 'category'
-          }));
-          setTechStackGroups(normalized);
-        }
-      })
-      .catch((err) => console.error("Error fetching tech stack:", err));
-  }, []);
-
-  // Try to find "Data / AI" or similar group by title
+  // Try to find "Data / AI" group by title (Data + AI/ML in name)
   const highlightGroup = techStackGroups.find((group) =>
-    /data/i.test(group.title) || /(ai|ml|intelligence)/i.test(group.title)
+    /data/i.test(group.title) && /(ai|ml)/i.test(group.title)
   );
 
   const remainingGroups = highlightGroup
     ? techStackGroups.filter((g) => g !== highlightGroup)
     : techStackGroups;
 
-
   return (
     <section className="relative py-20 md:py-24">
       {/* Background glow */}
       <div
-        className="absolute inset-x-0 top-0 h-96 bg-[radial-gradient(circle_at_top,rgba(56,189,248,0.18),transparent_65%)] pointer-events-none"
+        className="
+          pointer-events-none absolute inset-0 -z-10
+          bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.2),_transparent_60%)]
+        "
         aria-hidden="true"
       />
 
@@ -114,7 +85,7 @@ const TechStackSection = () => {
           pointer-events-none absolute inset-0 -z-10
           bg-[linear-gradient(to_right,rgba(148,163,184,0.08)_1px,transparent_1px),
               linear-gradient(to_bottom,rgba(148,163,184,0.08)_1px,transparent_1px)]
-          bg-size-[22px_22px]
+          bg-[size:22px_22px]
           opacity-40
         "
         aria-hidden="true"
@@ -142,9 +113,9 @@ const TechStackSection = () => {
         {/* Tech groups with DS/AI in the middle */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           {/* First two normal groups */}
-          {remainingGroups.slice(0, 2).map((group, idx) => (
+          {remainingGroups.slice(0, 2).map((group) => (
             <TechStackGroup
-              key={group.id || idx}
+              key={group.id}
               title={group.title}
               items={group.items}
             />
@@ -161,11 +132,11 @@ const TechStackSection = () => {
           )}
 
           {/* Remaining groups */}
-          {remainingGroups.slice(2).map((group, idx) => (
+          {remainingGroups.slice(2).map((group) => (
             <TechStackGroup
-              key={group.id || idx}
+              key={group.id}
               title={group.title}
-              items={group.items.map(i => i.name)}
+              items={group.items}
             />
           ))}
         </div>

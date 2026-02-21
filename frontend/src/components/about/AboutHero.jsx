@@ -1,10 +1,24 @@
-import { useData } from "../../context/DataContext";
+import React, { useState, useEffect } from "react";
+import { STUDIO_STATS, META_STATS } from "../../data/aboutData/aboutStats";
 
 const AboutHero = () => {
-  const { globalData, loading: isLoading } = useData();
-  const topStats = globalData?.aboutData?.stats?.studio || [];
-  const bottomStats = globalData?.aboutData?.stats?.meta || [];
+  const [stats, setStats] = useState([]);
+  const [metaStats, setMetaStats] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
+  // Simulate async data load (replace with API later if needed)
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setStats(STUDIO_STATS);
+      setMetaStats(META_STATS);
+      setIsLoading(false);
+    }, 900);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  const topStats = isLoading ? STUDIO_STATS : stats;
+  const bottomStats = isLoading ? META_STATS : metaStats;
 
   return (
     <header className="relative overflow-hidden bg-[hsl(var(--mantle))] pt-32 md:pt-40 pb-16 md:pb-20">
@@ -64,9 +78,10 @@ const AboutHero = () => {
                 <span
                   className={`
                     inline-flex h-1.5 w-1.5 rounded-full
-                    ${isLoading
-                      ? "bg-[hsl(var(--blue))] animate-pulse"
-                      : "bg-[hsl(var(--green))]"
+                    ${
+                      isLoading
+                        ? "bg-[hsl(var(--blue))] animate-pulse"
+                        : "bg-[hsl(var(--green))]"
                     }
                   `}
                 />
@@ -77,8 +92,9 @@ const AboutHero = () => {
                 {topStats.map((stat) => (
                   <div key={stat.id} className="text-center">
                     <p
-                      className={`text-2xl md:text-3xl font-semibold ${isLoading ? "opacity-60 animate-pulse" : ""
-                        }`}
+                      className={`text-2xl md:text-3xl font-semibold ${
+                        isLoading ? "opacity-60 animate-pulse" : ""
+                      }`}
                     >
                       {stat.value}
                     </p>

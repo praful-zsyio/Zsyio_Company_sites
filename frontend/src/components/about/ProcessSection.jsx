@@ -1,12 +1,10 @@
 import React from "react";
 import { Search, PencilRuler, Code, Rocket } from "lucide-react";
-import { useData } from "../../context/DataContext";
+import { processSteps } from "../../data/aboutData/aboutProcess";
 
 const iconMap = { Search, PencilRuler, Code, Rocket };
 
 const ProcessSection = () => {
-  const { globalData } = useData();
-  const processSteps = globalData?.aboutData?.process || [];
   return (
     <section
       className="
