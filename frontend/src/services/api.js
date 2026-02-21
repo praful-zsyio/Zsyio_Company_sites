@@ -3,7 +3,7 @@ import axios from 'axios';
 export const ACCESS_TOKEN = 'access_token';
 export const REFRESH_TOKEN = 'refresh_token';
 
-const API_BASE_URL = 'https://zsyio-tech-67m6.onrender.com/api/' || import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000/api/';
+const API_BASE_URL = 'https://zsyio-company-7d1w.onrender.com/api/' || import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000/api/';
 
 const api = axios.create({
     baseURL: API_BASE_URL,
