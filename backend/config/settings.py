@@ -46,7 +46,8 @@ CSRF_TRUSTED_ORIGINS = [
     "http://127.0.0.1:5173",
     "http://localhost:3000",
     "https://company-sites11.vercel.app",
-    "https://zsyiotech.vercel.app/"
+    "https://zsyiotech.vercel.app/",
+    "https://zsyio-web.vercel.app/"
 ]
 
 # CORS Configuration
@@ -299,6 +300,7 @@ CLOUDINARY_STORAGE = {
 }
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
 
 
 
