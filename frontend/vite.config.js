@@ -17,7 +17,7 @@ export default defineConfig({
         proxy: {
             // Proxy /api requests to the Django backend in development
             '/api': {
-                target: 'https://zsyio-tech-67m6.onrender.com' || 'http://127.0.0.1:8000',
+                target: 'https://zsyio-company-7d1w.onrender.com' || 'http://127.0.0.1:8000',
                 changeOrigin: true,
                 secure: false,
             },
