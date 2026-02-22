@@ -1,5 +1,5 @@
-import React, { useState, useContext } from "react";
-import { NavLink, Link, useNavigate } from "react-router-dom";
+import React, { useState} from "react";
+import { NavLink, Link } from "react-router-dom";
 const logo = "https://res.cloudinary.com/damlvqiwv/image/upload/f_auto,q_auto/v1769755031/static_assets/nhbcbfzk97vmxx0oxfa9.png";
 import { useTheme } from "../../context/ThemeContext";
 import { AuthContext } from "../../context/AuthContext";
@@ -7,7 +7,7 @@ import { useData } from "../../context/DataContext";
 
 const Navbar = () => {
   const { theme, toggleTheme } = useTheme();
-  const { user, logout } = useContext(AuthContext);
+  // const { user, logout } = useContext(AuthContext);
   const { globalData } = useData();
   const navLinks = globalData?.navLinks || [];
 
@@ -35,9 +35,9 @@ const Navbar = () => {
         <div
           className="
             relative flex h-14 md:h-16 items-center justify-between gap-4
-            rounded-3xl
+            rounded-4xl
             border border-[hsl(var(--surface2))/0.7]
-            bg-[hsl(var(--mantle)/0.35)]
+            bg-[hsl(var(--mantle)/0.3)]
             backdrop-blur-2xl
             shadow-[0_10px_30px_rgba(0,0,0,0.18)]
             px-4 sm:px-6
@@ -86,51 +86,68 @@ const Navbar = () => {
             </Link>
 
 
-
-
           </div>
 
-          {/* Right controls */}
           <div className="flex items-center gap-3">
             {/* Theme Toggle */}
             <button
-              type="button"
-              onClick={toggleTheme}
-              aria-label="Toggle theme"
-              aria-pressed={theme === "dark"}
-              className="
-                relative h-8 w-14 overflow-hidden rounded-full
-                border border-[hsl(var(--overlay1))/0.7]
-                bg-[hsl(var(--surface0)/0.7)]
-                backdrop-blur-xl
-                shadow-[0_4px_10px_rgba(0,0,0,0.18)]
-              "
-            >
-              <span
-                className={`absolute inset-0 transition-transform duration-500 ${theme === "dark"
-                  ? "translate-y-0 bg-[hsl(var(--yellow)/0.3)]"
-                  : "-translate-y-full bg-[hsl(var(--blue)/0.35)]"
-                  }`}
-              />
+    type="button"
+    onClick={toggleTheme}
+    aria-label="Toggle theme"
+    aria-pressed={theme === "dark"}
+    className="
+      relative h-8 w-14 overflow-hidden !rounded-full
+      border border-[hsl(var(--overlay1))/0.7]
+      bg-[hsl(var(--surface0)/0.7)]
+      backdrop-blur-xl
+      shadow-[0_4px_10px_rgba(0,0,0,0.18)]
+      transition-colors duration-300
+    "
+  >
+    {/* Ripple Background */}
+    <span
+      className={`
+        absolute inset-0 rounded-full
+        transition-transform duration-500 ease-out
+        ${theme === "dark"
+          ? "scale-150 bg-[hsl(var(--yellow)/0.35)]"
+          : "scale-0 bg-[hsl(var(--blue)/0.35)]"
+        }
+      `}
+    />
 
-              <span
-                className={`absolute left-2 top-1/2 -translate-y-1/2 transition-all duration-500 ${theme === "dark"
-                  ? "-translate-x-10 opacity-0"
-                  : "translate-x-0 opacity-100"
-                  }`}
-              >
-                ☀️
-              </span>
+    {/* Sliding Knob */}
+    <span
+      className={`
+        absolute top-1 left-1 h-6 w-6 rounded-full
+        bg-[hsl(var(--base))]
+        shadow-md
+        transition-transform duration-500
+        ${theme === "dark" ? "translate-x-6" : "translate-x-0"}
+      `}
+    />
 
-              <span
-                className={`absolute right-2 top-1/2 -translate-y-1/2 transition-all duration-500 ${theme === "dark"
-                  ? "translate-x-0 opacity-100"
-                  : "translate-x-10 opacity-0"
-                  }`}
-              >
-                🌙
-              </span>
-            </button>
+    {/* Icons */}
+    <span
+      className={`
+        absolute left-2 top-1/2 -translate-y-1/2 text-xs
+        transition-all duration-20
+        ${theme === "dark" ? "opacity-0 -translate-x-2" : "opacity-100"}
+      `}
+    >
+      ☀️
+    </span>
+
+    <span
+      className={`
+        absolute right-2 top-1/2 -translate-y-1/2 text-xs
+        transition-all duration-20
+        ${theme === "dark" ? "opacity-100" : "opacity-0 translate-x-2"}
+      `}
+    >
+      🌙
+    </span>
+  </button>
 
             {/* Mobile Menu Button */}
             <button
@@ -138,7 +155,7 @@ const Navbar = () => {
               onClick={handleToggleMenu}
               className="
                 md:hidden inline-flex h-9 w-9 items-center justify-center
-                rounded-full border border-[hsl(var(--overlay1))/0.7]
+                !rounded-full border border-[hsl(var(--overlay1))/0.7]
                 bg-[hsl(var(--surface0)/0.7)]
                 backdrop-blur-xl
                 text-[hsl(var(--text))]
@@ -148,17 +165,21 @@ const Navbar = () => {
             >
               <span className="relative block h-4 w-4">
                 <span
-                  className={`absolute left-0 top-0 h-[2px] w-full rounded-full bg-current transition-transform duration-200 ${isMenuOpen ? "translate-y-[6px] rotate-45" : ""
-                    }`}
+                  className={`absolute left-0 top-0 h-[2px] w-full !rounded-full bg-current transition-transform duration-300 ${
+                    isMenuOpen ? "translate-y-[6px] rotate-45" : ""
+                  }`}
                 />
                 <span
-                  className={`absolute left-0 top-[6px] h-[2px] w-full rounded-full bg-current transition-opacity duration-200 ${isMenuOpen ? "opacity-0" : "opacity-100"
-                    }`}
+                  className={`absolute left-0 top-[6px] h-[2px] w-full !rounded-full bg-current transition-opacity duration-200 ${
+                    isMenuOpen ? "opacity-0" : "opacity-100"
+                  }`}
                 />
                 <span
-                  className={`absolute left-0 top-[12px] h-[2px] w-full rounded-full bg-current transition-transform duration-200 ${isMenuOpen ? "-translate-y-[6px] -rotate-45" : ""
-                    }`}
+                  className={`absolute left-0 top-[12px] h-[2px] w-full !rounded-full bg-current transition-transform duration-200 ${
+                    isMenuOpen ? "-translate-y-[6px] -rotate-45" : ""
+                  }`}
                 />
+                <p className="text-transparent">Toggle</p>
               </span>
             </button>
           </div>
@@ -185,10 +206,11 @@ const Navbar = () => {
                       "rounded-lg px-3 py-2 text-sm transition-colors duration-200",
                       isActive
                         ? "bg-[hsl(var(--surface1))] text-[hsl(var(--text))]"
-                        : `${theme === "light"
-                          ? "text-[hsl(var(--subtext1))]"
-                          : "text-[hsl(var(--subtext0))]"
-                        } hover:text-[hsl(var(--text))] hover:bg-[hsl(var(--surface1)/0.7)]`,
+                        : `${
+                            theme === "light"
+                              ? "text-[hsl(var(--subtext1))]"
+                              : "text-[hsl(var(--subtext0))]"
+                          } hover:text-[hsl(var(--text))] hover:bg-[hsl(var(--surface1)/0.7)]`,
                     ].join(" ")
                   }
                   onClick={closeMenu}
@@ -211,8 +233,6 @@ const Navbar = () => {
               >
                 Contact Us
               </Link>
-
-
             </div>
           </div>
         )}

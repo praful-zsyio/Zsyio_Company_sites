@@ -279,33 +279,6 @@ const AboutSection = () => {
         </div>
 
         {/* CTA */}
-        <div className="mt-16 text-center feature-card about-cta">
-          <Link
-            to="/about"
-            className="
-              inline-block
-              rounded-xl
-              bg-[hsl(var(--blue))]
-              px-6 md:px-8 py-3
-              text-base
-              font-semibold
-              text-[hsl(var(--crust))]
-              shadow-soft
-              border border-transparent
-              transition-all duration-300
-              hover:bg-[hsl(var(--blue))]/90
-              hover:-translate-y-1
-              hover:shadow-[0_0_22px_rgba(56,189,248,0.25)]
-              focus-visible:outline-none
-              focus-visible:ring-2
-              focus-visible:ring-[hsl(var(--blue))]
-              focus-visible:ring-offset-2
-              focus-visible:ring-offset-[hsl(var(--base))]
-            "
-          >
-            Learn More About Us
-          </Link>
-        </div>
       </div>
     </section>
   );

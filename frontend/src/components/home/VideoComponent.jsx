@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-const backgroundVideo = "https://res.cloudinary.com/damlvqiwv/video/upload/f_auto,q_auto/v1769755069/static_assets/aqpqishomqttgatsdad4.mp4";
-const mobileImg = "https://res.cloudinary.com/damlvqiwv/image/upload/f_auto,q_auto/v1769755035/static_assets/f8vkequuud69wsyogyzc.png";
+import video2 from "../../assets/Zsyio3.mp4";
+import mobileImg from "../../assets/mobileFallback.png";
 
 const VideoComponent = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -36,15 +36,14 @@ const VideoComponent = () => {
     };
   }, []);
 
-  // TEMPORARILY DISABLED FOR DEBUGGING
-  const showImage = false; // isMobile || prefersReducedMotion;
+  const showImage = isMobile || prefersReducedMotion;
 
   /* -------------------------
      MOBILE FALLBACK (IMAGE)
      ------------------------- */
   if (showImage) {
     return (
-      <div className="absolute inset-0 pointer-events-none">
+      <div className="absolute inset-0 -z-10 pointer-events-none">
         <div
           className="w-full h-screen bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${mobileImg})` }}
@@ -58,10 +57,10 @@ const VideoComponent = () => {
      DESKTOP VIDEO BACKGROUND
      ------------------------- */
   return (
-    <div className="absolute inset-0 pointer-events-none">
+    <div className="absolute inset-0 -z-10 pointer-events-none">
       <div className="w-full h-screen overflow-hidden">
         <video
-          src={backgroundVideo}
+          src={video2}
           autoPlay
           loop
           muted

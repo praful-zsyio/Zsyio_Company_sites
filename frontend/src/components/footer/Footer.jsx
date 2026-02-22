@@ -17,13 +17,13 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const socialLinks = [
-  { Icon: Twitter, label: "Twitter", href: "#" },
-  { Icon: Github, label: "GitHub", href: "#" },
+  // { Icon: Twitter, label: "Twitter", href: "#" },
+  { Icon: Github, label: "GitHub", href: "https://github.com/ZSYIO" },
   { Icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/zsyio-technology-0b0005391/" },
-  { Icon: Facebook, label: "Facebook", href: "#" },
+  // { Icon: Facebook, label: "Facebook", href: "#" },
   { Icon: Instagram, label: "Instagram", href: "https://www.instagram.com/zsyio_tech/" },
-  { Icon: Youtube, label: "YouTube", href: "#" },
-  { Icon: Dribbble, label: "Dribbble", href: "#" },
+  // { Icon: Youtube, label: "YouTube", href: "#" },
+  // { Icon: Dribbble, label: "Dribbble", href: "#" },
 ];
 
 const Footer = () => {
@@ -93,17 +93,21 @@ const Footer = () => {
         >
           {/* Company Info */}
           <div className="footer-animate">
-            <h2 className="text-2xl font-bold text-[hsl(var(--text))] mb-3">
-              Zsyio
-            </h2>
-            <p className="text-sm leading-relaxed">
-              Pioneering digital transformation through modern, reliable
-              software, web, and mobile solutions that actually ship and scale.
-            </p>
-            <p className="mt-3 text-xs text-[hsl(var(--subtext0))]">
-              Based in India, collaborating with teams worldwide.
-            </p>
-          </div>
+  <h2 className="text-2xl font-bold text-[hsl(var(--text))] mb-3 font-serif tracking-normal uppercase relative inline-block">
+    Zsyio
+    <span className="align-top text-sm text-[hsl(var(--text))]">™</span>
+  </h2>
+
+  <p className="text-sm leading-relaxed text-[hsl(var(--subtext1))]">
+    Building scalable digital systems - from intelligent web platforms
+    to high-performance mobile and enterprise software.
+  </p>
+
+  <p className="mt-3 text-xs text-[hsl(var(--subtext0))]">
+    Headquartered in India. Partnering with global teams to engineer
+    reliable, future-ready technology.
+  </p>
+</div>
 
           {/* Quick Links */}
           <div className="footer-animate">
@@ -192,6 +196,7 @@ const Footer = () => {
                 border border-[hsl(var(--surface2))]
                 rounded-2xl px-3 py-3
                 backdrop-blur-xl
+                justify-center
               "
             >
               {socialLinks.map(({ Icon, label, href }) => (
@@ -219,11 +224,21 @@ const Footer = () => {
 
         {/* Bottom bar */}
         <div className="border-t border-[hsl(var(--surface1))] pt-5 flex flex-col md:flex-row items-center justify-between gap-3 text-xs md:text-sm footer-animate">
-          <p>&copy; {currentYear} Zsyio. All rights reserved.</p>
-          <p className="text-[hsl(var(--subtext0))]">
-            Crafted with care, performance, and a bit of caffeine.
-          </p>
-        </div>
+  
+  <p>
+    &copy; {currentYear}{" "}
+    <span className="font-semibold tracking-wide">
+      Zsyio
+      <span className="align-top text-[10px] text-[hsl(var(--text))]">™</span>
+    </span>
+    . All rights reserved.
+  </p>
+
+  <p className="text-[hsl(var(--subtext0))] text-center md:text-right">
+    Engineering digital systems that scale and built with precision, performance, and purpose.
+  </p>
+
+</div>
       </div>
     </footer>
   );
