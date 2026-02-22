@@ -155,7 +155,7 @@ const Navbar = () => {
               onClick={handleToggleMenu}
               className="
                 md:hidden inline-flex h-9 w-9 items-center justify-center
-                !rounded-full border border-[hsl(var(--overlay1))/0.7]
+                rounded-full! border border-[hsl(var(--overlay1))/0.7]
                 bg-[hsl(var(--surface0)/0.7)]
                 backdrop-blur-xl
                 text-[hsl(var(--text))]
@@ -165,18 +165,18 @@ const Navbar = () => {
             >
               <span className="relative block h-4 w-4">
                 <span
-                  className={`absolute left-0 top-0 h-[2px] w-full !rounded-full bg-current transition-transform duration-300 ${
-                    isMenuOpen ? "translate-y-[6px] rotate-45" : ""
+                  className={`absolute left-0 top-0 h-0.5 w-full rounded-full! bg-current transition-transform duration-300 ${
+                    isMenuOpen ? "translate-y-1.5 rotate-45" : ""
                   }`}
                 />
                 <span
-                  className={`absolute left-0 top-[6px] h-[2px] w-full !rounded-full bg-current transition-opacity duration-200 ${
+                  className={`absolute left-0 top-1.5 h-0.5 w-full rounded-full! bg-current transition-opacity duration-200 ${
                     isMenuOpen ? "opacity-0" : "opacity-100"
                   }`}
                 />
                 <span
-                  className={`absolute left-0 top-[12px] h-[2px] w-full !rounded-full bg-current transition-transform duration-200 ${
-                    isMenuOpen ? "-translate-y-[6px] -rotate-45" : ""
+                  className={`absolute left-0 top-3 h-0.5 w-full rounded-full! bg-current transition-transform duration-200 ${
+                    isMenuOpen ? "-translate-y-1.5 -rotate-45" : ""
                   }`}
                 />
                 <p className="text-transparent">Toggle</p>

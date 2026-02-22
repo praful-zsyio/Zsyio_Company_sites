@@ -120,7 +120,7 @@ const Services = () => {
                   {service.description}
                 </p>
 
-                <div className="mt-4 h-[2px] w-0 bg-[hsl(var(--blue))] group-hover:w-full transition-all duration-300 rounded-full" />
+                <div className="mt-4 h-0.5 w-0 bg-[hsl(var(--blue))] group-hover:w-full transition-all duration-300 rounded-full" />
               </motion.article>
             );
           })}

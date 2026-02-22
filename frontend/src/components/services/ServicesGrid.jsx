@@ -66,7 +66,7 @@ const ServicesGrid = ({ isInView = true }) => {
 
   if (loading) {
     return (
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-24">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-24">
         {[...Array(4)].map((_, i) => (
           <div key={i} className="h-72 rounded-2xl border border-[hsl(var(--surface1))] bg-[hsl(var(--mantle))]/60 animate-pulse" />
         ))}
@@ -88,7 +88,7 @@ const ServicesGrid = ({ isInView = true }) => {
       variants={container}
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
-      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-24"
+      className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-12"
     >
       {services.map((service, index) => {
         const Icon = LucideIcons[service.icon] || LucideIcons.HelpCircle;
@@ -180,7 +180,7 @@ const ServicesGrid = ({ isInView = true }) => {
             </div>
 
             {/* Bottom accent line */}
-            <div className="mb-3 h-[2px] w-0 bg-[hsl(var(--blue))] group-hover:w-full transition-all duration-300 rounded-full" />
+            <div className="mb-3 h-0.5 w-0 bg-[hsl(var(--blue))] group-hover:w-full transition-all duration-300 rounded-full" />
 
             {/* Action buttons */}
             <div className="flex gap-2">

@@ -184,170 +184,260 @@ const EstimateSection = () => {
   const hasInputsForService = !!DEFAULT_INPUTS[serviceId];
 
   return (
-    <section className="pt-28 pb-32 max-w-4xl mx-auto px-6">
+  <section className="pt-28 pb-32 px-6">
+    <div className="max-w-6xl mx-auto">
 
-      {/* Back button */}
-      <button
-        onClick={() => navigate(-1)}
-        className="mb-6 inline-flex items-center gap-2 text-sm font-medium text-[hsl(var(--subtext1))] hover:text-[hsl(var(--text))] transition"
-      >
-        ← Back
-      </button>
+      {/* ───────── Header ───────── */}
+      <div className="mb-10">
+        <button
+          onClick={() => navigate(-1)}
+          className="mb-4 text-sm font-medium text-[hsl(var(--subtext1))] hover:text-[hsl(var(--blue))] transition"
+        >
+          ← Back
+        </button>
 
-      <h1 className="text-3xl font-semibold mb-8">
-        {service.title} – Cost Estimation
-      </h1>
+        <h1 className="text-3xl md:text-4xl font-semibold text-[hsl(var(--text))]">
+          {service.title}
+        </h1>
+        <p className="text-[hsl(var(--subtext1))] mt-2">
+          Configure your requirements and get an instant cost estimation.
+        </p>
+      </div>
 
-      <div className="rounded-2xl border border-[hsl(var(--surface1))] bg-[hsl(var(--mantle))]/80 p-8 space-y-6">
+      {/* ───────── Main Grid Layout ───────── */}
+      <div className="grid lg:grid-cols-3 gap-10">
 
-        {/* ── No inputs mapped for this service ─────────────────────── */}
-        {!hasInputsForService ? (
-          <div className="text-center py-8 text-[hsl(var(--subtext1))]">
-            <p className="text-lg font-medium mb-2">Custom Estimation Required</p>
-            <p className="text-sm">
-              Please contact us directly for a custom quote for <strong>{service.title}</strong>.
-            </p>
-          </div>
-        ) : (
-          <>
-            {/* ── WEB DESIGNING ─────────────────────────────────── */}
-            {serviceId === "web-designing" && (
+        {/* ───────── LEFT: Configuration ───────── */}
+        <div className="lg:col-span-2">
+          <div className="rounded-2xl border border-[hsl(var(--surface1))] bg-[hsl(var(--mantle))]/70 p-8 space-y-8">
+
+            {!hasInputsForService ? (
+              <div className="text-center py-12 text-[hsl(var(--subtext1))]">
+                <p className="text-lg font-medium mb-2">
+                  Custom Estimation Required
+                </p>
+                <p className="text-sm">
+                  Please contact us directly for a custom quote for{" "}
+                  <strong>{service.title}</strong>.
+                </p>
+              </div>
+            ) : (
               <>
-                <Input label="Number of Pages" value={inputs.pages ?? 1} min={1}
-                  onChange={(v) => setInputs(p => ({ ...p, pages: v }))} />
-                <Input label="Design Iterations" value={inputs.iterations ?? 1} min={1}
-                  onChange={(v) => setInputs(p => ({ ...p, iterations: v }))} />
-                <Checkbox label="Include Logo Design" checked={inputs.logo ?? false}
-                  onChange={(v) => setInputs(p => ({ ...p, logo: v }))} />
+                <SectionTitle title="Project Configuration" />
+
+                {/* WEB DESIGNING */}
+                {serviceId === "web-designing" && (
+                  <div className="space-y-6">
+                    <Input
+                      label="Number of Pages"
+                      value={inputs.pages ?? 1}
+                      min={1}
+                      onChange={(v) => setInputs(p => ({ ...p, pages: v }))}
+                    />
+                    <Input
+                      label="Design Iterations"
+                      value={inputs.iterations ?? 1}
+                      min={1}
+                      onChange={(v) => setInputs(p => ({ ...p, iterations: v }))}
+                    />
+                    <Checkbox
+                      label="Include Logo Design"
+                      checked={inputs.logo ?? false}
+                      onChange={(v) => setInputs(p => ({ ...p, logo: v }))}
+                    />
+                  </div>
+                )}
+
+                {/* WEB DEVELOPMENT */}
+                {serviceId === "web-development" && (
+                  <div className="space-y-6">
+                    <Input
+                      label="Number of Pages"
+                      value={inputs.pages ?? 1}
+                      min={1}
+                      onChange={(v) => setInputs(p => ({ ...p, pages: v }))}
+                    />
+                    <div className="space-y-4">
+                      <p className="text-sm font-medium text-[hsl(var(--text))]">
+                        Additional Features
+                      </p>
+                      {["cms", "auth", "payments"].map((key) => (
+                        <Checkbox
+                          key={key}
+                          label={{
+                            cms: "CMS Integration",
+                            auth: "Authentication System",
+                            payments: "Payment Gateway",
+                          }[key]}
+                          checked={inputs.features?.[key] ?? false}
+                          onChange={(v) =>
+                            setInputs(p => ({
+                              ...p,
+                              features: { ...p.features, [key]: v },
+                            }))
+                          }
+                        />
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Other services remain exactly same structure-wise */}
+                {serviceId === "deployment" && (
+                  <Input
+                    label="Number of Environments"
+                    value={inputs.environments ?? 1}
+                    min={1}
+                    onChange={(v) => setInputs(p => ({ ...p, environments: v }))}
+                  />
+                )}
+
+                {serviceId === "company-details" && (
+                  <Input
+                    label="Number of Pages"
+                    value={inputs.pages ?? 1}
+                    min={1}
+                    onChange={(v) => setInputs(p => ({ ...p, pages: v }))}
+                  />
+                )}
+
+                {serviceId === "hosting" && (
+                  <Input
+                    label="Years of Hosting"
+                    value={inputs.years ?? 1}
+                    min={1}
+                    onChange={(v) => setInputs({ years: v })}
+                  />
+                )}
+
+                {serviceId === "app-development" && (
+                  <div className="space-y-6">
+                    <Input
+                      label="Number of Screens"
+                      value={inputs.screens ?? 5}
+                      min={1}
+                      onChange={(v) => setInputs(p => ({ ...p, screens: v }))}
+                    />
+                    <label className="flex flex-col gap-2">
+                      <span className="text-sm font-medium text-[hsl(var(--text))]">
+                        Platform
+                      </span>
+                      <select
+                        value={inputs.platform ?? "single"}
+                        onChange={(e) =>
+                          setInputs(p => ({ ...p, platform: e.target.value }))
+                        }
+                        className="border border-[hsl(var(--surface2))] rounded-xl p-3 bg-[hsl(var(--base))]"
+                      >
+                        <option value="single">Android or iOS</option>
+                        <option value="both">Android + iOS</option>
+                      </select>
+                    </label>
+                  </div>
+                )}
+
+                {serviceId === "logo-designing" && (
+                  <div className="space-y-6">
+                    <Input
+                      label="Number of Concepts"
+                      value={inputs.concepts ?? 1}
+                      min={1}
+                      onChange={(v) => setInputs(p => ({ ...p, concepts: v }))}
+                    />
+                    <Input
+                      label="Number of Revisions"
+                      value={inputs.revisions ?? 2}
+                      min={0}
+                      onChange={(v) => setInputs(p => ({ ...p, revisions: v }))}
+                    />
+                  </div>
+                )}
+
+                {serviceId === "data-solutions" && (
+                  <div className="space-y-6">
+                    <Input
+                      label="Number of Dashboards"
+                      value={inputs.dashboards ?? 1}
+                      min={1}
+                      onChange={(v) => setInputs(p => ({ ...p, dashboards: v }))}
+                    />
+                    <Input
+                      label="Number of Integrations"
+                      value={inputs.integrations ?? 0}
+                      min={0}
+                      onChange={(v) => setInputs(p => ({ ...p, integrations: v }))}
+                    />
+                  </div>
+                )}
               </>
             )}
-
-            {/* ── WEB DEVELOPMENT ───────────────────────────────── */}
-            {serviceId === "web-development" && (
-              <>
-                <Input label="Number of Pages" value={inputs.pages ?? 1} min={1}
-                  onChange={(v) => setInputs(p => ({ ...p, pages: v }))} />
-                {["cms", "auth", "payments"].map((key) => (
-                  <Checkbox key={key}
-                    label={{ cms: "CMS Integration", auth: "Authentication System", payments: "Payment Gateway" }[key]}
-                    checked={inputs.features?.[key] ?? false}
-                    onChange={(v) => setInputs(p => ({
-                      ...p, features: { ...p.features, [key]: v }
-                    }))} />
-                ))}
-              </>
-            )}
-
-            {/* ── DEPLOYMENT ────────────────────────────────────── */}
-            {serviceId === "deployment" && (
-              <Input label="Number of Environments" value={inputs.environments ?? 1} min={1}
-                onChange={(v) => setInputs(p => ({ ...p, environments: v }))} />
-            )}
-
-            {/* ── COMPANY DETAILS ───────────────────────────────── */}
-            {serviceId === "company-details" && (
-              <Input label="Number of Pages" value={inputs.pages ?? 1} min={1}
-                onChange={(v) => setInputs(p => ({ ...p, pages: v }))} />
-            )}
-
-            {/* ── HOSTING ───────────────────────────────────────── */}
-            {serviceId === "hosting" && (
-              <Input label="Years of Hosting" value={inputs.years ?? 1} min={1}
-                onChange={(v) => setInputs({ years: v })} />
-            )}
-
-            {/* ── APP DEVELOPMENT ───────────────────────────────── */}
-            {serviceId === "app-development" && (
-              <>
-                <Input label="Number of Screens" value={inputs.screens ?? 5} min={1}
-                  onChange={(v) => setInputs(p => ({ ...p, screens: v }))} />
-                <label className="flex flex-col gap-2">
-                  <span className="text-sm font-medium text-[hsl(var(--text))]">Platform</span>
-                  <select
-                    value={inputs.platform ?? "single"}
-                    onChange={(e) => setInputs(p => ({ ...p, platform: e.target.value }))}
-                    className="border border-[hsl(var(--surface2))] rounded-lg p-2.5 bg-[hsl(var(--base))] text-[hsl(var(--text))]"
-                  >
-                    <option value="single">Android or iOS</option>
-                    <option value="both">Android + iOS</option>
-                  </select>
-                </label>
-              </>
-            )}
-
-            {/* ── LOGO DESIGNING ────────────────────────────────── */}
-            {serviceId === "logo-designing" && (
-              <>
-                <Input label="Number of Concepts" value={inputs.concepts ?? 1} min={1}
-                  onChange={(v) => setInputs(p => ({ ...p, concepts: v }))} />
-                <Input label="Number of Revisions" value={inputs.revisions ?? 2} min={0}
-                  onChange={(v) => setInputs(p => ({ ...p, revisions: v }))} />
-              </>
-            )}
-
-            {/* ── DATA SOLUTIONS ────────────────────────────────── */}
-            {serviceId === "data-solutions" && (
-              <>
-                <Input label="Number of Dashboards" value={inputs.dashboards ?? 1} min={1}
-                  onChange={(v) => setInputs(p => ({ ...p, dashboards: v }))} />
-                <Input label="Number of Integrations" value={inputs.integrations ?? 0} min={0}
-                  onChange={(v) => setInputs(p => ({ ...p, integrations: v }))} />
-              </>
-            )}
-          </>
-        )}
-
-        {/* ── BREAKDOWN + TOTAL ─────────────────────────────────────── */}
-        <div className="border-t border-[hsl(var(--surface1))] pt-6 mt-6 space-y-4">
-
-          {calcError && (
-            <p className="text-sm text-red-400 text-center">{calcError}</p>
-          )}
-
-          {breakdown.length > 0 && (
-            <div className="space-y-2 mb-4">
-              {breakdown.map((item, idx) => (
-                <div key={idx} className="flex justify-between text-sm text-[hsl(var(--subtext1))]">
-                  <span>{item.label}</span>
-                  <span className="tabular-nums">₹{item.value.toLocaleString("en-IN")}</span>
-                </div>
-              ))}
-            </div>
-          )}
-
-          <div className="flex justify-between items-center pt-4 border-t border-[hsl(var(--surface1))]">
-            <span className="text-lg font-semibold text-[hsl(var(--text))]">Estimated Total</span>
-            <span className="text-2xl font-bold text-[hsl(var(--blue))]">
-              ₹{total.toLocaleString("en-IN")}
-            </span>
           </div>
         </div>
 
-        {/* ── ADD TO CART ───────────────────────────────────────────── */}
-        <button
-          onClick={handleAddToCart}
-          className={`
-            w-full rounded-xl mt-4 py-3
-            font-semibold text-white
-            transition-all duration-300
-            ${added
-              ? "bg-green-500"
-              : total > 0
-                ? "bg-[hsl(var(--blue))] hover:opacity-90"
-                : "bg-[hsl(var(--surface2))] cursor-not-allowed opacity-60"
-            }
-          `}
-        >
-          {added ? "✓ Added to Cart!" : total > 0 ? "Add to Cart" : "Adjust inputs to get estimate"}
-        </button>
+        {/* ───────── RIGHT: Summary Panel ───────── */}
+        <div className="lg:col-span-1">
+          <div className="sticky top-28 rounded-2xl border border-[hsl(var(--surface1))] bg-[hsl(var(--mantle))]/80 p-8 space-y-6">
+
+            <h3 className="text-lg font-semibold text-[hsl(var(--text))]">
+              Cost Summary
+            </h3>
+
+            {calcError && (
+              <p className="text-sm text-red-400">{calcError}</p>
+            )}
+
+            {breakdown.length > 0 && (
+              <div className="space-y-2">
+                {breakdown.map((item, idx) => (
+                  <div key={idx} className="flex justify-between text-sm text-[hsl(var(--subtext1))]">
+                    <span>{item.label}</span>
+                    <span>₹{item.value.toLocaleString("en-IN")}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            <div className="border-t border-[hsl(var(--surface1))] pt-4 flex justify-between items-center">
+              <span className="font-semibold">Total</span>
+              <span className="text-2xl font-bold text-[hsl(var(--blue))]">
+                ₹{total.toLocaleString("en-IN")}
+              </span>
+            </div>
+
+            <button
+              onClick={handleAddToCart}
+              className={`
+                w-full rounded-xl py-3 font-semibold text-white transition-all
+                ${added
+                  ? "bg-green-500"
+                  : total > 0
+                    ? "bg-[hsl(var(--blue))] hover:opacity-90"
+                    : "bg-[hsl(var(--surface2))] cursor-not-allowed opacity-60"
+                }
+              `}
+            >
+              {added
+                ? "✓ Added to Cart!"
+                : total > 0
+                  ? "Add to Cart"
+                  : "Adjust inputs to get estimate"}
+            </button>
+          </div>
+        </div>
       </div>
 
       <CartAndContact />
-    </section>
-  );
+    </div>
+  </section>
+);
 };
 
 export default EstimateSection;
+const SectionTitle = ({ title }) => (
+  <h2 className="text-lg font-semibold text-[hsl(var(--text))] border-b border-[hsl(var(--surface1))] pb-3">
+    {title}
+  </h2>
+);
 
 /* ─────────── REUSABLE INPUTS ─────────── */
 const Input = ({ label, value, onChange, min = 0 }) => (

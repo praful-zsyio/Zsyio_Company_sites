@@ -74,106 +74,149 @@ const CartAndContact = () => {
     const cartTotal = cart.reduce((sum, item) => sum + item.amount, 0);
 
     return (
-        <section className="py-12 max-w-4xl mx-auto px-6">
-            <div className="rounded-2xl border bg-[hsl(var(--mantle))]/80 p-6 backdrop-blur-xl">
-                <h2 className="text-xl font-semibold mb-4">
-                    Your Project Estimation Cart
-                </h2>
+  <section className="py-16 max-w-5xl mx-auto px-6">
+    <div className="rounded-3xl border border-[hsl(var(--surface2))] bg-[hsl(var(--mantle))]/70 backdrop-blur-2xl p-8 md:p-10 space-y-10">
 
-                <div className="space-y-4">
-                    {cart.map((item, index) => (
-                        <div
-                            key={index}
-                            className="flex justify-between items-center border-b border-[hsl(var(--surface1))] pb-2"
-                        >
-                            <div>
-                                <p className="font-medium">{item.title}</p>
-                                <p className="text-sm text-[hsl(var(--subtext1))]">
-                                    ₹{item.amount.toLocaleString("en-IN")}
-                                </p>
-                            </div>
+      {/* HEADER */}
+      <div className="flex justify-between items-center flex-wrap gap-4">
+        <div>
+          <h2 className="text-2xl md:text-3xl font-semibold">
+            Project Estimation Cart
+          </h2>
+          <p className="text-sm text-[hsl(var(--subtext1))] mt-1">
+            Review your selected services before submitting your request.
+          </p>
+        </div>
 
-                            <button
-                                onClick={() => handleRemoveFromCart(index)}
-                                className="text-sm text-red-400 hover:underline"
-                            >
-                                Remove
-                            </button>
-                        </div>
-                    ))}
-                </div>
+        <span className="text-xs uppercase tracking-widest text-[hsl(var(--subtext0))]">
+          {cart.length} Items
+        </span>
+      </div>
 
-                <div className="border-t border-[hsl(var(--surface1))] mt-4 pt-4 flex justify-between items-center">
-                    <span className="text-lg font-semibold">Grand Total</span>
-                    <span className="text-2xl font-bold text-blue-400">
-                        ₹{cartTotal.toLocaleString("en-IN")}
-                    </span>
-                </div>
-
-                {/* CHECKOUT / SUBMIT FORM */}
-                <div className="mt-8 pt-6 border-t border-[hsl(var(--surface1))]">
-                    <h3 className="text-lg font-semibold mb-4">Receive Quote & Discuss via Email</h3>
-                    <p className="text-sm text-[hsl(var(--subtext1))] mb-4">
-                        Submit your estimation request directly to <strong>contact@zsyio.com</strong>.
-                    </p>
-
-                    <div className="grid gap-4 md:grid-cols-2">
-                        <input
-                            type="text"
-                            placeholder="Full Name"
-                            className="rounded-lg border border-[hsl(var(--surface2))] bg-[hsl(var(--base))] p-3 outline-none focus:border-[hsl(var(--blue))]"
-                            value={contactForm.name}
-                            onChange={(e) => setContactForm(p => ({ ...p, name: e.target.value }))}
-                        />
-                        <input
-                            type="email"
-                            placeholder="Email Address"
-                            className="rounded-lg border border-[hsl(var(--surface2))] bg-[hsl(var(--base))] p-3 outline-none focus:border-[hsl(var(--blue))]"
-                            value={contactForm.email}
-                            onChange={(e) => setContactForm(p => ({ ...p, email: e.target.value }))}
-                        />
-                        <input
-                            type="tel"
-                            placeholder="Phone Number"
-                            className="rounded-lg border border-[hsl(var(--surface2))] bg-[hsl(var(--base))] p-3 outline-none focus:border-[hsl(var(--blue))]"
-                            value={contactForm.phone}
-                            onChange={(e) => setContactForm(p => ({ ...p, phone: e.target.value }))}
-                        />
-                    </div>
-
-                    <div className="mt-4">
-                        <textarea
-                            rows="2"
-                            placeholder="Additional Message (Optional)"
-                            className="w-full rounded-lg border border-[hsl(var(--surface2))] bg-[hsl(var(--base))] p-3 outline-none focus:border-[hsl(var(--blue))]"
-                            value={contactForm.message}
-                            onChange={(e) => setContactForm(p => ({ ...p, message: e.target.value }))}
-                        />
-                    </div>
-
-                    {submitStatus && (
-                        <p className={`mt-4 text-center text-sm ${submitStatus.includes("Success") ? "text-green-400" : "text-red-400"}`}>
-                            {submitStatus}
-                        </p>
-                    )}
-
-                    <button
-                        onClick={handleSubmitCart}
-                        disabled={isSubmitting}
-                        className="
-              mt-6 w-full rounded-xl
-              bg-[hsl(var(--blue))] text-[hsl(var(--base))]
-              font-bold py-3
-              hover:opacity-90 transition
-              disabled:opacity-50 disabled:cursor-not-allowed
+      {/* CART ITEMS */}
+      <div className="space-y-5">
+        {cart.map((item, index) => (
+          <div
+            key={index}
+            className="
+              flex justify-between items-center
+              rounded-xl
+              border border-[hsl(var(--surface1))]
+              bg-[hsl(var(--base))]/60
+              px-5 py-4
             "
-                    >
-                        {isSubmitting ? "Sending..." : "Submit to contact@zsyio.com"}
-                    </button>
-                </div>
+          >
+            <div>
+              <p className="font-medium text-base">{item.title}</p>
+              <p className="text-sm text-[hsl(var(--subtext1))]">
+                ₹{item.amount.toLocaleString("en-IN")}
+              </p>
             </div>
-        </section>
-    );
+
+            <button
+              onClick={() => handleRemoveFromCart(index)}
+              className="text-xs uppercase tracking-wide text-red-400"
+            >
+              Remove
+            </button>
+          </div>
+        ))}
+      </div>
+
+      {/* TOTAL */}
+      <div className="
+        flex justify-between items-center
+        rounded-2xl
+        bg-[hsl(var(--base))]/80
+        px-6 py-5
+        border border-[hsl(var(--surface1))]
+      ">
+        <span className="text-lg font-medium">Grand Total</span>
+        <span className="text-3xl font-bold text-[hsl(var(--blue))]">
+          ₹{cartTotal.toLocaleString("en-IN")}
+        </span>
+      </div>
+
+      {/* FORM SECTION */}
+      <div className="border-t border-[hsl(var(--surface1))] pt-8 space-y-6">
+
+        <div>
+          <h3 className="text-xl font-semibold">
+            Receive Detailed Quote
+          </h3>
+          <p className="text-sm text-[hsl(var(--subtext1))] mt-1">
+            Submit your request and our team will respond within 24 hours.
+          </p>
+        </div>
+
+        {/* INPUT GRID */}
+        <div className="grid gap-5 md:grid-cols-2">
+          <input
+            type="text"
+            placeholder="Full Name"
+            className="rounded-xl border border-[hsl(var(--surface2))] bg-[hsl(var(--base))]/70 p-4 outline-none focus:border-[hsl(var(--blue))]"
+            value={contactForm.name}
+            onChange={(e) => setContactForm(p => ({ ...p, name: e.target.value }))}
+          />
+
+          <input
+            type="email"
+            placeholder="Email Address"
+            className="rounded-xl border border-[hsl(var(--surface2))] bg-[hsl(var(--base))]/70 p-4 outline-none focus:border-[hsl(var(--blue))]"
+            value={contactForm.email}
+            onChange={(e) => setContactForm(p => ({ ...p, email: e.target.value }))}
+          />
+
+          <input
+            type="tel"
+            placeholder="Phone Number"
+            className="rounded-xl border border-[hsl(var(--surface2))] bg-[hsl(var(--base))]/70 p-4 outline-none focus:border-[hsl(var(--blue))] md:col-span-2"
+            value={contactForm.phone}
+            onChange={(e) => setContactForm(p => ({ ...p, phone: e.target.value }))}
+          />
+        </div>
+
+        <textarea
+          rows="3"
+          placeholder="Additional Message (Optional)"
+          className="w-full rounded-xl border border-[hsl(var(--surface2))] bg-[hsl(var(--base))]/70 p-4 outline-none focus:border-[hsl(var(--blue))]"
+          value={contactForm.message}
+          onChange={(e) => setContactForm(p => ({ ...p, message: e.target.value }))}
+        />
+
+        {submitStatus && (
+          <p
+            className={`text-center text-sm ${
+              submitStatus.includes("Success")
+                ? "text-green-400"
+                : "text-red-400"
+            }`}
+          >
+            {submitStatus}
+          </p>
+        )}
+
+        {/* CTA */}
+        <button
+          onClick={handleSubmitCart}
+          disabled={isSubmitting}
+          className="
+            w-full rounded-2xl
+            bg-[hsl(var(--blue))]
+            text-[hsl(var(--base))]
+            font-semibold
+            py-4
+            text-lg
+            disabled:opacity-50 disabled:cursor-not-allowed
+          "
+        >
+          {isSubmitting ? "Sending..." : "Submit Estimation Request"}
+        </button>
+
+      </div>
+    </div>
+  </section>
+);
 };
 
 export default CartAndContact;
