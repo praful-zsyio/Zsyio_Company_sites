@@ -128,6 +128,7 @@ const CartAndContact = () => {
         flex justify-between items-center
         rounded-2xl
         bg-[hsl(var(--base))]/80
+        text-[hsl(var(--text))]
         px-6 py-5
         border border-[hsl(var(--surface1))]
       ">
