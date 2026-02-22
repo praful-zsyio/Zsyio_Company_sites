@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import {motion, useInView } from "framer-motion";
 import ServicesGrid from "../components/services/ServicesGrid";
 import TechnologiesGrid from "../components/services/TechnologiesGrid";
 import CartAndContact from "../components/services/CartAndContact";

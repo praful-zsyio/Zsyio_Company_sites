@@ -153,13 +153,13 @@ const ProjectsPage = () => {
               >
                 {/* subtle top accent line */}
                 <div
-                  className="absolute inset-x-5 top-0 h-[2px] bg-gradient-to-r from-transparent via-[hsl(var(--blue))] to-transparent opacity-80"
+                  className="absolute inset-x-5 top-0 h-0.5 bg-linear-to-r from-transparent via-[hsl(var(--blue))] to-transparent opacity-80"
                   aria-hidden="true"
                 />
 
                 {/* subtle right glow */}
                 <div
-                  className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[hsl(var(--blue))]/10 to-transparent pointer-events-none"
+                  className="absolute inset-y-0 right-0 w-24 bg-linear-to-l from-[hsl(var(--blue))]/10 to-transparent pointer-events-none"
                   aria-hidden="true"
                 />
 

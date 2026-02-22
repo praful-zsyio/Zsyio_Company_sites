@@ -67,7 +67,6 @@ const ProjectDetailPage = () => {
     features = [],
     challenges,
     solutions,
-    created_at
   } = project;
 
   // Normalize data
@@ -91,7 +90,7 @@ const ProjectDetailPage = () => {
         "
       >
         {/* Background Glow */}
-        <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-[hsl(var(--blue))]/5 to-transparent pointer-events-none" />
+        <div className="absolute top-0 right-0 w-1/2 h-full bg-linear-to-l from-[hsl(var(--blue))]/5 to-transparent pointer-events-none" />
 
         <div className="max-w-7xl mx-auto relative z-10">
           {/* Breadcrumb */}
@@ -121,25 +120,25 @@ const ProjectDetailPage = () => {
               <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-10 border-t border-[hsl(var(--surface1))] pt-8 text-sm">
                 {client && (
                   <div>
-                    <span className="block text-[hsl(var(--subtext0))] mb-1 flex items-center gap-1.5"><Briefcase size={14} /> Client</span>
+                    <span className="text-[hsl(var(--subtext0))] mb-1 flex items-center gap-1.5"><Briefcase size={14} /> Client</span>
                     <span className="font-medium">{client}</span>
                   </div>
                 )}
                 {role && (
                   <div>
-                    <span className="block text-[hsl(var(--subtext0))] mb-1 flex items-center gap-1.5"><Award size={14} /> Role</span>
+                    <span className="text-[hsl(var(--subtext0))] mb-1 flex items-center gap-1.5"><Award size={14} /> Role</span>
                     <span className="font-medium">{role}</span>
                   </div>
                 )}
                 {duration && (
                   <div>
-                    <span className="block text-[hsl(var(--subtext0))] mb-1 flex items-center gap-1.5"><Clock size={14} /> Duration</span>
+                    <span className="text-[hsl(var(--subtext0))] mb-1 flex items-center gap-1.5"><Clock size={14} /> Duration</span>
                     <span className="font-medium">{duration}</span>
                   </div>
                 )}
                 {completion_date && (
                   <div>
-                    <span className="block text-[hsl(var(--subtext0))] mb-1 flex items-center gap-1.5"><Calendar size={14} /> Year</span>
+                    <span className="text-[hsl(var(--subtext0))] mb-1 flex items-center gap-1.5"><Calendar size={14} /> Year</span>
                     <span className="font-medium">{new Date(completion_date).getFullYear()}</span>
                   </div>
                 )}
@@ -228,7 +227,7 @@ const ProjectDetailPage = () => {
           {/* Detailed Description */}
           <section>
             <h2 className="text-2xl font-semibold mb-6 flex items-center gap-2">
-              <span className="w-8 h-[2px] bg-[hsl(var(--blue))] block"></span>
+              <span className="w-8 h-0.5 bg-[hsl(var(--blue))] block"></span>
               Overview
             </h2>
             <div className="prose prose-invert prose-lg text-[hsl(var(--subtext1))] max-w-none leading-relaxed whitespace-pre-line">
@@ -240,7 +239,7 @@ const ProjectDetailPage = () => {
           {features && features.length > 0 && (
             <section>
               <h2 className="text-2xl font-semibold mb-6 flex items-center gap-2">
-                <span className="w-8 h-[2px] bg-[hsl(var(--green))] block"></span>
+                <span className="w-8 h-0.5 bg-[hsl(var(--green))] block"></span>
                 Key Features
               </h2>
               <div className="grid sm:grid-cols-2 gap-4">

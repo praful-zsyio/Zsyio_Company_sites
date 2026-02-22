@@ -22,7 +22,7 @@ const LoginPage = () => {
     return (
         <div className="min-h-screen flex items-center justify-center bg-[hsl(var(--base))] text-[hsl(var(--text))] px-4">
             <div className="max-w-md w-full bg-[hsl(var(--mantle))] p-8 rounded-2xl border border-[hsl(var(--surface1))] shadow-2xl">
-                <h2 className="text-3xl font-bold text-center mb-6 bg-clip-text text-transparent bg-gradient-to-r from-[hsl(var(--blue))] to-[hsl(var(--purple))]">
+                <h2 className="text-3xl font-bold text-center mb-6 bg-clip-text text-transparent bg-linear-to-r from-[hsl(var(--blue))] to-[hsl(var(--purple))]">
                     Welcome Back
                 </h2>
 

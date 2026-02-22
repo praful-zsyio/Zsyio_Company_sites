@@ -202,6 +202,7 @@ const Footer = () => {
               {socialLinks.map(({ Icon, label, href }) => (
                 <a
                   key={label}
+                  target="_blank"
                   href={href}
                   aria-label={label}
                   className="

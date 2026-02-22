@@ -184,8 +184,8 @@ const EstimateSection = () => {
   const hasInputsForService = !!DEFAULT_INPUTS[serviceId];
 
   return (
-  <section className="pt-28 pb-32 px-6">
-    <div className="max-w-6xl mx-auto ">
+  <section className="w-full min-h-screen bg-[hsl(var(--base))] pt-28 pb-32">
+  <div className="px-6 max-w-6xl mx-auto">
 
       {/* ───────── Header ───────── */}
       <div className="mb-10">
