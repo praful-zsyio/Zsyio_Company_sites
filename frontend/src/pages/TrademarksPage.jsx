@@ -2,7 +2,7 @@ import React from "react";
 
 const TrademarksPage = () => {
   return (
-    <section className="pt-28 mt-10 pb-32 max-w-4xl mx-auto px-6 text-[hsl(var(--text))]">
+    <section className="pt-28 pb-32 max-w-full mx-auto px-6 text-[hsl(var(--text))] bg-[hsl(var(--base))]">
 
       {/* HEADER */}
       <div className="mb-12 text-center space-y-4">
@@ -18,10 +18,10 @@ const TrademarksPage = () => {
       {/* CONTENT CARD */}
       <div
         className="
-          rounded-[var(--radius-xl)]
+          rounded-(--radius-xl)
           bg-[hsl(var(--mantle))]
           border border-[hsl(var(--surface1))]
-          shadow-[var(--shadow-soft)]
+          shadow-(--shadow-soft)
           p-10
           space-y-12
         "

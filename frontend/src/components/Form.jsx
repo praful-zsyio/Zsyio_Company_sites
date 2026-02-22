@@ -42,7 +42,7 @@ const Contact = () => {
           pointer-events-none absolute inset-0 -z-10
           bg-[linear-gradient(to_right,rgba(148,163,184,0.06)_1px,transparent_1px),
               linear-gradient(to_bottom,rgba(148,163,184,0.06)_1px,transparent_1px)]
-          bg-[size:24px_24px]
+          bg-size-[24px_24px]
         "
         aria-hidden="true"
       />
@@ -100,7 +100,7 @@ const Contact = () => {
             <ContactDetail
               icon={<Mail className="w-5 h-5 text-[hsl(var(--blue))]" />}
               title="Email"
-              detail="zsyio.official@zsyio.com"
+              detail="contact@zsyio.com"
             />
           </div>
 

@@ -185,7 +185,7 @@ const EstimateSection = () => {
 
   return (
   <section className="pt-28 pb-32 px-6">
-    <div className="max-w-6xl mx-auto">
+    <div className="max-w-6xl mx-auto ">
 
       {/* ───────── Header ───────── */}
       <div className="mb-10">

@@ -1,6 +1,4 @@
 import React, { useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import VideoComponent from '../components/home/VideoComponent';
 import HeroSection from '../components/home/HeroSection';
 import AboutSection from '../components/home/AboutSection';
