@@ -9,8 +9,8 @@ import JourneySection from "../components/about/JourneySection";
 import ValuesSection from "../components/about/ValuesSection";
 import WhyPartnerSection from "../components/about/WhyPartnerSection";
 import ProcessSection from "../components/about/ProcessSection";
-import CultureVideoSection from "../components/about/CultureVideoSection";
-import TestimonialsSection from "../components/about/TestimonialsSection";
+// import CultureVideoSection from "../components/about/CultureVideoSection";
+// import TestimonialsSection from "../components/about/TestimonialsSection";
 import QualitySecuritySection from "../components/about/QualitySecuritySection";
 import TechStackSection from "../components/about/TechStackSection";
 import IndustriesSection from "../components/about/IndustriesSection";
@@ -78,8 +78,8 @@ const AboutUs = () => {
       <ValuesSection />
       <WhyPartnerSection />
       <ProcessSection />
-      <CultureVideoSection />
-      <TestimonialsSection />
+      {/* <CultureVideoSection /> */}
+      {/* <TestimonialsSection /> */}
       <QualitySecuritySection />
       <TechStackSection />
       <IndustriesSection />

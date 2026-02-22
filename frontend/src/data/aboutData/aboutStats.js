@@ -1,30 +1,35 @@
 export const STUDIO_STATS = [
   {
     id: 1,
-    value: "2+",
-    label: "Years in Business",
+    value: "6+",
+    label: "Years Building",
   },
   {
     id: 2,
     value: "5+",
-    label: "Team Members",
+    label: "Core Team",
   },
   {
     id: 3,
     value: "10+",
-    label: "Projects Shipped",
+    label: "Products Launched",
   },
+  {
+    id: 4,
+    value: "24/7",
+    label: "Infrastructure Monitoring",
+  }
 ];
 
 export const META_STATS = [
   {
     id: 1,
     label: "Client Retention",
-    value: "95%",
+    value: "92%",
   },
   {
     id: 2,
-    label: "Global Reach",
-    value: "3+ Countries",
+    label: "Markets Served",
+    value: "4 Countries",
   },
 ];

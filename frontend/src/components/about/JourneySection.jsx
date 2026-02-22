@@ -1,75 +1,140 @@
-import React from "react";
+import React, { useRef } from "react";
+import { useGSAP } from "@gsap/react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const JourneySection = () => {
+  const component = useRef();
+  const trackRef = useRef();
+
+  const milestones = [
+    { year: "2019", title: "Founded", desc: "Started with a focused vision — building scalable digital systems for ambitious founders who needed execution speed without compromising architecture." },
+    { year: "2020", title: "First Product Launches", desc: "Designed and shipped early-stage SaaS platforms across web and mobile, establishing strong UI engineering and backend foundations." },
+    { year: "2021", title: "Scaling Infrastructure", desc: "Migrated systems to cloud-native environments with CI/CD pipelines and containerized deployments." },
+    { year: "2022", title: "Cloud & AI Expansion", desc: "Integrated distributed systems and AI-powered workflows for automation and intelligent orchestration." },
+    { year: "2023", title: "Enterprise Architecture", desc: "Delivered multi-tenant platforms and scalable APIs supporting high-growth organizations globally." },
+    { year: "2024", title: "Global Partnerships", desc: "Became long-term product engineering partner for international teams with roadmap alignment." },
+    { year: "2025", title: "Agentic AI Systems", desc: "Built autonomous AI workflows and intelligent agents capable of contextual reasoning." },
+    { year: "2026", title: "Platform Innovation", desc: "Evolved into a full-stack product innovation partner delivering ERP and AI-integrated ecosystems." },
+  ];
+  const wrapperRef = useRef();
+
+useGSAP(
+  () => {
+    if (window.innerWidth < 768) return;
+
+    const track = trackRef.current;
+    const wrapper = wrapperRef.current;
+
+    const getScrollAmount = () => {
+  const totalWidth = track.scrollWidth;
+  const visibleWidth = wrapper.offsetWidth;
+
+  const overshoot = visibleWidth * 0.08; // 8% extra slide
+
+  return totalWidth - visibleWidth + overshoot;
+};
+
+    const tween = gsap.to(track, {
+      x: () => -getScrollAmount(),
+      ease: "none",
+      scrollTrigger: {
+        trigger: component.current,
+        start: "top top",
+        end: () => `+=${getScrollAmount()}`,
+        scrub: 4,
+        pin: true,
+        invalidateOnRefresh: true,
+      },
+    });
+
+    return () => {
+      tween.kill();
+      ScrollTrigger.getAll().forEach(t => t.kill());
+    };
+  },
+  { scope: component }
+);
+
   return (
-    <section className="py-20 md:py-24 bg-[hsl(var(--mantle))]">
-      <div className="container mx-auto px-6 max-w-5xl">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 animate-in-view">
-          Our Journey
-        </h2>
-        <p className="text-center text-xs uppercase tracking-[0.25em] text-[hsl(var(--subtext0))] mb-8 animate-in-view">
-          From idea to trusted partner
-        </p>
+    <section
+      ref={component}
+      className="relative h-auto md:h-screen overflow-hidden bg-[hsl(var(--mantle))]"
+    >
+      <div className="container mx-auto px-[5vw] h-full flex flex-col justify-center py-16 md:py-0">
+        
+        {/* Header */}
+        <div className="max-w-3xl mb-16">
+          <p className="text-[10px] uppercase tracking-[0.35em] text-[hsl(var(--subtext0))] mb-5">
+            Our Journey
+          </p>
 
-        <p className="text-lg text-[hsl(var(--subtext1))] leading-relaxed text-center mb-10 animate-in-view">
-          Founded by a team of passionate technologists, Zsyio began with a
-          simple yet powerful idea: to bridge the gap between business
-          challenges and technological solutions. From our humble beginnings, we
-          have grown into a trusted partner for organizations worldwide, driven
-          by our relentless pursuit of excellence and a deep understanding of
-          the industries we serve. Our journey is a testament to the power of
-          collaboration, innovation, and a client-first approach.
-        </p>
+          <h2 className="text-3xl md:text-5xl font-semibold leading-[1.1] tracking-[-0.01em] mb-6">
+            A timeline of
+            <br />
+            <span className="bg-gradient-to-r from-[hsl(var(--yellow))] to-[hsl(var(--blue))] bg-clip-text text-transparent">
+              growth & evolution.
+            </span>
+          </h2>
 
-        <div className="relative mt-10 max-w-3xl mx-auto animate-in-view">
-          <div className="absolute left-4 top-0 bottom-0 w-px bg-[hsl(var(--surface2))]" />
-          <div className="space-y-8 pl-10">
-            <div>
-              <div className="flex items-center gap-3 mb-2">
-                <span className="flex h-6 w-6 items-center justify-center rounded-full border border-[hsl(var(--blue))] bg-[hsl(var(--surface0))] text-[10px]">
-                  01
-                </span>
-                <p className="text-sm font-semibold">
-                  Founding &amp; early projects
-                </p>
+          <p className="text-[hsl(var(--subtext1))] text-sm md:text-base leading-relaxed">
+            From focused beginnings to global partnerships, each milestone strengthened our engineering foundation.
+          </p>
+        </div>
+
+        {/* Track */}
+        <div ref={wrapperRef} className="overflow-hidden w-full">
+          <div
+            ref={trackRef}
+            className="
+              flex flex-col md:flex-row
+              gap-8 md:gap-[4vw]
+            "
+          >
+            {milestones.map((item, index) => (
+              <div
+                key={index}
+                className="
+                  w-full md:w-[calc(50vw-4vw)]
+                  flex-shrink-0
+                  p-8 md:p-10
+                  rounded-3xl
+                  border border-[hsl(var(--surface2))]
+                  bg-[hsl(var(--base))]/60
+                  backdrop-blur-sm
+                  flex flex-col justify-between
+                  transition-all duration-500
+                  hover:-translate-y-3
+                  hover:border-[hsl(var(--yellow))]/40
+                "
+              >
+                <div>
+                  <p className="text-[hsl(var(--yellow))] text-sm font-semibold mb-4">
+                    {item.year}
+                  </p>
+
+                  <h3 className="text-xl md:text-2xl font-semibold mb-4">
+                    {item.title}
+                  </h3>
+
+                  <p className="text-sm text-[hsl(var(--subtext1))] leading-relaxed">
+                    {item.desc}
+                  </p>
+                </div>
+
+                <div className="text-[hsl(var(--surface2))] text-xs tracking-widest uppercase mt-6">
+                  Milestone
+                </div>
               </div>
-              <p className="text-xs text-[hsl(var(--subtext1))]">
-                Building our first products with a small group of ambitious
-                founders and teams.
-              </p>
-            </div>
-            <div>
-              <div className="flex items-center gap-3 mb-2">
-                <span className="flex h-6 w-6 items-center justify-center rounded-full border border-[hsl(var(--blue))] bg-[hsl(var(--surface0))] text-[10px]">
-                  02
-                </span>
-                <p className="text-sm font-semibold">Scaling capabilities</p>
-              </div>
-              <p className="text-xs text-[hsl(var(--subtext1))]">
-                Expanding into mobile, cloud, and AI while formalizing our
-                process and quality practices.
-              </p>
-            </div>
-            <div>
-              <div className="flex items-center gap-3 mb-2">
-                <span className="flex h-6 w-6 items-center justify-center rounded-full border border-[hsl(var(--blue))] bg-[hsl(var(--surface0))] text-[10px]">
-                  03
-                </span>
-                <p className="text-sm font-semibold">
-                  Becoming a long-term partner
-                </p>
-              </div>
-              <p className="text-xs text-[hsl(var(--subtext1))]">
-                Working side-by-side with teams worldwide as a trusted,
-                product-minded engineering partner.
-              </p>
-            </div>
+            ))}
           </div>
         </div>
+
       </div>
     </section>
   );
 };
 
 export default JourneySection;
-

@@ -34,9 +34,11 @@ const CtaSection = () => {
         {/* Label */}
         <div
           className="
-            inline-flex items-center gap-2 rounded-full border border-[hsl(var(--surface2))]
-            bg-[hsl(var(--mantle))]/70 px-4 py-1 text-xs md:text-sm
-            text-[hsl(var(--subtext1))] mb-5 animate-in-view
+            inline-flex items-center gap-2 rounded-full
+            border border-[hsl(var(--surface2))]
+            bg-[hsl(var(--mantle))]/70 px-4 py-1
+            text-xs md:text-sm text-[hsl(var(--subtext1))]
+            mb-5
           "
         >
           <span className="h-1.5 w-1.5 rounded-full bg-[hsl(var(--blue))]" />
@@ -44,12 +46,12 @@ const CtaSection = () => {
         </div>
 
         {/* Heading */}
-        <h2 className="text-3xl md:text-4xl font-semibold tracking-tight mb-4 animate-in-view">
+        <h2 className="text-3xl md:text-4xl font-semibold tracking-tight mb-4">
           Let&apos;s Build Something Great Together
         </h2>
 
         {/* Subtext */}
-        <p className="text-lg md:text-xl text-[hsl(var(--subtext1))] max-w-3xl mx-auto mb-10 animate-in-view leading-relaxed">
+        <p className="text-lg md:text-xl text-[hsl(var(--subtext1))] max-w-3xl mx-auto mb-10 leading-relaxed">
           Have a project in mind, exploring an idea, or want to understand how
           we work? Our team would love to hear from you.
         </p>
@@ -58,20 +60,17 @@ const CtaSection = () => {
         <a
           href="/contact"
           className="
-            relative inline-flex items-center justify-center
+            inline-flex items-center justify-center
             bg-[hsl(var(--blue))] text-[hsl(var(--crust))]
             font-semibold text-lg px-10 py-3.5 rounded-xl
-            transition-all duration-300
             hover:bg-[hsl(var(--sapphire))]
-            hover:shadow-[0_0_25px_rgba(56,189,248,0.25)]
-            animate-in-view
           "
         >
           Get in Touch
         </a>
 
         {/* Subtle below-text */}
-        <p className="text-[hsl(var(--subtext0))] text-xs md:text-sm mt-4 animate-in-view">
+        <p className="text-[hsl(var(--subtext0))] text-xs md:text-sm mt-4">
           Expect a response within 24 hours.
         </p>
       </div>

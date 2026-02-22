@@ -1,27 +1,37 @@
-// Process steps (Discovery → Design → Develop → Deploy)
 export const processSteps = [
   {
     id: "discovery",
     icon: "Search",
-    title: "Discovery",
-    description: "Understanding your vision, goals, and challenges.",
+    title: "Strategic Discovery",
+    description:
+      "We analyze business goals, market positioning, technical constraints, and growth opportunities to define clear objectives and minimize execution risks early.",
   },
   {
     id: "design",
     icon: "PencilRuler",
-    title: "Design",
-    description: "Creating intuitive UI/UX and robust system architecture.",
+    title: "Experience & Architecture",
+    description:
+      "We craft intuitive user experiences and scalable system architectures, ensuring seamless usability, performance efficiency, and long-term technical adaptability.",
   },
   {
     id: "develop",
     icon: "Code",
-    title: "Develop",
-    description: "Building your solution with clean, efficient code.",
+    title: "Engineering & Implementation",
+    description:
+      "We build production-ready systems with clean code, robust testing, continuous integration pipelines, and scalable infrastructure for reliability.",
+  },
+  {
+    id: "optimize",
+    icon: "BarChart",
+    title: "Optimization & Intelligence",
+    description:
+      "We enhance performance, security, and automation while integrating analytics and intelligent workflows to improve operational efficiency continuously.",
   },
   {
     id: "deploy",
     icon: "Rocket",
-    title: "Deploy",
-    description: "Ensuring a seamless launch and providing ongoing support.",
+    title: "Launch & Scale",
+    description:
+      "We deploy secure cloud infrastructure, manage releases, monitor performance, and iteratively scale systems to support sustainable growth.",
   },
 ];
