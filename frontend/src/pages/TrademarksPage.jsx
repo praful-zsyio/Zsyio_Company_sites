@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 const TrademarksPage = () => {
   return (
     <section className="pt-28 pb-32 max-w-full mx-auto px-6 text-[hsl(var(--text))] bg-[hsl(var(--base))]">
@@ -124,27 +124,18 @@ const TrademarksPage = () => {
             For trademark permissions or legal inquiries, contact us at:
           </p>
 
-          <div
-            className="
-              bg-[hsl(var(--surface0))]
-              border border-[hsl(var(--surface1))]
-              rounded-lg
-              px-6 py-4
-              inline-block
-            "
-          >
-            <a
-              href="mailto:contact@zsyio.com"
+            <Link
+              to="/contact"
               className="
-                font-semibold
-                text-[hsl(var(--blue))]
-                hover:underline
-                transition
-              "
-            >
-              contact@zsyio.com
-            </a>
-          </div>
+              inline-flex items-center justify-center
+              rounded-xl border border-[hsl(var(--blue))]
+              px-8 py-3
+              text-sm font-semibold
+              text-[hsl(var(--blue))]
+              hover:bg-[hsl(var(--blue))]/10
+              transition "            >
+              Contact Us
+            </Link>
         </section>
 
       </div>

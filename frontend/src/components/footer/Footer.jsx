@@ -199,7 +199,9 @@ const Footer = () => {
                 justify-center
               "
             >
-              {socialLinks.map(({ Icon, label, href }) => (
+              {socialLinks.map(({ Icon, label, href }) => {
+                const IconComponent = Icon;
+                return (
                 <a
                   key={label}
                   target="_blank"
@@ -216,9 +218,10 @@ const Footer = () => {
                     transition-all duration-200
                   "
                 >
-                  <Icon className="w-5 h-5" />
+                  <IconComponent className="w-5 h-5" />
                 </a>
-              ))}
+                );
+              })}
             </div>
           </div>
         </div>

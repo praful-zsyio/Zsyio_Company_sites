@@ -1,5 +1,6 @@
 import { useRef, useEffect, useState } from "react";
-import { motion, useInView } from "framer-motion";
+import { useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { getServices, getCategorizedTechnologies } from "../../services/api";
 import * as LucideIcons from "lucide-react";
@@ -10,7 +11,6 @@ const Services = () => {
   const isInView = useInView(sectionRef, { once: true, amount: 0.15 });
   const [services, setServices] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     Promise.all([
@@ -19,10 +19,8 @@ const Services = () => {
     ]).then(([servicesData, categoriesData]) => {
       setServices(servicesData);
       setCategories(categoriesData);
-      setLoading(false);
     }).catch(err => {
       console.error("Error fetching services data:", err);
-      setLoading(false);
     });
   }, []);
 
