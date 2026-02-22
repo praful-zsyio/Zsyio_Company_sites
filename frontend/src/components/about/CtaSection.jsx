@@ -7,7 +7,7 @@ const CtaSection = () => {
       <div
         className="
           pointer-events-none absolute inset-0 -z-10
-          bg-[radial-gradient(circle_at_center,_rgba(56,189,248,0.20),_transparent_70%)]
+          bg-[radial-gradient(circle_at_center,rgba(56,189,248,0.20),transparent_70%)]
         "
       />
 
@@ -17,7 +17,7 @@ const CtaSection = () => {
           pointer-events-none absolute inset-0 -z-10
           bg-[linear-gradient(to_right,rgba(148,163,184,0.08)_1px,transparent_1px),
               linear-gradient(to_bottom,rgba(148,163,184,0.08)_1px,transparent_1px)]
-          bg-[size:22px_22px]
+          bg-size-[22px_22px]
           opacity-40
         "
       />
@@ -26,7 +26,7 @@ const CtaSection = () => {
       <div
         className="
           pointer-events-none absolute inset-0 -z-10
-          bg-gradient-to-b from-transparent via-[hsl(var(--mantle))]/30 to-transparent
+          bg-linear-to-b from-transparent via-[hsl(var(--mantle))]/30 to-transparent
         "
       />
 

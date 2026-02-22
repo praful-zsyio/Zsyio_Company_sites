@@ -9,7 +9,7 @@ const ProcessSection = () => {
     <section
       className="
         relative py-24
-        bg-gradient-to-b
+        bg-linear-to-b
         from-[hsl(var(--base))]
         via-[hsl(var(--mantle))]
         to-[hsl(var(--base))]
@@ -20,7 +20,7 @@ const ProcessSection = () => {
       <div
         className="
           absolute inset-0 -z-10
-          bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.18),_transparent_60%)]
+          bg-[radial-gradient(circle_at_top,rgba(56,189,248,0.18),transparent_60%)]
         "
       />
       <div
@@ -28,7 +28,7 @@ const ProcessSection = () => {
           absolute inset-0 -z-10 opacity-30
           bg-[linear-gradient(to_right,rgba(148,163,184,0.08)_1px,transparent_1px),
               linear-gradient(to_bottom,rgba(148,163,184,0.08)_1px,transparent_1px)]
-          bg-[size:24px_24px]
+          bg-size-[24px_24px]
         "
       />
 

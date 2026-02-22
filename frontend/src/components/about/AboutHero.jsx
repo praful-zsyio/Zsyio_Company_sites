@@ -24,8 +24,8 @@ const AboutHero = () => {
 
       {/* Background Accents */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute -top-40 right-0 w-[600px] h-[600px] bg-[hsl(var(--blue))]/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 -left-40 w-[500px] h-[500px] bg-[hsl(var(--yellow))]/10 rounded-full blur-3xl" />
+        <div className="absolute -top-40 right-0 w-150 h-150 bg-[hsl(var(--blue))]/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 -left-40 w-125 h-125 bg-[hsl(var(--yellow))]/10 rounded-full blur-3xl" />
       </div>
 
       <div className="relative container mx-auto px-4 md:px-12 lg:px-20">
@@ -49,7 +49,7 @@ const AboutHero = () => {
               <h1 className="text-2xl md:text-4xl lg:text-5xl font-semibold leading-[1.05] tracking-tight mb-12">
                 Building digital systems
                 <br />
-                <span className="bg-gradient-to-r from-[hsl(var(--yellow))] to-[hsl(var(--blue))] bg-clip-text text-transparent">
+                <span className="bg-linear-to-r from-[hsl(var(--yellow))] to-[hsl(var(--blue))] bg-clip-text text-transparent">
                   engineered to scale.
                 </span>
               </h1>

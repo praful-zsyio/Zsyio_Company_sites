@@ -21,7 +21,7 @@ const TestimonialCard = ({ quote, name, role }) => {
         className="
           pointer-events-none absolute inset-0 opacity-0
           group-hover:opacity-100 transition-opacity duration-300
-          bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.16),_transparent_65%)]
+          bg-[radial-gradient(circle_at_top,rgba(56,189,248,0.16),transparent_65%)]
         "
         aria-hidden="true"
       />
@@ -40,7 +40,7 @@ const TestimonialCard = ({ quote, name, role }) => {
       </blockquote>
 
       {/* Divider */}
-      <div className="relative mb-4 h-px w-10 bg-gradient-to-r from-transparent via-[hsl(var(--blue))] to-transparent opacity-70" />
+      <div className="relative mb-4 h-px w-10 bg-linear-to-r from-transparent via-[hsl(var(--blue))] to-transparent opacity-70" />
 
       {/* Name / Role */}
       <figcaption className="relative mt-auto">
@@ -66,7 +66,7 @@ const TestimonialsSection = () => {
       <div
         className="
           pointer-events-none absolute inset-0 -z-10
-          bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.18),_transparent_60%)]
+          bg-[radial-gradient(circle_at_top,rgba(56,189,248,0.18),transparent_60%)]
         "
         aria-hidden="true"
       />
@@ -76,7 +76,7 @@ const TestimonialsSection = () => {
           pointer-events-none absolute inset-0 -z-10
           bg-[linear-gradient(to_right,rgba(148,163,184,0.08)_1px,transparent_1px),
               linear-gradient(to_bottom,rgba(148,163,184,0.08)_1px,transparent_1px)]
-          bg-[size:22px_22px]
+          bg-size-[22px_22px]
           opacity-40
         "
         aria-hidden="true"

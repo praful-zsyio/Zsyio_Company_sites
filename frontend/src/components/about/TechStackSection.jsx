@@ -21,7 +21,7 @@ const TechStackGroup = ({ title, items }) => {
         className="
           pointer-events-none absolute inset-0 opacity-0
           group-hover:opacity-100 transition-opacity duration-300
-          bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.18),_transparent_65%)]
+          bg-[radial-gradient(circle_at_top,rgba(56,189,248,0.18),transparent_65%)]
         "
         aria-hidden="true"
       />
@@ -74,7 +74,7 @@ const TechStackSection = () => {
       <div
         className="
           pointer-events-none absolute inset-0 -z-10
-          bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.2),_transparent_60%)]
+          bg-[radial-gradient(circle_at_top,rgba(56,189,248,0.2),transparent_60%)]
         "
         aria-hidden="true"
       />
@@ -85,7 +85,7 @@ const TechStackSection = () => {
           pointer-events-none absolute inset-0 -z-10
           bg-[linear-gradient(to_right,rgba(148,163,184,0.08)_1px,transparent_1px),
               linear-gradient(to_bottom,rgba(148,163,184,0.08)_1px,transparent_1px)]
-          bg-[size:22px_22px]
+          bg-size-[22px_22px]
           opacity-40
         "
         aria-hidden="true"

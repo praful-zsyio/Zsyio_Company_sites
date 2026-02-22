@@ -9,14 +9,14 @@ const WhyPartnerSection = () => {
     <section
       className="
         relative py-20 md:py-24
-        bg-gradient-to-b from-[hsl(var(--base))] via-[hsl(var(--mantle))] to-[hsl(var(--base))]
+        bg-linear-to-b from-[hsl(var(--base))] via-[hsl(var(--mantle))] to-[hsl(var(--base))]
       "
     >
       {/* Futuristic background: glow + grid */}
       <div
         className="
           pointer-events-none absolute inset-0 -z-10
-          bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.22),_transparent_60%)]
+          bg-[radial-gradient(circle_at_top,rgba(56,189,248,0.22),transparent_60%)]
         "
         aria-hidden="true"
       />
@@ -25,7 +25,7 @@ const WhyPartnerSection = () => {
           pointer-events-none absolute inset-0 -z-10
           bg-[linear-gradient(to_right,rgba(148,163,184,0.08)_1px,transparent_1px),
               linear-gradient(to_bottom,rgba(148,163,184,0.08)_1px,transparent_1px)]
-          bg-[size:22px_22px]
+          bg-size-[22px_22px]
           opacity-40
         "
         aria-hidden="true"
@@ -72,20 +72,20 @@ const WhyPartnerSection = () => {
                   pointer-events-none absolute inset-0 opacity-0
                   group-hover:opacity-100
                   transition-opacity duration-300
-                  bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.22),_transparent_60%)]
+                  bg-[radial-gradient(circle_at_top,rgba(56,189,248,0.22),transparent_60%)]
                 "
                 aria-hidden="true"
               />
 
               {/* Top accent line */}
-              <div className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-[hsl(var(--blue))]/0 via-[hsl(var(--blue))] to-[hsl(var(--blue))]/0 opacity-70" />
+              <div className="absolute inset-x-0 top-0 h-0.5 bg-linear-to-r from-[hsl(var(--blue))]/0 via-[hsl(var(--blue))] to-[hsl(var(--blue))]/0 opacity-70" />
 
               <div className="relative space-y-3">
                 <h3 className="text-lg md:text-xl font-semibold text-[hsl(var(--text))]">
                   {reason.title}
                 </h3>
 
-                <div className="h-px w-10 bg-gradient-to-r from-transparent via-[hsl(var(--blue))] to-transparent opacity-70" />
+                <div className="h-px w-10 bg-linear-to-r from-transparent via-[hsl(var(--blue))] to-transparent opacity-70" />
 
                 <p className="text-[hsl(var(--subtext1))] text-sm md:text-[0.95rem] leading-relaxed">
                   {reason.description}

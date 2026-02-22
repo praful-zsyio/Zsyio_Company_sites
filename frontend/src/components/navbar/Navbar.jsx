@@ -96,7 +96,7 @@ const Navbar = () => {
     aria-label="Toggle theme"
     aria-pressed={theme === "dark"}
     className="
-      relative h-8 w-14 overflow-hidden !rounded-full
+      relative h-8 w-14 overflow-hidden rounded-full!
       border border-[hsl(var(--overlay1))/0.7]
       bg-[hsl(var(--surface0)/0.7)]
       backdrop-blur-xl

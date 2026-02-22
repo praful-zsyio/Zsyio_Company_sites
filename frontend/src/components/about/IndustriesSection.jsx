@@ -56,10 +56,10 @@ const IndustriesSection = () => {
   return (
     <section className="relative py-20 md:py-24">
       {/* Background glow */}
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.18),_transparent_60%)]" />
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,rgba(56,189,248,0.18),transparent_60%)]" />
 
       {/* Subtle grid */}
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_right,rgba(148,163,184,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(148,163,184,0.08)_1px,transparent_1px)] bg-[size:22px_22px] opacity-40" />
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_right,rgba(148,163,184,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(148,163,184,0.08)_1px,transparent_1px)] bg-size-[22px_22px] opacity-40" />
 
       <div className="container mx-auto px-6 max-w-6xl">
         {/* Heading */}
@@ -102,10 +102,10 @@ const IndustriesSection = () => {
                 "
               >
                 {/* Hover glow */}
-                <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.18),_transparent_65%)]" />
+                <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[radial-gradient(circle_at_top,rgba(56,189,248,0.18),transparent_65%)]" />
 
                 {/* Corner accent */}
-                <div className="absolute inset-x-4 top-0 h-[2px] bg-gradient-to-r from-transparent via-[hsl(var(--blue))] to-transparent opacity-70" />
+                <div className="absolute inset-x-4 top-0 h-0.5 bg-linear-to-r from-transparent via-[hsl(var(--blue))] to-transparent opacity-70" />
 
                 <div className="relative flex flex-col gap-3 h-full">
                   {/* Top row */}
@@ -124,7 +124,7 @@ const IndustriesSection = () => {
                   </h3>
 
                   {/* Divider */}
-                  <div className="h-px w-8 bg-gradient-to-r from-transparent via-[hsl(var(--blue))] to-transparent opacity-70" />
+                  <div className="h-px w-8 bg-linear-to-r from-transparent via-[hsl(var(--blue))] to-transparent opacity-70" />
 
                   {/* Tagline */}
                   <p className="text-[hsl(var(--subtext1))] text-xs md:text-[0.8rem] leading-relaxed flex-1">

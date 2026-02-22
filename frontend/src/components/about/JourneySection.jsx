@@ -74,7 +74,7 @@ useGSAP(
           <h2 className="text-3xl md:text-5xl font-semibold leading-[1.1] tracking-[-0.01em] mb-6">
             A timeline of
             <br />
-            <span className="bg-gradient-to-r from-[hsl(var(--yellow))] to-[hsl(var(--blue))] bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-[hsl(var(--yellow))] to-[hsl(var(--blue))] bg-clip-text text-transparent">
               growth & evolution.
             </span>
           </h2>
@@ -98,7 +98,7 @@ useGSAP(
                 key={index}
                 className="
                   w-full md:w-[calc(50vw-4vw)]
-                  flex-shrink-0
+                  shrink-0
                   p-8 md:p-10
                   rounded-3xl
                   border border-[hsl(var(--surface2))]
