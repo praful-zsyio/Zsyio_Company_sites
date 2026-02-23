@@ -13,9 +13,7 @@ const MissionVisionSection = () => {
               Our Mission
             </h2>
             <p className="text-lg text-[hsl(var(--subtext1))] leading-relaxed">
-              To empower businesses with cutting-edge technology, robust
-              solutions, and strategic insights, enabling them to thrive in an
-              ever-evolving digital landscape.
+              To design and deliver innovative, scalable technology products that empower businesses to operate smarter, grow faster, and excel in an ever-evolving digital ecosystem.
             </p>
           </div>
 
@@ -27,9 +25,7 @@ const MissionVisionSection = () => {
               Our Vision
             </h2>
             <p className="text-lg text-[hsl(var(--subtext1))] leading-relaxed">
-              To be a global leader in IT services and consulting, recognized
-              for our commitment to innovation, quality, and unwavering client
-              success.
+              To be a global leader in innovative technology products, delivering scalable, high-impact digital solutions that empower businesses worldwide and set new standards for quality, performance, and customer experience.
             </p>
           </div>
         </div>
@@ -48,7 +44,7 @@ const MissionVisionSection = () => {
               We think long-term
             </p>
             <p className="text-[hsl(var(--text))]">
-              Architecture, DX, and quality are treated as first-class citizens.
+              We prioritize strong architecture, smooth developer experience, and high product quality at every step of building and delivering our products.
             </p>
           </div>
           <div className="rounded-xl border border-[hsl(var(--surface2))] bg-[hsl(var(--surface0))]/70 px-4 py-3">
@@ -56,7 +52,7 @@ const MissionVisionSection = () => {
               We embed with your team
             </p>
             <p className="text-[hsl(var(--text))]">
-              Designers and engineers work alongside your people, not in silos.
+              Our designers and engineers work directly with your team, side by side, instead of working separately.
             </p>
           </div>
         </div>

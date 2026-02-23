@@ -4,6 +4,7 @@ import HeroSection from '../components/home/HeroSection';
 import AboutSection from '../components/home/AboutSection';
 import ProjectsGlimpse from '../components/home/homeProjects/ProjectsGlimpse';
 import Services from '../components/home/Services';
+import NewsletterBox from '../components/globalComponents/NewsletterBox';
 
 const HomePage = () => {
   const mainRef = useRef(null);
@@ -22,6 +23,7 @@ const HomePage = () => {
       <AboutSection />
       <ProjectsGlimpse />
       <Services />
+      {/* <NewsletterBox /> */}
     </main>
   );
 };

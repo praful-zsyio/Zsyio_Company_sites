@@ -63,7 +63,7 @@ const ValueCard = ({ icon, title, description }) => {
       <h3
         className="
           text-lg md:text-xl font-semibold mb-2
-          text-[hsl(var(--text))]
+          text-[hsl(var(--text))] justify-center text-center
         "
       >
         {title}
