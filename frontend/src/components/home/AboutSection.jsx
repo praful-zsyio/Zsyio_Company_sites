@@ -18,22 +18,41 @@ const AboutSection = () => {
       const titles = section.querySelectorAll(".title-animate");
       const cards = section.querySelectorAll(".feature-card");
       const icons = section.querySelectorAll(".feature-card svg");
-      const cta = section.querySelector(".about-cta");
 
       // TITLES – smooth fade + slide up
+      // gsap.from(titles, {
+      //   opacity: 0,
+      //   y: 40,
+      //   stagger: 0.12,
+      //   duration: 0.7,
+      //   ease: "power3.out",
+      //   scrollTrigger: {
+      //     trigger: section,
+      //     start: "top 70%",
+      //     toggleActions: "play none none none",
+      //     scrub: 0.2, // keeps the section in place during animation for smoother effect
+      //   },
+      // });
       gsap.from(titles, {
-        opacity: 0,
-        y: 40,
-        stagger: 0.12,
-        duration: 0.7,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: section,
-          start: "top 80%",
-          toggleActions: "play none none none",
-        },
-      });
-
+  y: 60,
+  opacity: 0,
+  stagger: 0.15,
+  duration: 1,
+  ease: "power4.out",
+  scrollTrigger: {
+    trigger: section,
+    start: "top 75%",
+    toggleActions: "play none none reverse",
+  },
+});
+gsap.to(section.querySelectorAll("div[aria-hidden='true']"), {
+  y: -80,
+  ease: "none",
+  scrollTrigger: {
+    trigger: section,
+    scrub: true,
+  },
+});
       // CARDS – 3D pop-in (NO opacity, so they never stay hidden)
       gsap.fromTo(
         cards,
@@ -50,8 +69,9 @@ const AboutSection = () => {
           ease: "back.out(1.6)",
           scrollTrigger: {
             trigger: section,
-            start: "top 75%",
+            start: "top 80%",
             toggleActions: "play none none none",
+            // scrub: 0.2,// keeps the section in place during animation for smoother effect
           },
         }
       );
@@ -73,22 +93,6 @@ const AboutSection = () => {
           },
         }
       );
-
-      // CTA – delayed subtle rise
-      if (cta) {
-        gsap.from(cta, {
-          opacity: 0,
-          y: 30,
-          scale: 0.95,
-          duration: 0.6,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: cta,
-            start: "top 85%",
-            toggleActions: "play none none none",
-          },
-        });
-      }
     },
     { scope: sectionRef }
   );

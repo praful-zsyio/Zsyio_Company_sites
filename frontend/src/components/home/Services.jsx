@@ -40,7 +40,25 @@ const Services = () => {
       transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
     },
   };
+// const container = {
+//   hidden: {},
+//   visible: {
+//     transition: {
+//       staggerChildren: 0.15,
+//       delayChildren: 0.2,
+//     },
+//   },
+// };
 
+// const item = {
+//   hidden: { y: 50, opacity: 0, scale: 0.95 },
+//   visible: {
+//     y: 0,
+//     opacity: 1,
+//     scale: 1,
+//     transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+//   },
+// };
   return (
     <section
       ref={sectionRef}

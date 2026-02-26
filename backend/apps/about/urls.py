@@ -1,10 +1,11 @@
-from django.urls import path, include
-from rest_framework.routers import DefaultRouter
+from django.urls import path
 from .views import AboutViewSet
 
-router = DefaultRouter()
-router.register(r'', AboutViewSet)
+list_view   = AboutViewSet.as_view({'get': 'list',     'post': 'create'})
+detail_view = AboutViewSet.as_view({'get': 'retrieve', 'put': 'update',
+                                    'patch': 'partial_update', 'delete': 'destroy'})
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('',      list_view,        name='about-list'),
+    path('<str:pk>/', detail_view,  name='about-detail'),
 ]

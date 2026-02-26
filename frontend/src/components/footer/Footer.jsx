@@ -20,8 +20,8 @@ const socialLinks = [
   // { Icon: Twitter, label: "Twitter", href: "#" },
   { Icon: Github, label: "GitHub", href: "https://github.com/ZSYIO" },
   { Icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/zsyio-technology-0b0005391/" },
-  // { Icon: Facebook, label: "Facebook", href: "#" },
   { Icon: Instagram, label: "Instagram", href: "https://www.instagram.com/zsyio_tech/" },
+  // { Icon: Facebook, label: "Facebook", href: "#" },
   // { Icon: Youtube, label: "YouTube", href: "#" },
   // { Icon: Dribbble, label: "Dribbble", href: "#" },
 ];
@@ -93,7 +93,7 @@ const Footer = () => {
         >
           {/* Company Info */}
           <div className="footer-animate">
-  <h2 className="text-2xl font-bold text-[hsl(var(--text))] mb-3 font-serif tracking-normal uppercase relative inline-block">
+  <h2 className="text-2xl font-bold text-[hsl(var(--text))] mb-3 font-serif tracking-normal  relative inline-block">
     Zsyio
     <span className="align-top text-sm text-[hsl(var(--text))]">™</span>
   </h2>
@@ -107,6 +107,10 @@ const Footer = () => {
     Headquartered in India. Partnering with global teams to engineer
     reliable, future-ready technology.
   </p>
+
+  <p className="mt-3 text-xs text-[hsl(var(--subtext0))]">
+  ISO-ready engineering practices • Secure deployment pipelines • Cloud-native architecture
+</p>
 </div>
 
           {/* Quick Links */}
@@ -206,6 +210,7 @@ const Footer = () => {
                   key={label}
                   target="_blank"
                   href={href}
+                  rel="noopener noreferrer"
                   aria-label={label}
                   className="
                     inline-flex items-center justify-center
@@ -226,23 +231,48 @@ const Footer = () => {
           </div>
         </div>
 
+
         {/* Bottom bar */}
-        <div className="border-t border-[hsl(var(--surface1))] pt-5 flex flex-col md:flex-row items-center justify-between gap-3 text-xs md:text-sm footer-animate">
-  
-  <p>
-    &copy; {currentYear}{" "}
-    <span className="font-semibold tracking-wide">
-      Zsyio
-      <span className="align-top text-[10px] text-[hsl(var(--text))]">™</span>
-    </span>
-    . All rights reserved.
-  </p>
+<div className="border-t border-[hsl(var(--surface1))] pt-6 mt-6 footer-animate">
+  <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-xs md:text-sm">
 
-  <p className="text-[hsl(var(--subtext0))] text-center md:text-right">
-    Engineering digital systems that scale and built with precision, performance, and purpose.
-  </p>
+    {/* Left: Legal + Brand */}
+    <div className="text-center md:text-left space-y-1">
+      <p className="text-[hsl(var(--text))]">
+        © {currentYear}{" "}
+        <span className="font-semibold tracking-wide">
+          Zsyio
+          <span className="align-top text-[10px]">™</span>
+        </span>
+        . All rights reserved.
+      </p>
 
+      <p className="text-[hsl(var(--subtext0))] text-[11px] md:text-xs">
+        Registered technology brand. All product names, logos, and trademarks are property of their respective owners.
+      </p>
+    </div>
+
+    {/* Center: Trust Indicators */}
+    <div className="flex flex-wrap items-center justify-center gap-4 text-[11px] md:text-xs text-[hsl(var(--subtext0))]">
+      <span className="px-2 py-1 rounded-md bg-[hsl(var(--surface2))]/40 border border-[hsl(var(--surface2))] hover:shadow-lg hover:shadow-[hsl(var(--blue))]/10">
+        Secure Architecture
+      </span>
+      <span className="px-2 py-1 rounded-md bg-[hsl(var(--surface2))]/40 border border-[hsl(var(--surface2))] hover:shadow-lg hover:shadow-[hsl(var(--blue))]/10">
+        Performance Optimized
+      </span>
+      <span className="px-2 py-1 rounded-md bg-[hsl(var(--surface2))]/40 border border-[hsl(var(--surface2))] hover:shadow-lg hover:shadow-[hsl(var(--blue))]/10">
+        Scalable Infrastructure
+      </span>
+    </div>
+
+    {/* Right: Build Signature */}
+    <div className="text-center md:text-right text-[hsl(var(--subtext0))] text-[11px] md:text-xs">
+      Engineered with precision in India • v1.0.0
+    </div>
+
+  </div>
 </div>
+
       </div>
     </footer>
   );

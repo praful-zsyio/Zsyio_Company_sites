@@ -5,6 +5,8 @@ from rest_framework.response import Response
 from .models import Service, Technology
 from .serializers import ServiceSerializer, TechnologySerializer
 from apps.utils.mongo import get_mongo_db, mongo_log
+from apps.utils.views import ReloadMixin
+import decimal
 from bson.objectid import ObjectId
 import datetime
 
@@ -13,7 +15,7 @@ def get_collection(name):
     return db[name] if db is not None else None
 
 def serialize_mongo_doc(doc):
-    """Recursively convert MongoDB ObjectId and datetime to JSON serializable formats."""
+    """Recursively convert MongoDB ObjectId, datetime, and decimal to JSON serializable formats."""
     if doc is None:
         return None
     if isinstance(doc, list):
@@ -23,7 +25,7 @@ def serialize_mongo_doc(doc):
         for k, v in doc.items():
             if k == '_id':
                 new_doc['id'] = str(v)
-            elif isinstance(v, (ObjectId, datetime.datetime)):
+            elif isinstance(v, (ObjectId, datetime.datetime, decimal.Decimal)):
                 if isinstance(v, datetime.datetime):
                     new_doc[k] = v.isoformat()
                 else:
@@ -35,7 +37,7 @@ def serialize_mongo_doc(doc):
         return new_doc
     return doc
 
-class ServiceViewSet(viewsets.ModelViewSet):
+class ServiceViewSet(ReloadMixin, viewsets.ModelViewSet):
     queryset = Service.objects.none()
     serializer_class = ServiceSerializer
     permission_classes = [permissions.AllowAny]
@@ -116,7 +118,7 @@ class ServiceViewSet(viewsets.ModelViewSet):
         mongo_log('service_logs', {'action': 'delete', 'service_id': str(service['_id']), 'title': service.get('title')})
         return Response(status=204)
 
-class TechnologyViewSet(viewsets.ModelViewSet):
+class TechnologyViewSet(ReloadMixin, viewsets.ModelViewSet):
     queryset = Technology.objects.none()
     serializer_class = TechnologySerializer
     permission_classes = [permissions.AllowAny]

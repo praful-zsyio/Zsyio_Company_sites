@@ -5,13 +5,17 @@ import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom'
 import { ThemeProvider } from './context/ThemeContext.jsx'
 import { DataProvider } from './context/DataContext.jsx'
+import SmoothScrollProvider from "./core/SmoothScrollProvider";
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <DataProvider>
       <ThemeProvider>
         <BrowserRouter>
-          <App />
+
+  <SmoothScrollProvider>
+    <App />
+  </SmoothScrollProvider>
         </BrowserRouter>
       </ThemeProvider>
     </DataProvider>

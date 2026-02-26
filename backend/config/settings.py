@@ -45,9 +45,7 @@ CSRF_TRUSTED_ORIGINS = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
     "http://localhost:3000",
-    "https://company-sites11.vercel.app",
-    "https://zsyiotech.vercel.app/",
-    "https://zsyio-web.vercel.app/"
+    "https://company-sites11.vercel.app"
 ]
 
 # CORS Configuration
@@ -123,6 +121,7 @@ INSTALLED_APPS = [
     'apps.cloudinary_upload',
     'apps.theme',
     'apps.colors',
+    'apps.newsletter',
 ]
 
 MIDDLEWARE = [
@@ -176,6 +175,7 @@ MIGRATION_MODULES = {
     'contact': 'apps.no_migrations',
     'theme': 'apps.no_migrations',
     'colors': 'apps.no_migrations',
+    'newsletter': 'apps.no_migrations',
 }
 
 
@@ -300,7 +300,5 @@ CLOUDINARY_STORAGE = {
 }
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-
-
 
 

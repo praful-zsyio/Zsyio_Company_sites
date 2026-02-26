@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { subscribeToNewsletter } from "../../utils/api";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -9,6 +10,7 @@ const NewsletterBox = () => {
   const sectionRef = useRef(null);
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useGSAP(
     () => {
@@ -45,7 +47,7 @@ const NewsletterBox = () => {
     { scope: sectionRef }
   );
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!email || !email.includes("@")) {
@@ -53,9 +55,18 @@ const NewsletterBox = () => {
       return;
     }
 
-    console.log("Subscribed:", email);
-    setStatus("Subscribed successfully!");
-    setEmail("");
+    setLoading(true);
+    setStatus(null);
+
+    try {
+      await subscribeToNewsletter(email);
+      setStatus("Subscribed successfully!");
+      setEmail("");
+    } catch (error) {
+      setStatus(error.message || "An unexpected error occurred.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -126,6 +137,7 @@ const NewsletterBox = () => {
 
             <button
               type="submit"
+              disabled={loading}
               className="
                 w-full md:w-auto
                 bg-[hsl(var(--blue))]
@@ -137,9 +149,10 @@ const NewsletterBox = () => {
                 transition-all duration-300
                 hover:-translate-y-1
                 hover:shadow-[0_0_20px_rgba(56,189,248,0.35)]
+                disabled:opacity-50
               "
             >
-              Subscribe
+              {loading ? "Subscribing..." : "Subscribe"}
             </button>
           </form>
 
@@ -160,7 +173,7 @@ const NewsletterBox = () => {
         {/* Social Buttons */}
         <div className="newsletter-cta mt-8 flex flex-col md:flex-row items-center justify-center gap-4">
           <a
-            href="https://chat.whatsapp.com/YOUR-LINK"
+            href="https://whatsapp.com/channel/0029Vb7QfBxDjiOi5fd1WS3y"
             target="_blank"
             rel="noopener noreferrer"
             className="w-full md:w-auto bg-green-600 px-8 py-3 rounded-xl font-semibold text-white shadow-soft transition-all duration-300 hover:-translate-y-1"
@@ -168,14 +181,14 @@ const NewsletterBox = () => {
             Join on WhatsApp
           </a>
 
-          <a
+          {/* <a
             href="https://discord.gg/YOUR-LINK"
             target="_blank"
             rel="noopener noreferrer"
             className="w-full md:w-auto bg-[hsl(var(--blue))] px-8 py-3 rounded-xl font-semibold text-white shadow-soft transition-all duration-300 hover:-translate-y-1"
           >
             Join on Discord
-          </a>
+          </a> */}
         </div>
 
         <p className="mt-12 text-xs text-[hsl(var(--subtext1))]">

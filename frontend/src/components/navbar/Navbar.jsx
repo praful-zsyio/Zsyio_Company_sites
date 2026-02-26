@@ -1,6 +1,7 @@
 import React, { useState} from "react";
 import { NavLink, Link } from "react-router-dom";
-const logo = "https://res.cloudinary.com/damlvqiwv/image/upload/f_auto,q_auto/v1769755031/static_assets/nhbcbfzk97vmxx0oxfa9.png";
+// const logo = "https://res.cloudinary.com/damlvqiwv/image/upload/v1772109801/DarkGreenLogo_r1ytux.png";
+import logo from "../../assets/test.png";
 import { useTheme } from "../../context/ThemeContext";
 import { AuthContext } from "../../context/AuthContext";
 import { useData } from "../../context/DataContext";
@@ -44,11 +45,11 @@ const Navbar = () => {
           "
         >
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2 select-none">
-            <img className="h-10 w-auto" src={logo} alt="Zsyio logo" />
-            <span className="text-xl font-serif font-bold tracking-tight uppercase text-[hsl(var(--text))]">
+          <Link to="/" className="flex  select-none">
+            <img className="h-19 rounded-full  w-auto" src={logo} alt="Zsyio logo" />
+            {/* <span className="text-xl font-serif font-bold tracking-tight uppercase text-[hsl(var(--text))]">
               Zsyio
-            </span>
+            </span> */}
           </Link>
 
           {/* Desktop Nav */}

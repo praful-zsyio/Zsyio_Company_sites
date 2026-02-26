@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import 'locomotive-scroll/dist/locomotive-scroll.css';
 
 /* 1) Base Theme (Light) */
 :root {
@@ -84,4 +85,12 @@
 @theme {
   --radius-xl: 1rem;
   --shadow-soft: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+body {
+  overflow-x: hidden;
 }

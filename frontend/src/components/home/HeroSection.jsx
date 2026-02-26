@@ -6,27 +6,49 @@ import { useGSAP } from '@gsap/react';
 const HeroSection = () => {
 const comp = useRef(null);
 
+// useGSAP(() => {
+//     let ctx = gsap.context(() => {
+//     const t1 = gsap.timeline({
+//         delay:0.5
+//     });
+//     t1.from(["#hero-title", "#hero-subtitle"], {
+//         opacity: 0,
+//         y: 30,
+//         stagger: 0.3,
+//         delay: 0.2
+//     });
+//     t1.from(".hero-button", {
+//         opacity: 0,
+//         y: 30,
+//         stagger: 0.3,
+//     })
+//     }, comp);
+
+//     return () => ctx.revert();
+// }, []);
 useGSAP(() => {
-    let ctx = gsap.context(() => {
-    const t1 = gsap.timeline({
-        delay:0.5
-    });
-    t1.from(["#hero-title", "#hero-subtitle"], {
-        opacity: 0,
-        y: 30,
-        stagger: 0.3,
-        delay: 0.2
-    });
-    t1.from(".hero-button", {
-        opacity: 0,
-        y: 30,
-        stagger: 0.3,
-    })
-    }, comp);
+  const tl = gsap.timeline();
 
-    return () => ctx.revert();
-}, []);
-
+  tl.from("#hero-title", {
+    y: 60,
+    opacity: 0,
+    duration: 1,
+    ease: "power4.out",
+  })
+  .from("#hero-subtitle", {
+    y: 40,
+    opacity: 0,
+    duration: 0.8,
+    ease: "power3.out",
+  }, "-=0.6")
+  .from(".hero-button", {
+    y: 30,
+    opacity: 0,
+    duration: 0.6,
+    stagger: 0.2,
+    ease: "power2.out",
+  }, "-=0.5");
+});
   return (
       <div className='flex grow items-center justify-center text-white' ref={comp}>
         <div id="welcome" className='w-full flex flex-col justify-center text-center text-base p-8'>
