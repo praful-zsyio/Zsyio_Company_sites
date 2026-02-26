@@ -1,7 +1,7 @@
 import React, { useState} from "react";
 import { NavLink, Link } from "react-router-dom";
 // const logo = "https://res.cloudinary.com/damlvqiwv/image/upload/v1772109801/DarkGreenLogo_r1ytux.png";
-import logo from "../../assets/test.png";
+import logo from "https://res.cloudinary.com/damlvqiwv/image/upload/v1772116832/test_sibbx7.png";
 import { useTheme } from "../../context/ThemeContext";
 import { AuthContext } from "../../context/AuthContext";
 import { useData } from "../../context/DataContext";
