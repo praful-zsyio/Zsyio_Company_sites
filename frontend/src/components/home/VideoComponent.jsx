@@ -10,7 +10,7 @@ const VideoComponent = () => {
     if (typeof window === "undefined") return;
 
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 768);
+      setIsMobile(window.innerWidth < 700);
     };
 
     const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");

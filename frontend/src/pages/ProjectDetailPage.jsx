@@ -87,8 +87,14 @@ const ProjectDetailPage = () => {
           pb-16
           relative
           overflow-hidden
+          bg-cover bg-center
         "
+        style={{ backgroundImage: `url(${image})` }}
       >
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-[hsl(var(--mantle)/0.6)] backdrop-blur-[1px] "></div>
+
+
         {/* Background Glow */}
         <div className="absolute top-0 right-0 w-1/2 h-full bg-linear-to-l from-[hsl(var(--blue))]/5 to-transparent pointer-events-none" />
 
@@ -103,7 +109,7 @@ const ProjectDetailPage = () => {
               <span>Back to projects</span>
             </Link>
             <span className="mx-2 text-[hsl(var(--overlay1))]">/</span>
-            <span className="uppercase tracking-wide font-medium text-[hsl(var(--blue))]">{category}</span>
+            <span className="uppercase tracking-wide font-medium text-[hsl(var(--subtext-0))]">{category}</span>
           </div>
 
           <div className="grid lg:grid-cols-[1.5fr_1fr] gap-12 items-end">
@@ -147,11 +153,11 @@ const ProjectDetailPage = () => {
 
             {/* Actions & Tags */}
             <div className="flex flex-col gap-6 items-start lg:items-end">
-              <div className="flex flex-wrap gap-2 justify-start lg:justify-end">
+              <div className="flex flex-wrap gap-1 justify-start lg:justify-end">
                 {finalTags.map((tag) => (
                   <span
                     key={tag}
-                    className="px-3 py-1 text-[11px] uppercase tracking-wider font-semibold rounded-full bg-[hsl(var(--surface1))]/50 border border-[hsl(var(--surface1))] text-[hsl(var(--subtext1))]"
+                    className="px-3 py-1 text-[11px] uppercase tracking-wider font-semibold rounded-full bg-white/10 border border-white/20 text-white/90"
                   >
                     {tag}
                   </span>
@@ -167,8 +173,8 @@ const ProjectDetailPage = () => {
                     className="
                                inline-flex items-center gap-2
                                px-6 py-3 rounded-full
-                               border border-[hsl(var(--surface1))]
-                               hover:border-[hsl(var(--text))]
+                               border border-white/30
+                               hover:bg-white/10
                                transition-all
                                font-medium
                              "
@@ -204,24 +210,8 @@ const ProjectDetailPage = () => {
         </div>
       </header>
 
-      {/* HERO IMAGE */}
-      {image && (
-        <div className="px-6 md:px-16 -mt-8 mb-16 relative z-20">
-          <div className="max-w-7xl mx-auto">
-            <div className="rounded-2xl overflow-hidden border border-[hsl(var(--surface1))] shadow-2xl bg-[hsl(var(--mantle))] aspect-video relative group">
-              <img
-                src={image}
-                alt={`${title} Preview`}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(56,189,248,0.18),transparent_60%)] pointer-events-none" />
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* MAIN CONTENT */}
-      <main className="px-6 md:px-16 py-8 grid gap-14 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] max-w-7xl mx-auto">
+      <main className="px-6 md:px-16 py-16 grid gap-14 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] max-w-7xl mx-auto">
         {/* LEFT COLUMN */}
         <section className="space-y-16">
           {/* Detailed Description */}

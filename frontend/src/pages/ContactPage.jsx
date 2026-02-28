@@ -6,7 +6,7 @@ const ContactPage = () => {
     return (
         <main>
             <Form />
-            {/* <NewsletterSection/> */}
+            <NewsletterSection/>
         </main>
     );
 };

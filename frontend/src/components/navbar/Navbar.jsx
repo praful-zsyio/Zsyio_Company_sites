@@ -10,7 +10,7 @@ const Navbar = () => {
   const { globalData } = useData();
   const navLinks = globalData?.navLinks || [];
   const logo = globalData?.logo || "https://res.cloudinary.com/damlvqiwv/image/upload/v1772118343/test_dl2h0c.png";
-
+  const logo2 = globalData?.logoAlt || "https://res.cloudinary.com/damlvqiwv/image/upload/v1772188218/image_m9k017.png";
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -46,7 +46,7 @@ const Navbar = () => {
         >
           {/* Logo */}
           <Link to="/" className="flex  select-none">
-            <img className="h-10 md:h-12 lg:h-19 rounded-full  w-auto" src={logo} alt="Zsyio logo" />
+            <img className="h-10 md:h-12 lg:h-19 rounded-full  w-auto" src={theme === 'light' ? logo2 : logo} alt="Zsyio logo" />
             {/* <span className="text-xl font-serif font-bold tracking-tight uppercase text-[hsl(var(--text))]">
               Zsyio
             </span> */}
