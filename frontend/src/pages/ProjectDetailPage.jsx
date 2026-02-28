@@ -165,24 +165,6 @@ const ProjectDetailPage = () => {
               </div>
 
               <div className="flex flex-wrap gap-4">
-                {github_url && (
-                  <a
-                    href={github_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="
-                               inline-flex items-center gap-2
-                               px-6 py-3 rounded-full
-                               border border-white/30
-                               hover:bg-white/10
-                               transition-all
-                               font-medium
-                             "
-                  >
-                    <Github size={18} />
-                    View Code
-                  </a>
-                )}
                 {finalLiveUrl && (
                   <a
                     href={finalLiveUrl}
