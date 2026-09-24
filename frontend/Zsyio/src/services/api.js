@@ -61,6 +61,7 @@ export const logout = () => {
 
 export const getProjects = () => api.get('projects/');
 export const getProducts = () => api.get('products/');
+export const getProductNavLinks = () => api.get('products/nav-links/');
 export const getServices = () => api.get('services/');
 export const getTechnologies = () => api.get('services/technologies/');
 export const getAbout = () => api.get('about/');

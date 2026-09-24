@@ -6,6 +6,7 @@ POST /api/chatbot/ - Chat with Bot
 POST /api/contact/ - Submit Contact Form
 
 GET /api/products/ - List Products
+GET /api/products/nav-links/ - Dynamic Product Navigation Links (Categories & Items)
 POST /api/products/ - Create Product
 GET /api/products/{id}/ - Retrieve Product
 PUT /api/products/{id}/ - Update Product
