@@ -1,7 +1,7 @@
 # Zsyio Project
 
 ## Overview
-Zsyio is a modern full-stack web application designed to showcase projects, offer service estimations, and provide interactive AI chatbot features. It works with a robust Django backend and a dynamic React frontend powered by Vite.
+Zsyio is a modern full-stack web application designed to showcase projects, products, services, and provide interactive AI chatbot features. It works with a robust Django backend and a dynamic React frontend powered by Vite.
 
 ## Tech Stack
 
@@ -23,7 +23,7 @@ Zsyio is a modern full-stack web application designed to showcase projects, offe
 
 ## Features
 - **Project Showcase:** Browsable portfolio of projects.
-- **Service Estimation:** interactive tools to estimate service costs.
+- **Product Catalog:** API & management for digital products.
 - **AI Chatbot:** Integrated intelligent chatbot for user assistance.
 - **Authentication:** Secure user login and token management.
 - **Contact System:** Functional contact form with email notifications via Resend.
@@ -93,9 +93,9 @@ Ensure you have a `.env` file in your backend configuration directory with the f
 The backend provides the following main API endpoints:
 - **Authentication:** `/api/token/`, `/api/token/refresh/`
 - **Projects:** `/api/projects/`
+- **Products:** `/api/products/`
 - **Services:** `/api/services/`
 - **Cart:** `/api/cart/`
-- **Estimation:** `/api/estimation/`
 - **Chatbot:** `/api/chatbot/`
 - **Contact:** `/api/contact/`
 - **Configuration:** `/api/config/`

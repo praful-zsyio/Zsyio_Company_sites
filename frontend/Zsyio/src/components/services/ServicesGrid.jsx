@@ -1,12 +1,10 @@
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getServices } from "../../services/api";
 import * as Icons from "lucide-react";
 import { Box } from "lucide-react"; // Start with specific fallback
 
 const ServicesGrid = ({ isInView }) => {
-  const navigate = useNavigate();
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -59,13 +57,6 @@ const ServicesGrid = ({ isInView }) => {
             <p className="text-sm text-[hsl(var(--subtext1))] grow">
               {service.description}
             </p>
-
-            <button
-              onClick={() => navigate(`/estimate/${service.slug || service.id}`)}
-              className="mt-6 rounded-lg border border-blue-400 px-4 py-2 text-sm"
-            >
-              Get Estimation
-            </button>
           </motion.article>
         );
       })}

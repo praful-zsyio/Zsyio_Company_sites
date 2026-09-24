@@ -18,17 +18,19 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework_simplejwt.views import TokenRefreshView
 from apps.authentication.views import CustomTokenObtainPairView
+from apps.config_api.views import DatabaseStatusView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/token/', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/projects/', include('apps.projects.urls')),
+    path('api/products/', include('apps.products.urls')),
     path('api/services/', include('apps.services.urls')),
     path('api/cart/', include('apps.cart.urls')),
     path('api/about/', include('apps.about.urls')),
-    path('api/estimation/', include('apps.estimation.urls')),
     path('api/chatbot/', include('apps.chatbot.urls')),
     path('api/config/', include('apps.config_api.urls')),
+    path('api/db-status/', DatabaseStatusView.as_view(), name='api-db-status'),
     path('api/contact/', include('apps.contact.urls')),
 ]

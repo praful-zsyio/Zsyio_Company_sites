@@ -60,12 +60,13 @@ export const logout = () => {
 };
 
 export const getProjects = () => api.get('projects/');
+export const getProducts = () => api.get('products/');
 export const getServices = () => api.get('services/');
 export const getTechnologies = () => api.get('services/technologies/');
 export const getAbout = () => api.get('about/');
-export const calculateEstimate = (data) => api.post('estimation/calculate/', data);
 export const sendChatMessage = (message) => api.post('chatbot/', { message });
 export const getSiteConfig = () => api.get('config/');
+export const getNavLinks = () => api.get('config/nav-links/');
 
 // Cart API
 export const getCart = () => api.get('cart/');

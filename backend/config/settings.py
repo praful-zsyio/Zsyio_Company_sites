@@ -53,8 +53,8 @@ INSTALLED_APPS = [
     'apps.cart',
     'apps.chatbot',
     'apps.config_api',
-    'apps.estimation',
     'apps.projects',
+    'apps.products',
     'apps.services',
     'apps.authentication',
     'apps.contact',
@@ -62,6 +62,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
+    'config.middleware.AppendSlashForAPIMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -101,6 +102,10 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# MongoDB Database Configuration
+MONGO_URI = os.getenv('MONGO_URI')
+MONGO_DB_NAME = os.getenv('MONGO_DB_NAME', 'zsyio_db')
 
 
 # Password validation

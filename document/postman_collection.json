@@ -234,10 +234,29 @@
             ]
         },
         {
-            "name": "Estimation",
+            "name": "Products",
             "item": [
                 {
-                    "name": "Calculate Estimate",
+                    "name": "List Products",
+                    "request": {
+                        "method": "GET",
+                        "header": [],
+                        "url": {
+                            "raw": "{{base_url}}/api/products/",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "api",
+                                "products",
+                                ""
+                            ]
+                        }
+                    },
+                    "response": []
+                },
+                {
+                    "name": "Create Product",
                     "request": {
                         "method": "POST",
                         "header": [
@@ -248,17 +267,16 @@
                         ],
                         "body": {
                             "mode": "raw",
-                            "raw": "{\n    \"serviceId\": \"web-designing\",\n    \"params\": {\n        \"pages\": 5,\n        \"iterations\": 2,\n        \"logo\": true\n    }\n}"
+                            "raw": "{\n    \"title\": \"Cloud DevOps Suite\",\n    \"category\": \"DevOps\",\n    \"price\": 399.00,\n    \"cloudinary_image\": \"https://res.cloudinary.com/demo/image/upload/sample.jpg\",\n    \"description\": \"Complete cloud orchestration tool.\",\n    \"features\": [\"CI/CD\", \"Kubernetes\"],\n    \"solutions\": [\"Efficiency\"]\n}"
                         },
                         "url": {
-                            "raw": "{{base_url}}/api/estimation/calculate/",
+                            "raw": "{{base_url}}/api/products/",
                             "host": [
                                 "{{base_url}}"
                             ],
                             "path": [
                                 "api",
-                                "estimation",
-                                "calculate",
+                                "products",
                                 ""
                             ]
                         }

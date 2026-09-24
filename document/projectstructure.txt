@@ -48,10 +48,11 @@ company-website/
 │   │   │   ├── views.py
 │   │   │   └── urls.py
 │   │   │
-│   │   ├── estimation/
+│   │   ├── products/
 │   │   │   ├── __init__.py
 │   │   │   ├── apps.py
-│   │   │   ├── services.py
+│   │   │   ├── models.py
+│   │   │   ├── serializers.py
 │   │   │   ├── views.py
 │   │   │   └── urls.py
 │   │   │
@@ -98,10 +99,10 @@ company-website/
 │   │   ├── api/                        # API Layer
 │   │   │   ├── axios.js
 │   │   │   ├── projects.api.js
+│   │   │   ├── products.api.js
 │   │   │   ├── services.api.js
 │   │   │   ├── about.api.js
 │   │   │   ├── contact.api.js
-│   │   │   ├── estimation.api.js
 │   │   │   ├── config.api.js
 │   │   │   ├── cart.api.js
 │   │   │   └── chatbot.api.js

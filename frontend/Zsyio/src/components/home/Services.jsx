@@ -162,7 +162,7 @@ const Services = () => {
           </div>
         </motion.section>
 
-        {/* ✅ Get Estimation Button */}
+        {/* Explore All Services Button */}
         <div className="mt-20 flex justify-center">
           <Link
             to="/services"
@@ -176,7 +176,7 @@ const Services = () => {
               transition
             "
           >
-            Get Estimation
+            Explore All Services
           </Link>
         </div>
       </div>

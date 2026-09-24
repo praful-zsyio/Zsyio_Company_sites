@@ -12,7 +12,6 @@ import ScrollToTop from './components/ScrollToTop'
 import ContactPage from './pages/ContactPage'
 import Navbar from './components/navbar/Navbar'
 import Footer from './components/footer/Footer'
-import EstimateSection from './components/services/EstimationSection'
 import { AuthProvider } from './context/AuthContext'
 // import Chatbot from './components/Chatbot'
 
@@ -30,7 +29,6 @@ const App = () => {
           <Route path='/projects/:projectId' element={<ProjectDetailPage />} />
           <Route path='/services' element={<ServicesPage />} />
           <Route path='/contact' element={<ContactPage />} />
-          <Route path="/estimate/:serviceId" element={<EstimateSection />} />
         </Routes>
       </main>
       <Footer />

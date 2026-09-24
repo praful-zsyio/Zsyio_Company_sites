@@ -10,8 +10,8 @@ The project follows a standard Django backend and React (Vite) frontend structur
         - `projects`: Manages project portfolio data.
         - `services`: Handles services and technology listings.
         - `about`: About Us information.
+        - `products`: Digital products management with Cloudinary image support.
         - `contact`: Contact form submissions.
-        - `estimation`: Project cost estimation logic.
         - `config_api`: Site configuration.
         - `cart`: Shopping cart functionality.
         - `chatbot`: Chatbot integration.
@@ -68,8 +68,13 @@ The project follows a standard Django backend and React (Vite) frontend structur
 - `PATCH /api/about/{id}/` - Update About Info (partial)
 - `DELETE /api/about/{id}/` - Delete About Info
 
-### Estimation
-- `POST /api/estimation/calculate/` - Calculate Estimate
+### Products
+- `GET /api/products/` - List all products
+- `POST /api/products/` - Create a new product
+- `GET /api/products/{id}/` - Retrieve product details
+- `PUT /api/products/{id}/` - Update product (full)
+- `PATCH /api/products/{id}/` - Update product (partial)
+- `DELETE /api/products/{id}/` - Delete product
 
 ### Chatbot
 - `POST /api/chatbot/` - Send Message

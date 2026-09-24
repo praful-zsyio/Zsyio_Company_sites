@@ -1,9 +1,15 @@
 GET /api/config/ - Get Site Config
+GET /api/config/nav-links/ - Get Navigation Links
 POST /api/token/ - Obtain Token
 POST /api/token/refresh/ - Refresh Token
 POST /api/chatbot/ - Chat with Bot
 POST /api/contact/ - Submit Contact Form
-POST /api/estimation/calculate/ - Calculate Estimate
+
+GET /api/products/ - List Products
+POST /api/products/ - Create Product
+GET /api/products/{id}/ - Retrieve Product
+PUT /api/products/{id}/ - Update Product
+DELETE /api/products/{id}/ - Delete Product
 
 GET /api/projects/ - List Projects
 POST /api/projects/ - Create Project

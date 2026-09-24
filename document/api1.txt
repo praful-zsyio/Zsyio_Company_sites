@@ -83,21 +83,21 @@ Sample for an Item (if applicable):
 }
 
 --------------------------------------------------------------------------------
-5. ESTIMATION
+5. PRODUCTS
 --------------------------------------------------------------------------------
-Endpoint: POST /api/estimation/calculate/
-Description: Calculate project cost
+Endpoint: POST /api/products/
+Description: Create a new product
 JSON Body:
 {
-  "serviceId": "web-development",
-  "params": {
-    "pages": 10,
-    "features": {
-      "cms": true,
-      "auth": true,
-      "payments": true
-    }
-  }
+  "title": "Cloud Monitoring Tool",
+  "category": "DevOps",
+  "price": "299.00",
+  "image": "https://example.com/images/product.jpg",
+  "cloudinary_image": "https://res.cloudinary.com/demo/image/upload/sample.jpg",
+  "description": "Real-time metrics and cloud system monitoring.",
+  "live_url": "https://monitor.example.com",
+  "features": ["Alerting", "Dashboard", "APM"],
+  "solutions": ["Faster MTTR", "Cost Optimization"]
 }
 
 --------------------------------------------------------------------------------
