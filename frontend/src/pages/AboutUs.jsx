@@ -4,17 +4,20 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 
 import AboutHero from "../components/about/AboutHero";
+
+import StorySection from "../components/about/StorySection";
+import AboutStatsSection from "../components/about/AboutStatsSection";
 import MissionVisionSection from "../components/about/MissionVisionSection";
-import JourneySection from "../components/about/JourneySection";
 import ValuesSection from "../components/about/ValuesSection";
-import WhyPartnerSection from "../components/about/WhyPartnerSection";
 import ProcessSection from "../components/about/ProcessSection";
-// import CultureVideoSection from "../components/about/CultureVideoSection";
-// import TestimonialsSection from "../components/about/TestimonialsSection";
-import QualitySecuritySection from "../components/about/QualitySecuritySection";
-import TechStackSection from "../components/about/TechStackSection";
 import IndustriesSection from "../components/about/IndustriesSection";
 import CtaSection from "../components/about/CtaSection";
+import AboutMarquee from "../components/about/AboutMarquee";
+import ImageSplitSection from "../components/about/ImageSplitSection";
+import JourneySection from "../components/about/JourneySection";
+import PhilosophySection from "../components/about/PhilosophySection";
+import CertificationsSection from "../components/about/CertificationsSection";
+import FounderSection from "../components/about/FounderSection";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -70,19 +73,34 @@ const AboutUs = () => {
   return (
     <div
       ref={comp}
-      className="bg-[hsl(var(--base))] text-[hsl(var(--text))] font-serif"
     >
       <AboutHero />
+      <AboutMarquee
+        items={['Crafting the Current', 'Since 2025', 'Indore, India', 'Globally Delivered', '20+ Clients', '3 Countries', 'Senior-Led', 'Outcome-Driven']}
+        dark={true}
+        speed={8}
+      />
+      <StorySection />
+      <AboutStatsSection />
       <MissionVisionSection />
-      <JourneySection />
       <ValuesSection />
-      <WhyPartnerSection />
+      <AboutMarquee
+        items={['UI/UX Design', 'Web Development', 'Mobile Applications', 'Cloud Architecture', 'E-Commerce Solutions', 'AI & Machine Learning', 'DevOps & Scaling', 'Product Strategy']}
+        dark={false}
+        speed={45}
+      />
       <ProcessSection />
-      {/* <CultureVideoSection /> */}
-      {/* <TestimonialsSection /> */}
-      <QualitySecuritySection />
-      <TechStackSection />
+      <ImageSplitSection />
+      <JourneySection />
+      <PhilosophySection />
+      <CertificationsSection />
       <IndustriesSection />
+      <AboutMarquee
+        items={['India', 'United States', 'United Kingdom', 'Germany', 'Japan', 'South Korea', 'Singapore', 'Israel', 'Canada', 'France', 'Australia','New Zealand', 'Netherlands', 'Sweden', 'Switzerland', 'Finland', 'Taiwan', 'Ireland', 'Denmark', 'Norway', 'Estonia']}
+        dark={true}
+        speed={55}
+      />
+      <FounderSection />
       <CtaSection />
     </div>
   );

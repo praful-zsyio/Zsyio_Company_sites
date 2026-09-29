@@ -27,6 +27,8 @@ urlpatterns = [
     path('api/token/refresh/', CustomTokenRefreshView.as_view(), name='token_refresh_old'),
     path('api/projects/', include('apps.projects.urls')),
     path('api/projects', include('apps.projects.urls')),
+    path('api/products/', include('apps.products.urls')),
+    path('api/products', include('apps.products.urls')),
     path('api/services/', include('apps.services.urls')),
     path('api/cart/', include('apps.cart.urls')),
     path('api/cart', include('apps.cart.urls')),

@@ -11,36 +11,24 @@ const NewsletterBox = () => {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const inputRef = useRef(null);
 
   useGSAP(
     () => {
       const section = sectionRef.current;
       if (!section) return;
 
-      const titles = section.querySelectorAll(".title-animate");
-      const ctas = section.querySelectorAll(".newsletter-cta");
-
-      gsap.from(titles, {
+      const elements = section.querySelectorAll(".animate-item");
+      gsap.from(elements, {
         opacity: 0,
-        y: 40,
-        stagger: 0.15,
-        duration: 0.7,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: section,
-          start: "top 80%",
-        },
-      });
-
-      gsap.from(ctas, {
-        opacity: 0,
-        y: 50,
-        stagger: 0.2,
+        y: 30,
+        stagger: 0.1,
         duration: 0.8,
         ease: "power3.out",
         scrollTrigger: {
           trigger: section,
-          start: "top 75%",
+          start: "top 80%",
         },
       });
     },
@@ -50,7 +38,7 @@ const NewsletterBox = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!email || !email.includes("@")) {
+    if (!email.trim() || !email.includes("@")) {
       setStatus("Please enter a valid email.");
       return;
     }
@@ -60,7 +48,7 @@ const NewsletterBox = () => {
 
     try {
       await subscribeToNewsletter(email);
-      setStatus("Subscribed successfully!");
+      setSubmitted(true);
       setEmail("");
     } catch (error) {
       setStatus(error.message || "An unexpected error occurred.");
@@ -70,130 +58,98 @@ const NewsletterBox = () => {
   };
 
   return (
-    <section
-      ref={sectionRef}
-      className="
-        relative
-        min-h-[70vh]
-        pt-20 md:pt-28
-        pb-20
-        overflow-hidden
-        bg-[hsl(var(--mantle))]
-      "
-    >
-      {/* Glow Background */}
-      <div
-        className="
-          pointer-events-none absolute inset-0 -z-10
-          bg-[radial-gradient(circle_at_top,rgba(56,189,248,0.18),transparent_65%)]
-        "
-        aria-hidden="true"
-      />
-
-      <div className="max-w-5xl mx-auto px-6 text-center">
-
-        {/* Badge */}
-        <div className="inline-flex items-center gap-2 rounded-full border border-[hsl(var(--surface2))] bg-[hsl(var(--base))]/80 px-4 py-1 text-xs md:text-sm text-[hsl(var(--subtext1))] mb-6 title-animate">
-          <span className="h-1.5 w-1.5 rounded-full bg-[hsl(var(--blue))]" />
-          <span>Zsyio Community</span>
+    <section ref={sectionRef} className="mt-10 border-b border-[hsla(var(--lavender))]">
+      <div className="grid grid-cols-1 md:grid-cols-2">
+        {/* Left — copy */}
+        <div className="px-6 md:px-10 lg:px-14 py-14 flex flex-col justify-between gap-10">
+          <div>
+            <p className="font-Barlow text-[11px] tracking-[0.25em] uppercase font-medium mb-4 text-[hsla(var(--lavender)/0.8)] animate-item flex items-center gap-2">
+              <span className="w-1.5 h-1.5 bg-[hsla(var(--lavender))] flex-shrink-0" />
+              ZSYIO Community
+            </p>
+            <h2 className="font-Barlow text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight leading-none animate-item">
+              Build the <span className="text-[hsla(var(--lavender))]">Future.</span>
+              <br />
+              Together.
+            </h2>
+          </div>
+          <p className="font-serif text-sm md:text-base leading-relaxed text-[hsla(var(--text)/0.75)] max-w-sm animate-item">
+            Join engineers, founders, and innovators shaping intelligent,
+            scalable AI systems, ERP automation, and digital infrastructure.
+          </p>
+          <div className="flex flex-col gap-3 animate-item">
+            <a
+              href="https://whatsapp.com/channel/0029Vb7QfBxDjiOi5fd1WS3y"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full md:w-max font-Barlow text-[10px] tracking-[0.2em] uppercase font-medium border px-8 py-4 transition-all duration-300 border-[#25D366] text-[#25D366] hover:bg-[#25D366] hover:text-white inline-block text-center"
+            >
+              JOIN ON WHATSAPP
+            </a>
+          </div>
         </div>
 
-        {/* Headline */}
-        <h2 className="text-3xl md:text-5xl font-semibold text-[hsl(var(--blue))] title-animate">
-          Build the Future. Together.
-        </h2>
+        {/* Right — form */}
+        <div className="px-6 md:px-10 lg:px-14 py-14 flex flex-col justify-center animate-item">
+          {submitted ? (
+            <div className="py-10">
+              <p className="font-Barlow text-[11px] tracking-[0.25em] uppercase font-medium mb-4 text-[hsla(var(--lavender)/0.8)]">
+                Confirmed
+              </p>
+              <h3 className="font-Barlow text-4xl font-black uppercase tracking-tight mb-4 leading-none">
+                You're in.
+              </h3>
+              <p className="font-serif text-sm md:text-base leading-relaxed text-[hsla(var(--text)/0.75)]">
+                Subscribed successfully!
+              </p>
+              <button
+                onClick={() => {
+                  setSubmitted(false);
+                  setStatus(null);
+                }}
+                className="mt-8 font-Barlow text-[11px] tracking-[0.2em] uppercase font-medium border-b border-[hsla(var(--lavender))] text-[hsla(var(--lavender))] pb-1 hover:opacity-70 transition-opacity"
+              >
+                Subscribe another →
+              </button>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="flex flex-col gap-0 w-full max-w-md mx-auto md:mx-0">
+              <label className="font-Barlow text-[11px] tracking-[0.25em] uppercase font-medium mb-3 text-[hsla(var(--lavender)/0.8)]">
+                ENTER YOUR EMAIL
+              </label>
 
-        <p className="mt-6 max-w-2xl mx-auto text-base md:text-lg leading-relaxed text-[hsl(var(--subtext1))] title-animate">
-          Join engineers, founders, and innovators shaping intelligent,
-          scalable AI systems, ERP automation, and digital infrastructure.
-        </p>
+              {/* Input row */}
+              <div className="flex flex-col sm:flex-row gap-4 w-full">
+                <input
+                  ref={inputRef}
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="you@company.com"
+                  className="flex-1 px-5 py-4 font-Barlow text-sm bg-transparent border border-[hsla(var(--lavender))] rounded-xl text-[hsla(var(--text))] placeholder:text-[hsla(var(--text)/0.3)] tracking-widest outline-none uppercase transition-colors focus:border-[hsla(var(--text))]"
+                />
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="bg-[hsla(var(--lavender))] flex justify-center items-center font-bold text-[14px] md:text-[15px] text-[hsla(var(--base))] px-8 py-4 cursor-pointer rounded-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-lg shadow-[hsla(var(--lavender)/0.25)] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:shadow-none flex-shrink-0"
+                >
+                  {loading ? "SUBSCRIBING..." : "SUBSCRIBE"}
+                </button>
+              </div>
 
-        {/* Newsletter Card */}
-        <div className="newsletter-cta mt-12 bg-[hsl(var(--base))]/80 border border-[hsl(var(--surface2))] rounded-2xl p-6 md:p-8 shadow-soft backdrop-blur-xl">
-          <form
-            onSubmit={handleSubmit}
-            className="flex flex-col md:flex-row items-center justify-center gap-4"
-          >
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
-              required
-              className="
-                w-full md:w-[420px]
-                bg-transparent
-                border border-[hsl(var(--surface2))]
-                px-5 py-3
-                rounded-xl
-                text-[hsl(var(--text))]
-                placeholder:text-[hsl(var(--subtext1))]
-                focus:outline-none
-                focus:ring-2
-                focus:ring-[hsl(var(--blue))]
-                transition-all duration-300
-              "
-            />
+              {status && (
+                <p className="mt-4 font-Barlow text-[11px] tracking-[0.1em] uppercase text-[hsla(var(--lavender))]">
+                  {status}
+                </p>
+              )}
 
-            <button
-              type="submit"
-              disabled={loading}
-              className="
-                w-full md:w-auto
-                bg-[hsl(var(--blue))]
-                px-8 py-3
-                rounded-xl
-                font-semibold
-                text-white
-                shadow-soft
-                transition-all duration-300
-                hover:-translate-y-1
-                hover:shadow-[0_0_20px_rgba(56,189,248,0.35)]
-                disabled:opacity-50
-              "
-            >
-              {loading ? "Subscribing..." : "Subscribe"}
-            </button>
-          </form>
-
-          {status && (
-            <p className="mt-4 text-sm text-[hsl(var(--subtext1))]">
-              {status}
-            </p>
+              <p className="mt-6 font-Barlow text-[10px] tracking-[0.08em] text-[hsla(var(--text)/0.4)] uppercase">
+                No noise. High-signal updates. Crafting the Current.
+              </p>
+            </form>
           )}
         </div>
-
-        {/* Divider */}
-        <div className="newsletter-cta mt-10 flex items-center justify-center gap-6 text-sm text-[hsl(var(--subtext1))]">
-          <span className="h-px w-12 bg-[hsl(var(--surface2))]" />
-          or join instantly
-          <span className="h-px w-12 bg-[hsl(var(--surface2))]" />
-        </div>
-
-        {/* Social Buttons */}
-        <div className="newsletter-cta mt-8 flex flex-col md:flex-row items-center justify-center gap-4">
-          <a
-            href="https://whatsapp.com/channel/0029Vb7QfBxDjiOi5fd1WS3y"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full md:w-auto bg-green-600 px-8 py-3 rounded-xl font-semibold text-white shadow-soft transition-all duration-300 hover:-translate-y-1"
-          >
-            Join on WhatsApp
-          </a>
-
-          {/* <a
-            href="https://discord.gg/YOUR-LINK"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full md:w-auto bg-[hsl(var(--blue))] px-8 py-3 rounded-xl font-semibold text-white shadow-soft transition-all duration-300 hover:-translate-y-1"
-          >
-            Join on Discord
-          </a> */}
-        </div>
-
-        <p className="mt-12 text-xs text-[hsl(var(--subtext1))]">
-          No noise. High-signal updates. Crafting the Current.
-        </p>
       </div>
     </section>
   );

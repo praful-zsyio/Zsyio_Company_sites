@@ -1,131 +1,116 @@
-import React from "react";
-import { Search, PencilRuler, Code, Rocket, BarChart } from "lucide-react";
-import { processSteps } from "../../data/aboutData/aboutProcess";
+import React, { useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+import { PROCESS } from "../../data/aboutData/aboutProcess";
 
-const iconMap = { Search, PencilRuler, Code, Rocket ,BarChart};
+gsap.registerPlugin(ScrollTrigger);
 
 const ProcessSection = () => {
+  const comp = useRef(null);
+
+  useGSAP(() => {
+    // Header animation
+    gsap.from(".process-header-fade-up", {
+      opacity: 0,
+      y: 30,
+      duration: 0.8,
+      stagger: 0.15,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: ".process-header-container",
+        start: "top 85%",
+        toggleActions: "play none none reverse",
+      }
+    });
+
+    // Rows animation
+    gsap.from(".process-row", {
+      opacity: 0,
+      y: 40,
+      duration: 0.8,
+      stagger: 0.1,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: ".process-list",
+        start: "top 85%",
+        toggleActions: "play none none reverse",
+      }
+    });
+  }, { scope: comp });
+
   return (
-    <section
-      className="
-        relative py-24
-        bg-linear-to-b
-        from-[hsl(var(--base))]
-        via-[hsl(var(--mantle))]
-        to-[hsl(var(--base))]
-        overflow-hidden
-      "
-    >
-      {/* Background Effects */}
-      <div
-        className="
-          absolute inset-0 -z-10
-          bg-[radial-gradient(circle_at_top,rgba(56,189,248,0.18),transparent_60%)]
-        "
-      />
-      <div
-        className="
-          absolute inset-0 -z-10 opacity-30
-          bg-[linear-gradient(to_right,rgba(148,163,184,0.08)_1px,transparent_1px),
-              linear-gradient(to_bottom,rgba(148,163,184,0.08)_1px,transparent_1px)]
-          bg-size-[24px_24px]
-        "
-      />
-
-      <div className="container mx-auto px-0 max-w-6xl">
-
-        {/* Heading */}
-        <header className="text-center mb-16 space-y-4">
-          <span className="inline-block text-xs uppercase tracking-[0.3em] text-[hsl(var(--subtext0))]">
-            Process
-          </span>
-
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight">
-            From Concept to Scalable Reality
-          </h2>
-
-          <p className="text-[hsl(var(--subtext1))] max-w-2xl mx-auto text-sm md:text-base leading-relaxed">
-            A structured engineering framework that ensures clarity, velocity,
-            and long-term scalability at every stage.
-          </p>
-        </header>
-
-        {/* Timeline Grid */}
-        <div className="relative">
-
-          {/* Horizontal Connector */}
-          <div className="hidden md:block absolute top-6 left-0 w-full h-px bg-[hsl(var(--surface2))]" />
-
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-10">
-            {processSteps.map((step, index) => {
-              const Icon = iconMap[step.icon];
-
-              return (
-                <div key={step.id} className="relative group">
-
-                  {/* Icon + Step */}
-                  <div className="flex md:flex-col items-center md:items-center gap-4 md:gap-0">
-
-                    {/* Icon Circle */}
-                    <div
-                      className="
-                        relative z-10
-                        flex items-center justify-center
-                        w-12 h-12
-                        rounded-full
-                        border border-[hsl(var(--blue))]/60
-                        bg-[hsl(var(--mantle))]
-                        shadow-[0_0_18px_rgba(56,189,248,0.25)]
-                        transition-all duration-300
-                        group-hover:shadow-[0_0_28px_rgba(56,189,248,0.45)]
-                      "
-                    >
-                      {Icon && (
-                        <Icon className="w-5 h-5 text-[hsl(var(--blue))]" />
-                      )}
-                    </div>
-
-                    {/* Step Label */}
-                    <span className="md:mt-3 text-[10px] uppercase tracking-[0.25em] text-[hsl(var(--subtext0))]">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                  </div>
-
-                  {/* Card */}
-                  <div
-                    className="
-                      mt-6
-                      rounded-2xl
-                      border border-[hsl(var(--surface2))]
-                      bg-[hsl(var(--base))]/80
-                      backdrop-blur-lg
-                      p-6
-                      transition-all duration-300
-                      group-hover:-translate-y-2
-                      group-hover:border-[hsl(var(--blue))]
-                      group-hover:shadow-[0_0_30px_rgba(56,189,248,0.2)]
-                      flex flex-col
-                      animate-in-view
-                      md:min-h-75
-                      md:min-w-55
-                    "
-                  >
-                    <h3 className="text-base md:text-lg font-semibold mb-3">
-                      {step.title}
-                    </h3>
-
-                    <div className="h-px w-10 bg-[hsl(var(--blue))]/60 mb-3" />
-
-                    <p className="text-[hsl(var(--subtext1))] text-sm leading-relaxed flex-1">
-                      {step.description}
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
+    <section ref={comp} className="border-b border-[hsla(var(--lavender)/0.4)] text-[hsl(var(--text))] bg-transparent">
+      {/* Header */}
+      <div className="process-header-container px-6 md:px-14 py-12 border-b border-[hsla(var(--lavender)/0.4)]">
+        <div className="process-header-fade-up">
+          <div className="grid grid-cols-1 md:grid-cols-2 items-end gap-0">
+            <div>
+              <p className="text-[11px] tracking-[0.25em] uppercase font-medium mb-3 text-[hsl(var(--lavender))]">
+                Our Methodology
+              </p>
+              <h2
+                style={{
+                  fontFamily: "'Barlow Condensed', sans-serif",
+                  fontSize: "clamp(3rem, 7vw, 7rem)",
+                  lineHeight: 0.9,
+                  letterSpacing: "-0.025em",
+                }}
+                className="font-black uppercase"
+              >
+                How We<br />Work.
+              </h2>
+            </div>
+            <div className="mt-6 md:mt-0 md:pl-14">
+              <p className="text-base leading-relaxed text-[hsl(var(--subtext1))] max-w-md">
+                Five phases. No exceptions. We've delivered the same methodology for 2 years because it works — not because we haven't thought to change it.
+              </p>
+            </div>
           </div>
         </div>
+      </div>
 
+      {/* Process steps */}
+      <div className="process-list">
+        {PROCESS.map((p, i) => (
+          <div
+            key={p.num}
+            className="process-row border-b border-[hsla(var(--lavender)/0.4)] last:border-b-0 grid grid-cols-[160px_1fr] md:grid-cols-[280px_1fr] hover:bg-[hsla(var(--lavender)/0.03)] transition-colors group"
+          >
+            {/* Left: number + phase label */}
+            <div className="border-r border-[hsla(var(--lavender)/0.4)] px-6 md:px-12 py-10 flex flex-col justify-between">
+              <span className="text-[10px] tracking-[0.3em] uppercase font-medium text-[hsl(var(--lavender))] opacity-80">{p.num}</span>
+              <span
+                style={{
+                  fontFamily: "'Barlow Condensed', sans-serif",
+                  writingMode: "vertical-rl",
+                  textOrientation: "mixed",
+                }}
+                className="text-xs tracking-[0.25em] uppercase font-bold text-[hsl(var(--lavender))] opacity-60 mt-4 self-end rotate-180 hidden md:block"
+              >
+                {p.label}
+              </span>
+            </div>
+
+            {/* Right: content */}
+            <div className="px-6 md:px-14 py-10">
+              <div className="flex flex-wrap items-center gap-3 mb-4">
+                <h3
+                  style={{ fontFamily: "'Barlow Condensed', sans-serif" }}
+                  className="text-2xl md:text-4xl font-black uppercase tracking-tight"
+                >
+                  {p.title}
+                </h3>
+                <span className="text-[10px] tracking-[0.2em] uppercase font-medium border border-[hsla(var(--lavender)/0.4)] text-[hsl(var(--lavender))] px-2 py-1 md:hidden">
+                  {p.label}
+                </span>
+              </div>
+              <p className="text-sm md:text-base leading-relaxed text-[hsl(var(--subtext1))] max-w-2xl">
+                {p.body}
+              </p>
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   );

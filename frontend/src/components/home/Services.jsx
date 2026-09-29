@@ -1,221 +1,96 @@
-import { useRef, useEffect, useState } from "react";
-import { useInView } from "framer-motion";
-import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
-import { getServices, getCategorizedTechnologies } from "../../services/api";
-import * as LucideIcons from "lucide-react";
+import React, { useRef, useLayoutEffect } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import ServicesGrid from '../services/ServicesGrid';
+
+gsap.registerPlugin(ScrollTrigger);
 
 
 const Services = () => {
   const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, { once: true, amount: 0.15 });
-  const [services, setServices] = useState([]);
-  const [categories, setCategories] = useState([]);
+  const tagRef     = useRef(null);
+  const headRef    = useRef(null);
+  const subRef     = useRef(null);
+  const linkRef    = useRef(null);
 
-  useEffect(() => {
-    Promise.all([
-      getServices().then(res => Array.isArray(res.data) ? res.data : []),
-      getCategorizedTechnologies().then(res => Array.isArray(res.data) ? res.data : [])
-    ]).then(([servicesData, categoriesData]) => {
-      setServices(servicesData);
-      setCategories(categoriesData);
-    }).catch(err => {
-      console.error("Error fetching services data:", err);
-    });
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: 'top 80%',
+          // play on scroll down, stay visible, reverse only on scroll back up
+          toggleActions: 'play none none reverse',
+        },
+        defaults: { ease: 'power3.out' },
+      });
+
+      // Tag spans stagger in
+      tl.from(tagRef.current.children, {
+        opacity: 0,
+        y: 16,
+        stagger: 0.07,
+        duration: 0.5,
+      })
+
+      // "Services" headline
+      .from(headRef.current, {
+        opacity: 0,
+        y: 50,
+        duration: 0.7,
+      }, '-=0.3')
+
+      // Subtitle
+      .from(subRef.current, {
+        opacity: 0,
+        x: 24,
+        duration: 0.5,
+      }, '-=0.4')
+
+      // "View All" link
+      .from(linkRef.current, {
+        opacity: 0,
+        y: 12,
+        duration: 0.4,
+      }, '-=0.2');
+    }, sectionRef);
+
+    return () => ctx.revert();
   }, []);
 
-  const container = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.12 },
-    },
-  };
-
-  const item = {
-    hidden: { opacity: 0, y: 28 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
-    },
-  };
-// const container = {
-//   hidden: {},
-//   visible: {
-//     transition: {
-//       staggerChildren: 0.15,
-//       delayChildren: 0.2,
-//     },
-//   },
-// };
-
-// const item = {
-//   hidden: { y: 50, opacity: 0, scale: 0.95 },
-//   visible: {
-//     y: 0,
-//     opacity: 1,
-//     scale: 1,
-//     transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
-//   },
-// };
   return (
-    <section
-      ref={sectionRef}
-      className="relative py-20 md:py-24 bg-[hsl(var(--base))]"
-    >
-      {/* background grid */}
-      <div
-        className="
-          pointer-events-none absolute inset-0 -z-10
-          bg-[linear-gradient(to_right,rgba(148,163,184,0.06)_1px,transparent_1px),
-              linear-gradient(to_bottom,rgba(148,163,184,0.06)_1px,transparent_1px)]
-          bg-size-[24px_24px]
-        "
-        aria-hidden="true"
-      />
+    <section ref={sectionRef} className='mt-16 lg:mt-24 px-6 md:px-10 w-full'>
 
-      <div className="max-w-7xl mx-auto px-6">
-        {/* Header */}
-        <motion.header
-          initial={{ opacity: 0, y: -20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-14 space-y-4"
-        >
-          <div className="inline-flex items-center gap-2 rounded-full border border-[hsl(var(--surface2))] bg-[hsl(var(--mantle))]/70 px-4 py-1 text-xs text-[hsl(var(--subtext1))]">
-            <span className="h-1.5 w-1.5 rounded-full bg-[hsl(var(--blue))]" />
-            What we do
-          </div>
-
-          <h2 className="text-3xl md:text-4xl font-bold text-[hsl(var(--text))]">
-            Our Services
-          </h2>
-
-          <p className="text-[hsl(var(--subtext1))] max-w-3xl mx-auto text-sm md:text-base">
-            End-to-end product, design, and engineering capabilities focused on
-            shipping reliable, scalable digital systems.
-          </p>
-        </motion.header>
-
-        {/* Services Grid */}
-        <motion.div
-          variants={container}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 mb-20"
-        >
-          {Array.isArray(services) && services.map((service, index) => {
-            const Icon = LucideIcons[service.icon] || LucideIcons.HelpCircle;
-            return (
-              <motion.article
-                key={service.slug || index}
-                variants={item}
-                className="
-                  group relative h-full
-                  rounded-2xl border border-[hsl(var(--surface1))]
-                  bg-[hsl(var(--mantle))]/80
-                  backdrop-blur-xl
-                  p-6
-                  transition-all duration-300
-                  hover:-translate-y-1.5
-                  hover:border-[hsl(var(--blue))]
-                  hover:shadow-[0_0_28px_rgba(56,189,248,0.22)]
-                  flex flex-col
-                "
-              >
-                <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-[hsl(var(--blue))]/15 border border-[hsl(var(--blue))]/30 mb-4">
-                  <Icon className="w-6 h-6 text-[hsl(var(--blue))]" />
-                </div>
-
-                <h3 className="text-lg font-semibold text-[hsl(var(--text))] mb-2">
-                  {service.title}
-                </h3>
-
-                <p className="text-sm text-[hsl(var(--subtext1))] leading-relaxed grow">
-                  {service.description}
-                </p>
-
-                <div className="mt-4 h-0.5 w-0 bg-[hsl(var(--blue))] group-hover:w-full transition-all duration-300 rounded-full" />
-              </motion.article>
-            );
-          })}
-        </motion.div>
-
-        {/* Technologies */}
-        <motion.section
-          initial={{ opacity: 0, y: 24 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          <h3 className="text-2xl md:text-3xl text-[hsl(var(--subtext1))]  font-semibold text-center mb-4">
-            Technologies We Work With
+      {/* ── Section header ── */}
+      <div className='flex justify-between lg:items-center flex-col lg:flex-row mb-8 lg:mb-12'>
+        <div>
+          <h3 ref={tagRef} className='text-[11px] md:text-[12px] font-medium text-[hsla(var(--lavender)/0.8)] uppercase flex flex-wrap gap-3 md:gap-5 pl-1 mb-2'>
+            <span className='tracking-[.2rem]'>What </span>
+            <span className='tracking-[.2rem]'>we </span>
+            <span className='tracking-[.2rem]'>do</span>
           </h3>
-
-          <p className="text-[hsl(var(--subtext1))] text-center max-w-3xl mx-auto mb-12 text-sm md:text-base">
-            Proven tools and platforms chosen for reliability, performance, and
-            long-term maintainability.
-          </p>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-            {Array.isArray(categories) && categories.map((group, idx) => (
-              <motion.div
-                key={idx}
-                variants={item}
-                initial="hidden"
-                animate={isInView ? "visible" : "hidden"}
-                transition={{ delay: 0.3 + idx * 0.08 }}
-                className="
-                  rounded-2xl border border-[hsl(var(--surface1))]
-                  bg-[hsl(var(--mantle))]/80
-                  p-6
-                  transition-all duration-300
-                  hover:border-[hsl(var(--blue))]
-                  hover:shadow-soft
-                "
-              >
-                <h4 className="text-lg font-semibold text-[hsl(var(--blue))] mb-5 text-center">
-                  {group.category}
-                </h4>
-
-                <div className="space-y-3">
-                  {group.items.map((tech, i) => {
-                    const TechIcon = LucideIcons[tech.icon] || LucideIcons.HelpCircle;
-                    return (
-                      <div
-                        key={i}
-                        className="flex items-center gap-3 text-sm text-[hsl(var(--subtext1))]"
-                      >
-                        <TechIcon style={{ color: tech.color }} className="w-4 h-4" />
-                        <span>{tech.name}</span>
-                      </div>
-                    );
-                  })}
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.section>
-
-
-        {/* ✅ Get Estimation Button */}
-        <div className="mt-20 flex justify-center">
-          <Link
-            to="/services"
-            className="
-              inline-flex items-center justify-center
-              rounded-xl border border-[hsl(var(--blue))]
-              px-8 py-3
-              text-sm font-semibold
-              text-[hsl(var(--blue))]
-              hover:bg-[hsl(var(--blue))]/10
-              transition
-            "
-          >
-            Get Estimation
-          </Link>
+          <h1 ref={headRef} className='text-[2.5rem] lg:text-[5rem] font-black font-Barlow uppercase leading-none'>
+            Services
+          </h1>
         </div>
+        <h6 ref={subRef} className='text-[0.8rem] font-Barlow uppercase mt-3 lg:mt-0 max-w-xs text-right'>
+          Multiple disciplines. One team.<br />everything built as a <span className='text-[hsl(var(--lavender))] font-medium'>masterpiece</span>.
+        </h6>
       </div>
+
+      {/* ── Responsive services grid — self-animates with GSAP stagger ── */}
+      <ServicesGrid limit={6} />
+
+      {/* ── View all link ── */}
+      <div ref={linkRef} className='flex justify-center mb-16'>
+        <a
+          href='/services'
+          className='text-[0.8rem] font-Barlow uppercase tracking-[.15rem] text-[hsl(var(--lavender))] underline underline-offset-4 hover:opacity-70 transition-opacity'
+        >
+          View All Services
+        </a>
+      </div>
+
     </section>
   );
 };

@@ -1,244 +1,408 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { motion, useInView } from "framer-motion";
 import { getProjects } from "../services/api";
+import ProjectMarquee from "../components/projects/ProjectMarquee";
+import CartAndContact from "../components/services/CartAndContact";
 
-gsap.registerPlugin(ScrollTrigger);
+// ─── PAGE ─────────────────────────────────────────────────────────────────────
 
-const ProjectsPage = () => {
-  const container = useRef(null);
+export default function ProjectsPage() {
   const [projectsData, setProjectsData] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [activeFilter, setActiveFilter] = useState("All");
 
   useEffect(() => {
     getProjects()
       .then((response) => {
-        setProjectsData(response.data);
+        setProjectsData(Array.isArray(response.data) ? response.data : []);
       })
       .catch((error) => console.error("Error fetching projects:", error))
       .finally(() => setLoading(false));
   }, []);
 
-  useGSAP(
-    () => {
-      if (!container.current || loading) return;
+  // Derive unique industries/categories from the fetched data
+  const allIndustries = [
+    "All",
+    ...Array.from(
+      new Set(
+        projectsData
+          .map((p) => p.industry || p.category || p.type)
+          .filter(Boolean)
+      )
+    ),
+  ];
 
-      // HERO ANIMATION
-      const heroEls = container.current.querySelectorAll(
-        ".projects-hero-animate"
-      );
-
-      if (heroEls.length) {
-        gsap.from(heroEls, {
-          opacity: 0,
-          y: 30,
-          stagger: 0.15,
-          duration: 0.8,
-          ease: "power3.out",
-        });
-      }
-
-      // ROWS ANIMATION — animate each row individually with its own ScrollTrigger
-      const rowNodes = container.current.querySelectorAll(".project-row-animate");
-      const rows = gsap.utils.toArray(rowNodes);
-
-      rows.forEach((row, index) => {
-        gsap.from(row, {
-          opacity: 0,
-          y: 30,
-          duration: 0.7,
-          delay: index * 0.05, // light staggering by index (optional)
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: row,
-            start: "top 80%",
-            toggleActions: "play none none none",
-          },
-        });
-      });
-    },
-    { scope: container, dependencies: [loading] }
-  );
-
-  const totalProjects = projectsData?.length || 0;
+  const filtered =
+    activeFilter === "All"
+      ? projectsData
+      : projectsData.filter(
+          (p) => (p.industry || p.category || p.type) === activeFilter
+        );
 
   if (loading) {
-    return <div className="min-h-screen flex items-center justify-center bg-[hsl(var(--base))] text-[hsl(var(--text))]">Loading...</div>;
+    return (
+      <div className="min-h-screen flex items-center justify-center text-[hsl(var(--text))]">
+        <p className="font-barlow text-[11px] tracking-[0.2em] uppercase font-bold animate-pulse">
+          Loading Projects...
+        </p>
+      </div>
+    );
   }
 
   return (
-    <div
-      ref={container}
-      className="min-h-screen bg-[hsl(var(--base))] text-[hsl(var(--text))]"
-      style={{
-        backgroundImage:
-          "radial-gradient(circle at 20% 20%, rgba(56,189,248,0.10), transparent 45%), radial-gradient(circle at 80% 80%, rgba(245,158,11,0.12), transparent 45%)",
-      }}
-    >
-      <div className="max-w-6xl mx-auto px-6 pt-28 md:pt-36 pb-16">
-        <div className="grid gap-12 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,2fr)]">
-          {/* LEFT: Sticky intro / metrics */}
-          <aside className="lg:sticky lg:top-24 self-start space-y-6">
-            <span className="projects-hero-animate inline-flex items-center gap-2 rounded-full border border-[hsl(var(--surface1))] bg-[hsl(var(--mantle))]/70 px-3 py-1 text-xs text-[hsl(var(--subtext1))]">
-              <span className="h-1.5 w-1.5 rounded-full bg-[hsl(var(--green))]" />
-              <span>Case studies · Selected work</span>
-            </span>
+    <main className="pt-20 md:pt-28 text-[hsl(var(--text))] min-h-screen">
+      {/* ─── HERO STRIP ──────────────────────────────────────────────────────── */}
+      <section className='flex flex-col lg:flex-row mt-16 lg:mt-10 px-6 md:px-10 border-b border-[hsl(var(--surface1))] pb-12'>
+        <div className='flex flex-col justify-center py-12 lg:py-0 w-full lg:w-[55%] lg:pr-16'>
+          <motion.h3
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className='text-[11px] md:text-[12px] font-medium text-[hsla(var(--lavender)/0.8)] uppercase flex flex-wrap gap-3 md:gap-3 pl-1'
+          >
+            <span className='tracking-[.2em]'>Selected Work</span>
+          </motion.h3>
 
-            <h1 className="projects-hero-animate text-3xl md:text-5xl font-semibold tracking-tight">
-              Products that move{" "}
-              <span className="block bg-clip-text text-transparent bg-[linear-gradient(120deg,hsl(var(--blue)),hsl(var(--green)))]">
-                metrics, not just pixels.
+          <motion.h1
+            initial={{ opacity: 0, y: 48 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.1 }}
+            className='font-Barlow font-[900] uppercase tracking-[-.05em] mt-6 md:mt-10 leading-[0.95]'
+            style={{ fontSize: 'clamp(3rem, 8vw, 6.5rem)' }}
+          >
+            Project<br />
+            <span className='text-[hsla(var(--lavender))]'>Archive.</span>
+          </motion.h1>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className='grid grid-cols-2 gap-x-6 gap-y-10 mt-10 md:mt-16'
+          >
+            <div className='flex flex-col'>
+               <span className='text-3xl md:text-5xl font-bold font-Barlow text-[hsla(var(--lavender))]'>{projectsData.length}</span>
+               <span className='text-xs md:text-sm text-[hsla(var(--text)/0.6)] uppercase tracking-[.15em] mt-2'>Featured Projects</span>
+            </div>
+            <div className='flex flex-col'>
+               <span className='text-3xl md:text-5xl font-bold font-Barlow text-[hsla(var(--lavender))]'>{allIndustries.length - 1}</span>
+               <span className='text-xs md:text-sm text-[hsla(var(--text)/0.6)] uppercase tracking-[.15em] mt-2'>Industries</span>
+            </div>
+            <div className='flex flex-col'>
+               <span className='text-3xl md:text-5xl font-bold font-Barlow text-[hsla(var(--lavender))]'>50+</span>
+               <span className='text-xs md:text-sm text-[hsla(var(--text)/0.6)] uppercase tracking-[.15em] mt-2'>Total Shipped</span>
+            </div>
+            <div className='flex flex-col'>
+               <span className='text-3xl md:text-5xl font-bold font-Barlow text-[hsla(var(--lavender))]'>10-18</span>
+               <span className='text-xs md:text-sm text-[hsla(var(--text)/0.6)] uppercase tracking-[.15em] mt-2'>Avg. Weeks</span>
+            </div>
+          </motion.div>
+        </div>
+
+        <motion.div
+          initial={{ opacity: 0, x: 40 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.9, delay: 0.2 }}
+          className='flex flex-col justify-center w-full lg:w-[45%] lg:pl-12 pb-12 lg:pb-0'
+        >
+          <p className='font-barlow text-lg md:text-[22px] leading-relaxed md:leading-[1.6] text-[hsla(var(--text)/0.8)] max-w-lg'>
+            From 0→1 launches to large-scale enterprise transformations, each
+            engagement is led by senior engineers and measured against outcomes
+            — not deliverables.
+          </p>
+
+          <div className='w-16 h-[2px] bg-[hsla(var(--lavender)/0.4)] mt-10 md:mt-12'></div>
+
+          <div className='flex flex-wrap gap-3 mt-8 md:mt-10'>
+            {['Cloud Migration', 'Digital Transformation', 'Platform Engineering', 'Mobile Apps'].map(tag => (
+              <span key={tag} className='px-4 py-2 text-xs md:text-sm border border-[hsla(var(--lavender)/0.3)] rounded-full text-[hsla(var(--lavender))] bg-[hsla(var(--lavender)/0.05)] hover:bg-[hsla(var(--lavender)/0.1)] transition-colors duration-300 cursor-default font-barlow'>
+                {tag}
               </span>
-            </h1>
-
-            <p className="projects-hero-animate text-sm md:text-base text-[hsl(var(--subtext1))] leading-relaxed max-w-xl">
-              From 0→1 launches to large-scale replatforming, we help teams ship
-              web, mobile, and platform work that survives real traffic, edge
-              cases, and changing roadmaps.
-            </p>
-
-            <dl
-              className="
-                projects-hero-animate
-                grid grid-cols-2 gap-4 text-xs md:text-sm
-                border border-[hsl(var(--surface1))]
-                rounded-2xl p-4
-                bg-[hsl(var(--mantle))]/70
-              "
-            >
-              <div>
-                <dt className="text-[hsl(var(--subtext0))]">Projects shipped</dt>
-                <dd className="text-lg font-semibold text-[hsl(var(--text))]">
-                  {totalProjects}
-                </dd>
-              </div>
-              <div>
-                <dt className="text-[hsl(var(--subtext0))]">
-                  Typical launch window
-                </dt>
-                <dd className="text-lg font-semibold text-[hsl(var(--text))]">
-                  10–12 weeks
-                </dd>
-              </div>
-            </dl>
-
-            <p className="projects-hero-animate text-[11px] md:text-xs text-[hsl(var(--subtext0))] max-w-xs">
-              Each engagement is different, but the bar stays the same:
-              measurable impact, clean architecture, and a team you can actually
-              talk to.
-            </p>
-          </aside>
-
-          {/* RIGHT: Case study rows */}
-          <main className="space-y-6">
-            {projectsData.map((project) => (
-              <article
-                key={project.id}
-                className="
-                  project-row-animate
-                  group relative overflow-hidden
-                  rounded-2xl
-                  border border-[hsl(var(--surface1))]
-                  bg-[hsl(var(--mantle))]/80
-                  backdrop-blur-xl
-                  p-5 md:p-6
-                  flex flex-col gap-4
-                  transition-all duration-300
-                  hover:-translate-y-1.5
-                  hover:border-[hsl(var(--blue))]
-                  hover:shadow-[0_0_32px_rgba(56,189,248,0.28)]
-                "
-              >
-                {/* subtle top accent line */}
-                <div
-                  className="absolute inset-x-5 top-0 h-0.5 bg-linear-to-r from-transparent via-[hsl(var(--blue))] to-transparent opacity-80"
-                  aria-hidden="true"
-                />
-
-                {/* subtle right glow */}
-                <div
-                  className="absolute inset-y-0 right-0 w-24 bg-linear-to-l from-[hsl(var(--blue))]/10 to-transparent pointer-events-none"
-                  aria-hidden="true"
-                />
-
-                <header className="flex items-start justify-between gap-4 relative z-10">
-                  <div>
-                    <h2 className="text-lg md:text-xl font-semibold text-[hsl(var(--text))]">
-                      {project.title || "Project title"}
-                    </h2>
-                    <p className="text-[10px] md:text-xs uppercase tracking-[0.18em] text-[hsl(var(--subtext0))] mt-1">
-                      {project.category ||
-                        project.type ||
-                        "Digital product · Web / Mobile"}
-                    </p>
-                  </div>
-
-                  {project.highlight && (
-                    <span className="inline-flex items-center rounded-full bg-[hsl(var(--green))]/10 text-[hsl(var(--green))] px-2.5 py-0.5 text-[11px] border border-[hsl(var(--green))]/40">
-                      {project.highlight}
-                    </span>
-                  )}
-                </header>
-
-                <p className="text-sm md:text-[15px] text-[hsl(var(--subtext1))] leading-relaxed relative z-10">
-                  {project.description ||
-                    project.summary ||
-                    "A brief description of the project, the problem space, and how the solution moved key metrics or unlocked new capabilities."}
-                </p>
-
-                <div className="flex flex-wrap items-center justify-between gap-3 relative z-10">
-                  {/* Tech / tags */}
-                  <div className="flex flex-wrap gap-1.5 text-[11px] text-[hsl(var(--subtext0))]">
-                    {(project.techStack ||
-                      project.tags ||
-                      project.stack ||
-                      []
-                    )
-                      .slice(0, 4)
-                      .map((tag) => (
-                        <span
-                          key={tag}
-                          className="
-                            px-2.5 py-1 rounded-full
-                            bg-[hsl(var(--surface0))]
-                            text-[hsl(var(--subtext1))]
-                          "
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                  </div>
-
-                  {/* Link to details */}
-                  <Link
-                    to={`/projects/${project.id}`}
-                    className="
-                      text-[11px] md:text-xs font-medium
-                      text-[hsl(var(--blue))]
-                      hover:text-[hsl(var(--sapphire))]
-                      inline-flex items-center gap-1
-                    "
-                  >
-                    View details
-                    <span aria-hidden="true">↗</span>
-                  </Link>
-                </div>
-              </article>
             ))}
+          </div>
+        </motion.div>
+      </section>
 
-            {projectsData.length === 0 && (
-              <p className="text-sm text-[hsl(var(--subtext1))]">
-                No projects available yet. Add some entries to{" "}
-                <code>projectsData</code>.
+      <ProjectMarquee items={['✦ Case Study', '✦ Digital Innovation', '✦ Strategic Execution', '✦ Enterprise Solution', '✦ Results Driven']} />
+
+      {/* ─── MAIN CONTENT: sticky left + scrollable right ─────────────────────── */}
+      <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] min-h-screen">
+        {/* LEFT: sticky sidebar */}
+        <aside className="lg:sticky lg:top-24 self-start border-b lg:border-b-0 lg:border-r border-[hsl(var(--surface1))]">
+          <div className="px-6 md:px-8 py-10 flex flex-col gap-8">
+            {/* Filter by industry */}
+            <div>
+              <p className="font-barlow text-[11px] tracking-[0.25em] uppercase font-bold mb-4 text-[hsl(var(--subtext1))]">
+                Filter by Category
               </p>
-            )}
-          </main>
+              <div className="flex flex-col gap-0">
+                {allIndustries.map((ind) => (
+                  <button
+                    key={ind}
+                    onClick={() => setActiveFilter(ind)}
+                    className={`text-left py-3 border-b border-[hsl(var(--surface1))] flex items-center justify-between group transition-colors
+                      ${
+                        activeFilter === ind
+                          ? "text-[hsl(var(--lavender))]"
+                          : "text-[hsl(var(--text))] hover:text-[hsl(var(--lavender))]"
+                      }`}
+                  >
+                    <span className="font-Barlow text-xl font-bold uppercase tracking-tight">
+                      {ind}
+                    </span>
+                    {activeFilter === ind && (
+                      <span className="w-2 h-2 bg-[hsl(var(--lavender))] flex-shrink-0" />
+                    )}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Summary metrics */}
+            <div className="border-t border-[hsl(var(--surface1))] pt-8">
+              <p className="font-barlow text-[11px] tracking-[0.25em] uppercase font-bold mb-5 text-[hsl(var(--subtext1))]">
+                Showing
+              </p>
+              <div className="font-Barlow text-5xl font-black tracking-tight mb-1 text-[hsl(var(--text))]">
+                {filtered.length}
+              </div>
+              <p className="font-barlow text-[11px] tracking-[0.2em] uppercase font-bold text-[hsl(var(--lavender))]">
+                {activeFilter === "All" ? "All Projects" : activeFilter}
+              </p>
+            </div>
+
+            {/* CTA */}
+            <div className="border-t border-[hsl(var(--surface1))] pt-8">
+              <p className="font-barlow text-[11px] tracking-[0.25em] uppercase font-bold mb-4 text-[hsl(var(--subtext1))]">
+                Start a Project
+              </p>
+              <Link
+                to="/services"
+                className="font-barlow text-[11px] tracking-[0.2em] uppercase font-bold border-b border-[hsl(var(--lavender))] text-[hsl(var(--lavender))] pb-0.5 hover:text-[hsl(var(--text))] hover:border-[hsl(var(--text))] transition-colors"
+              >
+                View Services &rarr;
+              </Link>
+            </div>
+          </div>
+        </aside>
+
+        {/* RIGHT: project rows */}
+        <main>
+          {filtered.map((project, i) => (
+            <ProjectRow
+              key={project.id || i}
+              project={project}
+              index={i}
+              isLast={i === filtered.length - 1}
+            />
+          ))}
+
+          {filtered.length === 0 && (
+            <div className="px-8 py-20">
+              <p className="font-Barlow text-3xl font-black uppercase tracking-tight text-[hsl(var(--subtext1))]">
+                No projects in this category.
+              </p>
+            </div>
+          )}
+        </main>
+      </div>
+
+      <ProjectMarquee items={["✦ Let's Build Something Great", '✦ Ready to transform your business?', "✦ Connect With Us"]} />
+
+
+        <CartAndContact />
+    </main>
+  );
+}
+
+// ─── PROJECT ROW ──────────────────────────────────────────────────────────────
+
+function ProjectRow({ project, index, isLast }) {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, amount: 0.15 });
+
+  const num = String(index + 1).padStart(2, "0");
+  const year = project.year || project.date?.substring(0, 4) || "2024";
+  const industry = project.industry || project.category || project.type || "General";
+  const scope = project.scope || "Development";
+  const title = project.title || "Untitled Project";
+  const outcome = project.outcome || project.highlight || "Delivered successfully";
+  const image = project.img || project.image || project.thumbnail;
+  const summary = project.summary || project.description || "Project summary goes here.";
+  const challenge = project.challenge || "Complex requirements and strict timeline.";
+  
+  // Deliverables might be an array or string
+  let deliverables = project.deliverables || [];
+  if (typeof deliverables === "string") {
+    deliverables = deliverables.split("\n").filter((d) => d.trim());
+  } else if (!Array.isArray(deliverables) || deliverables.length === 0) {
+    deliverables = ["Architecture Design", "Development & Testing", "Deployment & Support"];
+  }
+
+  // Tech stack
+  let stack = project.stack || project.techStack || project.tags || [];
+  if (typeof stack === "string") {
+    stack = stack.split(",").map((s) => s.trim());
+  } else if (!Array.isArray(stack) || stack.length === 0) {
+    stack = ["React", "Node.js", "PostgreSQL"];
+  }
+
+  const duration = project.duration || project.timeline || "3 Months";
+  const teamSize = project.teamSize || "5 Engineers";
+
+  return (
+    <motion.article
+      ref={ref}
+      initial={{ opacity: 0, y: 30 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.6, delay: index * 0.05 }}
+      className={`${!isLast ? "border-b border-[hsl(var(--surface1))]" : ""} bg-[hsla(var(--lavender)/0.02)] hover:bg-[hsla(var(--lavender)/0.04)] transition-colors duration-500`}
+    >
+      {/* Row header — always visible */}
+      <div className="px-8 md:px-12 pt-10 pb-0">
+        <div className="flex items-start justify-between gap-4 mb-6">
+          <div className="flex items-baseline gap-4">
+            <span className="font-barlow text-[11px] tracking-[0.25em] uppercase font-bold text-[hsl(var(--subtext1))]">
+              {num}
+            </span>
+            <span className="font-barlow text-[11px] tracking-[0.25em] uppercase font-bold text-[hsl(var(--subtext1))]">
+              {year}
+            </span>
+          </div>
+          <div className="flex items-center gap-2 flex-wrap justify-end">
+            <span className="font-barlow text-[10px] tracking-[0.15em] uppercase font-bold border border-[hsl(var(--surface1))] px-2 py-1 text-[hsl(var(--text))]">
+              {industry}
+            </span>
+            <span className="font-barlow text-[10px] tracking-[0.15em] uppercase font-bold border border-[hsl(var(--surface1))] px-2 py-1 text-[hsl(var(--text))]">
+              {scope}
+            </span>
+          </div>
+        </div>
+
+        <h2 className="font-Barlow font-black uppercase text-[clamp(2rem,5vw,4.5rem)] leading-[0.9] tracking-tight mb-4 text-[hsl(var(--text))]">
+          {title}
+        </h2>
+
+        {/* Outcome — key stat */}
+        <div className="mb-8">
+          <span className="font-barlow text-[11px] tracking-[0.2em] uppercase font-bold text-[hsl(var(--subtext1))] mr-3">
+            Outcome
+          </span>
+          <span className="font-Barlow text-2xl font-black uppercase tracking-tight text-[hsl(var(--lavender))]">
+            {outcome}
+          </span>
         </div>
       </div>
-    </div>
-  );
-};
 
-export default ProjectsPage;
+      {/* Image */}
+      {image ? (
+        <div
+          className="mx-8 md:mx-12 border border-[hsl(var(--surface1))] overflow-hidden bg-[hsl(var(--mantle))]"
+          style={{ height: "280px" }}
+        >
+          <img
+            src={image}
+            alt={title}
+            className="w-full h-full object-cover grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-700"
+          />
+        </div>
+      ) : (
+        <div
+          className="mx-8 md:mx-12 border border-[hsl(var(--surface1))] bg-[hsla(var(--lavender)/0.05)] flex items-end p-6"
+          style={{ height: "180px" }}
+        >
+          <span
+            aria-hidden
+            className="font-Barlow font-black uppercase text-[clamp(3rem,8vw,8rem)] leading-[0.85] tracking-tight text-[hsla(var(--lavender)/0.1)] select-none"
+          >
+            {scope}
+          </span>
+        </div>
+      )}
+
+      {/* Body */}
+      <div className="px-8 md:px-12 pt-8 pb-0">
+        {/* Summary */}
+        <p className="font-barlow text-sm md:text-base leading-relaxed text-[hsl(var(--text))] max-w-2xl mb-8">
+          {summary}
+        </p>
+
+        {/* Two-column: challenge + deliverables */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-0 border-t border-[hsl(var(--surface1))]">
+          <div className="py-6 md:border-r border-[hsl(var(--surface1))] md:pr-8">
+            <p className="font-barlow text-[11px] tracking-[0.25em] uppercase font-bold mb-4 text-[hsl(var(--subtext1))]">
+              The Challenge
+            </p>
+            <p className="font-barlow text-sm leading-relaxed text-[hsl(var(--text))] opacity-80">
+              {challenge}
+            </p>
+          </div>
+          <div className="py-6 border-t md:border-t-0 border-[hsl(var(--surface1))] md:pl-8">
+            <p className="font-barlow text-[11px] tracking-[0.25em] uppercase font-bold mb-4 text-[hsl(var(--subtext1))]">
+              What We Delivered
+            </p>
+            <ul className="flex flex-col gap-2">
+              {deliverables.slice(0, 5).map((d) => (
+                <li
+                  key={d}
+                  className="font-barlow flex items-start gap-3 text-sm leading-snug text-[hsl(var(--text))] opacity-80"
+                >
+                  <span className="mt-1.5 w-1 h-1 flex-shrink-0 bg-[hsl(var(--lavender))]" />
+                  {d}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      {/* Footer meta row */}
+      <div className="px-8 md:px-12 py-6 border-t border-[hsl(var(--surface1))] grid grid-cols-2 md:grid-cols-4 gap-0">
+        {/* Stack */}
+        <div className="md:border-r border-[hsl(var(--surface1))] md:pr-6 col-span-2 md:col-span-1 border-b md:border-b-0 pb-4 md:pb-0">
+          <p className="font-barlow text-[10px] tracking-[0.2em] uppercase font-bold text-[hsl(var(--subtext1))] mb-2">
+            Stack
+          </p>
+          <div className="flex flex-wrap gap-1.5">
+            {stack.slice(0, 5).map((t) => (
+              <span
+                key={t}
+                className="font-barlow text-[10px] tracking-[0.1em] uppercase font-bold border border-[hsl(var(--surface1))] px-2 py-0.5 text-[hsl(var(--text))]"
+              >
+                {t}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div className="md:border-r border-[hsl(var(--surface1))] md:px-6 pt-4 md:pt-0 border-b md:border-b-0 pb-4 md:pb-0">
+          <p className="font-barlow text-[10px] tracking-[0.2em] uppercase font-bold text-[hsl(var(--subtext1))] mb-2">
+            Duration
+          </p>
+          <p className="font-Barlow text-xl font-bold uppercase tracking-tight text-[hsl(var(--text))]">
+            {duration}
+          </p>
+        </div>
+
+        <div className="md:border-r border-[hsl(var(--surface1))] md:px-6 pt-4 md:pt-0 border-b md:border-b-0 pb-4 md:pb-0">
+          <p className="font-barlow text-[10px] tracking-[0.2em] uppercase font-bold text-[hsl(var(--subtext1))] mb-2">
+            Team
+          </p>
+          <p className="font-Barlow text-xl font-bold uppercase tracking-tight text-[hsl(var(--text))]">
+            {teamSize}
+          </p>
+        </div>
+
+        <div className="md:pl-6 pt-4 md:pt-0 flex items-end">
+          <Link
+            to={`/projects/${project.id || project.slug}`}
+            className="font-barlow text-[10px] tracking-[0.15em] uppercase font-bold bg-[hsl(var(--text))] text-[hsl(var(--base))] px-4 py-2 hover:bg-[hsl(var(--lavender))] transition-colors w-full text-center"
+          >
+            Read Full Study &rarr;
+          </Link>
+        </div>
+      </div>
+    </motion.article>
+  );
+}

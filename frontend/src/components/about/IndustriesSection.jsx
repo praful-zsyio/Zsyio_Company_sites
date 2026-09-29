@@ -1,4 +1,7 @@
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 import {
   Globe2,
   HeartPulse,
@@ -9,6 +12,8 @@ import {
   BookOpen,
 } from "lucide-react";
 import { industries } from "../../data/aboutData/aboutIndustries";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const getIndustryIcon = (id) => {
   switch (id) {
@@ -32,108 +37,147 @@ const getIndustryIcon = (id) => {
 const getIndustryTagline = (id) => {
   switch (id) {
     case "healthcare":
-      return "Patient-first digital experiences";
+      return "Patient-first digital experiences.";
     case "fintech":
-      return "Secure, compliant, real-time systems";
+      return "Secure, real-time systems.";
     case "ecommerce":
-      return "Conversion-focused buying journeys";
+      return "Conversion-focused buying journeys.";
     case "saas":
-      return "Scalable modern product platforms";
+      return "Scalable modern platforms.";
     case "realestate":
-      return "Operational clarity & visibility";
+      return "Operational clarity & visibility.";
     case "education":
-      return "Engaging learning ecosystems";
+      return "Engaging learning ecosystems.";
     case "ai":
-      return "Intelligent automation & analysis";
+      return "Intelligent automation & analysis.";
     case "logistics":
-      return "Efficiency powered by real-time data";
+      return "Efficiency via real-time data.";
     default:
-      return "Specialized digital solutions";
+      return "Specialized digital solutions.";
   }
 };
 
 const IndustriesSection = () => {
+  const comp = useRef(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  useGSAP(() => {
+    // Scroll-driven spy: updates activeIndex when an item reaches the center of the viewport
+    industries.forEach((_, i) => {
+      ScrollTrigger.create({
+        trigger: `.ind-item-${i}`,
+        start: "top 60%",
+        end: "bottom 60%",
+        onToggle: (self) => {
+          if (self.isActive) {
+            setActiveIndex(i);
+          }
+        }
+      });
+    });
+  }, { scope: comp });
+
+  // Animate the right side icon when activeIndex changes
+  useEffect(() => {
+    gsap.fromTo(".sticky-icon-anim",
+      { opacity: 0, y: 10 },
+      { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }
+    );
+  }, [activeIndex]);
+
+  const activeIndustry = industries[activeIndex] || industries[0];
+  const ActiveIcon = getIndustryIcon(activeIndustry.id);
+
   return (
-    <section className="relative py-20 md:py-24">
-      {/* Background glow */}
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_top,rgba(56,189,248,0.18),transparent_60%)]" />
+    <section ref={comp} className="relative border-b border-[hsla(var(--lavender)/0.4)] text-[hsl(var(--text))] bg-transparent">
+      
+      <div className="container mx-auto max-w-6xl relative z-10 px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_400px] items-start gap-12 lg:gap-20">
+          
+          {/* Left Side: Scrolling List */}
+          <div className="flex flex-col pt-16 pb-24">
+            
+            <div className="mb-16 border-b border-[hsla(var(--lavender)/0.4)] pb-8">
+              <p className="text-[10px] tracking-[0.25em] uppercase font-medium mb-3 text-[hsl(var(--lavender))] opacity-50">
+                Where We Build
+              </p>
+              <h2
+                style={{ fontFamily: "'Barlow Condensed', sans-serif" }}
+                className="text-4xl md:text-5xl font-black uppercase tracking-tight"
+              >
+                Industries.
+              </h2>
+            </div>
 
-      {/* Subtle grid */}
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(to_right,rgba(148,163,184,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(148,163,184,0.08)_1px,transparent_1px)] bg-size-[22px_22px] opacity-40" />
+            <div className="flex flex-col">
+              {industries.map((industry, i) => {
+                const isActive = activeIndex === i;
+                const Icon = getIndustryIcon(industry.id);
+                const tagline = getIndustryTagline(industry.id);
+                const sectorNumber = String(i + 1).padStart(2, "0");
 
-      <div className="container mx-auto px-6 max-w-6xl">
-        {/* Heading */}
-        <header className="text-center mb-12 md:mb-14 space-y-4">
-          <div className="inline-flex items-center gap-2 rounded-full border border-[hsl(var(--surface2))] bg-[hsl(var(--mantle))]/70 px-4 py-1 text-xs md:text-sm text-[hsl(var(--subtext1))] animate-in-view">
-            <span className="h-1.5 w-1.5 rounded-full bg-[hsl(var(--blue))]" />
-            <span>Where Zsyio creates impact</span>
+                return (
+                  <div 
+                    key={industry.id} 
+                    className={`ind-item-${i} flex flex-col transition-all duration-300 border-b border-[hsla(var(--lavender)/0.4)] last:border-b-0 py-8 ${isActive ? 'opacity-100' : 'opacity-40 hover:opacity-70'}`}
+                  >
+                    <div className="flex items-center gap-4 mb-3">
+                      <span className="text-[10px] tracking-[0.25em] uppercase font-bold text-[hsl(var(--lavender))] opacity-60">
+                        Sector {sectorNumber}
+                      </span>
+                      {/* Mobile icon */}
+                      <div className="w-6 h-6 flex items-center justify-center text-[hsl(var(--lavender))] lg:hidden">
+                        <Icon className="w-4 h-4" />
+                      </div>
+                    </div>
+                    
+                    <h3 
+                      style={{ fontFamily: "'Barlow Condensed', sans-serif" }} 
+                      className="text-2xl md:text-3xl font-black uppercase tracking-tight text-[hsl(var(--text))] mb-2"
+                    >
+                      {industry.name}
+                    </h3>
+                    
+                    <p className="text-sm text-[hsl(var(--subtext1))] leading-relaxed max-w-sm">
+                      {tagline}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
           </div>
 
-          <h2 className="text-3xl md:text-4xl font-bold animate-in-view">
-            Industries We Serve
-          </h2>
-
-          <p className="text-[hsl(var(--subtext1))] max-w-4xl mx-auto text-sm md:text-base leading-relaxed text-center animate-in-view">
-            We adapt our engineering and product expertise to the unique demands
-            of each sector — from compliance-heavy industries to fast-moving
-            digital products.
-          </p>
-        </header>
-
-        {/* Industries grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 lg:gap-8 max-w-6xl mx-auto">
-          {industries.map((industry, index) => {
-            const Icon = getIndustryIcon(industry.id);
-            const tagline = getIndustryTagline(industry.id);
-            const sectorNumber = String(index + 1).padStart(2, "0");
-
-            return (
-              <article
-                key={industry.id}
-                className="
-                  group relative h-full flex flex-col
-                  rounded-2xl border border-[hsl(var(--surface2))]
-                  bg-[hsl(var(--mantle))]/75 backdrop-blur-xl
-                  p-4 md:p-5
-                  transition-all duration-300
-                  hover:-translate-y-2 hover:border-[hsl(var(--blue))]
-                  hover:shadow-[0_0_25px_rgba(56,189,248,0.25)]
-                  animate-in-view
-                "
-              >
-                {/* Hover glow */}
-                <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-[radial-gradient(circle_at_top,rgba(56,189,248,0.18),transparent_65%)]" />
-
-                {/* Corner accent */}
-                <div className="absolute inset-x-4 top-0 h-0.5 bg-linear-to-r from-transparent via-[hsl(var(--blue))] to-transparent opacity-70" />
-
-                <div className="relative flex flex-col gap-3 h-full">
-                  {/* Top row */}
-                  <div className="flex items-center justify-between gap-3">
-                    <div className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-[hsl(var(--blue))]/60 bg-[hsl(var(--blue))]/10">
-                      <Icon className="h-4 w-4 text-[hsl(var(--blue))]" />
-                    </div>
-                    <span className="text-[10px] uppercase tracking-[0.2em] text-[hsl(var(--subtext0))]">
-                      Sector {sectorNumber}
-                    </span>
-                  </div>
-
-                  {/* Name */}
-                  <h3 className="font-semibold text-[hsl(var(--text))] text-sm md:text-base leading-snug">
-                    {industry.name}
-                  </h3>
-
-                  {/* Divider */}
-                  <div className="h-px w-8 bg-linear-to-r from-transparent via-[hsl(var(--blue))] to-transparent opacity-70" />
-
-                  {/* Tagline */}
-                  <p className="text-[hsl(var(--subtext1))] text-xs md:text-[0.8rem] leading-relaxed flex-1">
-                    {tagline}
-                  </p>
+          {/* Right Side: Sticky Display */}
+          <div className="hidden lg:flex sticky top-0 h-screen items-center justify-center">
+             
+             <div className="w-full max-w-[320px] aspect-[4/5] border border-[hsla(var(--lavender)/0.4)] bg-[hsl(var(--base))] flex flex-col p-8 relative group overflow-hidden">
+                
+                {/* Background Watermark Icon */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 pointer-events-none">
+                  <ActiveIcon key={`bg-${activeIndustry.id}`} className="sticky-icon-anim w-full h-full text-[hsl(var(--lavender))] opacity-[0.04]" />
                 </div>
-              </article>
-            );
-          })}
+                
+                {/* Header */}
+                <div className="w-full flex justify-between items-start mb-auto z-10">
+                   <div className="w-12 h-12 border border-[hsla(var(--lavender)/0.4)] bg-[hsl(var(--base))] flex items-center justify-center text-[hsl(var(--lavender))]">
+                      <ActiveIcon key={`fg-${activeIndustry.id}`} className="sticky-icon-anim w-6 h-6" />
+                   </div>
+                   <span className="text-[10px] tracking-[0.25em] uppercase font-bold text-[hsl(var(--lavender))] opacity-50 sticky-icon-anim mt-2">
+                     {String(activeIndex + 1).padStart(2, "0")}
+                   </span>
+                </div>
+                
+                {/* Footer */}
+                <div className="w-full pt-4 z-10">
+                   <span style={{ fontFamily: "'Barlow Condensed', sans-serif" }} className="text-2xl font-black uppercase text-[hsl(var(--text))] sticky-icon-anim block tracking-tight">
+                     {activeIndustry.name}
+                   </span>
+                </div>
+                
+             </div>
+             
+          </div>
+
         </div>
       </div>
     </section>

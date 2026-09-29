@@ -2,10 +2,15 @@ import React, { useRef } from 'react';
 import VideoComponent from '../components/home/VideoComponent';
 import HeroSection from '../components/home/HeroSection';
 import AboutSection from '../components/home/AboutSection';
+import MarqueeStrip from '../components/home/MarqueeStrip';
 import ProjectsGlimpse from '../components/home/homeProjects/ProjectsGlimpse';
+import PartnerMarquee from '../components/home/PartnerMarquee';
+import ProductsSection from '../components/home/ProductsSection';
 import Services from '../components/home/Services';
 import NewsletterBox from '../components/globalComponents/NewsletterBox';
+import EnggExcell from '../components/home/EnggExcell';
 
+import StatsMarquee from '../components/home/StatsMarquee';
 
 const HomePage = () => {
   const mainRef = useRef(null);
@@ -16,17 +21,15 @@ const HomePage = () => {
 
     <main className='flex flex-col' 
     ref={mainRef}>
-      <div className="relative flex items-center justify-center px-6 h-screen pt-16"
-      >
-        <VideoComponent />
-
-        <div className="relative z-10 w-full py-32 md:py-0">
-          <HeroSection />
-        </div>
-      </div>
-      <AboutSection />
-      <ProjectsGlimpse />
+      <HeroSection />
+      <MarqueeStrip />
       <Services />
+      <ProjectsGlimpse />
+      <PartnerMarquee />
+      <ProductsSection />
+      <EnggExcell />
+      <StatsMarquee />
+      <AboutSection />
       <NewsletterBox />
     </main>
   );

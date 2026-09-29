@@ -15,45 +15,37 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const linkBaseClasses =
-    "relative px-3 py-2 text-sm font-medium transition-colors duration-200";
+    "relative px-1 py-2 text-[15px] font-medium font-barlow transition-colors duration-300";
 
   const linkInactiveClasses = [
     theme === "light"
-      ? "text-[hsl(var(--subtext1))]"
-      : "text-[hsl(var(--subtext0))]",
-    "hover:text-[hsl(var(--text))]",
+      ? "text-[hsl(var(--subtext0))]"
+      : "text-[hsl(var(--subtext1))]",
+    "hover:text-[hsl(var(--lavender))]",
   ].join(" ");
 
   const linkActiveClasses =
-    "text-[hsl(var(--text))] after:absolute after:left-3 after:right-3 after:-bottom-1 after:h-[2px] after:rounded-full after:bg-[hsl(var(--blue))]";
+    "text-[hsl(var(--lavender))] font-semibold";
 
   const handleToggleMenu = () => setIsMenuOpen((prev) => !prev);
   const closeMenu = () => setIsMenuOpen(false);
 
   return (
-    <nav className="fixed inset-x-0 top-0 z-40 flex justify-center pointer-events-none">
-      <div className="w-full max-w-6xl px-4 sm:px-6 mt-4 pointer-events-auto">
-        <div
-          className="
-            relative flex h-14 md:h-16 items-center justify-between gap-4
-            rounded-4xl
-            border border-[hsl(var(--surface2))/0.7]
-            bg-[hsl(var(--mantle)/0.3)]
-            backdrop-blur-2xl
-            shadow-[0_10px_30px_rgba(0,0,0,0.18)]
-            px-4 sm:px-6
-          "
-        >
+    <nav className="fixed inset-x-0 top-0 z-50 bg-[hsl(var(--base))/0.85] backdrop-blur-xl border-b border-[hsl(var(--surface0))] transition-colors duration-300">
+      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex h-16 items-center justify-between">
+          
           {/* Logo */}
-          <Link to="/" className="flex  select-none">
-            <img className="h-10 md:h-12 lg:h-19 rounded-full  w-auto" src={theme === 'light' ? logo2 : logo} alt="Zsyio logo" />
-            {/* <span className="text-xl font-serif font-bold tracking-tight uppercase text-[hsl(var(--text))]">
-              Zsyio
-            </span> */}
-          </Link>
+          <div className="flex-shrink-0">
+            <Link to="/" className="flex items-center gap-2 transition-opacity hover:opacity-80">
+              <span className="text-2xl font-barlow font-bold tracking-tight text-[hsl(var(--text))]">
+                Zsyio
+              </span>
+            </Link>
+          </div>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-2">
+          <div className="hidden md:flex md:items-center md:space-x-8">
             {navLinks.map((link) => (
               <NavLink
                 key={link.path}
@@ -64,179 +56,89 @@ const Navbar = () => {
                     isActive ? linkActiveClasses : linkInactiveClasses,
                   ].join(" ")
                 }
-                onClick={closeMenu}
               >
                 {link.title}
               </NavLink>
             ))}
-
-            {/* Desktop Contact CTA */}
-            <Link
-              to="/contact"
-              className="
-                ml-2 inline-flex items-center
-                rounded-full px-4 py-2 text-sm font-semibold
-                bg-[hsl(var(--blue))]
-                text-[hsl(var(--base))]
-                hover:bg-[hsl(var(--sapphire))]
-                transition-colors
-                shadow-soft
-              "
-            >
-              Contact Us
-            </Link>
-
-
           </div>
 
-          <div className="flex items-center gap-3">
-            {/* Theme Toggle */}
-            <button
-    type="button"
-    onClick={toggleTheme}
-    aria-label="Toggle theme"
-    aria-pressed={theme === "dark"}
-    className="
-      relative h-8 w-14 overflow-hidden rounded-full!
-      border border-[hsl(var(--overlay1))/0.7]
-      bg-[hsl(var(--surface0)/0.7)]
-      backdrop-blur-xl
-      shadow-[0_4px_10px_rgba(0,0,0,0.18)]
-      transition-colors duration-300
-    "
-  >
-    {/* Ripple Background */}
-    <span
-      className={`
-        absolute inset-0 rounded-full
-        transition-transform duration-500 ease-out
-        ${theme === "dark"
-          ? "scale-150 bg-[hsl(var(--yellow)/0.35)]"
-          : "scale-0 bg-[hsl(var(--blue)/0.35)]"
-        }
-      `}
-    />
-
-    {/* Sliding Knob */}
-    <span
-      className={`
-        absolute top-1 left-1 h-6 w-6 rounded-full
-        bg-[hsl(var(--base))]
-        shadow-md
-        transition-transform duration-500
-        ${theme === "dark" ? "translate-x-6" : "translate-x-0"}
-      `}
-    />
-
-    {/* Icons */}
-    <span
-      className={`
-        absolute left-2 top-1/2 -translate-y-1/2 text-xs
-        transition-all duration-20
-        ${theme === "dark" ? "opacity-0 -translate-x-2" : "opacity-100"}
-      `}
-    >
-      ☀️
-    </span>
-
-    <span
-      className={`
-        absolute right-2 top-1/2 -translate-y-1/2 text-xs
-        transition-all duration-20
-        ${theme === "dark" ? "opacity-100" : "opacity-0 translate-x-2"}
-      `}
-    >
-      🌙
-    </span>
-  </button>
-
-            {/* Mobile Menu Button */}
+          {/* Actions */}
+          <div className="flex items-center gap-5">
+            
+            {/* Elegant Minimalist Theme Switch */}
             <button
               type="button"
-              onClick={handleToggleMenu}
-              className="
-                md:hidden inline-flex h-9 w-9 items-center justify-center
-                rounded-full! border border-[hsl(var(--overlay1))/0.7]
-                bg-[hsl(var(--surface0)/0.7)]
-                backdrop-blur-xl
-                text-[hsl(var(--text))]
-              "
-              aria-label="Toggle navigation menu"
-              aria-expanded={isMenuOpen}
+              onClick={toggleTheme}
+              aria-label="Toggle theme"
+              className={`
+                relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent 
+                transition-colors duration-300 ease-in-out focus:outline-none
+                ${theme === 'dark' ? 'bg-[hsl(var(--lavender))]' : 'bg-[hsl(var(--surface2))]'}
+              `}
             >
-              <span className="relative block h-4 w-4">
-                <span
-                  className={`absolute left-0 top-0 h-0.5 w-full rounded-full! bg-current transition-transform duration-300 ${
-                    isMenuOpen ? "translate-y-1.5 rotate-45" : ""
-                  }`}
-                />
-                <span
-                  className={`absolute left-0 top-1.5 h-0.5 w-full rounded-full! bg-current transition-opacity duration-200 ${
-                    isMenuOpen ? "opacity-0" : "opacity-100"
-                  }`}
-                />
-                <span
-                  className={`absolute left-0 top-3 h-0.5 w-full rounded-full! bg-current transition-transform duration-200 ${
-                    isMenuOpen ? "-translate-y-1.5 -rotate-45" : ""
-                  }`}
-                />
-                <p className="text-transparent">Toggle</p>
-              </span>
+              <span
+                className={`
+                  pointer-events-none inline-block h-5 w-5 transform rounded-full bg-[hsl(var(--base))] shadow ring-0 
+                  transition duration-300 ease-in-out
+                  ${theme === 'dark' ? 'translate-x-5' : 'translate-x-0'}
+                `}
+              />
             </button>
-          </div>
-        </div>
 
-        {/* Mobile Dropdown */}
-        {isMenuOpen && (
-          <div className="md:hidden mt-2 pb-1">
-            <div
-              className="
-                flex flex-col gap-1 rounded-2xl
-                border border-[hsl(var(--surface2))/0.7]
-                bg-[hsl(var(--mantle)/0.45)]
-                backdrop-blur-xl
-                p-2 shadow-[0_10px_24px_rgba(0,0,0,0.18)]
-              "
-            >
-              {navLinks.map((link) => (
-                <NavLink
-                  key={link.path}
-                  to={link.path}
-                  className={({ isActive }) =>
-                    [
-                      "rounded-lg px-3 py-2 text-sm transition-colors duration-200",
-                      isActive
-                        ? "bg-[hsl(var(--surface1))] text-[hsl(var(--text))]"
-                        : `${
-                            theme === "light"
-                              ? "text-[hsl(var(--subtext1))]"
-                              : "text-[hsl(var(--subtext0))]"
-                          } hover:text-[hsl(var(--text))] hover:bg-[hsl(var(--surface1)/0.7)]`,
-                    ].join(" ")
-                  }
-                  onClick={closeMenu}
-                >
-                  {link.title}
-                </NavLink>
-              ))}
-
-              {/* Mobile Contact CTA */}
-              <Link
-                to="/contact"
-                onClick={closeMenu}
-                className="
-                  mt-2 rounded-xl px-3 py-2 text-sm font-semibold text-center
-                  bg-[hsl(var(--blue))]
-                  text-[hsl(var(--base))]
-                  hover:bg-[hsl(var(--sapphire))]
-                  transition-colors
-                "
+            {/* Mobile Menu Button */}
+            <div className="flex md:hidden">
+              <button
+                type="button"
+                onClick={handleToggleMenu}
+                className="inline-flex items-center justify-center rounded-md p-2 text-[hsl(var(--text))] hover:bg-[hsl(var(--surface0))] transition-colors"
+                aria-expanded={isMenuOpen}
               >
-                Contact Us
-              </Link>
+                <span className="sr-only">Open main menu</span>
+                <svg
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  aria-hidden="true"
+                >
+                  {isMenuOpen ? (
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                  ) : (
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                  )}
+                </svg>
+              </button>
             </div>
           </div>
-        )}
+        </div>
+      </div>
+
+      {/* Mobile Menu Accordion */}
+      <div 
+        className={`md:hidden transition-all duration-300 ease-in-out overflow-hidden ${
+          isMenuOpen ? 'max-h-96 border-b border-[hsl(var(--surface0))] bg-[hsl(var(--base))/0.95] backdrop-blur-xl' : 'max-h-0'
+        }`}
+      >
+        <div className="space-y-1 px-4 pb-4 pt-2 sm:px-6">
+          {navLinks.map((link) => (
+            <NavLink
+              key={link.path}
+              to={link.path}
+              className={({ isActive }) =>
+                [
+                  "block rounded-md px-3 py-3 text-base font-medium font-barlow transition-colors duration-200",
+                  isActive
+                    ? "bg-[hsl(var(--lavender))/0.1] text-[hsl(var(--lavender))]"
+                    : "text-[hsl(var(--subtext0))] hover:bg-[hsl(var(--surface0))] hover:text-[hsl(var(--text))]",
+                ].join(" ")
+              }
+              onClick={closeMenu}
+            >
+              {link.title}
+            </NavLink>
+          ))}
+        </div>
       </div>
     </nav>
   );

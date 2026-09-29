@@ -17,7 +17,7 @@
   --sky: 197 100% 77%;
   --sapphire: 199 77% 74%;
   --blue: 217 92% 76%;
-  --lavender: 259 72% 83%;
+  --lavender: 259 72% 70%;
 
   --text: 234 16% 15%;
   --subtext1: 233 13% 27%;
@@ -28,12 +28,14 @@
   --surface2: 233 14% 82%;
   --surface1: 233 14% 88%;
   --surface0: 233 13% 92%;
-  --base: 240 21% 97%;
+  --base: 0 0% 100%;
   --mantle: 240 21% 99%;
   --crust: 240 23% 100%;
-
   --radius-xl: 1rem;
   --shadow-soft: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --inversion: 0 0% 0%;
+  --textInversion: 0 0% 100%;
+  --card-bg: 0 0% 100%;
 }
 
 /* 2) Dark Theme (Mocha-ish) */
@@ -62,9 +64,12 @@
   --surface2: 233 14% 37%;
   --surface1: 233 14% 30%;
   --surface0: 233 13% 23%;
-  --base: 240 21% 15%;
+  --base: 0 0% 0%;
   --mantle: 240 21% 12%;
   --crust: 240 23% 10%;
+  --inversion: 0 0% 100%;
+  --textInversion: 234 16% 15%;
+  --card-bg: 0 0% 7%;
 }
 
 /* 3) Auto-respect system preference on first load (no JS needed yet) */
@@ -81,16 +86,214 @@
   }
 }
 
-/* 4) Some reusable “design tokens” using Tailwind’s @theme (v4 style) */
+/* ─── Local @font-face (served from /public/Barlow/) ────────────────────── */
+
+@font-face {
+  font-family: 'Barlow';
+  src: url('/Barlow/Barlow-Thin.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Barlow';
+  src: url('/Barlow/Barlow-ThinItalic.ttf') format('truetype');
+  font-weight: 100;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Barlow';
+  src: url('/Barlow/Barlow-ExtraLight.ttf') format('truetype');
+  font-weight: 200;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Barlow';
+  src: url('/Barlow/Barlow-ExtraLightItalic.ttf') format('truetype');
+  font-weight: 200;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Barlow';
+  src: url('/Barlow/Barlow-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Barlow';
+  src: url('/Barlow/Barlow-LightItalic.ttf') format('truetype');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Barlow';
+  src: url('/Barlow/Barlow-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Barlow';
+  src: url('/Barlow/Barlow-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Barlow';
+  src: url('/Barlow/Barlow-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Barlow';
+  src: url('/Barlow/Barlow-MediumItalic.ttf') format('truetype');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Barlow';
+  src: url('/Barlow/Barlow-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Barlow';
+  src: url('/Barlow/Barlow-SemiBoldItalic.ttf') format('truetype');
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Barlow';
+  src: url('/Barlow/Barlow-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Barlow';
+  src: url('/Barlow/Barlow-BoldItalic.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Barlow';
+  src: url('/Barlow/Barlow-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Barlow';
+  src: url('/Barlow/Barlow-ExtraBoldItalic.ttf') format('truetype');
+  font-weight: 800;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Black (900) — used for Display / Headlines */
+@font-face {
+  font-family: 'Barlow';
+  src: url('/Barlow/Barlow-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Barlow';
+  src: url('/Barlow/Barlow-BlackItalic.ttf') format('truetype');
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* ─── Tailwind v4 @theme tokens → generates utility classes ─────────────── */
+/* font-barlow            → font-family: Barlow (body/ui/nav)                */
+/* font-barlow-condensed  → alias pointing to Black weight (display/headline) */
 @theme {
   --radius-xl: 1rem;
   --shadow-soft: 0 8px 24px rgba(0, 0, 0, 0.08);
+
+  /* These generate: font-barlow  and  font-barlow-condensed  Tailwind classes */
+  --font-family-barlow:            'Barlow', system-ui, sans-serif;
+  --font-family-barlow-condensed:  'Barlow', system-ui, sans-serif; /* Black weight applied separately */
+}
+
+/* ─── Typography System ─────────────────────────────────────────────────── */
+
+/* CSS custom properties for each role */
+:root {
+  --font-body:     'Barlow', system-ui, sans-serif;
+  --font-display:  'Barlow', system-ui, sans-serif; /* Black 900 via font-weight */
+
+  /* Weights */
+  --fw-regular:  400;
+  --fw-medium:   500;
+  --fw-semibold: 600;
+  --fw-black:    900;
+
+  /* Tracking presets */
+  --tracking-display: -0.025em;  /* Display / Headlines */
+  --tracking-body:     0em;      /* Body / UI */
+  --tracking-micro:    0.23em;   /* Micro labels */
+}
+
+/* ─── Global base ────────────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
 }
 
 html {
   scroll-behavior: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
   overflow-x: hidden;
+  font-family:    var(--font-body);
+  font-weight:    var(--fw-regular);
+  letter-spacing: var(--tracking-body);
+  line-height:    1.6;
 }
+
+/* ─── Utility helpers ────────────────────────────────────────────────────── */
+/* Add these classes to any element to apply the type role                    */
+
+/* --- Display / Headline role ---                                            */
+/* font-barlow-condensed + font-black + uppercase + tracking-display          */
+.tracking-display { letter-spacing: var(--tracking-display); }
+.tracking-micro   { letter-spacing: var(--tracking-micro);   }
+
+/* --- Weight shorthands (use alongside font-barlow) --- */
+.fw-black    { font-weight: var(--fw-black);    }
+.fw-semibold { font-weight: var(--fw-semibold); }
+.fw-medium   { font-weight: var(--fw-medium);   }
+.fw-regular  { font-weight: var(--fw-regular);  }
+

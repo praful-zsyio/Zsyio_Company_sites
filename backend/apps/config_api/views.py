@@ -95,9 +95,11 @@ class GlobalDataView(APIView):
         data = {
             "navLinks": [
                 {"title": "Home", "path": "/", "icon": "Home"},
-                {"title": "About Us", "path": "/about", "icon": "Info"},
                 {"title": "Services", "path": "/services", "icon": "Cpu"},
                 {"title": "Projects", "path": "/projects", "icon": "Briefcase"},
+                {"title": "Products", "path": "/products", "icon": "Box"},
+                {"title": "About Us", "path": "/about", "icon": "Info"},
+                {"title": "Contact", "path": "/contact", "icon": "Mail"},
             ],
             "aboutData": {
                 "stats": {

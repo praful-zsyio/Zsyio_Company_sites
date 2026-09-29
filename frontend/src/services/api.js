@@ -3,7 +3,7 @@ import axios from 'axios';
 export const ACCESS_TOKEN = 'access_token';
 export const REFRESH_TOKEN = 'refresh_token';
 
-const API_BASE_URL = 'https://zsyio-company-7d1w.onrender.com/api/' || import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000/api/';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000/api/';
 
 const api = axios.create({
     baseURL: API_BASE_URL,
@@ -138,8 +138,17 @@ export const createAbout = (aboutData) => {
 };
 
 // Enhanced Projects API
+export const getProjectById = (id) => api.get(`projects/${id}/`);
 export const createProject = (projectData) => api.post('projects/', projectData);
 export const deleteProject = (id) => api.delete(`projects/${id}/`);
+
+// Products API
+export const getProducts = () => api.get('products/');
+export const getProductById = (id) => api.get(`products/${id}/`);
+export const createProduct = (data) => api.post('products/', data);
+export const updateProduct = (id, data) => api.put(`products/${id}/`, data);
+export const deleteProduct = (id) => api.delete(`products/${id}/`);
+export const getProductNavLinks = () => api.get('products/nav-links/');
 
 export default api;
 

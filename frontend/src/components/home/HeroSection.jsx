@@ -1,74 +1,115 @@
-import React, { useRef } from 'react'
-import { gsap } from 'gsap';
-import { Link } from 'react-router-dom';
-import { useGSAP } from '@gsap/react';
+import React, { useRef, useLayoutEffect } from 'react'
+import { gsap } from 'gsap'
+import ParticleText from './ParticleText'
 
 const HeroSection = () => {
-const comp = useRef(null);
+  const rootRef   = useRef(null)
+  const tagRef    = useRef(null)
+  const headRef   = useRef(null)
+  const paraRef   = useRef(null)
+  const btnRef    = useRef(null)
+  const rightRef  = useRef(null)
 
-// useGSAP(() => {
-//     let ctx = gsap.context(() => {
-//     const t1 = gsap.timeline({
-//         delay:0.5
-//     });
-//     t1.from(["#hero-title", "#hero-subtitle"], {
-//         opacity: 0,
-//         y: 30,
-//         stagger: 0.3,
-//         delay: 0.2
-//     });
-//     t1.from(".hero-button", {
-//         opacity: 0,
-//         y: 30,
-//         stagger: 0.3,
-//     })
-//     }, comp);
+  useLayoutEffect(() => {
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({ defaults: { ease: 'power3.out' } })
 
-//     return () => ctx.revert();
-// }, []);
-useGSAP(() => {
-  const tl = gsap.timeline();
+      // Tag line — fade + slide up
+      tl.from(tagRef.current.children, {
+        opacity: 0,
+        y: 18,
+        stagger: 0.08,
+        duration: 0.6,
+      })
 
-  tl.from("#hero-title", {
-    y: 60,
-    opacity: 0,
-    duration: 1,
-    ease: "power4.out",
-  })
-  .from("#hero-subtitle", {
-    y: 40,
-    opacity: 0,
-    duration: 0.8,
-    ease: "power3.out",
-  }, "-=0.6")
-  .from(".hero-button", {
-    y: 30,
-    opacity: 0,
-    duration: 0.6,
-    stagger: 0.2,
-    ease: "power2.out",
-  }, "-=0.5");
-});
+      // Headline words — clip reveal upward
+      tl.from(headRef.current, {
+        opacity: 0,
+        y: 48,
+        duration: 0.8,
+      }, '-=0.3')
+
+      // Paragraph
+      tl.from(paraRef.current, {
+        opacity: 0,
+        y: 24,
+        duration: 0.6,
+      }, '-=0.4')
+
+      // Buttons
+      tl.from(btnRef.current.children, {
+        opacity: 0,
+        y: 20,
+        stagger: 0.1,
+        duration: 0.5,
+      }, '-=0.35')
+
+      // Right panel — fade in from right
+      tl.from(rightRef.current, {
+        opacity: 0,
+        x: 40,
+        duration: 0.9,
+        ease: 'power2.out',
+      }, '-=0.6')
+    }, rootRef)
+
+    return () => ctx.revert()
+  }, [])
+
   return (
-      <div className='flex grow items-center justify-center text-white' ref={comp}>
-        <div id="welcome" className='w-full flex flex-col justify-center text-center text-base p-8'>
-          <h1 id="hero-title" className='md:text-6xl text-xl font-serif font-bold text-text' style={{ textShadow: '0 1px 2px rgba(0,0,0,0.1)' }}>
-            Igniting Innovations on Websites, Apps and Softwares Built for Tomorrow
-          </h1>
-          <h2 id="hero-subtitle" className='md:text-3xl text-lg font-serif mt-4 text-subtext1' style={{ textShadow: '0 1px 2px rgba(0,0,0,0.05)' }}>
-            Transforming Your Ideas into Intelligent, Market-Leading Solutions.
-          </h2>
-          {/* Buttons now stack on mobile and are side-by-side on larger screens */}
-          <div className='flex flex-col md:flex-row items-center justify-center gap-4 md:gap-10 mt-8 hero-button'>
-            <Link to="/contact" className='btn cursor-pointer bg-blue text-base px-6 py-3 rounded-xl text-lg font-semibold shadow-soft hover:bg-white/20 border transform hover:scale-105 transition-all duration-300'>
-              Get Started
-            </Link>
-            <Link to="/projects" className='btn cursor-pointer bg-blue text-base px-6 py-3 rounded-xl font-semibold shadow-soft hover:bg-white/20 border transform hover:scale-105 transition-all duration-300'>
-              Our Work
-            </Link>
-          </div>
+    <div ref={rootRef} className='flex flex-col lg:flex-row lg:h-screen mt-16 lg:mt-6 px-6 md:px-10'>
+
+      {/* ── Left: text content ── */}
+      <div className='flex flex-col justify-center py-12 lg:py-0 w-full lg:w-2/5 lg:pr-6'>
+        <h3 ref={tagRef} className='text-[11px] md:text-[12px] font-medium text-[hsla(var(--lavender)/0.8)] uppercase flex flex-wrap gap-3 md:gap-5 pl-1'>
+          <span className='tracking-[.2em]'>IT Consultancy</span>
+          <span className='tracking-[.2em]'>Services</span>
+          <span className='tracking-[.2em]'>Products</span>
+        </h3>
+
+        <h1
+          ref={headRef}
+          className='font-Barlow font-[900] uppercase tracking-[-.05em] mt-6 md:mt-10 leading-[0.95]'
+          style={{ fontSize: 'clamp(3rem, 8vw, 7.8rem)' }}
+        >
+          Crafting the{' '}
+          <span className='text-[hsla(var(--lavender))]'>Current</span>
+        </h1>
+
+        <p ref={paraRef} className='mt-6 md:mt-8 font-serif text-base md:text-lg text-[hsla(var(--text)/0.8)] max-w-lg'>
+          We are a team of innovative thinkers and problem solvers dedicated to
+          providing high-quality software development and technology consulting
+          services to businesses worldwide.
+        </p>
+
+        <div ref={btnRef} className='flex flex-wrap gap-4 mt-6 md:mt-8'>
+          <a href='/services'>
+            <button className='bg-[hsla(var(--lavender))] flex justify-center items-center font-bold text-[15px] md:text-[16px] text-[hsla(var(--base))] px-5 py-3 cursor-pointer rounded-xl'>
+              Explore Our Services
+            </button>
+          </a>
+          <a href='/contact'>
+            <button className='flex justify-center items-center font-bold text-[15px] md:text-[16px] text-[hsla(var(--lavender))] px-3 py-3 underline cursor-pointer'>
+              Contact Us
+            </button>
+          </a>
         </div>
       </div>
+
+      {/* ── Right: particle canvas — desktop/laptop only ── */}
+      <div
+        ref={rightRef}
+        className='
+          hidden lg:flex
+          flex-1 h-auto
+          relative
+          border-l border-[hsla(var(--lavender))]
+        '
+      >
+        <ParticleText text='ZSYIO' />
+      </div>
+
+    </div>
   )
 }
 

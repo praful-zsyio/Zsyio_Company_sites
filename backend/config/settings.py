@@ -110,6 +110,7 @@ INSTALLED_APPS = [
     'cloudinary',
     # Local apps
     'apps.projects',
+    'apps.products',
     'apps.services',
     'apps.about',
     'apps.contact',
@@ -170,6 +171,7 @@ MIGRATION_MODULES = {
     'config_api': 'apps.no_migrations',
     'estimation': 'apps.no_migrations',
     'projects': 'apps.no_migrations',
+    'products': 'apps.no_migrations',
     'services': 'apps.no_migrations',
     'authentication': 'apps.no_migrations',
     'contact': 'apps.no_migrations',

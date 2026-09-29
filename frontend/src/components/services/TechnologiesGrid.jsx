@@ -1,16 +1,6 @@
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { getCategorizedTechnologies } from "../../services/api";
-import * as LucideIcons from "lucide-react";
-
-const item = {
-  hidden: { opacity: 0, y: 28 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
-  },
-};
 
 const TechnologiesGrid = ({ isInView = true }) => {
   const [categories, setCategories] = useState([]);
@@ -23,78 +13,92 @@ const TechnologiesGrid = ({ isInView = true }) => {
           setCategories(res.data);
         }
       })
-      .catch(err => console.error("Error fetching technologies:", err))
+      .catch((err) => console.error("Error fetching technologies:", err))
       .finally(() => setLoading(false));
   }, []);
 
   if (loading) {
-    return <div className="text-center text-[hsl(var(--subtext1))] py-12">Loading technologies...</div>;
+    return (
+      <div className="py-24 px-6 md:px-10 text-center text-[hsl(var(--subtext1))]">
+        <p className="font-barlow text-sm uppercase tracking-widest animate-pulse">Loading Technologies...</p>
+      </div>
+    );
   }
 
   if (!categories || categories.length === 0) {
-    return <div className="text-center text-[hsl(var(--subtext1))] py-12">No technologies found.</div>;
+    return null;
   }
 
   return (
-    <motion.section
-      initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
-      variants={{
-        hidden: { opacity: 0, y: 24 },
-        visible: { opacity: 1, y: 0 }
-      }}
-      transition={{ duration: 0.6, delay: 0.2 }}
-    >
-      <h2 className="text-2xl md:text-3xl text-[hsl(var(--subtext1))] font-semibold text-center mb-4">
-        Technologies We Work With
-      </h2>
+    <section className="mt-0 border-t border-[hsl(var(--surface1))] px-6 md:px-10 pb-24">
+      {/* ── Header ── */}
+      <motion.div
+        initial={{ opacity: 0, x: -16 }}
+        animate={isInView ? { opacity: 1, x: 0 } : {}}
+        transition={{ duration: 0.55, delay: 0.15 }}
+        className="border-b border-[hsl(var(--surface1))] py-10 md:py-12 flex flex-col md:flex-row md:items-end md:justify-between gap-4"
+      >
+        <div>
+          <p className="font-barlow text-[11px] tracking-[0.25em] uppercase font-medium mb-3 text-[hsl(var(--lavender))]">
+            Our Stack
+          </p>
+          <h2 className="font-Barlow text-[2.5rem] md:text-[4rem] font-black uppercase tracking-tight leading-none text-[hsl(var(--text))]">
+            Technologies
+          </h2>
+        </div>
+        <p className="font-barlow hidden md:block text-sm text-[hsl(var(--subtext1))] max-w-xs text-right leading-relaxed">
+          Battle-tested tools chosen for reliability,<br/> not trend chasing.
+        </p>
+      </motion.div>
 
-      <p className="text-[hsl(var(--subtext1))] text-center max-w-3xl mx-auto mb-12 text-sm md:text-base">
-        Proven tools and platforms chosen for reliability, performance, and
-        long-term maintainability.
-      </p>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-        {Array.isArray(categories) && categories.map((group, idx) => (
+      {/* ── Tech category grid ── */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        {categories.map((cat, ci) => (
           <motion.div
-            key={idx}
-            variants={item}
-            initial="hidden"
-            animate={isInView ? "visible" : "hidden"}
-            transition={{ delay: 0.3 + idx * 0.08 }}
-            className="
-              rounded-2xl border border-[hsl(var(--surface1))]
-              bg-[hsl(var(--mantle))]/80
-              p-6
-              transition-all duration-300
-              hover:border-[hsl(var(--blue))]
-              hover:shadow-soft
-            "
+            key={cat.category}
+            initial={{ opacity: 0, y: 20 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.45, delay: 0.2 + ci * 0.08, ease: [0.4, 0, 0.2, 1] }}
+            className={[
+              "border-b border-[hsl(var(--surface1))] px-7 py-8 group",
+              "hover:bg-[hsla(var(--lavender)/0.03)] transition-colors duration-300",
+              // right border for 2-col layout (md)
+              ci % 2 === 0 ? "md:border-r md:border-[hsl(var(--surface1))]" : "",
+              // override right border for 3-col layout (lg)
+              ci % 3 !== 2 ? "lg:border-r lg:border-[hsl(var(--surface1))]" : "lg:border-r-0",
+              ci % 2 !== 0 ? "md:border-r-0" : "",
+            ]
+              .filter(Boolean)
+              .join(" ")}
           >
-            <h3 className="text-lg font-semibold text-[hsl(var(--blue))] mb-5 text-center">
-              {group.category}
-            </h3>
-
-            <div className="space-y-3">
-              {group.items.map((tech, i) => {
-                const TechIcon = LucideIcons[tech.icon] || LucideIcons.HelpCircle;
+            <p className="font-barlow text-[10px] tracking-[0.25em] uppercase font-bold mb-6 text-[hsl(var(--lavender))]">
+              {cat.category}
+            </p>
+            <ul className="flex flex-col">
+              {cat.items && cat.items.map((tech, ti) => {
+                const techName = typeof tech === 'object' ? tech.name : tech;
                 return (
-                  <div
-                    key={i}
-                    className="flex items-center gap-3 text-sm text-[hsl(var(--subtext1))]"
+                  <li
+                    key={techName}
+                    className={`flex items-center justify-between py-3 ${
+                      ti < cat.items.length - 1
+                        ? "border-b border-[hsl(var(--surface1))]"
+                        : ""
+                    }`}
                   >
-                    <TechIcon style={{ color: tech.color }} className="w-4 h-4" />
-                    <span>{tech.name}</span>
-                  </div>
+                    <span className="font-Barlow text-lg md:text-xl font-bold uppercase tracking-tight text-[hsl(var(--text))] group-hover:text-[hsl(var(--lavender))] transition-colors duration-200">
+                      {techName}
+                    </span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-[hsl(var(--lavender))] opacity-30 shrink-0" />
+                  </li>
                 );
               })}
-            </div>
+            </ul>
           </motion.div>
         ))}
       </div>
-    </motion.section>
+    </section>
   );
 };
-
 
 export default TechnologiesGrid;

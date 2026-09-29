@@ -1,31 +1,33 @@
 // Core values cards
-export const coreValues = [
+export const VALUES = [
   {
-    id: "innovation",
-    icon: "Lightbulb",
-    title: "Innovation",
-    description:
-      "We constantly explore new ideas and technologies to deliver forward-thinking solutions.",
+    num: "01",
+    title: "DEFY MEDIOCRITY",
+    description: "Good enough is never enough. We reject the average and push every project to its absolute creative and technical limit."
   },
   {
-    id: "integrity",
-    icon: "ShieldCheck",
-    title: "Integrity",
-    description:
-      "We build trust through transparent, ethical, and honest communication and actions.",
+    num: "02",
+    title: "RADICAL TRANSPARENCY",
+    description: "No hidden agendas or sugar-coated timelines. We believe in honest, unfiltered communication from day one."
   },
   {
-    id: "excellence",
-    icon: "Gem",
-    title: "Excellence",
-    description:
-      "We are committed to the highest standards of quality in everything we do.",
+    num: "03",
+    title: "OWN THE OUTCOME",
+    description: "We don't just write code and design screens; we take full responsibility for the success of your product."
   },
   {
-    id: "partnership",
-    icon: "Handshake",
-    title: "Partnership",
-    description:
-      "We succeed by fostering collaborative relationships with our clients and our team.",
+    num: "04",
+    title: "OBSESSIVE CRAFT",
+    description: "Every pixel, every animation, and every line of code matters. We sweat the small stuff so you don't have to."
   },
+  {
+    num: "05",
+    title: "MOVE WITH PURPOSE",
+    description: "Speed is a weapon, but only when directed. We move fast, but with deliberate, calculated precision."
+  },
+  {
+    num: "06",
+    title: "BUILT TO LAST",
+    description: "We don't build disposable solutions. Our architectures are scalable, secure, and designed for tomorrow."
+  }
 ];
