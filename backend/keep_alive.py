@@ -3,8 +3,10 @@ import time
 import requests
 
 def ping_server():
-    # Replace with your actual Render URL
-    URL = "https://zsyio-company-7d1w.onrender.com/" 
+    # Render deployed URL with env fallback
+    import os
+    URL = os.getenv("RENDER_EXTERNAL_URL") or "https://zsyio-company-sites-scm2.onrender.com/"
+ 
     
     while True:
         try:

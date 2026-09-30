@@ -3,9 +3,10 @@ import axios from 'axios';
 export const ACCESS_TOKEN = 'access_token';
 export const REFRESH_TOKEN = 'refresh_token';
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000/api/';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://zsyio-company-sites-scm2.onrender.com/api/';
 
 const api = axios.create({
+
     baseURL: API_BASE_URL,
     withCredentials: true,  // Send cookies/auth headers cross-origin (required for CORS with credentials)
     headers: {

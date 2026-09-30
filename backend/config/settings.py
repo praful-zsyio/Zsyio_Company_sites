@@ -40,6 +40,7 @@ ALLOWED_HOSTS = ['*']
 CSRF_TRUSTED_ORIGINS = [
     "https://*.onrender.com",
     "https://*.netlify.app",
+    "https://zsyio-company-sites-scm2.onrender.com",
     "https://zsyio.com",
     "https://www.zsyio.com",
     "http://localhost:5173",
@@ -55,8 +56,10 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "https://zsyio.com",
     "https://www.zsyio.com",
-    "https://company-sites11.vercel.app"
+    "https://company-sites11.vercel.app",
+    "https://zsyio-company-sites-scm2.onrender.com",
 ]
+
 
 # Allow Netlify preview and Render.com deployments via regex
 CORS_ALLOWED_ORIGIN_REGEXES = [

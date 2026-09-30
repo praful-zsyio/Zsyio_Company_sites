@@ -19,10 +19,11 @@ export default defineConfig({
         proxy: {
             // Proxy /api requests to the Django backend in development
             '/api': {
-                target: 'https://zsyio-company-7d1w.onrender.com' || 'http://127.0.0.1:8000',
+                target: process.env.VITE_API_BASE_URL || 'https://zsyio-company-sites-scm2.onrender.com',
                 changeOrigin: true,
                 secure: false,
             },
+
         },
     }
 })
