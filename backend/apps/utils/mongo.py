@@ -47,7 +47,7 @@ def mongo_log(collection_name: str, document: dict, db_name: str = 'zsyio_db') -
             document['timestamp'] = datetime.datetime.utcnow()
 
         db[collection_name].insert_one(document)
-        print(f"[MongoDB] Logged to '{collection_name}' ✓")
+        print(f"[MongoDB] Logged to '{collection_name}' [OK]")
         return True
 
     except Exception as e:

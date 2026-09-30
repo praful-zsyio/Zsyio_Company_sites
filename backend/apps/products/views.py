@@ -1,3 +1,4 @@
+import json
 import datetime
 from rest_framework import viewsets, permissions
 from rest_framework.decorators import action
@@ -32,8 +33,58 @@ def serialize_doc(doc):
                 out[k] = serialize_doc(v)
             else:
                 out[k] = v
+        # Ensure images is always present as an array
+        if 'images' not in out or not isinstance(out['images'], list):
+            primary = out.get('cloudinary_image') or out.get('image')
+            out['images'] = [primary] if primary else []
         return out
     return doc
+
+
+def extract_images_from_request(data, files=None):
+    """
+    Extract images list from request data (list of URLs, JSON string, comma-separated)
+    and any files uploaded in request.FILES under 'images' or 'images[]'.
+    """
+    images = []
+    raw = data.get('images') if 'images' in data else data.get('image_urls')
+    if isinstance(raw, list):
+        for item in raw:
+            if isinstance(item, str) and item.strip():
+                images.append(item.strip())
+    elif isinstance(raw, str):
+        val = raw.strip()
+        if val.startswith('[') and val.endswith(']'):
+            try:
+                parsed = json.loads(val)
+                if isinstance(parsed, list):
+                    images.extend([str(x).strip() for x in parsed if str(x).strip()])
+            except Exception:
+                pass
+        if not images and val:
+            parts = [p.strip() for p in val.replace('\r\n', '\n').split('\n') if p.strip()]
+            if len(parts) == 1 and ',' in parts[0]:
+                parts = [p.strip() for p in parts[0].split(',') if p.strip()]
+            images.extend(parts)
+
+    if files:
+        uploaded_files = files.getlist('images') or files.getlist('images[]')
+        for f in uploaded_files:
+            try:
+                url = upload_image(f)
+                if url:
+                    images.append(url)
+            except Exception as e:
+                print(f"[products] Image upload error: {e}")
+
+    # Deduplicate while preserving order
+    seen = set()
+    result = []
+    for img in images:
+        if img and img not in seen:
+            seen.add(img)
+            result.append(img)
+    return result
 
 
 class ProductViewSet(viewsets.ViewSet):
@@ -79,12 +130,29 @@ class ProductViewSet(viewsets.ViewSet):
         data = request.data.copy()
         data['created_at'] = datetime.datetime.utcnow()
 
-        # Optional Cloudinary image upload
+        # Handle multiple image URLs and uploaded files
+        images = extract_images_from_request(data, request.FILES)
+
+        # Optional single image file upload
         if 'image' in request.FILES:
             try:
-                data['image'] = upload_image(request.FILES['image'])
+                single_url = upload_image(request.FILES['image'])
+                data['image'] = single_url
+                data['cloudinary_image'] = single_url
+                if single_url not in images:
+                    images.insert(0, single_url)
             except Exception as e:
                 return Response({'error': f'Image upload failed: {e}'}, status=500)
+
+        # Synchronize primary image and images array
+        if not data.get('image') and images:
+            data['image'] = images[0]
+            data['cloudinary_image'] = images[0]
+        elif (data.get('image') or data.get('cloudinary_image')) and not images:
+            primary = data.get('cloudinary_image') or data.get('image')
+            images = [primary]
+
+        data['images'] = images
 
         result = coll.insert_one(data)
         data['id'] = str(result.inserted_id)
@@ -106,15 +174,32 @@ class ProductViewSet(viewsets.ViewSet):
 
         data = {k: v for k, v in request.data.items() if k not in ('id', '_id')}
 
+        # Handle multiple images
+        new_images = extract_images_from_request(data, request.FILES)
+
         if 'image' in request.FILES:
             try:
                 if existing.get('image'):
                     pub_id = get_public_id_from_url(existing['image'])
                     if pub_id:
                         delete_image(pub_id)
-                data['image'] = upload_image(request.FILES['image'])
+                single_url = upload_image(request.FILES['image'])
+                data['image'] = single_url
+                data['cloudinary_image'] = single_url
+                if single_url not in new_images:
+                    new_images.insert(0, single_url)
             except Exception as e:
                 return Response({'error': f'Image handling failed: {e}'}, status=500)
+
+        if 'images' in request.data or 'image_urls' in request.data or (request.FILES and ('images' in request.FILES or 'images[]' in request.FILES)):
+            data['images'] = new_images
+            if new_images and not data.get('image'):
+                data['image'] = new_images[0]
+                data['cloudinary_image'] = new_images[0]
+        elif 'image' in data or 'cloudinary_image' in data:
+            primary = data.get('cloudinary_image') or data.get('image')
+            if primary and not data.get('images'):
+                data['images'] = [primary]
 
         coll.update_one(query, {'$set': data})
         updated = coll.find_one(query)
@@ -177,7 +262,8 @@ class ProductViewSet(viewsets.ViewSet):
                     'category': d.get('category', ''),
                     'path': f"/products/{d.get('id', '')}",
                     'price': str(d.get('price', '0.00')),
-                    'image': d.get('cloudinary_image') or d.get('image') or '',
+                    'image': (d.get('images') and d.get('images')[0]) or d.get('cloudinary_image') or d.get('image') or '',
+                    'images': d.get('images', []),
                 }
                 for d in docs
             ],
@@ -186,3 +272,4 @@ class ProductViewSet(viewsets.ViewSet):
     @action(detail=False, methods=['get'], url_path='navlink')
     def navlink_alias(self, request):
         return self.nav_links(request)
+

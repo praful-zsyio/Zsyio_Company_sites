@@ -12,6 +12,26 @@ node_modules
 # dist-ssr
 *.local
 
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.sqlite3
+*.sqlite3-journal
+
+# Django
+local_settings.py
+staticfiles/
+media/
+
+# Environment & Virtualenvs
+.env
+.env.*
+.venv/
+env/
+venv/
+ENV/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -22,6 +42,3 @@ node_modules
 *.njsproj
 *.sln
 *.sw?
-
-.env
-.env.*.local
