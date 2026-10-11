@@ -1,4 +1,5 @@
 from rest_framework import viewsets, permissions, generics, status
+from rest_framework.decorators import action
 from rest_framework.response import Response
 from django.conf import settings
 from .models import Project
@@ -128,7 +129,7 @@ class ProjectViewSet(ReloadMixin, viewsets.ModelViewSet):
 
     def destroy(self, request, pk=None, *args, **kwargs):
         coll = get_projects_collection()
-        if coll is None: return Response(status=500)
+        if coll is None: return Response({"error": "DB unavailable"}, status=500)
         
         query = {"_id": ObjectId(pk)} if ObjectId.is_valid(pk) else {"_id": pk}
         project = coll.find_one(query)
@@ -152,7 +153,20 @@ class ProjectViewSet(ReloadMixin, viewsets.ModelViewSet):
             'project_id': pk,
             'title': project.get('title'),
         })
-        return Response(status=204)
+        return Response({"message": "Project deleted successfully.", "id": pk}, status=200)
+
+    @action(detail=True, methods=['delete', 'post'], url_path='delete')
+    def delete_single(self, request, pk=None):
+        return self.destroy(request, pk=pk)
+
+    @action(detail=False, methods=['delete', 'post'], url_path='delete-all')
+    def delete_all(self, request):
+        coll = get_projects_collection()
+        if coll is None: return Response({"error": "DB unavailable"}, status=500)
+        count = coll.count_documents({})
+        coll.delete_many({})
+        mongo_log('project_logs', {'action': 'delete_all', 'count': count})
+        return Response({"message": f"All {count} projects deleted successfully.", "count": count}, status=200)
 
 class ProjectCreateView(generics.CreateAPIView):
     permission_classes = [permissions.AllowAny]
@@ -163,3 +177,6 @@ class ProjectDeleteView(generics.DestroyAPIView):
     permission_classes = [permissions.AllowAny]
     def delete(self, request, pk=None):
         return ProjectViewSet().destroy(request, pk=pk)
+    def post(self, request, pk=None):
+        return ProjectViewSet().destroy(request, pk=pk)
+

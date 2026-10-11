@@ -1,5 +1,6 @@
 import datetime
 from rest_framework import viewsets, permissions
+from rest_framework.views import APIView
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from bson.objectid import ObjectId
@@ -198,7 +199,7 @@ class ProductViewSet(viewsets.ViewSet):
     def destroy(self, request, pk=None):
         coll = get_products_collection()
         if coll is None:
-            return Response(status=503)
+            return Response({"error": "DB unavailable."}, status=503)
 
         query = {'_id': ObjectId(pk)} if ObjectId.is_valid(pk) else {'_id': pk}
         existing = coll.find_one(query)
@@ -215,7 +216,21 @@ class ProductViewSet(viewsets.ViewSet):
 
         coll.delete_one(query)
         mongo_log('product_logs', {'action': 'delete', 'product_id': pk, 'title': existing.get('title')})
-        return Response(status=204)
+        return Response({"message": "Product deleted successfully.", "id": pk}, status=200)
+
+    @action(detail=True, methods=['delete', 'post'], url_path='delete')
+    def delete_single(self, request, pk=None):
+        return self.destroy(request, pk=pk)
+
+    @action(detail=False, methods=['delete', 'post'], url_path='delete-all')
+    def delete_all(self, request):
+        coll = get_products_collection()
+        if coll is None:
+            return Response({"error": "DB unavailable."}, status=503)
+        count = coll.count_documents({})
+        coll.delete_many({})
+        mongo_log('product_logs', {'action': 'delete_all', 'count': count})
+        return Response({"message": f"All {count} products deleted successfully.", "count": count}, status=200)
 
     # ── Nav-links helper ──────────────────────────────────────────────────────
     @action(detail=False, methods=['get'], url_path='nav-links')
@@ -256,3 +271,13 @@ class ProductViewSet(viewsets.ViewSet):
     @action(detail=False, methods=['get'], url_path='navlink')
     def navlink_alias(self, request):
         return self.nav_links(request)
+
+
+class ProductDeleteView(APIView):
+    permission_classes = [permissions.AllowAny]
+
+    def delete(self, request, pk=None):
+        return ProductViewSet().destroy(request, pk=pk)
+
+    def post(self, request, pk=None):
+        return ProductViewSet().destroy(request, pk=pk)
