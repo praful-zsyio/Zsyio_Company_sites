@@ -4,7 +4,7 @@ import requests
 
 def ping_server():
     # Render URL
-    URL = "https://zsyio-company-1-4qcq.onrender.com/" 
+    URL = "https://zsyio-company-2-wlgt.onrender.com/" 
     
     while True:
         try:

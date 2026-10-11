@@ -78,6 +78,7 @@ EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 
 CSRF_TRUSTED_ORIGINS = [
     "https://*.onrender.com",
+    "https://zsyio-company-2-wlgt.onrender.com",
     "https://zsyio-company-1-4qcq.onrender.com",
     "https://*.netlify.app",
     "https://zsyio.com",
@@ -102,6 +103,7 @@ CORS_ALLOWED_ORIGINS = [
     "https://zsyio.com",
     "https://www.zsyio.com",
     "https://company-sites11.vercel.app",
+    "https://zsyio-company-2-wlgt.onrender.com",
     "https://zsyio-company-1-4qcq.onrender.com"
 ]
 

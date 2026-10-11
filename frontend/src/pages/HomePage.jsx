@@ -31,7 +31,7 @@ const HomePage = () => {
       <HeroSection />
       <MarqueeStrip />
       <Services />
-      <ProjectsGlimpse />
+      {/* <ProjectsGlimpse /> */}
       <PartnerMarquee />
       <ProductsSection />
       <EnggExcell />
