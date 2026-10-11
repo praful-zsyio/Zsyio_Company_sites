@@ -19,10 +19,11 @@ export default defineConfig({
         proxy: {
             // Proxy /api requests to the Django backend in development
             '/api': {
-                target: process.env.VITE_BACKEND_URL || 'http://127.0.0.1:8000',
+                target: process.env.VITE_BACKEND_URL || 'http://localhost:8000',
                 changeOrigin: true,
                 secure: false,
             },
+
         },
     }
 })
