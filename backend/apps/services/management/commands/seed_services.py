@@ -7,7 +7,7 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         db = get_mongo_db()
-        if not db:
+        if db is None:
             self.stderr.write(self.style.ERROR('Could not connect to MongoDB'))
             return
 

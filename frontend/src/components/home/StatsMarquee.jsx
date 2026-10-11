@@ -2,13 +2,13 @@ import React, { useRef, useEffect } from 'react';
 import gsap from 'gsap';
 
 const STATS_ITEMS = [
-  '✦ 20+ Projects Delivered',
-  '✦ 15+ Tech Experts',
-  '✦ 2+ Years of Excellence',
-  '✦ 3+ Countries Served',
-  '✦ 99.9% Uptime SLA',
-  '✦ 24/7 Premium Support',
-  '✦ ISO 27001 Certified',
+  '20+ Projects Delivered',
+  '15+ Tech Experts',
+  '2+ Years of Excellence',
+  '3+ Countries Served',
+  '99.9% Uptime SLA',
+  '24/7 Premium Support',
+  'ISO 27001 Certified',
 ];
 
 const StatsMarquee = () => {
@@ -31,7 +31,7 @@ const StatsMarquee = () => {
 
     tweenRef.current = gsap.to([track, clone], {
       x: `-=${totalWidth}`,
-      duration: 35, // slightly slower
+      duration: totalWidth / 40, // 40px per second, nice and slow
       ease: 'none',
       repeat: -1,
       modifiers: {
@@ -76,9 +76,9 @@ const StatsMarquee = () => {
         overflow: 'hidden',
         display: 'flex',
         alignItems: 'center',
-        background: 'linear-gradient(90deg, hsla(var(--lavender)/0.08) 0%, hsla(var(--lavender)/0.04) 50%, hsla(var(--lavender)/0.08) 100%)',
-        borderTop: '1px solid hsla(var(--lavender))',
-        borderBottom: '1px solid hsla(var(--lavender))',
+        background: 'linear-gradient(90deg, hsla(var(--highlight)/0.08) 0%, hsla(var(--highlight)/0.04) 50%, hsla(var(--highlight)/0.08) 100%)',
+        borderTop: '1px solid hsla(var(--highlight))',
+        borderBottom: '1px solid hsla(var(--highlight))',
         position: 'relative',
       }}
     >
@@ -92,7 +92,7 @@ const StatsMarquee = () => {
           willChange: 'transform',
         }}
       >
-        {STATS_ITEMS.map((text, i) => (
+        {Array(10).fill(STATS_ITEMS).flat().map((text, i) => (
           <span
             key={i}
             style={{
@@ -102,7 +102,7 @@ const StatsMarquee = () => {
               fontWeight: 600,
               letterSpacing: '0.08em',
               textTransform: 'uppercase',
-              color: 'hsla(var(--lavender)/0.85)',
+              color: 'hsla(var(--highlight)/0.85)',
               padding: '0 3rem',
               fontFamily: 'var(--font-barlow, "Barlow", sans-serif)',
             }}

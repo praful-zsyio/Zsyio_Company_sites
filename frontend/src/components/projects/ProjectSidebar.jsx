@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 export default function ProjectSidebar({ finalOutcome, stack, duration, teamSize }) {
   return (
-    <aside className="bg-[hsla(var(--lavender)/0.02)] border-t lg:border-t-0 lg:border-l border-[hsl(var(--surface1))] lg:-ml-px relative z-10">
+    <aside className="bg-[hsla(var(--highlight)/0.02)] border-t lg:border-t-0 lg:border-l border-[hsl(var(--surface1))] lg:-ml-px relative z-10">
       <motion.div
         initial={{ opacity: 0, x: 20 }}
         whileInView={{ opacity: 1, x: 0 }}
@@ -15,7 +15,7 @@ export default function ProjectSidebar({ finalOutcome, stack, duration, teamSize
           <p className="font-barlow text-[11px] tracking-[0.25em] uppercase font-bold mb-4 text-[hsl(var(--subtext1))]">
             Primary Outcome
           </p>
-          <p className="font-Barlow font-black uppercase text-3xl md:text-4xl tracking-tight leading-[0.9] text-[hsl(var(--lavender))]">
+          <p className="font-Barlow font-black uppercase text-3xl md:text-4xl tracking-tight leading-[0.9] text-[hsl(var(--highlight))]">
             {finalOutcome}
           </p>
         </div>

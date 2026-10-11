@@ -40,13 +40,13 @@ const ProcessSection = () => {
   }, { scope: comp });
 
   return (
-    <section ref={comp} className="border-b border-[hsla(var(--lavender)/0.4)] text-[hsl(var(--text))] bg-transparent">
+    <section ref={comp} className="border-b border-[hsla(var(--highlight)/0.4)] text-[hsl(var(--text))] bg-transparent">
       {/* Header */}
-      <div className="process-header-container px-6 md:px-14 py-12 border-b border-[hsla(var(--lavender)/0.4)]">
+      <div className="process-header-container px-6 md:px-14 py-12 border-b border-[hsla(var(--highlight)/0.4)]">
         <div className="process-header-fade-up">
           <div className="grid grid-cols-1 md:grid-cols-2 items-end gap-0">
             <div>
-              <p className="text-[11px] tracking-[0.25em] uppercase font-medium mb-3 text-[hsl(var(--lavender))]">
+              <p className="text-[11px] tracking-[0.25em] uppercase font-medium mb-3 text-[hsl(var(--highlight))]">
                 Our Methodology
               </p>
               <h2
@@ -75,18 +75,18 @@ const ProcessSection = () => {
         {PROCESS.map((p, i) => (
           <div
             key={p.num}
-            className="process-row border-b border-[hsla(var(--lavender)/0.4)] last:border-b-0 grid grid-cols-[160px_1fr] md:grid-cols-[280px_1fr] hover:bg-[hsla(var(--lavender)/0.03)] transition-colors group"
+            className="process-row border-b border-[hsla(var(--highlight)/0.4)] last:border-b-0 grid grid-cols-[160px_1fr] md:grid-cols-[280px_1fr] hover:bg-[hsla(var(--highlight)/0.03)] transition-colors group"
           >
             {/* Left: number + phase label */}
-            <div className="border-r border-[hsla(var(--lavender)/0.4)] px-6 md:px-12 py-10 flex flex-col justify-between">
-              <span className="text-[10px] tracking-[0.3em] uppercase font-medium text-[hsl(var(--lavender))] opacity-80">{p.num}</span>
+            <div className="border-r border-[hsla(var(--highlight)/0.4)] px-6 md:px-12 py-10 flex flex-col justify-between">
+              <span className="text-[10px] tracking-[0.3em] uppercase font-medium text-[hsl(var(--highlight))] opacity-80">{p.num}</span>
               <span
                 style={{
                   fontFamily: "'Barlow Condensed', sans-serif",
                   writingMode: "vertical-rl",
                   textOrientation: "mixed",
                 }}
-                className="text-xs tracking-[0.25em] uppercase font-bold text-[hsl(var(--lavender))] opacity-60 mt-4 self-end rotate-180 hidden md:block"
+                className="text-xs tracking-[0.25em] uppercase font-bold text-[hsl(var(--highlight))] opacity-60 mt-4 self-end rotate-180 hidden md:block"
               >
                 {p.label}
               </span>
@@ -101,7 +101,7 @@ const ProcessSection = () => {
                 >
                   {p.title}
                 </h3>
-                <span className="text-[10px] tracking-[0.2em] uppercase font-medium border border-[hsla(var(--lavender)/0.4)] text-[hsl(var(--lavender))] px-2 py-1 md:hidden">
+                <span className="text-[10px] tracking-[0.2em] uppercase font-medium border border-[hsla(var(--highlight)/0.4)] text-[hsl(var(--highlight))] px-2 py-1 md:hidden">
                   {p.label}
                 </span>
               </div>

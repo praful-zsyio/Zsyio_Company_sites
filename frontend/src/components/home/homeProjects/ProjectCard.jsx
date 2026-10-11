@@ -21,7 +21,7 @@ const ProjectCard = ({ project, className }) => (
         <p className="text-subtext1 mb-4 text-sm leading-relaxed grow">{project.description}</p>
         <div className="flex flex-wrap gap-2 mt-auto">
           {project.tags.map((tag, index) => (
-            <span key={index} className="bg-lavender/20 text-lavender text-xs font-semibold px-3 py-1 rounded-xl">
+            <span key={index} className="bg-highlight/20 text-highlight text-xs font-semibold px-3 py-1 rounded-xl">
               {tag}
             </span>
           ))}

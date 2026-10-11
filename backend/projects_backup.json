@@ -1,0 +1,147 @@
+[
+  {
+    "_id": {
+      "$oid": "6aca7b619a3e32f9ab579687"
+    },
+    "title": "The Planets",
+    "category": "Web Development",
+    "summary": "An interactive space-themed web experience showcasing planets with immersive UI and animations.",
+    "description": "The Planets is a visually engaging web application that presents detailed information about planets in our solar system. Built with modern frontend technologies, the project focuses on smooth animations, responsive design, and an immersive user experience. It demonstrates advanced UI/UX implementation and structured component-based architecture.",
+    "image": "https://res.cloudinary.com/damlvqiwv/image/upload/v1772184850/planet_zktjup.png",
+    "tech_stack": [
+      "React",
+      "JavaScript",
+      "CSS",
+      "HTML",
+      "GSAP",
+      "Vite",
+      "Three.js"
+    ],
+    "tags": [
+      "Featured",
+      "Web",
+      "Interactive UI",
+      "Animation",
+      "Frontend",
+      "3D"
+    ],
+    "live_url": "https://planets-bice.vercel.app/",
+    "github_url": "https://github.com/Mayawaaan/Planets",
+    "client": "Personal Project",
+    "duration": "2-3 Weeks",
+    "completion_date": {
+      "$date": "2025-01-15T00:00:00Z"
+    },
+    "role": "Frontend Developer",
+    "features": [
+      "Interactive planet selection interface",
+      "Smooth transitions and animations",
+      "Responsive layout for mobile and desktop",
+      "Component-based architecture",
+      "Modern UI design with engaging visuals",
+      "3D planet models and animations using Three.js"
+    ],
+    "challenges": "Maintaining performance while implementing smooth animations and ensuring responsiveness across devices.",
+    "solutions": "Optimized rendering logic, minimized re-renders, and structured reusable UI components for scalability and maintainability.",
+    "created_at": {
+      "$date": "2026-10-10T17:52:33.574Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6aca7b619a3e32f9ab579688"
+    },
+    "title": "Real-Time Chat Application",
+    "category": "Web Application",
+    "summary": "A scalable real-time messaging platform with authentication, group chats, media sharing, and live notifications.",
+    "description": "Developed a full-stack real-time chat application enabling secure one-to-one and group messaging. The system supports live message synchronization using WebSockets, media sharing, authentication workflows, and notification handling. Built with a scalable backend architecture and responsive frontend for seamless cross-device usage.",
+    "image": "https://res.cloudinary.com/damlvqiwv/image/upload/v1772185480/chat-app_eyonmx.png",
+    "tech_stack": [
+      "React",
+      "Node.js",
+      "Express",
+      "MongoDB",
+      "Socket.io",
+      "JWT Authentication"
+    ],
+    "tags": [
+      "Featured",
+      "Web App",
+      "Real-Time",
+      "Chat System"
+    ],
+    "live_url": "https://chatapp-kzre.onrender.com/",
+    "github_url": "https://github.com/Mayawaaan/ChatApp",
+    "client": "Personal Project",
+    "duration": "1-2 Months",
+    "completion_date": {
+      "$date": "2025-01-20T00:00:00Z"
+    },
+    "role": "Full Stack Developer",
+    "features": [
+      "Real-time one-to-one messaging using WebSockets",
+      "Group chat functionality",
+      "Secure authentication with JWT",
+      "Media and file sharing support",
+      "Live in-app notifications",
+      "Responsive cross-device UI",
+      "Message persistence with database storage"
+    ],
+    "challenges": "Ensuring low-latency real-time communication while maintaining secure authentication and efficient database queries.",
+    "solutions": "Implemented Socket.io for bi-directional communication, optimized MongoDB indexing for message retrieval, and secured routes using JWT middleware.",
+    "architecture": {
+      "frontend": "React SPA",
+      "backend": "Node.js with Express",
+      "database": "MongoDB",
+      "realtime": "Socket.io",
+      "authentication": "JWT-based token system"
+    },
+    "created_at": {
+      "$date": "2026-10-10T17:52:33.574Z"
+    }
+  },
+  {
+    "_id": {
+      "$oid": "6aca7b619a3e32f9ab579689"
+    },
+    "title": "Audi R8 3D Experience",
+    "category": "Web Development",
+    "summary": "An interactive 3D car visualization in the browser featuring high-fidelity rendering and smooth user controls.",
+    "description": "Developed a 3D web experience showcasing the Audi R8 using React and WebGL. Users can interact with the high-quality car model, zoom, orbit, and explore details with optimized performance and responsive design across devices.",
+    "image": "https://res.cloudinary.com/damlvqiwv/image/upload/v1772185487/Audi_r8_zyr0c8.png",
+    "tech_stack": [
+      "React",
+      "Three.js",
+      "React Three Fiber (R3F)",
+      "Vite",
+      "WebGL",
+      "Tailwind CSS"
+    ],
+    "tags": [
+      "Featured",
+      "Web",
+      "3D",
+      "Interactive UI"
+    ],
+    "live_url": "https://audi-r8-woad.vercel.app",
+    "github_url": "https://github.com/Mayawaaan/AudiR8",
+    "client": "Personal Project",
+    "duration": "2\u20133 Weeks",
+    "completion_date": {
+      "$date": "2025-11-26T00:00:00Z"
+    },
+    "role": "Frontend Developer",
+    "features": [
+      "Interactive 3D car model with orbit, zoom, and pan controls",
+      "High-quality rendering with realistic lighting and materials",
+      "Responsive design optimized for both desktop and mobile",
+      "Fast loading and optimized build using Vite",
+      "Component-structured 3D scene for extensibility"
+    ],
+    "challenges": "Rendering complex 3D models in the browser while maintaining smooth interaction and cross-device performance.",
+    "solutions": "Used React Three Fiber to integrate Three.js into a React component architecture and optimized scene graph for performance.",
+    "created_at": {
+      "$date": "2026-10-10T17:52:33.574Z"
+    }
+  }
+]

@@ -103,7 +103,7 @@ export default function DisclaimerPage() {
         </p>
         <Link
           to="/contact"
-          className="bg-[hsl(var(--lavender))] flex justify-center items-center font-bold text-[14px] md:text-[15px] text-[hsl(var(--base))] px-8 py-4 rounded-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-lg shadow-[hsla(var(--lavender)/0.25)] flex-shrink-0"
+          className="bg-[hsl(var(--highlight))] flex justify-center items-center font-bold text-[14px] md:text-[15px] text-[hsl(var(--base))] px-8 py-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg shadow-[hsla(var(--highlight)/0.25)] flex-shrink-0"
         >
           Contact Legal Team →
         </Link>

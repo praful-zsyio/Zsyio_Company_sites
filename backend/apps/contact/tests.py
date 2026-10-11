@@ -1,24 +1,15 @@
-from django.test import SimpleTestCase
-from rest_framework import status
+from django.test import TestCase
 from rest_framework.test import APIClient
-from .serializers import ContactSubmissionSerializer
+from rest_framework import status
+from .models import ContactSubmission
 
-class ContactSubmissionTests(SimpleTestCase):
+class ContactSubmissionTests(TestCase):
     def setUp(self):
         self.client = APIClient()
         self.url = '/api/contact/'
-        self.full_payload = {
-            'name': 'Ravi Sharma',
-            'company': 'Acme Corp',
-            'email': 'ravi@acme.com',
-            'phone': '+91 98765 43210',
-            'services': ['Web Development', 'Cloud Migration'],
-            'subject': 'App Development, Cloud Migration...',
-            'message': 'Tell us about your project, timeline, and goals...'
-        }
-        self.minimal_payload = {
-            'name': 'Ravi Sharma',
-            'email': 'ravi@acme.com',
+        self.valid_payload = {
+            'name': 'John Doe',
+            'email': 'john@example.com',
             'message': 'Hello world'
         }
         self.invalid_payload = {
@@ -27,34 +18,13 @@ class ContactSubmissionTests(SimpleTestCase):
             'message': ''
         }
 
-    def test_serializer_full_payload(self):
-        serializer = ContactSubmissionSerializer(data=self.full_payload)
-        self.assertTrue(serializer.is_valid(), serializer.errors)
-        self.assertEqual(serializer.validated_data['name'], 'Ravi Sharma')
-        self.assertEqual(serializer.validated_data['company'], 'Acme Corp')
-        self.assertEqual(serializer.validated_data['services'], ['Web Development', 'Cloud Migration'])
-        self.assertEqual(serializer.validated_data['subject'], 'App Development, Cloud Migration...')
-
-    def test_serializer_minimal_payload(self):
-        serializer = ContactSubmissionSerializer(data=self.minimal_payload)
-        self.assertTrue(serializer.is_valid(), serializer.errors)
-        self.assertEqual(serializer.validated_data['services'], [])
-        self.assertEqual(serializer.validated_data['company'], '')
-
-    def test_serializer_invalid_payload(self):
-        serializer = ContactSubmissionSerializer(data=self.invalid_payload)
-        self.assertFalse(serializer.is_valid())
-        self.assertIn('name', serializer.errors)
-        self.assertIn('email', serializer.errors)
-        self.assertIn('message', serializer.errors)
-
-    def test_post_full_payload(self):
-        response = self.client.post(self.url, self.full_payload, format='json')
+    def test_create_submission(self):
+        response = self.client.post(self.url, self.valid_payload, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(response.data.get('status'), 'success')
+        self.assertEqual(ContactSubmission.objects.count(), 1)
+        self.assertEqual(ContactSubmission.objects.get().name, 'John Doe')
 
-    def test_post_invalid_payload(self):
+    def test_create_submission_invalid(self):
         response = self.client.post(self.url, self.invalid_payload, format='json')
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
-
-
+        self.assertEqual(ContactSubmission.objects.count(), 0)

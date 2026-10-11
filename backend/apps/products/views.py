@@ -1,4 +1,3 @@
-import json
 import datetime
 from rest_framework import viewsets, permissions
 from rest_framework.decorators import action
@@ -15,7 +14,7 @@ def get_products_collection():
 
 
 def serialize_doc(doc):
-    """Convert MongoDB ObjectId / datetime fields to JSON-safe types."""
+    """Convert MongoDB ObjectId / datetime fields to JSON-safe types and normalize schema."""
     if doc is None:
         return None
     if isinstance(doc, list):
@@ -33,64 +32,36 @@ def serialize_doc(doc):
                 out[k] = serialize_doc(v)
             else:
                 out[k] = v
-        # Ensure images is always present as an array
-        if 'images' not in out or not isinstance(out['images'], list):
-            primary = out.get('cloudinary_image') or out.get('image')
-            out['images'] = [primary] if primary else []
+
+        # Normalize title/name aliases
+        title = out.get('title') or out.get('name') or 'Untitled'
+        out['title'] = title
+        out['name'] = title
+
+        # Normalize status (default 'Live' if live_url is configured)
+        if not out.get('status'):
+            out['status'] = 'Live' if out.get('live_url') else 'Live'
+
+        # Normalize live_url aliases
+        if 'live_url' in out and 'liveUrl' not in out:
+            out['liveUrl'] = out['live_url']
+        elif 'liveUrl' in out and 'live_url' not in out:
+            out['live_url'] = out['liveUrl']
+
+        # Normalize features / highlights
+        features = out.get('features') or out.get('highlights') or []
+        out['features'] = features
+        out['highlights'] = features
+
         return out
     return doc
-
-
-def extract_images_from_request(data, files=None):
-    """
-    Extract images list from request data (list of URLs, JSON string, comma-separated)
-    and any files uploaded in request.FILES under 'images' or 'images[]'.
-    """
-    images = []
-    raw = data.get('images') if 'images' in data else data.get('image_urls')
-    if isinstance(raw, list):
-        for item in raw:
-            if isinstance(item, str) and item.strip():
-                images.append(item.strip())
-    elif isinstance(raw, str):
-        val = raw.strip()
-        if val.startswith('[') and val.endswith(']'):
-            try:
-                parsed = json.loads(val)
-                if isinstance(parsed, list):
-                    images.extend([str(x).strip() for x in parsed if str(x).strip()])
-            except Exception:
-                pass
-        if not images and val:
-            parts = [p.strip() for p in val.replace('\r\n', '\n').split('\n') if p.strip()]
-            if len(parts) == 1 and ',' in parts[0]:
-                parts = [p.strip() for p in parts[0].split(',') if p.strip()]
-            images.extend(parts)
-
-    if files:
-        uploaded_files = files.getlist('images') or files.getlist('images[]')
-        for f in uploaded_files:
-            try:
-                url = upload_image(f)
-                if url:
-                    images.append(url)
-            except Exception as e:
-                print(f"[products] Image upload error: {e}")
-
-    # Deduplicate while preserving order
-    seen = set()
-    result = []
-    for img in images:
-        if img and img not in seen:
-            seen.add(img)
-            result.append(img)
-    return result
 
 
 class ProductViewSet(viewsets.ViewSet):
     """
     MongoDB-backed product endpoints.
-    GET  /api/products/              → list all
+    GET  /api/products/              → list all (supports ?category=, ?status=, ?search=)
+    GET  /api/products/count/        → count live and total products
     GET  /api/products/<id>/         → retrieve one
     POST /api/products/              → create
     PUT/PATCH /api/products/<id>/    → update
@@ -104,8 +75,56 @@ class ProductViewSet(viewsets.ViewSet):
         coll = get_products_collection()
         if coll is None:
             return Response([])
-        docs = [serialize_doc(d) for d in coll.find().sort('created_at', -1)]
+
+        query = {}
+        category = request.query_params.get('category')
+        if category and category.strip().lower() != 'all':
+            query['category'] = {'$regex': f"^{category.strip()}$", '$options': 'i'}
+
+        status_param = request.query_params.get('status')
+        if status_param:
+            query['status'] = {'$regex': f"^{status_param.strip()}$", '$options': 'i'}
+
+        search = request.query_params.get('search')
+        if search:
+            query['$or'] = [
+                {'title': {'$regex': search.strip(), '$options': 'i'}},
+                {'name': {'$regex': search.strip(), '$options': 'i'}},
+                {'description': {'$regex': search.strip(), '$options': 'i'}},
+            ]
+
+        docs = [serialize_doc(d) for d in coll.find(query).sort('created_at', -1)]
         return Response(docs)
+
+    # ── Count Endpoint ────────────────────────────────────────────────────────
+    @action(detail=False, methods=['get'], url_path='count')
+    def count(self, request):
+        """Returns total products count and live products count for dashboard/hero."""
+        coll = get_products_collection()
+        if coll is None:
+            return Response({'count': 0, 'total': 0, 'live_count': 0, 'categories_count': 0, 'categories': {}})
+
+        docs = list(coll.find())
+        total = len(docs)
+
+        # Count live products (status 'Live' or having live_url)
+        live_count = sum(
+            1 for d in docs
+            if (d.get('status', '').lower() == 'live' or bool(d.get('live_url')))
+        )
+
+        categories = {}
+        for d in docs:
+            cat = d.get('category', 'Uncategorized')
+            categories[cat] = categories.get(cat, 0) + 1
+
+        return Response({
+            'count': total,
+            'total': total,
+            'live_count': live_count,
+            'categories_count': len(categories),
+            'categories': categories,
+        })
 
     # ── Retrieve ──────────────────────────────────────────────────────────────
     def retrieve(self, request, pk=None):
@@ -130,29 +149,12 @@ class ProductViewSet(viewsets.ViewSet):
         data = request.data.copy()
         data['created_at'] = datetime.datetime.utcnow()
 
-        # Handle multiple image URLs and uploaded files
-        images = extract_images_from_request(data, request.FILES)
-
-        # Optional single image file upload
+        # Optional Cloudinary image upload
         if 'image' in request.FILES:
             try:
-                single_url = upload_image(request.FILES['image'])
-                data['image'] = single_url
-                data['cloudinary_image'] = single_url
-                if single_url not in images:
-                    images.insert(0, single_url)
+                data['image'] = upload_image(request.FILES['image'])
             except Exception as e:
                 return Response({'error': f'Image upload failed: {e}'}, status=500)
-
-        # Synchronize primary image and images array
-        if not data.get('image') and images:
-            data['image'] = images[0]
-            data['cloudinary_image'] = images[0]
-        elif (data.get('image') or data.get('cloudinary_image')) and not images:
-            primary = data.get('cloudinary_image') or data.get('image')
-            images = [primary]
-
-        data['images'] = images
 
         result = coll.insert_one(data)
         data['id'] = str(result.inserted_id)
@@ -174,32 +176,15 @@ class ProductViewSet(viewsets.ViewSet):
 
         data = {k: v for k, v in request.data.items() if k not in ('id', '_id')}
 
-        # Handle multiple images
-        new_images = extract_images_from_request(data, request.FILES)
-
         if 'image' in request.FILES:
             try:
                 if existing.get('image'):
                     pub_id = get_public_id_from_url(existing['image'])
                     if pub_id:
                         delete_image(pub_id)
-                single_url = upload_image(request.FILES['image'])
-                data['image'] = single_url
-                data['cloudinary_image'] = single_url
-                if single_url not in new_images:
-                    new_images.insert(0, single_url)
+                data['image'] = upload_image(request.FILES['image'])
             except Exception as e:
                 return Response({'error': f'Image handling failed: {e}'}, status=500)
-
-        if 'images' in request.data or 'image_urls' in request.data or (request.FILES and ('images' in request.FILES or 'images[]' in request.FILES)):
-            data['images'] = new_images
-            if new_images and not data.get('image'):
-                data['image'] = new_images[0]
-                data['cloudinary_image'] = new_images[0]
-        elif 'image' in data or 'cloudinary_image' in data:
-            primary = data.get('cloudinary_image') or data.get('image')
-            if primary and not data.get('images'):
-                data['images'] = [primary]
 
         coll.update_one(query, {'$set': data})
         updated = coll.find_one(query)
@@ -262,8 +247,7 @@ class ProductViewSet(viewsets.ViewSet):
                     'category': d.get('category', ''),
                     'path': f"/products/{d.get('id', '')}",
                     'price': str(d.get('price', '0.00')),
-                    'image': (d.get('images') and d.get('images')[0]) or d.get('cloudinary_image') or d.get('image') or '',
-                    'images': d.get('images', []),
+                    'image': d.get('cloudinary_image') or d.get('image') or '',
                 }
                 for d in docs
             ],
@@ -272,4 +256,3 @@ class ProductViewSet(viewsets.ViewSet):
     @action(detail=False, methods=['get'], url_path='navlink')
     def navlink_alias(self, request):
         return self.nav_links(request)
-

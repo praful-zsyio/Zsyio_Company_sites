@@ -44,7 +44,7 @@ const ProjectRow = ({ project, index, isOpen, onToggle, isLast }) => {
   }, [isOpen]);
 
   return (
-    <div className={`border-t border-[hsl(var(--lavender))] ${isLast ? "border-b" : ""}`}>
+    <div className={`border-t border-[hsl(var(--highlight))] ${isLast ? "border-b" : ""}`}>
 
       {/* ── Collapsed trigger row ── */}
       <button
@@ -79,7 +79,7 @@ const ProjectRow = ({ project, index, isOpen, onToggle, isLast }) => {
           <span className={`
             hidden lg:block font-Barlow text-[9px] tracking-[0.18em] uppercase font-medium
             border px-2.5 py-1 flex-shrink-0 transition-colors duration-300
-            border-[hsl(var(--lavender))]
+            border-[hsl(var(--highlight))]
             ${isOpen
               ? "text-[hsl(var(--textInversion))]"
               : "text-[hsl(var(--text))]/80"}
@@ -88,8 +88,8 @@ const ProjectRow = ({ project, index, isOpen, onToggle, isLast }) => {
           </span>
         )}
 
-        {/* Lavender accent line — grows on hover */}
-        <span className="hidden md:block h-px flex-shrink-0 w-0 group-hover:w-12 transition-all duration-300 bg-[hsl(var(--lavender))]" />
+        {/* Highlight accent line — grows on hover */}
+        <span className="hidden md:block h-px flex-shrink-0 w-0 group-hover:w-12 transition-all duration-300 bg-[hsl(var(--highlight))]" />
 
         {/* Toggle */}
         <span
@@ -98,7 +98,7 @@ const ProjectRow = ({ project, index, isOpen, onToggle, isLast }) => {
             transform: isOpen ? "rotate(45deg)" : "rotate(0deg)",
             transition: "transform 0.3s cubic-bezier(0.4,0,0.2,1)",
             display: "inline-block",
-            color: isOpen ? "hsl(var(--textInversion))" : "hsl(var(--lavender))",
+            color: isOpen ? "hsl(var(--textInversion))" : "hsl(var(--highlight))",
           }}
         >
           +
@@ -130,10 +130,10 @@ const ProjectRow = ({ project, index, isOpen, onToggle, isLast }) => {
                   </span>
                 </div>
               )}
-              {/* Lavender tint overlay */}
+              {/* Highlight tint overlay */}
               <div
                 className="absolute inset-0 pointer-events-none transition-opacity duration-500 group-hover:opacity-0"
-                style={{ background: "linear-gradient(135deg, hsla(var(--lavender)/0.18) 0%, transparent 60%)" }}
+                style={{ background: "linear-gradient(135deg, hsla(var(--highlight)/0.18) 0%, transparent 60%)" }}
               />
               <div className="absolute bottom-4 left-5 transition-opacity duration-500 group-hover:opacity-0 z-10">
                 <span className="font-Barlow text-[10px] tracking-[0.3em] uppercase font-medium opacity-30">
@@ -154,7 +154,7 @@ const ProjectRow = ({ project, index, isOpen, onToggle, isLast }) => {
                 lineHeight: 0.85,
                 right: "-0.04em",
                 top: "-0.08em",
-                color: "hsla(var(--lavender)/0.2)",
+                color: "hsla(var(--highlight)/0.2)",
                 letterSpacing: "-0.04em",
               }}
             >
@@ -164,7 +164,7 @@ const ProjectRow = ({ project, index, isOpen, onToggle, isLast }) => {
             {/* Meta + title + desc */}
             <div className="relative">
               <p className="font-Barlow text-[10px] tracking-[0.28em] uppercase font-medium mb-3"
-                style={{ color: "hsl(var(--lavender))" }}>
+                style={{ color: "hsl(var(--highlight))" }}>
                 {project.category || "Digital Product"}
                 {project.tags?.[0] ? ` — ${project.tags[0]}` : ""}
               </p>
@@ -180,13 +180,13 @@ const ProjectRow = ({ project, index, isOpen, onToggle, isLast }) => {
 
             {/* Tags + CTA */}
             <div className="relative border-t pt-5 flex flex-wrap items-end justify-between gap-4"
-              style={{ borderColor: "hsl(var(--lavender))" }}>
+              style={{ borderColor: "hsl(var(--highlight))" }}>
               <div className="flex flex-wrap gap-2">
                 {(project.tags || []).slice(0, 3).map((tag) => (
                   <span
                     key={tag}
                     className="font-Barlow text-[9px] tracking-[0.18em] uppercase border px-2.5 py-1"
-                    style={{ borderColor: "hsl(var(--lavender))", color: "white" }}
+                    style={{ borderColor: "hsl(var(--highlight))", color: "white" }}
                   >
                     {tag}
                   </span>
@@ -194,7 +194,7 @@ const ProjectRow = ({ project, index, isOpen, onToggle, isLast }) => {
               </div>
               <Link
                 to={`/projects/${project.id}`}
-                className="bg-[hsla(var(--lavender))] flex justify-center items-center font-bold text-[14px] md:text-[15px] text-[hsla(var(--base))] px-5 py-3 cursor-pointer rounded-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-lg shadow-[hsla(var(--lavender)/0.25)] w-max"
+                className="bg-[hsla(var(--highlight))] flex justify-center items-center font-bold text-[14px] md:text-[15px] text-[hsla(var(--base))] px-5 py-3 cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-lg shadow-[hsla(var(--highlight)/0.25)] w-max"
               >
                 View Project
               </Link>
@@ -239,7 +239,7 @@ const ProjectsGlimpse = () => {
         scrollTrigger: {
           trigger: headerRef.current,
           start: "top 82%",
-          toggleActions: "play none none reverse",
+          toggleActions: "play none none none",
         },
       });
 
@@ -254,7 +254,7 @@ const ProjectsGlimpse = () => {
         scrollTrigger: {
           trigger: rowsRef.current,
           start: "top 85%",
-          toggleActions: "play none none reverse",
+          toggleActions: "play none none none",
         },
       });
     }, sectionRef);
@@ -274,7 +274,7 @@ const ProjectsGlimpse = () => {
       {/* ── Section header — same as Services ── */}
       <div ref={headerRef} className="flex justify-between lg:items-center flex-col lg:flex-row mb-8 lg:mb-12">
         <div>
-          <h3 className="text-[11px] md:text-[12px] font-medium text-[hsla(var(--lavender)/0.8)] uppercase flex flex-wrap gap-3 md:gap-5 pl-1 mb-2">
+          <h3 className="text-[11px] md:text-[12px] font-medium text-[hsla(var(--highlight)/0.8)] uppercase flex flex-wrap gap-3 md:gap-5 pl-1 mb-2">
             <span className="tracking-[.2rem]">Selected </span>
             <span className="tracking-[.2rem]">Work</span>
           </h3>
@@ -283,7 +283,7 @@ const ProjectsGlimpse = () => {
           </h1>
         </div>
         <h6 className="text-[0.8rem] font-Barlow uppercase mt-3 lg:mt-0 max-w-xs text-right">
-          Real products. Real impact.<br />everything built as a <span className="text-[hsl(var(--lavender))] font-medium">masterpiece</span>.
+          Real products. Real impact.<br />everything built as a <span className="text-[hsl(var(--highlight))] font-medium">masterpiece</span>.
         </h6>
       </div>
 
@@ -306,7 +306,7 @@ const ProjectsGlimpse = () => {
       <div className="flex justify-center mb-16">
         <a
           href="/projects"
-          className="text-[0.8rem] font-Barlow uppercase tracking-[.15rem] text-[hsl(var(--lavender))] underline underline-offset-4 hover:opacity-70 transition-opacity"
+          className="text-[0.8rem] font-Barlow uppercase tracking-[.15rem] text-[hsl(var(--highlight))] underline underline-offset-4 hover:opacity-70 transition-opacity"
         >
           View All Projects
         </a>

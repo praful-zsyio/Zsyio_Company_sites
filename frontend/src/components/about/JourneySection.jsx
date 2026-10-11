@@ -89,11 +89,11 @@ const JourneySection = () => {
   }, { scope: comp });
 
   return (
-    <section ref={comp} className="border-b border-[hsla(var(--lavender)/0.4)] text-[hsl(var(--text))] bg-transparent">
-      <div className="journey-header px-6 md:px-14 py-12 border-b border-[hsla(var(--lavender)/0.4)]">
+    <section ref={comp} className="border-b border-[hsla(var(--highlight)/0.4)] text-[hsl(var(--text))] bg-transparent">
+      <div className="journey-header px-6 md:px-14 py-12 border-b border-[hsla(var(--highlight)/0.4)]">
         <div className="journey-header-fade flex items-end justify-between">
           <div>
-            <p className="text-[11px] tracking-[0.25em] uppercase font-medium mb-3 text-[hsl(var(--lavender))]">A Great Future</p>
+            <p className="text-[11px] tracking-[0.25em] uppercase font-medium mb-3 text-[hsl(var(--highlight))]">A Great Future</p>
             <h2
               style={{ fontFamily: "'Barlow Condensed', sans-serif", fontSize: 'clamp(3rem, 7vw, 7rem)', lineHeight: 0.9, letterSpacing: '-0.025em' }}
               className="font-black uppercase"
@@ -101,17 +101,17 @@ const JourneySection = () => {
               Our Journey.
             </h2>
           </div>
-          <span className="text-[11px] tracking-[0.2em] uppercase text-[hsl(var(--lavender))] opacity-60 font-medium hidden md:block">OCT '25 — FUTURE</span>
+          <span className="text-[11px] tracking-[0.2em] uppercase text-[hsl(var(--highlight))] opacity-60 font-medium hidden md:block">OCT '25 — FUTURE</span>
         </div>
       </div>
 
       <div className="journey-list">
         {TIMELINE.map((t, i) => (
-          <div key={t.year} className="journey-row border-b border-[hsla(var(--lavender)/0.4)] last:border-b-0 grid grid-cols-[160px_1fr] md:grid-cols-[280px_1fr] group hover:bg-[hsla(var(--lavender)/0.03)] transition-colors">
-            <div className="py-10 px-6 md:px-12 border-r border-[hsla(var(--lavender)/0.4)] flex flex-col items-start justify-center">
+          <div key={t.year} className="journey-row border-b border-[hsla(var(--highlight)/0.4)] last:border-b-0 grid grid-cols-[160px_1fr] md:grid-cols-[280px_1fr] group hover:bg-[hsla(var(--highlight)/0.03)] transition-colors">
+            <div className="py-10 px-6 md:px-12 border-r border-[hsla(var(--highlight)/0.4)] flex flex-col items-start justify-center">
               <span
                 style={{ fontFamily: "'Barlow Condensed', sans-serif" }}
-                className="text-2xl md:text-5xl font-black text-[hsl(var(--lavender))] opacity-40 group-hover:opacity-80 transition-opacity whitespace-nowrap"
+                className="text-2xl md:text-5xl font-black text-[hsl(var(--highlight))] opacity-40 group-hover:opacity-80 transition-opacity whitespace-nowrap"
               >
                 {t.year}
               </span>

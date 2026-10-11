@@ -50,7 +50,7 @@ export default function ProjectDetailPage() {
           </p>
           <Link
             to="/projects"
-            className="font-barlow text-[11px] tracking-[0.2em] uppercase font-bold border-b border-[hsl(var(--lavender))] text-[hsl(var(--lavender))] pb-0.5 hover:text-[hsl(var(--text))] transition-colors"
+            className="font-barlow text-[11px] tracking-[0.2em] uppercase font-bold border-b border-[hsl(var(--highlight))] text-[hsl(var(--highlight))] pb-0.5 hover:text-[hsl(var(--text))] transition-colors"
           >
             &larr; Back to Archive
           </Link>
@@ -70,6 +70,8 @@ export default function ProjectDetailPage() {
     image,
     img,
     thumbnail,
+    images,
+    gallery,
     live_url,
     liveUrl,
     duration = "3 Months",
@@ -85,6 +87,12 @@ export default function ProjectDetailPage() {
   const finalLiveUrl = live_url || liveUrl;
   const finalOutcome = outcome || highlight || "Successfully Delivered";
   
+  const projectImages = Array.isArray(images) && images.length > 0 
+    ? images 
+    : (Array.isArray(gallery) && gallery.length > 0 
+        ? gallery 
+        : (finalImage ? [finalImage] : []));
+
   // Deliverables mapping
   let deliverables = project.deliverables || [];
   if (typeof deliverables === "string") {
@@ -137,13 +145,13 @@ export default function ProjectDetailPage() {
 
       <ProjectTestimonial testimonial={testimonial} finalOutcome={finalOutcome} />
 
-      <ProjectGallery finalImage={finalImage} title={title} />
+      <ProjectGallery images={projectImages} title={title} />
 
       {/* ─── FOOTER STRIP ────────────────────────────────────────────────────── */}
       <footer className="border-t border-[hsl(var(--surface1))] px-6 md:px-14 py-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <Link
           to="/projects"
-          className="font-barlow text-[11px] tracking-[0.2em] uppercase font-bold text-[hsl(var(--text))] hover:text-[hsl(var(--lavender))] transition-colors"
+          className="font-barlow text-[11px] tracking-[0.2em] uppercase font-bold text-[hsl(var(--text))] hover:text-[hsl(var(--highlight))] transition-colors"
         >
           &larr; Back to All Projects
         </Link>

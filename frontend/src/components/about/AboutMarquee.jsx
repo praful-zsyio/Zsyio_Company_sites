@@ -67,9 +67,9 @@ const AboutMarquee = ({
         overflow: 'hidden',
         display: 'flex',
         alignItems: 'center',
-        background: 'linear-gradient(90deg, hsla(var(--lavender)/0.08) 0%, hsla(var(--lavender)/0.04) 50%, hsla(var(--lavender)/0.08) 100%)',
-        borderTop: '1px solid hsla(var(--lavender))',
-        borderBottom: '1px solid hsla(var(--lavender))',
+        background: 'linear-gradient(90deg, hsla(var(--highlight)/0.08) 0%, hsla(var(--highlight)/0.04) 50%, hsla(var(--highlight)/0.08) 100%)',
+        borderTop: '1px solid hsla(var(--highlight))',
+        borderBottom: '1px solid hsla(var(--highlight))',
         position: 'relative',
       }}
     >
@@ -94,7 +94,7 @@ const AboutMarquee = ({
                 fontWeight: 600,
                 letterSpacing: '0.08em',
                 textTransform: 'uppercase',
-                color: 'hsla(var(--lavender)/0.85)',
+                color: 'hsla(var(--highlight)/0.85)',
                 padding: '0 3rem',
                 fontFamily: 'var(--font-barlow, "Barlow", sans-serif)',
               }}

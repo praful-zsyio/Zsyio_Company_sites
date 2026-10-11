@@ -52,7 +52,7 @@ class ServiceViewSet(ReloadMixin, viewsets.ModelViewSet):
     @action(detail=False, methods=['get'])
     def combined_list(self, request):
         db = get_mongo_db()
-        if not db: return Response({"services": [], "technologies": []})
+        if db is None: return Response({"services": [], "technologies": []})
         
         services = [serialize_mongo_doc(s) for s in db['services'].find()]
         techs = [serialize_mongo_doc(t) for t in db['technologies'].find()]

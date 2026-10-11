@@ -8,11 +8,9 @@ class Project(models.Model):
     
     # Image storage via Cloudinary (configured in settings.py)
     image = models.ImageField(upload_to='projects/', blank=True, null=True, help_text="Main project image")
-    images = models.JSONField(default=list, blank=True, help_text="List of project image URLs")
     
     # Tech Stack & Tags
     tech_stack = models.JSONField(default=list, help_text="List of technologies used (e.g. ['React', 'Django'])")
-
     tags = models.JSONField(default=list, help_text="List of tags (e.g. ['Featured', 'Web'])")
     
     # Links

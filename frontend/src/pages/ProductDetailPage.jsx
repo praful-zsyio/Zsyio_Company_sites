@@ -6,6 +6,7 @@ import { getProductById } from "../services/api";
 import ProductDetailHero from "../components/products/ProductDetailHero";
 import ProductDetailFeatureList from "../components/products/ProductDetailFeatureList";
 import ProductDetailSidebarBlock from "../components/products/ProductDetailSidebarBlock";
+import ProjectGallery from "../components/projects/ProjectGallery";
 
 // ─── PRODUCT DETAIL PAGE ──────────────────────────────────────────────────────
 
@@ -42,7 +43,7 @@ export default function ProductDetailPage() {
           </p>
           <Link
             to="/products"
-            className="font-barlow text-[11px] tracking-[0.2em] uppercase font-bold border-b border-[hsl(var(--lavender))] text-[hsl(var(--lavender))] pb-0.5 hover:text-[hsl(var(--text))] transition-colors"
+            className="font-barlow text-[11px] tracking-[0.2em] uppercase font-bold border-b border-[hsl(var(--highlight))] text-[hsl(var(--highlight))] pb-0.5 hover:text-[hsl(var(--text))] transition-colors"
           >
             ← Back to Products
           </Link>
@@ -69,12 +70,17 @@ export default function ProductDetailPage() {
     ? product.tech_stack
     : [];
   const image = product.image || product.cloudinary_image || null;
+  const images = product.images || product.gallery || null;
   const liveUrl = product.live_url || product.liveUrl || null;
   const price = product.price != null ? product.price : null;
   const accent = product.accent || "hsl(259, 72%, 70%)";
   const createdAt = product.created_at
     ? new Date(product.created_at).getFullYear()
     : null;
+
+  const productImages = Array.isArray(images) && images.length > 0
+    ? images
+    : (image ? [image] : []);
 
   const statusStyles = {
     Live: "text-green-500 border-green-500",
@@ -103,13 +109,13 @@ export default function ProductDetailPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="mx-6 md:mx-12 lg:mx-20 mt-10 border border-[hsl(var(--surface1))] overflow-hidden bg-[hsl(var(--mantle))]"
-          style={{ height: "clamp(280px, 45vw, 560px)" }}
+          className="mx-6 md:mx-12 lg:mx-20 mt-10 p-4 md:p-8 flex items-center justify-center overflow-hidden bg-transparent"
+          style={{ height: "clamp(250px, 40vw, 500px)" }}
         >
           <img
             src={image}
             alt={name}
-            className="w-full h-full object-cover opacity-80 hover:opacity-100 hover:scale-[1.02] transition-all duration-700"
+            className="max-w-full max-h-full object-contain opacity-80 hover:opacity-100 hover:scale-[1.02] transition-all duration-700"
           />
         </motion.div>
       )}
@@ -227,7 +233,7 @@ export default function ProductDetailPage() {
               rel="noopener noreferrer"
               className={`font-barlow text-[11px] tracking-[0.2em] uppercase font-bold px-6 py-3 text-center transition-colors duration-300 ${
                 liveUrl
-                  ? "bg-[hsl(var(--text))] text-[hsl(var(--base))] hover:bg-[hsl(var(--lavender))]"
+                  ? "bg-[hsl(var(--text))] text-[hsl(var(--base))] hover:bg-[hsl(var(--highlight))]"
                   : "bg-[hsl(var(--surface1))] text-[hsl(var(--subtext1))] cursor-not-allowed opacity-50"
               }`}
             >
@@ -235,7 +241,7 @@ export default function ProductDetailPage() {
             </a>
             <Link
               to="/contact"
-              className="font-barlow text-[11px] tracking-[0.2em] uppercase font-bold border border-[hsl(var(--surface1))] text-[hsl(var(--text))] px-6 py-3 hover:border-[hsl(var(--lavender))] hover:text-[hsl(var(--lavender))] transition-colors duration-300 text-center"
+              className="font-barlow text-[11px] tracking-[0.2em] uppercase font-bold border border-[hsl(var(--surface1))] text-[hsl(var(--text))] px-6 py-3 hover:border-[hsl(var(--highlight))] hover:text-[hsl(var(--highlight))] transition-colors duration-300 text-center"
             >
               Get in Touch →
             </Link>
@@ -243,11 +249,13 @@ export default function ProductDetailPage() {
         </aside>
       </section>
 
+      <ProjectGallery images={productImages} title={name} />
+
       {/* ── FOOTER STRIP ──────────────────────────────────────────────────── */}
       <footer className="border-t border-[hsl(var(--surface1))] px-6 md:px-14 py-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
         <Link
           to="/products"
-          className="font-barlow text-[11px] tracking-[0.2em] uppercase font-bold text-[hsl(var(--text))] hover:text-[hsl(var(--lavender))] transition-colors"
+          className="font-barlow text-[11px] tracking-[0.2em] uppercase font-bold text-[hsl(var(--text))] hover:text-[hsl(var(--highlight))] transition-colors"
         >
           ← Back to All Products
         </Link>
@@ -257,7 +265,7 @@ export default function ProductDetailPage() {
           rel="noopener noreferrer"
           className={`font-barlow text-[11px] tracking-[0.2em] uppercase font-bold transition-colors ${
             liveUrl
-              ? "text-[hsl(var(--lavender))] hover:text-[hsl(var(--text))]"
+              ? "text-[hsl(var(--highlight))] hover:text-[hsl(var(--text))]"
               : "text-[hsl(var(--subtext1))] cursor-not-allowed opacity-50"
           }`}
         >

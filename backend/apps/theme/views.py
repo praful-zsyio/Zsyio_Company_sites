@@ -16,7 +16,7 @@ class UserThemeView(APIView):
 
     def get(self, request):
         db = get_mongo_db()
-        if not db: return Response({"error": "DB error"}, status=500)
+        if db is None: return Response({"error": "DB error"}, status=500)
         
         user_id = str(request.user.id) if request.user.is_authenticated else None
         session_id = request.session.session_key
@@ -45,7 +45,7 @@ class UserThemeView(APIView):
 
     def post(self, request):
         db = get_mongo_db()
-        if not db: return Response({"error": "DB error"}, status=500)
+        if db is None: return Response({"error": "DB error"}, status=500)
         
         user_id = str(request.user.id) if request.user.is_authenticated else None
         session_id = request.session.session_key or "guest"
@@ -73,7 +73,7 @@ class GlobalThemeView(APIView):
 
     def get(self, request):
         db = get_mongo_db()
-        if not db: return Response({"error": "DB error"}, status=500)
+        if db is None: return Response({"error": "DB error"}, status=500)
         
         config = db['global_theme_config'].find_one({"type": "main"})
         if not config:
@@ -94,7 +94,7 @@ class GlobalThemeView(APIView):
 
     def post(self, request):
         db = get_mongo_db()
-        if not db: return Response(status=500)
+        if db is None: return Response(status=500)
         
         data = request.data.copy()
         db['global_theme_config'].update_one({"type": "main"}, {"$set": data}, upsert=True)

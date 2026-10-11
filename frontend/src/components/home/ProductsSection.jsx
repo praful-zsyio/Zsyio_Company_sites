@@ -55,9 +55,9 @@ const ProductsSection = () => {
   return (
     <section ref={sectionRef} className='mt-16 lg:mt-24 px-6 md:px-10 w-full'>
       {/* ── Section header ── */}
-      <div className='flex justify-between lg:items-center flex-col lg:flex-row'>
+      <div className='flex justify-between lg:items-center flex-col lg:flex-row pb-4'>
         <div>
-          <h3 ref={tagRef} className='text-[11px] md:text-[12px] font-medium text-[hsla(var(--lavender)/0.8)] uppercase flex flex-wrap gap-3 md:gap-5 pl-1 mb-2'>
+          <h3 ref={tagRef} className='text-[11px] md:text-[12px] font-medium text-[hsla(var(--highlight)/0.8)] uppercase flex flex-wrap gap-3 md:gap-5 pl-1 mb-2'>
             <span className='tracking-[.2rem]'>Digital </span>
             <span className='tracking-[.2rem]'>Goods</span>
           </h3>
@@ -65,16 +65,13 @@ const ProductsSection = () => {
             Products
           </h1>
         </div>
-      <div className='hidden md:flex w-[80%] md:w-[60%] lg:w-[40%] mx-auto border-x border-[hsl(var(--lavender))] my-8 lg:my-2 h-32 md:h-32 relative items-center justify-center overflow-hidden'>
-        <ParticleText text="ZSYIO" />
-      </div>
         <h6 ref={subRef} className='text-[0.8rem] font-Barlow uppercase mt-3 lg:mt-0 max-w-xs text-right'>
-          Tools to build faster.<br />Everything designed as a <span className='text-[hsl(var(--lavender))] font-medium'>masterpiece</span>.
+          Tools to build faster.<br />Everything designed as a <span className='text-[hsl(var(--highlight))] font-medium'>masterpiece</span>.
         </h6>
       </div>
 
       {/* ── Products List ── */}
-      <div ref={cardsRef} className='flex flex-col mb-12 border-b border-[hsl(var(--lavender))]'>
+      <div ref={cardsRef} className='flex flex-col mb-12 border-b border-[hsl(var(--highlight))]'>
         {products.map((product) => {
           const id = product.id || product._id;
           const title = product.name || product.title || "Untitled";
@@ -84,7 +81,7 @@ const ProductsSection = () => {
           const image = product.image || product.cloudinary_image || null;
 
           return (
-            <div key={id} className='group relative flex flex-col md:flex-row items-center border-t border-[hsl(var(--lavender))] py-6 md:py-8 gap-6 md:gap-12 transition-colors duration-500 hover:bg-[hsl(var(--lavender))]/5'>
+            <div key={id} className='group relative flex flex-col md:flex-row items-center border-t border-[hsl(var(--highlight))] py-6 md:py-8 gap-6 md:gap-12 transition-colors duration-500 hover:bg-[hsl(var(--highlight))]/5'>
               {/* Image area */}
               <div className='relative w-full md:w-1/3 h-48 md:h-56 shrink-0'>
                 <div className='w-full h-full relative overflow-hidden rounded-[1.5rem] bg-[hsl(var(--mantle))]'>
@@ -99,13 +96,13 @@ const ProductsSection = () => {
                       No Image
                     </div>
                   )}
-                  <div className='absolute inset-0 pointer-events-none transition-opacity duration-500 group-hover:opacity-0 bg-gradient-to-br from-[hsla(var(--lavender)/0.18)] to-transparent' />
+                  <div className='absolute inset-0 pointer-events-none transition-opacity duration-500 group-hover:opacity-0 bg-gradient-to-br from-[hsla(var(--highlight)/0.18)] to-transparent' />
                 </div>
               </div>
               
               {/* Details area */}
               <div className='flex-1 flex flex-col justify-center w-full'>
-                <p className='font-Barlow text-[10px] tracking-[0.2em] uppercase font-medium text-[hsl(var(--lavender))] mb-2 md:mb-4'>
+                <p className='font-Barlow text-[10px] tracking-[0.2em] uppercase font-medium text-[hsl(var(--highlight))] mb-2 md:mb-4'>
                   {category}
                 </p>
                 <h3 className='font-Barlow text-2xl md:text-4xl font-black uppercase tracking-tight mb-3 text-[hsl(var(--text))]'>
@@ -115,14 +112,14 @@ const ProductsSection = () => {
                   {description}
                 </p>
                 
-                <div className='w-full border-t border-[hsl(var(--lavender))] py-3 mb-6'>
-                  <span className='font-Barlow text-[14px] md:text-[16px] tracking-[0.1em] font-bold text-[hsl(var(--lavender))]'>
+                <div className='w-full border-t border-[hsl(var(--highlight))] py-3 mb-6'>
+                  <span className='font-Barlow text-[14px] md:text-[16px] tracking-[0.1em] font-bold text-[hsl(var(--highlight))]'>
                     {price !== "Contact Us" && !isNaN(Number(price)) ? `₹${price}` : price}
                   </span>
                 </div>
                 
                 <div>
-                  <Link to={`/products/${id}`} className='inline-flex bg-[hsla(var(--lavender))] justify-center items-center font-bold text-[14px] md:text-[15px] text-[hsla(var(--base))] px-5 py-3 cursor-pointer rounded-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-lg shadow-[hsla(var(--lavender)/0.25)]'>
+                  <Link to={`/products/${id}`} className='inline-flex bg-[hsla(var(--highlight))] justify-center items-center font-bold text-[14px] md:text-[15px] text-[hsla(var(--base))] px-5 py-3 cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-lg shadow-[hsla(var(--highlight)/0.25)]'>
                     View Details
                   </Link>
                 </div>
@@ -136,7 +133,7 @@ const ProductsSection = () => {
       <div ref={linkRef} className='flex justify-center mb-16'>
         <a
           href='/products'
-          className='text-[0.8rem] font-Barlow uppercase tracking-[.15rem] text-[hsl(var(--lavender))] underline underline-offset-4 hover:opacity-70 transition-opacity'
+          className='text-[0.8rem] font-Barlow uppercase tracking-[.15rem] text-[hsl(var(--highlight))] underline underline-offset-4 hover:opacity-70 transition-opacity'
         >
           Explore Store
         </a>

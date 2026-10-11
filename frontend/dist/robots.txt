@@ -7,3 +7,5 @@ Disallow:
 
 User-agent: GPTBot
 Disallow:
+
+Sitemap: https://zsyio.com/sitemap.xml

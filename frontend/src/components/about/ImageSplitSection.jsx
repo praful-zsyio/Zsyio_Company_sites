@@ -24,9 +24,9 @@ const ImageSplitSection = () => {
   }, { scope: comp });
 
   return (
-    <section ref={comp} className="border-b border-[hsla(var(--lavender)/0.4)] grid grid-cols-1 md:grid-cols-2 text-[hsl(var(--text))] bg-transparent">
+    <section ref={comp} className="border-b border-[hsla(var(--highlight)/0.4)] grid grid-cols-1 md:grid-cols-2 text-[hsl(var(--text))] bg-transparent">
       {/* Left Image */}
-      <div className="split-image-container relative overflow-hidden border-b md:border-b-0 md:border-r border-[hsla(var(--lavender)/0.4)] min-h-[400px] md:min-h-[560px]">
+      <div className="split-image-container relative overflow-hidden border-b md:border-b-0 md:border-r border-[hsla(var(--highlight)/0.4)] min-h-[400px] md:min-h-[560px]">
         <img
           src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=900&h=700&fit=crop&auto=format"
           alt="Team Collaboration"
@@ -34,8 +34,8 @@ const ImageSplitSection = () => {
           style={{ filter: 'grayscale(100%) contrast(1.1)' }}
         />
         {/* Overlay caption */}
-        <div className="absolute bottom-0 left-0 right-0 border-t border-[hsla(var(--lavender)/0.4)] bg-[hsl(var(--base))] px-6 py-4">
-          <p className="text-[10px] tracking-[0.25em] uppercase font-bold text-[hsl(var(--lavender))]">Our Culture</p>
+        <div className="absolute bottom-0 left-0 right-0 border-t border-[hsla(var(--highlight)/0.4)] bg-[hsl(var(--base))] px-6 py-4">
+          <p className="text-[10px] tracking-[0.25em] uppercase font-bold text-[hsl(var(--highlight))]">Our Culture</p>
         </div>
       </div>
 
@@ -48,8 +48,8 @@ const ImageSplitSection = () => {
           style={{ filter: 'grayscale(100%) contrast(1.1)' }}
         />
         {/* Overlay caption */}
-        <div className="absolute bottom-0 left-0 right-0 border-t border-[hsla(var(--lavender)/0.4)] bg-[hsl(var(--base))] px-6 py-4">
-          <p className="text-[10px] tracking-[0.25em] uppercase font-bold text-[hsl(var(--lavender))]">Innovation</p>
+        <div className="absolute bottom-0 left-0 right-0 border-t border-[hsla(var(--highlight)/0.4)] bg-[hsl(var(--base))] px-6 py-4">
+          <p className="text-[10px] tracking-[0.25em] uppercase font-bold text-[hsl(var(--highlight))]">Innovation</p>
         </div>
       </div>
     </section>

@@ -61,7 +61,7 @@ const HeroSection = () => {
 
       {/* ── Left: text content ── */}
       <div className='flex flex-col justify-center py-12 lg:py-0 w-full lg:w-2/5 lg:pr-6'>
-        <h3 ref={tagRef} className='text-[11px] md:text-[12px] font-medium text-[hsla(var(--lavender)/0.8)] uppercase flex flex-wrap gap-3 md:gap-5 pl-1'>
+        <h3 ref={tagRef} className='text-[11px] md:text-[12px] font-medium text-[hsla(var(--highlight)/0.8)] uppercase flex flex-wrap gap-3 md:gap-5 pl-1'>
           <span className='tracking-[.2em]'>IT Consultancy</span>
           <span className='tracking-[.2em]'>Services</span>
           <span className='tracking-[.2em]'>Products</span>
@@ -73,7 +73,7 @@ const HeroSection = () => {
           style={{ fontSize: 'clamp(3rem, 8vw, 7.8rem)' }}
         >
           Crafting the{' '}
-          <span className='text-[hsla(var(--lavender))]'>Current</span>
+          <span className='text-[hsla(var(--highlight))]'>Current</span>
         </h1>
 
         <p ref={paraRef} className='mt-6 md:mt-8 font-serif text-base md:text-lg text-[hsla(var(--text)/0.8)] max-w-lg'>
@@ -84,12 +84,12 @@ const HeroSection = () => {
 
         <div ref={btnRef} className='flex flex-wrap gap-4 mt-6 md:mt-8'>
           <a href='/services'>
-            <button className='bg-[hsla(var(--lavender))] flex justify-center items-center font-bold text-[15px] md:text-[16px] text-[hsla(var(--base))] px-5 py-3 cursor-pointer rounded-xl'>
+            <button className='bg-[hsla(var(--highlight))] flex justify-center items-center font-bold text-[15px] md:text-[16px] text-[hsla(var(--base))] px-5 py-3 cursor-pointer'>
               Explore Our Services
             </button>
           </a>
           <a href='/contact'>
-            <button className='flex justify-center items-center font-bold text-[15px] md:text-[16px] text-[hsla(var(--lavender))] px-3 py-3 underline cursor-pointer'>
+            <button className='flex justify-center items-center font-bold text-[15px] md:text-[16px] text-[hsla(var(--highlight))] px-3 py-3 underline cursor-pointer'>
               Contact Us
             </button>
           </a>
@@ -103,7 +103,7 @@ const HeroSection = () => {
           hidden lg:flex
           flex-1 h-auto
           relative
-          border-l border-[hsla(var(--lavender))]
+          border-l border-[hsla(var(--highlight))]
         '
       >
         <ParticleText text='ZSYIO' />

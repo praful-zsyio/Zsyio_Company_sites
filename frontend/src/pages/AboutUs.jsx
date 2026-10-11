@@ -18,11 +18,18 @@ import JourneySection from "../components/about/JourneySection";
 import PhilosophySection from "../components/about/PhilosophySection";
 import CertificationsSection from "../components/about/CertificationsSection";
 import FounderSection from "../components/about/FounderSection";
+import { usePageSEO } from "../utils/seo";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const AboutUs = () => {
   const comp = useRef(null);
+
+  usePageSEO({
+    title: "About Us | Engineering Excellence & Vision",
+    description: "Learn about Zsyio's mission, engineering principles, leadership, and our commitment to building mission-critical enterprise systems.",
+    url: "/about",
+  });
 
   useGSAP(
     () => {
@@ -100,7 +107,7 @@ const AboutUs = () => {
         dark={true}
         speed={55}
       />
-      <FounderSection />
+      {/* <FounderSection /> */}
       <CtaSection />
     </div>
   );

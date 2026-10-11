@@ -3,10 +3,10 @@ import axios from 'axios';
 export const ACCESS_TOKEN = 'access_token';
 export const REFRESH_TOKEN = 'refresh_token';
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://zsyio-company-sites-scm2.onrender.com/api/';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 
+    (import.meta.env.PROD ? 'https://zsyio-company-1-4qcq.onrender.com/api/' : 'http://127.0.0.1:8000/api/');
 
 const api = axios.create({
-
     baseURL: API_BASE_URL,
     withCredentials: true,  // Send cookies/auth headers cross-origin (required for CORS with credentials)
     headers: {
@@ -80,6 +80,14 @@ export const getCart = () => api.get('cart/');
 export const addToCart = (serviceSlug, quantity) => api.post('cart/add_item/', { service_slug: serviceSlug, quantity });
 export const submitContact = (data) => api.post('contact/', data, { skipAuth: true });
 
+// Careers API (public)
+export const getCareerJobs = () => api.get('careers/jobs/', { skipAuth: true });
+export const applyForJob = (formData) =>
+    api.post('careers/apply/', formData, {
+        skipAuth: true,
+        headers: { 'Content-Type': 'multipart/form-data' },
+    });
+
 export const submitPrivacyConsent = (status) => api.post('config/privacy-consent/', { status });
 
 // ===== NEW BACKEND INTEGRATIONS =====
@@ -150,6 +158,15 @@ export const createProduct = (data) => api.post('products/', data);
 export const updateProduct = (id, data) => api.put(`products/${id}/`, data);
 export const deleteProduct = (id) => api.delete(`products/${id}/`);
 export const getProductNavLinks = () => api.get('products/nav-links/');
+export const getProductCount = () => api.get('products/count/', { skipAuth: true });
+
+// Insights & Case Studies API
+export const getInsights = (params = {}) => api.get('insights/', { params, skipAuth: true });
+export const getInsightCategories = () => api.get('insights/categories/', { skipAuth: true });
+export const getInsightBySlug = (slug) => api.get(`insights/${slug}/`, { skipAuth: true });
+export const createInsight = (data) => api.post('insights/', data);
+export const updateInsight = (idOrSlug, data) => api.patch(`insights/${idOrSlug}/`, data);
+export const deleteInsight = (idOrSlug) => api.delete(`insights/${idOrSlug}/`);
 
 export default api;
 

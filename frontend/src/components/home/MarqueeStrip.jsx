@@ -2,18 +2,18 @@ import React, { useRef, useEffect } from 'react';
 import gsap from 'gsap';
 
 const MARQUEE_ITEMS = [
-  '✦ Digital Transformation',
-  '✦ AI & ML Innovation',
-  '✦ Web & Mobile Excellence',
-  '✦ Cloud Solutions',
-  '✦ Data Analytics',
-  '✦ Cybersecurity',
-  '✦ UI/UX Design',
-  '✦ E-commerce Development',
-  '✦ IoT Solutions',
-  '✦ DevOps Solutions',
-  '✦ Quality Assurance',
-  '✦ Blockchain Development',
+  'Digital Transformation',
+  'AI & ML Innovation',
+  'Web & Mobile Excellence',
+  'Cloud Solutions',
+  'Data Analytics',
+  'Cybersecurity',
+  'UI/UX Design',
+  'E-commerce Development',
+  'IoT Solutions',
+  'DevOps Solutions',
+  'Quality Assurance',
+  'Blockchain Development',
 ];
 
 const MarqueeStrip = () => {
@@ -36,7 +36,7 @@ const MarqueeStrip = () => {
 
     tweenRef.current = gsap.to([track, clone], {
       x: `-=${totalWidth}`,
-      duration: 28,
+      duration: totalWidth / 45,
       ease: 'none',
       repeat: -1,
       modifiers: {
@@ -78,9 +78,9 @@ const MarqueeStrip = () => {
         overflow: 'hidden',
         display: 'flex',
         alignItems: 'center',
-        background: 'linear-gradient(90deg, hsla(var(--lavender)/0.08) 0%, hsla(var(--lavender)/0.04) 50%, hsla(var(--lavender)/0.08) 100%)',
-        borderTop: '1px solid hsla(var(--lavender))',
-        borderBottom: '1px solid hsla(var(--lavender))',
+        background: 'linear-gradient(90deg, hsla(var(--highlight)/0.08) 0%, hsla(var(--highlight)/0.04) 50%, hsla(var(--highlight)/0.08) 100%)',
+        borderTop: '1px solid hsla(var(--highlight))',
+        borderBottom: '1px solid hsla(var(--highlight))',
         position: 'relative',
       }}
     >
@@ -94,7 +94,7 @@ const MarqueeStrip = () => {
           willChange: 'transform',
         }}
       >
-        {MARQUEE_ITEMS.map((text, i) => (
+        {Array(10).fill(MARQUEE_ITEMS).flat().map((text, i) => (
           <span
             key={i}
             style={{
@@ -104,7 +104,7 @@ const MarqueeStrip = () => {
               fontWeight: 600,
               letterSpacing: '0.08em',
               textTransform: 'uppercase',
-              color: 'hsla(var(--lavender)/0.85)',
+              color: 'hsla(var(--highlight)/0.85)',
               padding: '0 3rem',
               fontFamily: 'var(--font-barlow, "Barlow", sans-serif)',
             }}

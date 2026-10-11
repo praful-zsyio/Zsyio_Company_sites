@@ -55,12 +55,12 @@ const NewsSection = () => {
   ];
 
   return (
-    <section ref={comp} className="border-b border-[hsla(var(--lavender)/0.4)] bg-transparent text-[hsl(var(--text))] py-20">
+    <section ref={comp} className="border-b border-[hsla(var(--highlight)/0.4)] bg-transparent text-[hsl(var(--text))] py-20">
       <div className="container mx-auto px-6 md:px-14 max-w-6xl">
         {/* Header */}
-        <div className="news-header flex flex-col md:flex-row md:items-end justify-between border-b border-[hsla(var(--lavender)/0.4)] pb-8 mb-12">
+        <div className="news-header flex flex-col md:flex-row md:items-end justify-between border-b border-[hsla(var(--highlight)/0.4)] pb-8 mb-12">
           <div>
-            <p className="text-[11px] tracking-[0.25em] uppercase font-medium mb-3 text-[hsl(var(--lavender))]">
+            <p className="text-[11px] tracking-[0.25em] uppercase font-medium mb-3 text-[hsl(var(--highlight))]">
               Latest Updates
             </p>
             <h2
@@ -75,7 +75,7 @@ const NewsSection = () => {
               News &<br />Insights.
             </h2>
           </div>
-          <a href="#" className="mt-6 md:mt-0 text-xs tracking-[0.15em] uppercase font-bold text-[hsl(var(--lavender))] border-b border-[hsla(var(--lavender)/0.4)] hover:border-[hsl(var(--lavender))] hover:text-white transition-colors pb-1">
+          <a href="#" className="mt-6 md:mt-0 text-xs tracking-[0.15em] uppercase font-bold text-[hsl(var(--highlight))] border-b border-[hsla(var(--highlight)/0.4)] hover:border-[hsl(var(--highlight))] hover:text-white transition-colors pb-1">
             View All Articles
           </a>
         </div>
@@ -85,7 +85,7 @@ const NewsSection = () => {
           {newsData.map((item) => (
             <article key={item.id} className="news-item group cursor-pointer flex flex-col h-full">
               {/* Image Container */}
-              <div className="relative w-full aspect-[4/3] overflow-hidden border border-[hsla(var(--lavender)/0.4)] mb-6">
+              <div className="relative w-full aspect-[4/3] overflow-hidden border border-[hsla(var(--highlight)/0.4)] mb-6">
                 <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
                 <img 
                   src={item.image} 
@@ -95,16 +95,16 @@ const NewsSection = () => {
               </div>
 
               {/* Meta */}
-              <div className="flex items-center gap-4 mb-4 text-[10px] tracking-[0.2em] uppercase font-medium text-[hsl(var(--lavender))] opacity-80">
+              <div className="flex items-center gap-4 mb-4 text-[10px] tracking-[0.2em] uppercase font-medium text-[hsl(var(--highlight))] opacity-80">
                 <span>{item.category}</span>
-                <span className="w-1 h-1 rounded-full bg-[hsl(var(--lavender))] opacity-50" />
+                <span className="w-1 h-1 rounded-full bg-[hsl(var(--highlight))] opacity-50" />
                 <span>{item.date}</span>
               </div>
 
               {/* Content */}
               <h3 
                 style={{ fontFamily: "'Barlow Condensed', sans-serif" }}
-                className="text-2xl md:text-3xl font-bold uppercase tracking-tight mb-4 group-hover:text-[hsl(var(--lavender))] transition-colors"
+                className="text-2xl md:text-3xl font-bold uppercase tracking-tight mb-4 group-hover:text-[hsl(var(--highlight))] transition-colors"
               >
                 {item.title}
               </h3>

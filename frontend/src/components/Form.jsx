@@ -7,20 +7,14 @@ const OFFICES = [
   {
     city: 'Indore',
     label: 'HQ',
-    address: ['123 Innovation Drive', 'Tech Park, Indore 452010', 'Madhya Pradesh, India'],
+    address: ['Retimandi Square, Rajendra nagar, Indore'],
     email: 'indore@zsyio.com',
     phone: '+91 917 918 2729'
   },
-  {
-    city: 'Mumbai',
-    label: 'Studio',
-    address: ['45 Creative Block', 'Bandra West, Mumbai 400050', 'Maharashtra, India'],
-    email: 'mumbai@zsyio.com',
-    phone: '+91 987 654 3210'
-  }
+
 ];
 
-const INPUT_CLASS = "w-full bg-transparent border-b border-[hsl(var(--surface1))] focus:border-[hsl(var(--lavender))] focus:outline-none py-3 text-lg md:text-xl text-[hsl(var(--text))] font-Barlow transition-colors placeholder:text-[hsl(var(--surface2))]";
+const INPUT_CLASS = "w-full bg-transparent border-b border-[hsl(var(--surface1))] focus:border-[hsl(var(--highlight))] focus:outline-none py-3 text-lg md:text-xl text-[hsl(var(--text))] font-Barlow transition-colors placeholder:text-[hsl(var(--surface2))]";
 
 const DEFAULT_SERVICES = ['Web Development', 'Cloud Migration', 'UI/UX Design', 'App Development', 'IT Consulting', 'Other'];
 
@@ -77,7 +71,7 @@ export default function Form() {
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
             className="flex flex-col justify-center h-full py-12"
           >
-            <div className="text-[10px] tracking-[0.3em] uppercase font-bold text-[hsl(var(--lavender))] mb-6">
+            <div className="text-[10px] tracking-[0.3em] uppercase font-bold text-[hsl(var(--highlight))] mb-6">
               Message Received
             </div>
             <h2 className="font-Barlow text-5xl md:text-7xl font-black uppercase tracking-tight mb-8 text-[hsl(var(--text))] leading-none">
@@ -88,7 +82,7 @@ export default function Form() {
             </p>
             <button
               onClick={() => { setStatus('idle'); setForm({ name: '', company: '', email: '', phone: '', subject: '', message: '', services: [] }) }}
-              className="self-start font-barlow text-[11px] tracking-[0.2em] uppercase font-bold border-b border-[hsl(var(--text))] pb-1 hover:text-[hsl(var(--lavender))] hover:border-[hsl(var(--lavender))] transition-colors"
+              className="self-start font-barlow text-[11px] tracking-[0.2em] uppercase font-bold border-b border-[hsl(var(--text))] pb-1 hover:text-[hsl(var(--highlight))] hover:border-[hsl(var(--highlight))] transition-colors"
             >
               Send Another Message
             </button>
@@ -161,7 +155,7 @@ export default function Form() {
                         key={service}
                         type="button"
                         onClick={() => toggleService(service)}
-                        className={`font-barlow text-[13px] md:text-[14px] font-bold px-4 py-2 rounded-xl transition-all duration-300 ${isSelected ? 'bg-[hsl(var(--lavender))] text-[hsl(var(--base))] shadow-md' : 'bg-[hsla(var(--surface1)/0.5)] text-[hsl(var(--subtext1))] hover:bg-[hsl(var(--surface2))] hover:text-[hsl(var(--text))]'}`}
+                        className={`font-barlow text-[13px] md:text-[14px] font-bold px-4 py-2 transition-all duration-300 ${isSelected ? 'bg-[hsl(var(--highlight))] text-[hsl(var(--base))] shadow-md' : 'bg-[hsla(var(--surface1)/0.5)] text-[hsl(var(--subtext1))] hover:bg-[hsl(var(--surface2))] hover:text-[hsl(var(--text))]'}`}
                       >
                         {service}
                       </button>
@@ -200,7 +194,7 @@ export default function Form() {
                 <button
                   type="submit"
                   disabled={status === 'loading'}
-                  className="bg-[hsl(var(--lavender))] flex justify-center items-center font-bold text-[15px] md:text-[16px] text-[hsl(var(--base))] px-8 py-4 cursor-pointer rounded-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-lg shadow-[hsla(var(--lavender)/0.25)] disabled:opacity-50 disabled:hover:translate-y-0 disabled:hover:shadow-none"
+                  className="bg-[hsl(var(--highlight))] flex justify-center items-center font-bold text-[15px] md:text-[16px] text-[hsl(var(--base))] px-8 py-4 cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-lg shadow-[hsla(var(--highlight)/0.25)] disabled:opacity-50 disabled:hover:translate-y-0 disabled:hover:shadow-none"
                 >
                   {status === 'loading' ? 'Sending...' : 'Send Message →'}
                 </button>
@@ -231,7 +225,7 @@ export default function Form() {
                   ))}
                 </div>
                 <div className="flex flex-col gap-2">
-                  <a href={`mailto:${office.email}`} className="font-barlow text-sm font-bold text-[hsl(var(--text))] hover:text-[hsl(var(--lavender))] transition-colors self-start">{office.email}</a>
+                  <a href={`mailto:${office.email}`} className="font-barlow text-sm font-bold text-[hsl(var(--text))] hover:text-[hsl(var(--highlight))] transition-colors self-start">{office.email}</a>
                   <p className="font-barlow text-sm text-[hsla(var(--text)/0.6)]">{office.phone}</p>
                 </div>
               </div>
@@ -246,11 +240,11 @@ export default function Form() {
           <div className="flex flex-col gap-4">
             <Link to="/services" className="flex items-center justify-between group">
               <span className="font-barlow text-sm font-bold text-[hsla(var(--text)/0.7)] group-hover:text-[hsl(var(--text))] transition-colors uppercase tracking-wider">View Our Services</span>
-              <span className="text-[hsl(var(--surface2))] group-hover:text-[hsl(var(--lavender))] transition-colors">→</span>
+              <span className="text-[hsl(var(--surface2))] group-hover:text-[hsl(var(--highlight))] transition-colors">→</span>
             </Link>
             <Link to="/projects" className="flex items-center justify-between group">
               <span className="font-barlow text-sm font-bold text-[hsla(var(--text)/0.7)] group-hover:text-[hsl(var(--text))] transition-colors uppercase tracking-wider">See Our Work</span>
-              <span className="text-[hsl(var(--surface2))] group-hover:text-[hsl(var(--lavender))] transition-colors">→</span>
+              <span className="text-[hsl(var(--surface2))] group-hover:text-[hsl(var(--highlight))] transition-colors">→</span>
             </Link>
           </div>
         </motion.div>

@@ -60,7 +60,7 @@ export default function CartAndContact() {
           className="border-b border-[hsl(var(--surface1))] py-8 md:py-12 flex flex-col md:flex-row md:items-end md:justify-between gap-6"
         >
           <div>
-            <p className="font-barlow text-[11px] tracking-[0.25em] uppercase font-medium mb-3 text-[hsl(var(--lavender))]">
+            <p className="font-barlow text-[11px] tracking-[0.25em] uppercase font-medium mb-3 text-[hsl(var(--highlight))]">
               {step === "select"
                 ? "Step 01 of 02"
                 : step === "form"
@@ -78,7 +78,7 @@ export default function CartAndContact() {
           {step === "select" && selected.length > 0 && (
             <button
               onClick={() => setStep("form")}
-              className="px-8 py-4 bg-[hsl(var(--lavender))] text-[hsl(var(--base))] text-[11px] tracking-[0.22em] uppercase font-bold hover:scale-105 hover:shadow-lg hover:shadow-[hsla(var(--lavender)/0.25)] transition-all duration-300 shrink-0"
+              className="px-8 py-4 bg-[hsl(var(--highlight))] text-[hsl(var(--base))] text-[11px] tracking-[0.22em] uppercase font-bold hover:scale-105 hover:shadow-lg hover:shadow-[hsla(var(--highlight)/0.25)] transition-all duration-300 shrink-0"
             >
               Continue ({selected.length}) &rarr;
             </button>
@@ -115,11 +115,11 @@ export default function CartAndContact() {
                         ${
                           active
                             ? "bg-[hsl(var(--text))] text-[hsl(var(--base))]"
-                            : "bg-transparent text-[hsl(var(--text))] hover:bg-[hsla(var(--lavender)/0.03)]"
+                            : "bg-transparent text-[hsl(var(--text))] hover:bg-[hsla(var(--highlight)/0.03)]"
                         }
                       `}
                     >
-                      <span className={`font-Barlow text-2xl md:text-3xl font-black uppercase tracking-tight leading-tight transition-colors ${active ? "text-[hsl(var(--base))]" : "group-hover:text-[hsl(var(--lavender))]"}`}>
+                      <span className={`font-Barlow text-2xl md:text-3xl font-black uppercase tracking-tight leading-tight transition-colors ${active ? "text-[hsl(var(--base))]" : "group-hover:text-[hsl(var(--highlight))]"}`}>
                         {s}
                       </span>
                       <span
@@ -150,14 +150,14 @@ export default function CartAndContact() {
               {selected.map((s) => (
                 <span
                   key={s}
-                  className="font-barlow text-[10px] tracking-[0.15em] uppercase font-bold border border-[hsl(var(--surface1))] px-3 py-1.5 text-[hsl(var(--lavender))]"
+                  className="font-barlow text-[10px] tracking-[0.15em] uppercase font-bold border border-[hsl(var(--surface1))] px-3 py-1.5 text-[hsl(var(--highlight))]"
                 >
                   {s}
                 </span>
               ))}
               <button
                 onClick={() => setStep("select")}
-                className="font-barlow text-[10px] tracking-[0.15em] uppercase font-bold text-[hsl(var(--subtext1))] hover:text-[hsl(var(--lavender))] transition-colors ml-3"
+                className="font-barlow text-[10px] tracking-[0.15em] uppercase font-bold text-[hsl(var(--subtext1))] hover:text-[hsl(var(--highlight))] transition-colors ml-3"
               >
                 &larr; Edit Services
               </button>
@@ -172,7 +172,7 @@ export default function CartAndContact() {
                   { key: "email", label: "Work Email", placeholder: "ravi@company.com", type: "email" },
                 ].map((field) => (
                   <div key={field.key} className="border-b border-[hsl(var(--surface1))]">
-                    <label className="block px-7 pt-6 pb-2 font-barlow text-[10px] tracking-[0.25em] uppercase font-bold text-[hsl(var(--lavender))]">
+                    <label className="block px-7 pt-6 pb-2 font-barlow text-[10px] tracking-[0.25em] uppercase font-bold text-[hsl(var(--highlight))]">
                       {field.label}
                     </label>
                     <input
@@ -190,7 +190,7 @@ export default function CartAndContact() {
               {/* Right — message + submit */}
               <div className="flex flex-col">
                 <div className="flex-1 border-b border-[hsl(var(--surface1))] flex flex-col">
-                  <label className="block px-7 pt-6 pb-2 font-barlow text-[10px] tracking-[0.25em] uppercase font-bold text-[hsl(var(--lavender))] shrink-0">
+                  <label className="block px-7 pt-6 pb-2 font-barlow text-[10px] tracking-[0.25em] uppercase font-bold text-[hsl(var(--highlight))] shrink-0">
                     Brief / Message
                   </label>
                   <textarea
@@ -208,7 +208,7 @@ export default function CartAndContact() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="px-8 py-4 bg-[hsl(var(--text))] text-[hsl(var(--base))] text-[11px] tracking-[0.22em] uppercase font-bold hover:bg-[hsl(var(--lavender))] transition-colors flex-shrink-0 disabled:opacity-50"
+                    className="px-8 py-4 bg-[hsl(var(--text))] text-[hsl(var(--base))] text-[11px] tracking-[0.22em] uppercase font-bold hover:bg-[hsl(var(--highlight))] transition-colors flex-shrink-0 disabled:opacity-50"
                   >
                     {isSubmitting ? "Sending..." : "Send Brief →"}
                   </button>
@@ -235,12 +235,12 @@ export default function CartAndContact() {
               </p>
             </div>
             <div className="pt-12 md:pt-0 md:pl-14 flex flex-col gap-4">
-              <p className="font-barlow text-[11px] tracking-[0.25em] uppercase font-bold text-[hsl(var(--lavender))] mb-2">
+              <p className="font-barlow text-[11px] tracking-[0.25em] uppercase font-bold text-[hsl(var(--highlight))] mb-2">
                 Services Requested
               </p>
               {selected.map((s) => (
                 <div key={s} className="flex items-center gap-3 border-b border-[hsl(var(--surface1))] pb-4">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[hsl(var(--lavender))] flex-shrink-0" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-[hsl(var(--highlight))] flex-shrink-0" />
                   <span className="font-Barlow text-xl md:text-2xl font-bold uppercase tracking-tight text-[hsl(var(--text))]">
                     {s}
                   </span>
@@ -252,7 +252,7 @@ export default function CartAndContact() {
                   setSelected([]);
                   setForm({ name: "", phone: "", email: "", message: "" });
                 }}
-                className="mt-6 font-barlow text-[11px] tracking-[0.2em] uppercase font-bold border-b border-[hsl(var(--surface1))] pb-1 w-fit text-[hsl(var(--subtext1))] hover:text-[hsl(var(--lavender))] hover:border-[hsl(var(--lavender))] transition-all"
+                className="mt-6 font-barlow text-[11px] tracking-[0.2em] uppercase font-bold border-b border-[hsl(var(--surface1))] pb-1 w-fit text-[hsl(var(--subtext1))] hover:text-[hsl(var(--highlight))] hover:border-[hsl(var(--highlight))] transition-all"
               >
                 Submit another brief &rarr;
               </button>

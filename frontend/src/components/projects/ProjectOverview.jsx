@@ -53,7 +53,7 @@ export default function ProjectOverview({ description, summary, challenges, deli
                 key={idx}
                 className="font-barlow flex items-start gap-3 text-sm md:text-base leading-snug text-[hsl(var(--text))] opacity-80"
               >
-                <span className="mt-1.5 w-1.5 h-1.5 flex-shrink-0 bg-[hsl(var(--lavender))]" />
+                <span className="mt-1.5 w-1.5 h-1.5 flex-shrink-0 bg-[hsl(var(--highlight))]" />
                 {d}
               </li>
             ))}

@@ -12,7 +12,7 @@ const ValueCard = ({ v, index }) => {
 
   return (
     <div className={`value-card relative overflow-hidden p-8 md:p-14 border-b border-[hsl(var(--surface2))] ${isRightCol ? "" : "md:border-r md:border-r-[hsl(var(--surface2))]"}`}>
-      <div className="relative z-10 text-sm font-semibold text-[hsl(var(--lavender))] mb-8 font-mono">
+      <div className="relative z-10 text-sm font-semibold text-[hsl(var(--highlight))] mb-8 font-mono">
         {v.num} —
       </div>
       <h3 className="relative z-10 text-2xl md:text-3xl font-bold uppercase tracking-tight mb-4">
@@ -30,7 +30,7 @@ const ValueCard = ({ v, index }) => {
           lineHeight: 0.85,
           right: "-0.04em",
           top: "-0.08em",
-          color: "hsla(var(--lavender)/0.15)",
+          color: "hsla(var(--highlight)/0.15)",
           letterSpacing: "-0.04em",
         }}
       >
@@ -74,11 +74,11 @@ const ValuesSection = () => {
   }, { scope: comp });
 
   return (
-    <section ref={comp} className="border-b border-[hsl(var(--lavender))] text-[hsl(var(--text))]">
+    <section ref={comp} className="border-b border-[hsl(var(--highlight))] text-[hsl(var(--text))]">
       {/* Header */}
-      <div className="values-header-container px-6 md:px-14 py-12 border-b border-[hsl(var(--lavender))] grid grid-cols-1 md:grid-cols-2 items-end gap-0">
+      <div className="values-header-container px-6 md:px-14 py-12 border-b border-[hsl(var(--highlight))] grid grid-cols-1 md:grid-cols-2 items-end gap-0">
         <div className="values-header-fade-up">
-          <p className="text-[11px] tracking-[0.25em] uppercase font-medium mb-3 text-[hsl(var(--lavender))]">
+          <p className="text-[11px] tracking-[0.25em] uppercase font-medium mb-3 text-[hsl(var(--highlight))]">
             How We Work
           </p>
           <h2
@@ -91,7 +91,7 @@ const ValuesSection = () => {
             className="font-black uppercase text-[hsl(var(--text))]"
           >
             Core{' '}
-            <span className="text-[hsl(var(--lavender))]">Values.</span>
+            <span className="text-[hsl(var(--highlight))]">Values.</span>
           </h2>
         </div>
         <div className="values-header-fade-up mt-4 md:mt-0 md:pl-14">

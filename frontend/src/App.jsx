@@ -5,17 +5,24 @@ import HomePage from './pages/HomePage'
 import ProjectsPage from './pages/ProjectsPage'
 import ProjectDetailPage from './pages/ProjectDetailPage'
 import ServicesPage from './pages/ServicesPage'
+import ServiceDetailPage from './pages/ServiceDetailPage'
+import InsightsPage from './pages/InsightsPage'
+import InsightDetailPage from './pages/InsightDetailPage'
 import ProductsPage from './pages/ProductsPage'
 import ProductDetailPage from './pages/ProductDetailPage'
 import BackToTopButton from './components/BackToTopButton'
 import ScrollToTop from './components/ScrollToTop'
 import ContactPage from './pages/ContactPage'
+import CareersPage from './pages/CareersPage'
 import PrivacyPolicyPage from './pages/PrivacyPolicyPage'
 import DisclaimerPage from './pages/DisclaimerPage'
 import TrademarksPage from './pages/TrademarksPage'
 import TermsAndConditionsPage from './pages/TermsAndConditionsPage'
+import LoginPage from './pages/LoginPage'
+import NotFoundPage from './pages/NotFoundPage'
 import Navbar from './components/navbar/Navbar'
 import Footer from './components/footer/Footer'
+import PrivacyConsent from './components/globalComponents/PrivacyConsent'
 import { AuthProvider } from './context/AuthContext'
 
 const App = () => {
@@ -32,16 +39,25 @@ const App = () => {
           <Route path='/projects' element={<ProjectsPage />} />
           <Route path='/projects/:projectId' element={<ProjectDetailPage />} />
           <Route path='/services' element={<ServicesPage />} />
+          <Route path='/services/:slug' element={<ServiceDetailPage />} />
+          <Route path='/insights' element={<InsightsPage />} />
+          <Route path='/insights/:slug' element={<InsightDetailPage />} />
+          <Route path='/blog' element={<InsightsPage />} />
+          <Route path='/blog/:slug' element={<InsightDetailPage />} />
           <Route path='/products' element={<ProductsPage />} />
           <Route path='/products/:productId' element={<ProductDetailPage />} />
           <Route path='/contact' element={<ContactPage />} />
+          <Route path='/careers' element={<CareersPage />} />
           <Route path='/privacy-policy' element={<PrivacyPolicyPage />} />
           <Route path='/disclaimer' element={<DisclaimerPage />} />
           <Route path='/trademarks' element={<TrademarksPage />} />
           <Route path='/terms' element={<TermsAndConditionsPage />} />
+          <Route path='/login' element={<LoginPage />} />
+          <Route path='*' element={<NotFoundPage />} />
         </Routes>
       </main>
       <Footer key={location.pathname} />
+      <PrivacyConsent />
       <BackToTopButton />
     </AuthProvider>
   )

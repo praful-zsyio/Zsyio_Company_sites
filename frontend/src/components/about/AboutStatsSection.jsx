@@ -11,14 +11,14 @@ const AnimatedStat = ({ value, suffix, label }) => {
       <div className="flex items-baseline">
         <span 
           style={{ fontFamily: "var(--font-barlow, 'Barlow', sans-serif)" }}
-          className="text-5xl md:text-7xl font-black tracking-tighter text-[hsla(var(--lavender))]"
+          className="text-5xl md:text-7xl font-black tracking-tighter text-[hsla(var(--highlight))]"
         >
           <span className="scroll-stat-counter">{value}</span>
         </span>
         {suffix && (
           <span 
             style={{ fontFamily: "var(--font-barlow, 'Barlow', sans-serif)" }}
-            className="text-4xl md:text-6xl font-black tracking-tighter text-[hsla(var(--lavender))] ml-1"
+            className="text-4xl md:text-6xl font-black tracking-tighter text-[hsla(var(--highlight))] ml-1"
           >
             {suffix}
           </span>
@@ -51,21 +51,21 @@ const AboutStatsSection = () => {
   }, { scope: container });
 
   return (
-    <section ref={container} className="border-b border-[hsla(var(--lavender)/0.4)] text-[hsl(var(--text))] bg-transparent">
-      <div className="px-6 md:px-14 pt-12 pb-6 border-b border-[hsla(var(--lavender)/0.4)]">
+    <section ref={container} className="border-b border-[hsla(var(--highlight)/0.4)] text-[hsl(var(--text))] bg-transparent">
+      <div className="px-6 md:px-14 pt-12 pb-6 border-b border-[hsla(var(--highlight)/0.4)]">
         <div className="animate-in-view">
           <p className="text-[11px] tracking-[0.25em] uppercase font-medium opacity-50">By the Numbers</p>
         </div>
       </div>
       
       <div className="grid grid-cols-2 md:grid-cols-4">
-        <div className="border-r border-[hsla(var(--lavender)/0.4)] border-b md:border-b-0">
+        <div className="border-r border-[hsla(var(--highlight)/0.4)] border-b md:border-b-0">
           <AnimatedStat value={2} suffix="+" label="Years in Operation" />
         </div>
-        <div className="border-b md:border-b-0 md:border-r border-[hsla(var(--lavender)/0.4)]">
+        <div className="border-b md:border-b-0 md:border-r border-[hsla(var(--highlight)/0.4)]">
           <AnimatedStat value={20} suffix="+" label="Clients Worldwide" />
         </div>
-        <div className="border-r border-[hsla(var(--lavender)/0.4)] border-t md:border-t-0">
+        <div className="border-r border-[hsla(var(--highlight)/0.4)] border-t md:border-t-0">
           <AnimatedStat value={3} suffix="" label="Countries Served" />
         </div>
         <div className="border-t md:border-t-0">
@@ -73,14 +73,14 @@ const AboutStatsSection = () => {
         </div>
       </div>
       
-      <div className="grid grid-cols-2 md:grid-cols-4 border-t border-[hsla(var(--lavender)/0.4)]">
-        <div className="border-r border-[hsla(var(--lavender)/0.4)] border-b md:border-b-0">
+      <div className="grid grid-cols-2 md:grid-cols-4 border-t border-[hsla(var(--highlight)/0.4)]">
+        <div className="border-r border-[hsla(var(--highlight)/0.4)] border-b md:border-b-0">
           <AnimatedStat value={20} suffix="+" label="Projects Delivered" />
         </div>
-        <div className="border-b md:border-b-0 md:border-r border-[hsla(var(--lavender)/0.4)]">
+        <div className="border-b md:border-b-0 md:border-r border-[hsla(var(--highlight)/0.4)]">
           <AnimatedStat value={99} suffix=".9%" label="Avg. Uptime SLA" />
         </div>
-        <div className="border-r border-[hsla(var(--lavender)/0.4)] border-t md:border-t-0">
+        <div className="border-r border-[hsla(var(--highlight)/0.4)] border-t md:border-t-0">
           <AnimatedStat value={9} suffix="" label="Practice Areas" />
         </div>
         <div className="border-t md:border-t-0">

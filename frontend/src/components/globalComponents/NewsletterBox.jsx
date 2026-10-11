@@ -58,17 +58,17 @@ const NewsletterBox = () => {
   };
 
   return (
-    <section ref={sectionRef} className="mt-10 border-b border-[hsla(var(--lavender))]">
+    <section ref={sectionRef} className="mt-10 border-b border-[hsla(var(--highlight))]">
       <div className="grid grid-cols-1 md:grid-cols-2">
         {/* Left — copy */}
         <div className="px-6 md:px-10 lg:px-14 py-14 flex flex-col justify-between gap-10">
           <div>
-            <p className="font-Barlow text-[11px] tracking-[0.25em] uppercase font-medium mb-4 text-[hsla(var(--lavender)/0.8)] animate-item flex items-center gap-2">
-              <span className="w-1.5 h-1.5 bg-[hsla(var(--lavender))] flex-shrink-0" />
+            <p className="font-Barlow text-[11px] tracking-[0.25em] uppercase font-medium mb-4 text-[hsla(var(--highlight)/0.8)] animate-item flex items-center gap-2">
+              <span className="w-1.5 h-1.5 bg-[hsla(var(--highlight))] flex-shrink-0" />
               ZSYIO Community
             </p>
             <h2 className="font-Barlow text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight leading-none animate-item">
-              Build the <span className="text-[hsla(var(--lavender))]">Future.</span>
+              Build the <span className="text-[hsla(var(--highlight))]">Future.</span>
               <br />
               Together.
             </h2>
@@ -93,7 +93,7 @@ const NewsletterBox = () => {
         <div className="px-6 md:px-10 lg:px-14 py-14 flex flex-col justify-center animate-item">
           {submitted ? (
             <div className="py-10">
-              <p className="font-Barlow text-[11px] tracking-[0.25em] uppercase font-medium mb-4 text-[hsla(var(--lavender)/0.8)]">
+              <p className="font-Barlow text-[11px] tracking-[0.25em] uppercase font-medium mb-4 text-[hsla(var(--highlight)/0.8)]">
                 Confirmed
               </p>
               <h3 className="font-Barlow text-4xl font-black uppercase tracking-tight mb-4 leading-none">
@@ -107,14 +107,14 @@ const NewsletterBox = () => {
                   setSubmitted(false);
                   setStatus(null);
                 }}
-                className="mt-8 font-Barlow text-[11px] tracking-[0.2em] uppercase font-medium border-b border-[hsla(var(--lavender))] text-[hsla(var(--lavender))] pb-1 hover:opacity-70 transition-opacity"
+                className="mt-8 font-Barlow text-[11px] tracking-[0.2em] uppercase font-medium border-b border-[hsla(var(--highlight))] text-[hsla(var(--highlight))] pb-1 hover:opacity-70 transition-opacity"
               >
                 Subscribe another →
               </button>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="flex flex-col gap-0 w-full max-w-md mx-auto md:mx-0">
-              <label className="font-Barlow text-[11px] tracking-[0.25em] uppercase font-medium mb-3 text-[hsla(var(--lavender)/0.8)]">
+              <label className="font-Barlow text-[11px] tracking-[0.25em] uppercase font-medium mb-3 text-[hsla(var(--highlight)/0.8)]">
                 ENTER YOUR EMAIL
               </label>
 
@@ -127,19 +127,19 @@ const NewsletterBox = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="you@company.com"
-                  className="flex-1 px-5 py-4 font-Barlow text-sm bg-transparent border border-[hsla(var(--lavender))] rounded-xl text-[hsla(var(--text))] placeholder:text-[hsla(var(--text)/0.3)] tracking-widest outline-none uppercase transition-colors focus:border-[hsla(var(--text))]"
+                  className="flex-1 px-5 py-4 font-Barlow text-sm bg-transparent border border-[hsla(var(--highlight))] rounded-xl text-[hsla(var(--text))] placeholder:text-[hsla(var(--text)/0.3)] tracking-widest outline-none uppercase transition-colors focus:border-[hsla(var(--text))]"
                 />
                 <button
                   type="submit"
                   disabled={loading}
-                  className="bg-[hsla(var(--lavender))] flex justify-center items-center font-bold text-[14px] md:text-[15px] text-[hsla(var(--base))] px-8 py-4 cursor-pointer rounded-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-lg shadow-[hsla(var(--lavender)/0.25)] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:shadow-none flex-shrink-0"
+                  className="bg-[hsla(var(--highlight))] flex justify-center items-center font-bold text-[14px] md:text-[15px] text-[hsla(var(--base))] px-8 py-4 cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-lg shadow-[hsla(var(--highlight)/0.25)] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:translate-y-0 disabled:hover:shadow-none flex-shrink-0"
                 >
                   {loading ? "SUBSCRIBING..." : "SUBSCRIBE"}
                 </button>
               </div>
 
               {status && (
-                <p className="mt-4 font-Barlow text-[11px] tracking-[0.1em] uppercase text-[hsla(var(--lavender))]">
+                <p className="mt-4 font-Barlow text-[11px] tracking-[0.1em] uppercase text-[hsla(var(--highlight))]">
                   {status}
                 </p>
               )}

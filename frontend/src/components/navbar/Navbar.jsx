@@ -1,8 +1,9 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { useTheme } from "../../context/ThemeContext";
 import { AuthContext } from "../../context/AuthContext";
 import { useData } from "../../context/DataContext";
+import { Sun, Moon } from "lucide-react";
 
 const Navbar = () => {
   const { theme, toggleTheme } = useTheme();
@@ -21,14 +22,30 @@ const Navbar = () => {
     theme === "light"
       ? "text-[hsl(var(--subtext0))]"
       : "text-[hsl(var(--subtext1))]",
-    "hover:text-[hsl(var(--lavender))]",
+    "hover:text-[hsl(var(--highlight))]",
   ].join(" ");
 
   const linkActiveClasses =
-    "text-[hsl(var(--lavender))] font-semibold";
+    "text-[hsl(var(--highlight))] font-semibold";
 
   const handleToggleMenu = () => setIsMenuOpen((prev) => !prev);
   const closeMenu = () => setIsMenuOpen(false);
+
+  const themeToggleButton = (
+    <button
+      type="button"
+      onClick={toggleTheme}
+      aria-label="Toggle theme"
+      className="relative flex items-center justify-center w-10 h-10 rounded-full bg-[hsl(var(--surface0))] hover:bg-[hsl(var(--surface1))] text-[hsl(var(--text))] transition-all duration-300 border border-[hsl(var(--surface0))] hover:border-[hsl(var(--highlight)/0.5)] overflow-hidden group shadow-sm"
+    >
+      <div className={`absolute inset-0 flex items-center justify-center transition-transform duration-500 ${theme === 'dark' ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'}`}>
+        <Moon className="w-[18px] h-[18px] group-hover:text-[hsl(var(--highlight))] transition-colors" />
+      </div>
+      <div className={`absolute inset-0 flex items-center justify-center transition-transform duration-500 ${theme === 'light' ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'}`}>
+        <Sun className="w-[18px] h-[18px] group-hover:text-amber-500 transition-colors" />
+      </div>
+    </button>
+  );
 
   return (
     <nav className="fixed inset-x-0 top-0 z-50 bg-[hsl(var(--base))/0.85] backdrop-blur-xl border-b border-[hsl(var(--surface0))] transition-colors duration-300">
@@ -60,37 +77,21 @@ const Navbar = () => {
                 {link.title}
               </NavLink>
             ))}
+            
+            {/* Theme Toggle in Desktop Nav */}
+            <div className="pl-4 ml-2 border-l border-[hsl(var(--surface0))] h-8 flex items-center">
+              {themeToggleButton}
+            </div>
           </div>
 
           {/* Actions */}
-          <div className="flex items-center gap-5">
-            
-            {/* Elegant Minimalist Theme Switch */}
-            <button
-              type="button"
-              onClick={toggleTheme}
-              aria-label="Toggle theme"
-              className={`
-                relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent 
-                transition-colors duration-300 ease-in-out focus:outline-none
-                ${theme === 'dark' ? 'bg-[hsl(var(--lavender))]' : 'bg-[hsl(var(--surface2))]'}
-              `}
-            >
-              <span
-                className={`
-                  pointer-events-none inline-block h-5 w-5 transform rounded-full bg-[hsl(var(--base))] shadow ring-0 
-                  transition duration-300 ease-in-out
-                  ${theme === 'dark' ? 'translate-x-5' : 'translate-x-0'}
-                `}
-              />
-            </button>
-
+          <div className="flex items-center gap-5 md:hidden">
             {/* Mobile Menu Button */}
-            <div className="flex md:hidden">
+            <div className="flex">
               <button
                 type="button"
                 onClick={handleToggleMenu}
-                className="inline-flex items-center justify-center rounded-md p-2 text-[hsl(var(--text))] hover:bg-[hsl(var(--surface0))] transition-colors"
+                className="inline-flex items-center justify-center p-2 text-[hsl(var(--text))] hover:bg-[hsl(var(--surface0))] transition-colors rounded-lg"
                 aria-expanded={isMenuOpen}
               >
                 <span className="sr-only">Open main menu</span>
@@ -127,9 +128,9 @@ const Navbar = () => {
               to={link.path}
               className={({ isActive }) =>
                 [
-                  "block rounded-md px-3 py-3 text-base font-medium font-barlow transition-colors duration-200",
+                  "block px-3 py-3 text-base font-medium font-barlow transition-colors duration-200 rounded-lg",
                   isActive
-                    ? "bg-[hsl(var(--lavender))/0.1] text-[hsl(var(--lavender))]"
+                    ? "bg-[hsl(var(--highlight))/0.1] text-[hsl(var(--highlight))]"
                     : "text-[hsl(var(--subtext0))] hover:bg-[hsl(var(--surface0))] hover:text-[hsl(var(--text))]",
                 ].join(" ")
               }
@@ -138,6 +139,12 @@ const Navbar = () => {
               {link.title}
             </NavLink>
           ))}
+          
+          {/* Mobile Theme Toggle */}
+          <div className="flex items-center justify-between px-3 py-4 mt-2 border-t border-[hsl(var(--surface0))]">
+            <span className="text-base font-medium font-barlow text-[hsl(var(--subtext0))]">Appearance</span>
+            {themeToggleButton}
+          </div>
         </div>
       </div>
     </nav>

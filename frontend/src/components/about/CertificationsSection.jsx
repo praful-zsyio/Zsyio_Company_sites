@@ -52,12 +52,12 @@ const CertificationsSection = () => {
   }, { scope: comp });
 
   return (
-    <section ref={comp} className="border-b border-[hsla(var(--lavender)/0.4)] text-[hsl(var(--text))] bg-transparent">
+    <section ref={comp} className="border-b border-[hsla(var(--highlight)/0.4)] text-[hsl(var(--text))] bg-transparent">
       {/* Header */}
-      <div className="cert-header-container px-6 md:px-14 py-16 border-b border-[hsla(var(--lavender)/0.4)]">
+      <div className="cert-header-container px-6 md:px-14 py-16 border-b border-[hsla(var(--highlight)/0.4)]">
         <div className="grid grid-cols-1 md:grid-cols-2 items-end gap-10">
           <div className="cert-header-fade">
-            <p className="text-[11px] tracking-[0.25em] uppercase font-bold mb-3 text-[hsl(var(--lavender))]">
+            <p className="text-[11px] tracking-[0.25em] uppercase font-bold mb-3 text-[hsl(var(--highlight))]">
               Trust & Standards
             </p>
             <h2
@@ -80,11 +80,11 @@ const CertificationsSection = () => {
         {CERTIFICATIONS.map((c, i) => (
           <div 
             key={c.code} 
-            className={`cert-card px-8 md:px-12 py-12 md:py-16 border-b border-[hsla(var(--lavender)/0.4)] group hover:bg-[hsl(var(--lavender))] hover:text-[hsl(var(--base))] transition-all duration-300 cursor-default md:border-r ${i % 2 === 1 ? 'md:border-r-0 lg:border-r' : ''} ${i % 3 === 2 ? 'lg:border-r-0' : ''}`}
+            className={`cert-card px-8 md:px-12 py-12 md:py-16 border-b border-[hsla(var(--highlight)/0.4)] group hover:bg-[hsl(var(--highlight))] hover:text-[hsl(var(--base))] transition-all duration-300 cursor-default md:border-r ${i % 2 === 1 ? 'md:border-r-0 lg:border-r' : ''} ${i % 3 === 2 ? 'lg:border-r-0' : ''}`}
           >
             <div className="flex flex-col justify-between h-full min-h-[140px]">
               {/* Little box icon that fills on hover */}
-              <div className="w-4 h-4 border-2 border-[hsl(var(--lavender))] group-hover:border-[hsl(var(--base))] group-hover:bg-[hsl(var(--base))] transition-colors mb-8" />
+              <div className="w-4 h-4 border-2 border-[hsl(var(--highlight))] group-hover:border-[hsl(var(--base))] group-hover:bg-[hsl(var(--base))] transition-colors mb-8" />
               <div>
                 <div style={{ fontFamily: "'Barlow Condensed', sans-serif" }} className="text-3xl md:text-5xl font-black uppercase mb-3 tracking-tight">
                   {c.code}

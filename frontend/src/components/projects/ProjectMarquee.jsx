@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from 'react';
 import gsap from 'gsap';
 
-const ProjectMarquee = ({ items = ['✦ Case Study', '✦ Enterprise Solution', '✦ Results Driven'] }) => {
+const ProjectMarquee = ({ items = ['Case Study', 'Enterprise Solution', 'Results Driven'] }) => {
   const trackRef  = useRef(null);
   const tweenRef  = useRef(null);
   // -1 = scrolling down (default, leftward), +1 = scrolling up (rightward)
@@ -21,7 +21,7 @@ const ProjectMarquee = ({ items = ['✦ Case Study', '✦ Enterprise Solution', 
 
     tweenRef.current = gsap.to([track, clone], {
       x: `-=${totalWidth}`,
-      duration: 35,
+      duration: totalWidth / 40, // 40px per second, nice and slow
       ease: 'none',
       repeat: -1,
       modifiers: {
@@ -63,9 +63,9 @@ const ProjectMarquee = ({ items = ['✦ Case Study', '✦ Enterprise Solution', 
         overflow: 'hidden',
         display: 'flex',
         alignItems: 'center',
-        background: 'linear-gradient(90deg, hsla(var(--lavender)/0.08) 0%, hsla(var(--lavender)/0.04) 50%, hsla(var(--lavender)/0.08) 100%)',
-        borderTop: '1px solid hsla(var(--lavender))',
-        borderBottom: '1px solid hsla(var(--lavender))',
+        background: 'linear-gradient(90deg, hsla(var(--highlight)/0.08) 0%, hsla(var(--highlight)/0.04) 50%, hsla(var(--highlight)/0.08) 100%)',
+        borderTop: '1px solid hsla(var(--highlight))',
+        borderBottom: '1px solid hsla(var(--highlight))',
         position: 'relative',
       }}
     >
@@ -79,7 +79,7 @@ const ProjectMarquee = ({ items = ['✦ Case Study', '✦ Enterprise Solution', 
           willChange: 'transform',
         }}
       >
-        {items.map((text, i) => (
+        {Array(20).fill(items).flat().map((text, i) => (
           <span
             key={i}
             style={{
@@ -89,7 +89,7 @@ const ProjectMarquee = ({ items = ['✦ Case Study', '✦ Enterprise Solution', 
               fontWeight: 600,
               letterSpacing: '0.08em',
               textTransform: 'uppercase',
-              color: 'hsla(var(--lavender)/0.85)',
+              color: 'hsla(var(--highlight)/0.85)',
               padding: '0 3rem',
               fontFamily: 'var(--font-barlow, "Barlow", sans-serif)',
             }}

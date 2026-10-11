@@ -36,12 +36,12 @@ const AboutSection = () => {
     <section id="about" ref={sectionRef} className="mt-8">
       <div className="grid grid-cols-1 md:grid-cols-2">
         {/* About text */}
-        <div className="px-6 md:px-10 lg:px-14 py-14  md:border-r border-[hsla(var(--lavender))]">
-          <p className="font-Barlow text-[11px] tracking-[0.25em] uppercase font-medium mb-8 text-[hsla(var(--lavender)/0.8)] animate-item">
+        <div className="px-6 md:px-10 lg:px-14 py-14  md:border-r border-[hsla(var(--highlight))]">
+          <p className="font-Barlow text-[11px] tracking-[0.25em] uppercase font-medium mb-8 text-[hsla(var(--highlight)/0.8)] animate-item">
             About ZSYIO
           </p>
           <h2 className="font-Barlow text-4xl md:text-5xl lg:text-6xl font-black uppercase tracking-tight mb-8 leading-none animate-item">
-            Born in <span className="text-[hsla(var(--lavender))]">India.</span><br />Built for the <span className="text-[hsla(var(--lavender))]">World.</span>
+            Born in <span className="text-[hsla(var(--highlight))]">India.</span><br />Built for the <span className="text-[hsla(var(--highlight))]">World.</span>
           </h2>
           <div className="space-y-6 max-w-md animate-item">
             <p className="font-Barlow text-sm md:text-base leading-relaxed text-[hsla(var(--text)/0.75)] tracking-wide">
@@ -63,7 +63,7 @@ const AboutSection = () => {
           <div className="mt-12 animate-item">
             <Link
               to="/about"
-              className="bg-[hsla(var(--lavender))] inline-flex justify-center items-center font-bold text-[15px] md:text-[16px] text-[hsla(var(--base))] px-5 py-3 cursor-pointer rounded-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-lg shadow-[hsla(var(--lavender)/0.25)]"
+              className="bg-[hsla(var(--highlight))] inline-flex justify-center items-center font-bold text-[15px] md:text-[16px] text-[hsla(var(--base))] px-5 py-3 cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-lg shadow-[hsla(var(--highlight)/0.25)]"
             >
               Discover More About Us
             </Link>
@@ -72,20 +72,20 @@ const AboutSection = () => {
 
         {/* Global reach */}
         <div className="px-6 md:px-10 lg:px-14 py-14">
-          <p className="font-Barlow text-[11px] tracking-[0.25em] uppercase font-medium mb-8 text-[hsla(var(--lavender)/0.8)] animate-item">
+          <p className="font-Barlow text-[11px] tracking-[0.25em] uppercase font-medium mb-8 text-[hsla(var(--highlight)/0.8)] animate-item">
             Global Reach
           </p>
           <div className="flex flex-col">
             {REGIONS.map((region, i) => (
               <div key={region} className="animate-item">
                 <div
-                  className="flex items-center justify-between py-6 border-b border-[hsla(var(--lavender))] group hover:px-3 transition-all duration-300 cursor-default text-[hsla(var(--text))] hover:text-[hsla(var(--lavender))]"
+                  className="flex items-center justify-between py-6 border-b border-[hsla(var(--highlight))] group hover:px-3 transition-all duration-300 cursor-default text-[hsla(var(--text))] hover:text-[hsla(var(--highlight))]"
                 >
                   <span className="font-Barlow text-2xl md:text-3xl font-bold uppercase tracking-tight ">
                     {region}
                   </span>
                   {region === 'India' && (
-                    <span className="text-[10px] tracking-[0.18em] uppercase font-medium border border-[hsla(var(--lavender))] text-[hsla(var(--lavender))] px-3 py-1">
+                    <span className="text-[10px] tracking-[0.18em] uppercase font-medium border border-[hsla(var(--highlight))] text-[hsla(var(--highlight))] px-3 py-1">
                       HQ
                     </span>
                   )}

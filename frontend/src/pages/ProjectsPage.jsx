@@ -4,6 +4,7 @@ import { motion, useInView } from "framer-motion";
 import { getProjects } from "../services/api";
 import ProjectMarquee from "../components/projects/ProjectMarquee";
 import CartAndContact from "../components/services/CartAndContact";
+import { usePageSEO } from "../utils/seo";
 
 // ─── PAGE ─────────────────────────────────────────────────────────────────────
 
@@ -11,6 +12,12 @@ export default function ProjectsPage() {
   const [projectsData, setProjectsData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeFilter, setActiveFilter] = useState("All");
+
+  usePageSEO({
+    title: "Client Case Studies & Enterprise Projects",
+    description: "Explore enterprise client engagements, architectural case studies, and engineering solutions delivered by Zsyio.",
+    url: "/projects",
+  });
 
   useEffect(() => {
     getProjects()
@@ -59,7 +66,7 @@ export default function ProjectsPage() {
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className='text-[11px] md:text-[12px] font-medium text-[hsla(var(--lavender)/0.8)] uppercase flex flex-wrap gap-3 md:gap-3 pl-1'
+            className='text-[11px] md:text-[12px] font-medium text-[hsla(var(--highlight)/0.8)] uppercase flex flex-wrap gap-3 md:gap-3 pl-1'
           >
             <span className='tracking-[.2em]'>Selected Work</span>
           </motion.h3>
@@ -72,7 +79,7 @@ export default function ProjectsPage() {
             style={{ fontSize: 'clamp(3rem, 8vw, 6.5rem)' }}
           >
             Project<br />
-            <span className='text-[hsla(var(--lavender))]'>Archive.</span>
+            <span className='text-[hsla(var(--highlight))]'>Archive.</span>
           </motion.h1>
 
           <motion.div
@@ -82,19 +89,19 @@ export default function ProjectsPage() {
             className='grid grid-cols-2 gap-x-6 gap-y-10 mt-10 md:mt-16'
           >
             <div className='flex flex-col'>
-               <span className='text-3xl md:text-5xl font-bold font-Barlow text-[hsla(var(--lavender))]'>{projectsData.length}</span>
+               <span className='text-3xl md:text-5xl font-bold font-Barlow text-[hsla(var(--highlight))]'>{projectsData.length}</span>
                <span className='text-xs md:text-sm text-[hsla(var(--text)/0.6)] uppercase tracking-[.15em] mt-2'>Featured Projects</span>
             </div>
             <div className='flex flex-col'>
-               <span className='text-3xl md:text-5xl font-bold font-Barlow text-[hsla(var(--lavender))]'>{allIndustries.length - 1}</span>
+               <span className='text-3xl md:text-5xl font-bold font-Barlow text-[hsla(var(--highlight))]'>{allIndustries.length - 1}</span>
                <span className='text-xs md:text-sm text-[hsla(var(--text)/0.6)] uppercase tracking-[.15em] mt-2'>Industries</span>
             </div>
             <div className='flex flex-col'>
-               <span className='text-3xl md:text-5xl font-bold font-Barlow text-[hsla(var(--lavender))]'>50+</span>
+               <span className='text-3xl md:text-5xl font-bold font-Barlow text-[hsla(var(--highlight))]'>50+</span>
                <span className='text-xs md:text-sm text-[hsla(var(--text)/0.6)] uppercase tracking-[.15em] mt-2'>Total Shipped</span>
             </div>
             <div className='flex flex-col'>
-               <span className='text-3xl md:text-5xl font-bold font-Barlow text-[hsla(var(--lavender))]'>10-18</span>
+               <span className='text-3xl md:text-5xl font-bold font-Barlow text-[hsla(var(--highlight))]'>10-18</span>
                <span className='text-xs md:text-sm text-[hsla(var(--text)/0.6)] uppercase tracking-[.15em] mt-2'>Avg. Weeks</span>
             </div>
           </motion.div>
@@ -112,11 +119,11 @@ export default function ProjectsPage() {
             — not deliverables.
           </p>
 
-          <div className='w-16 h-[2px] bg-[hsla(var(--lavender)/0.4)] mt-10 md:mt-12'></div>
+          <div className='w-16 h-[2px] bg-[hsla(var(--highlight)/0.4)] mt-10 md:mt-12'></div>
 
           <div className='flex flex-wrap gap-3 mt-8 md:mt-10'>
             {['Cloud Migration', 'Digital Transformation', 'Platform Engineering', 'Mobile Apps'].map(tag => (
-              <span key={tag} className='px-4 py-2 text-xs md:text-sm border border-[hsla(var(--lavender)/0.3)] rounded-full text-[hsla(var(--lavender))] bg-[hsla(var(--lavender)/0.05)] hover:bg-[hsla(var(--lavender)/0.1)] transition-colors duration-300 cursor-default font-barlow'>
+              <span key={tag} className='px-4 py-2 text-xs md:text-sm border border-[hsla(var(--highlight)/0.3)] rounded-full text-[hsla(var(--highlight))] bg-[hsla(var(--highlight)/0.05)] hover:bg-[hsla(var(--highlight)/0.1)] transition-colors duration-300 cursor-default font-barlow'>
                 {tag}
               </span>
             ))}
@@ -124,7 +131,7 @@ export default function ProjectsPage() {
         </motion.div>
       </section>
 
-      <ProjectMarquee items={['✦ Case Study', '✦ Digital Innovation', '✦ Strategic Execution', '✦ Enterprise Solution', '✦ Results Driven']} />
+      <ProjectMarquee items={['Case Study', 'Digital Innovation', 'Strategic Execution', 'Enterprise Solution', 'Results Driven']} />
 
       {/* ─── MAIN CONTENT: sticky left + scrollable right ─────────────────────── */}
       <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] min-h-screen">
@@ -144,15 +151,15 @@ export default function ProjectsPage() {
                     className={`text-left py-3 border-b border-[hsl(var(--surface1))] flex items-center justify-between group transition-colors
                       ${
                         activeFilter === ind
-                          ? "text-[hsl(var(--lavender))]"
-                          : "text-[hsl(var(--text))] hover:text-[hsl(var(--lavender))]"
+                          ? "text-[hsl(var(--highlight))]"
+                          : "text-[hsl(var(--text))] hover:text-[hsl(var(--highlight))]"
                       }`}
                   >
                     <span className="font-Barlow text-xl font-bold uppercase tracking-tight">
                       {ind}
                     </span>
                     {activeFilter === ind && (
-                      <span className="w-2 h-2 bg-[hsl(var(--lavender))] flex-shrink-0" />
+                      <span className="w-2 h-2 bg-[hsl(var(--highlight))] flex-shrink-0" />
                     )}
                   </button>
                 ))}
@@ -167,7 +174,7 @@ export default function ProjectsPage() {
               <div className="font-Barlow text-5xl font-black tracking-tight mb-1 text-[hsl(var(--text))]">
                 {filtered.length}
               </div>
-              <p className="font-barlow text-[11px] tracking-[0.2em] uppercase font-bold text-[hsl(var(--lavender))]">
+              <p className="font-barlow text-[11px] tracking-[0.2em] uppercase font-bold text-[hsl(var(--highlight))]">
                 {activeFilter === "All" ? "All Projects" : activeFilter}
               </p>
             </div>
@@ -179,7 +186,7 @@ export default function ProjectsPage() {
               </p>
               <Link
                 to="/services"
-                className="font-barlow text-[11px] tracking-[0.2em] uppercase font-bold border-b border-[hsl(var(--lavender))] text-[hsl(var(--lavender))] pb-0.5 hover:text-[hsl(var(--text))] hover:border-[hsl(var(--text))] transition-colors"
+                className="font-barlow text-[11px] tracking-[0.2em] uppercase font-bold border-b border-[hsl(var(--highlight))] text-[hsl(var(--highlight))] pb-0.5 hover:text-[hsl(var(--text))] hover:border-[hsl(var(--text))] transition-colors"
               >
                 View Services &rarr;
               </Link>
@@ -208,7 +215,7 @@ export default function ProjectsPage() {
         </main>
       </div>
 
-      <ProjectMarquee items={["✦ Let's Build Something Great", '✦ Ready to transform your business?', "✦ Connect With Us"]} />
+      <ProjectMarquee items={["Let's Build Something Great", 'Ready to transform your business?', "Connect With Us"]} />
 
 
         <CartAndContact />
@@ -257,7 +264,7 @@ function ProjectRow({ project, index, isLast }) {
       initial={{ opacity: 0, y: 30 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ duration: 0.6, delay: index * 0.05 }}
-      className={`${!isLast ? "border-b border-[hsl(var(--surface1))]" : ""} bg-[hsla(var(--lavender)/0.02)] hover:bg-[hsla(var(--lavender)/0.04)] transition-colors duration-500`}
+      className={`${!isLast ? "border-b border-[hsl(var(--surface1))]" : ""} bg-[hsla(var(--highlight)/0.02)] hover:bg-[hsla(var(--highlight)/0.04)] transition-colors duration-500`}
     >
       {/* Row header — always visible */}
       <div className="px-8 md:px-12 pt-10 pb-0">
@@ -289,7 +296,7 @@ function ProjectRow({ project, index, isLast }) {
           <span className="font-barlow text-[11px] tracking-[0.2em] uppercase font-bold text-[hsl(var(--subtext1))] mr-3">
             Outcome
           </span>
-          <span className="font-Barlow text-2xl font-black uppercase tracking-tight text-[hsl(var(--lavender))]">
+          <span className="font-Barlow text-2xl font-black uppercase tracking-tight text-[hsl(var(--highlight))]">
             {outcome}
           </span>
         </div>
@@ -309,12 +316,12 @@ function ProjectRow({ project, index, isLast }) {
         </div>
       ) : (
         <div
-          className="mx-8 md:mx-12 border border-[hsl(var(--surface1))] bg-[hsla(var(--lavender)/0.05)] flex items-end p-6"
+          className="mx-8 md:mx-12 border border-[hsl(var(--surface1))] bg-[hsla(var(--highlight)/0.05)] flex items-end p-6"
           style={{ height: "180px" }}
         >
           <span
             aria-hidden
-            className="font-Barlow font-black uppercase text-[clamp(3rem,8vw,8rem)] leading-[0.85] tracking-tight text-[hsla(var(--lavender)/0.1)] select-none"
+            className="font-Barlow font-black uppercase text-[clamp(3rem,8vw,8rem)] leading-[0.85] tracking-tight text-[hsla(var(--highlight)/0.1)] select-none"
           >
             {scope}
           </span>
@@ -348,7 +355,7 @@ function ProjectRow({ project, index, isLast }) {
                   key={d}
                   className="font-barlow flex items-start gap-3 text-sm leading-snug text-[hsl(var(--text))] opacity-80"
                 >
-                  <span className="mt-1.5 w-1 h-1 flex-shrink-0 bg-[hsl(var(--lavender))]" />
+                  <span className="mt-1.5 w-1 h-1 flex-shrink-0 bg-[hsl(var(--highlight))]" />
                   {d}
                 </li>
               ))}
@@ -397,7 +404,7 @@ function ProjectRow({ project, index, isLast }) {
         <div className="md:pl-6 pt-4 md:pt-0 flex items-end">
           <Link
             to={`/projects/${project.id || project.slug}`}
-            className="font-barlow text-[10px] tracking-[0.15em] uppercase font-bold bg-[hsl(var(--text))] text-[hsl(var(--base))] px-4 py-2 hover:bg-[hsl(var(--lavender))] transition-colors w-full text-center"
+            className="font-barlow text-[10px] tracking-[0.15em] uppercase font-bold bg-[hsl(var(--text))] text-[hsl(var(--base))] px-4 py-2 hover:bg-[hsl(var(--highlight))] transition-colors w-full text-center"
           >
             Read Full Study &rarr;
           </Link>

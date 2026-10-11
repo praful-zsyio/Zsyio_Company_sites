@@ -45,15 +45,15 @@ const EnggExcell = () => {
 
             {/* ── Left: text content ── */}
             <div className='flex flex-col py-6 lg:py-0 w-full lg:w-2/5 lg:pr-6 justify-center lg:justify-evenly gap-6 lg:gap-0'>
-                <h3 className='animate-item text-[11px] md:text-[12px] font-medium text-[hsla(var(--lavender)/0.8)] uppercase flex flex-wrap gap-3 md:gap-5 pl-1'>
+                <h3 className='animate-item text-[11px] md:text-[12px] font-medium text-[hsla(var(--highlight)/0.8)] uppercase flex flex-wrap gap-3 md:gap-5 pl-1'>
                     <span className='tracking-[.2em]'>Engineering</span>
                     <span className='tracking-[.2em]'>Excellence</span>
                 </h3>
 
                 <h1 className='animate-item font-Barlow font-[900] uppercase tracking-[-.05em] leading-[0.95] flex flex-col gap-4 md:gap-6 lg:gap-8 text-6xl md:text-7xl lg:text-8xl'>
                     <span>Precision.</span>
-                    <span className='bg-gradient-to-b from-[hsla(var(--text))] to-[hsla(var(--lavender))] bg-clip-text text-transparent'>Complexity.</span>
-                    <span className='text-[hsla(var(--lavender))]'>Resolved.</span>
+                    <span className='bg-gradient-to-b from-[hsla(var(--text))] to-[hsla(var(--highlight))] bg-clip-text text-transparent'>Complexity.</span>
+                    <span className='text-[hsla(var(--highlight))]'>Resolved.</span>
                 </h1>
 
                 <p className='animate-item font-serif text-base md:text-lg text-[hsla(var(--text)/0.8)] max-w-lg mt-6 lg:mt-0'>
@@ -68,7 +68,7 @@ const EnggExcell = () => {
           hidden lg:flex
           lg:flex-1 h-auto
           relative
-          border-l border-[hsla(var(--lavender))]
+          border-l border-[hsla(var(--highlight))]
         '
             >
                 <ParticleText text='System'/>

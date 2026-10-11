@@ -89,7 +89,7 @@ const IndustriesSection = () => {
   const ActiveIcon = getIndustryIcon(activeIndustry.id);
 
   return (
-    <section ref={comp} className="relative border-b border-[hsla(var(--lavender)/0.4)] text-[hsl(var(--text))] bg-transparent">
+    <section ref={comp} className="relative border-b border-[hsla(var(--highlight)/0.4)] text-[hsl(var(--text))] bg-transparent">
       
       <div className="container mx-auto max-w-6xl relative z-10 px-6">
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_400px] items-start gap-12 lg:gap-20">
@@ -97,8 +97,8 @@ const IndustriesSection = () => {
           {/* Left Side: Scrolling List */}
           <div className="flex flex-col pt-16 pb-24">
             
-            <div className="mb-16 border-b border-[hsla(var(--lavender)/0.4)] pb-8">
-              <p className="text-[10px] tracking-[0.25em] uppercase font-medium mb-3 text-[hsl(var(--lavender))] opacity-50">
+            <div className="mb-16 border-b border-[hsla(var(--highlight)/0.4)] pb-8">
+              <p className="text-[10px] tracking-[0.25em] uppercase font-medium mb-3 text-[hsl(var(--highlight))] opacity-50">
                 Where We Build
               </p>
               <h2
@@ -119,14 +119,14 @@ const IndustriesSection = () => {
                 return (
                   <div 
                     key={industry.id} 
-                    className={`ind-item-${i} flex flex-col transition-all duration-300 border-b border-[hsla(var(--lavender)/0.4)] last:border-b-0 py-8 ${isActive ? 'opacity-100' : 'opacity-40 hover:opacity-70'}`}
+                    className={`ind-item-${i} flex flex-col transition-all duration-300 border-b border-[hsla(var(--highlight)/0.4)] last:border-b-0 py-8 ${isActive ? 'opacity-100' : 'opacity-40 hover:opacity-70'}`}
                   >
                     <div className="flex items-center gap-4 mb-3">
-                      <span className="text-[10px] tracking-[0.25em] uppercase font-bold text-[hsl(var(--lavender))] opacity-60">
+                      <span className="text-[10px] tracking-[0.25em] uppercase font-bold text-[hsl(var(--highlight))] opacity-60">
                         Sector {sectorNumber}
                       </span>
                       {/* Mobile icon */}
-                      <div className="w-6 h-6 flex items-center justify-center text-[hsl(var(--lavender))] lg:hidden">
+                      <div className="w-6 h-6 flex items-center justify-center text-[hsl(var(--highlight))] lg:hidden">
                         <Icon className="w-4 h-4" />
                       </div>
                     </div>
@@ -150,19 +150,19 @@ const IndustriesSection = () => {
           {/* Right Side: Sticky Display */}
           <div className="hidden lg:flex sticky top-0 h-screen items-center justify-center">
              
-             <div className="w-full max-w-[320px] aspect-[4/5] border border-[hsla(var(--lavender)/0.4)] bg-[hsl(var(--base))] flex flex-col p-8 relative group overflow-hidden">
+             <div className="w-full max-w-[320px] aspect-[4/5] border border-[hsla(var(--highlight)/0.4)] bg-[hsl(var(--base))] flex flex-col p-8 relative group overflow-hidden">
                 
                 {/* Background Watermark Icon */}
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 pointer-events-none">
-                  <ActiveIcon key={`bg-${activeIndustry.id}`} className="sticky-icon-anim w-full h-full text-[hsl(var(--lavender))] opacity-[0.04]" />
+                  <ActiveIcon key={`bg-${activeIndustry.id}`} className="sticky-icon-anim w-full h-full text-[hsl(var(--highlight))] opacity-[0.04]" />
                 </div>
                 
                 {/* Header */}
                 <div className="w-full flex justify-between items-start mb-auto z-10">
-                   <div className="w-12 h-12 border border-[hsla(var(--lavender)/0.4)] bg-[hsl(var(--base))] flex items-center justify-center text-[hsl(var(--lavender))]">
+                   <div className="w-12 h-12 border border-[hsla(var(--highlight)/0.4)] bg-[hsl(var(--base))] flex items-center justify-center text-[hsl(var(--highlight))]">
                       <ActiveIcon key={`fg-${activeIndustry.id}`} className="sticky-icon-anim w-6 h-6" />
                    </div>
-                   <span className="text-[10px] tracking-[0.25em] uppercase font-bold text-[hsl(var(--lavender))] opacity-50 sticky-icon-anim mt-2">
+                   <span className="text-[10px] tracking-[0.25em] uppercase font-bold text-[hsl(var(--highlight))] opacity-50 sticky-icon-anim mt-2">
                      {String(activeIndex + 1).padStart(2, "0")}
                    </span>
                 </div>

@@ -6,11 +6,18 @@ import { getProducts } from "../services/api";
 import ProductsHero from "../components/products/ProductsHero";
 import ProductsSidebar from "../components/products/ProductsSidebar";
 import ProductRow from "../components/products/ProductRow";
+import { usePageSEO } from "../utils/seo";
 
 export default function ProductsPage() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeFilter, setActiveFilter] = useState("All");
+
+  usePageSEO({
+    title: "Software Products & Accelerators",
+    description: "Production-ready enterprise platforms, developer toolkits, and software accelerators built by Zsyio.",
+    url: "/products",
+  });
 
   useEffect(() => {
     getProducts()

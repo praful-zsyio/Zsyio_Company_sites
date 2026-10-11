@@ -44,12 +44,12 @@ const BackToTopButton = () => {
         hidden md:flex
         h-14 w-14
         items-center justify-center
-        rounded-xl
-        bg-[hsla(var(--lavender))]
-        shadow-lg shadow-[hsla(var(--lavender)/0.25)]
+        
+        bg-[hsla(var(--highlight))]
+        shadow-lg shadow-[hsla(var(--highlight)/0.25)]
         transition-all duration-500 ease-out
         hover:-translate-y-1
-        hover:shadow-xl hover:shadow-[hsla(var(--lavender)/0.4)]
+        hover:shadow-xl hover:shadow-[hsla(var(--highlight)/0.4)]
         focus:outline-none
         hover:!opacity-100
         `,

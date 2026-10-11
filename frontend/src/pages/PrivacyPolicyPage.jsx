@@ -152,7 +152,7 @@ export default function PrivacyPolicyPage() {
                 <ul className="mb-6 space-y-0">
                   {s.items.map((item) => (
                     <li key={item} className="border-t border-[hsl(var(--surface1))] py-3 flex items-start gap-4">
-                      <span className="text-[hsl(var(--lavender))] flex-shrink-0 mt-0.5 font-black">✦</span>
+                      <span className="text-[hsl(var(--highlight))] flex-shrink-0 mt-0.5 font-black">✦</span>
                       <span className="font-barlow text-[15px] leading-relaxed text-[hsla(var(--text)/0.8)]">{item}</span>
                     </li>
                   ))}
@@ -193,14 +193,14 @@ export default function PrivacyPolicyPage() {
                   <button
                     onClick={() => handleConsent('accepted')}
                     disabled={loading}
-                    className="bg-[hsl(var(--lavender))] flex justify-center items-center font-bold text-[14px] md:text-[15px] text-[hsl(var(--base))] px-8 py-3 rounded-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-lg shadow-[hsla(var(--lavender)/0.25)] disabled:opacity-50"
+                    className="bg-[hsl(var(--highlight))] flex justify-center items-center font-bold text-[14px] md:text-[15px] text-[hsl(var(--base))] px-8 py-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg shadow-[hsla(var(--highlight)/0.25)] disabled:opacity-50"
                   >
                     {loading ? 'Processing...' : 'Accept Policy'}
                   </button>
                   <button
                     onClick={() => handleConsent('rejected')}
                     disabled={loading}
-                    className="bg-transparent border border-[hsl(var(--surface1))] flex justify-center items-center font-bold text-[14px] md:text-[15px] text-[hsl(var(--text))] px-8 py-3 rounded-xl transition-all duration-300 hover:bg-[hsl(var(--surface1))] disabled:opacity-50"
+                    className="bg-transparent border border-[hsl(var(--surface1))] flex justify-center items-center font-bold text-[14px] md:text-[15px] text-[hsl(var(--text))] px-8 py-3 transition-all duration-300 hover:bg-[hsl(var(--surface1))] disabled:opacity-50"
                   >
                     {loading ? 'Processing...' : 'Decline'}
                   </button>
@@ -219,7 +219,7 @@ export default function PrivacyPolicyPage() {
                 <p className="font-barlow text-[15px] leading-relaxed text-[hsla(var(--text)/0.8)] mb-4">
                   Your consent has been recorded. Thank you for taking the time to review our Privacy Policy.
                 </p>
-                <button onClick={() => setConsent(null)} className="font-barlow text-[11px] tracking-[0.2em] uppercase font-bold border-b border-[hsl(var(--text))] pb-0.5 hover:text-[hsl(var(--lavender))] hover:border-[hsl(var(--lavender))] transition-colors">
+                <button onClick={() => setConsent(null)} className="font-barlow text-[11px] tracking-[0.2em] uppercase font-bold border-b border-[hsl(var(--text))] pb-0.5 hover:text-[hsl(var(--highlight))] hover:border-[hsl(var(--highlight))] transition-colors">
                   Review Again
                 </button>
               </div>
@@ -232,10 +232,10 @@ export default function PrivacyPolicyPage() {
                   Some features may be limited. You can change your decision at any time, or contact us to request data deletion.
                 </p>
                 <div className="flex gap-4">
-                  <button onClick={() => setConsent(null)} className="font-barlow text-[11px] tracking-[0.2em] uppercase font-bold border-b border-[hsl(var(--text))] pb-0.5 hover:text-[hsl(var(--lavender))] hover:border-[hsl(var(--lavender))] transition-colors">
+                  <button onClick={() => setConsent(null)} className="font-barlow text-[11px] tracking-[0.2em] uppercase font-bold border-b border-[hsl(var(--text))] pb-0.5 hover:text-[hsl(var(--highlight))] hover:border-[hsl(var(--highlight))] transition-colors">
                     Review Again
                   </button>
-                  <Link to="/contact" className="font-barlow text-[11px] tracking-[0.2em] uppercase font-bold border-b border-[hsla(var(--text)/0.3)] pb-0.5 hover:text-[hsl(var(--lavender))] hover:border-[hsl(var(--lavender))] transition-colors text-[hsla(var(--text)/0.6)]">
+                  <Link to="/contact" className="font-barlow text-[11px] tracking-[0.2em] uppercase font-bold border-b border-[hsla(var(--text)/0.3)] pb-0.5 hover:text-[hsl(var(--highlight))] hover:border-[hsl(var(--highlight))] transition-colors text-[hsla(var(--text)/0.6)]">
                     Request Deletion
                   </Link>
                 </div>
@@ -253,14 +253,14 @@ export default function PrivacyPolicyPage() {
           </p>
           <p className="font-barlow text-[15px] font-bold text-[hsl(var(--text))]">
             Contact our Data Protection Officer:{' '}
-            <a href="mailto:privacy@zsyio.com" className="border-b border-[hsl(var(--text))] hover:text-[hsl(var(--lavender))] hover:border-[hsl(var(--lavender))] transition-colors pb-0.5">
+            <a href="mailto:privacy@zsyio.com" className="border-b border-[hsl(var(--text))] hover:text-[hsl(var(--highlight))] hover:border-[hsl(var(--highlight))] transition-colors pb-0.5">
               privacy@zsyio.com
             </a>
           </p>
         </div>
         <Link
           to="/contact"
-          className="bg-[hsl(var(--lavender))] flex justify-center items-center font-bold text-[14px] md:text-[15px] text-[hsl(var(--base))] px-8 py-4 rounded-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-lg shadow-[hsla(var(--lavender)/0.25)] flex-shrink-0"
+          className="bg-[hsl(var(--highlight))] flex justify-center items-center font-bold text-[14px] md:text-[15px] text-[hsl(var(--base))] px-8 py-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg shadow-[hsla(var(--highlight)/0.25)] flex-shrink-0"
         >
           Contact Us →
         </Link>

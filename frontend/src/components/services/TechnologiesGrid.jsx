@@ -39,7 +39,7 @@ const TechnologiesGrid = ({ isInView = true }) => {
         className="border-b border-[hsl(var(--surface1))] py-10 md:py-12 flex flex-col md:flex-row md:items-end md:justify-between gap-4"
       >
         <div>
-          <p className="font-barlow text-[11px] tracking-[0.25em] uppercase font-medium mb-3 text-[hsl(var(--lavender))]">
+          <p className="font-barlow text-[11px] tracking-[0.25em] uppercase font-medium mb-3 text-[hsl(var(--highlight))]">
             Our Stack
           </p>
           <h2 className="font-Barlow text-[2.5rem] md:text-[4rem] font-black uppercase tracking-tight leading-none text-[hsl(var(--text))]">
@@ -52,26 +52,16 @@ const TechnologiesGrid = ({ isInView = true }) => {
       </motion.div>
 
       {/* ── Tech category grid ── */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+      <div className="columns-1 md:columns-2 lg:columns-3 gap-6">
         {categories.map((cat, ci) => (
           <motion.div
             key={cat.category}
             initial={{ opacity: 0, y: 20 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.45, delay: 0.2 + ci * 0.08, ease: [0.4, 0, 0.2, 1] }}
-            className={[
-              "border-b border-[hsl(var(--surface1))] px-7 py-8 group",
-              "hover:bg-[hsla(var(--lavender)/0.03)] transition-colors duration-300",
-              // right border for 2-col layout (md)
-              ci % 2 === 0 ? "md:border-r md:border-[hsl(var(--surface1))]" : "",
-              // override right border for 3-col layout (lg)
-              ci % 3 !== 2 ? "lg:border-r lg:border-[hsl(var(--surface1))]" : "lg:border-r-0",
-              ci % 2 !== 0 ? "md:border-r-0" : "",
-            ]
-              .filter(Boolean)
-              .join(" ")}
+            className="break-inside-avoid mb-6 border border-[hsl(var(--surface1))] rounded-xl px-7 py-8 group hover:bg-[hsla(var(--highlight)/0.03)] hover:border-[hsla(var(--highlight)/0.3)] transition-all duration-300"
           >
-            <p className="font-barlow text-[10px] tracking-[0.25em] uppercase font-bold mb-6 text-[hsl(var(--lavender))]">
+            <p className="font-barlow text-[10px] tracking-[0.25em] uppercase font-bold mb-6 text-[hsl(var(--highlight))]">
               {cat.category}
             </p>
             <ul className="flex flex-col">
@@ -86,10 +76,10 @@ const TechnologiesGrid = ({ isInView = true }) => {
                         : ""
                     }`}
                   >
-                    <span className="font-Barlow text-lg md:text-xl font-bold uppercase tracking-tight text-[hsl(var(--text))] group-hover:text-[hsl(var(--lavender))] transition-colors duration-200">
+                    <span className="font-Barlow text-lg md:text-xl font-bold uppercase tracking-tight text-[hsl(var(--text))] group-hover:text-[hsl(var(--highlight))] transition-colors duration-200">
                       {techName}
                     </span>
-                    <span className="w-1.5 h-1.5 rounded-full bg-[hsl(var(--lavender))] opacity-30 shrink-0" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-[hsl(var(--highlight))] opacity-30 shrink-0" />
                   </li>
                 );
               })}

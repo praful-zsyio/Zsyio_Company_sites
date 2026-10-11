@@ -98,7 +98,9 @@ class GlobalDataView(APIView):
                 {"title": "Services", "path": "/services", "icon": "Cpu"},
                 {"title": "Projects", "path": "/projects", "icon": "Briefcase"},
                 {"title": "Products", "path": "/products", "icon": "Box"},
+                {"title": "Insights", "path": "/insights", "icon": "BookOpen"},
                 {"title": "About Us", "path": "/about", "icon": "Info"},
+                {"title": "Careers", "path": "/careers", "icon": "Users"},
                 {"title": "Contact", "path": "/contact", "icon": "Mail"},
             ],
             "aboutData": {

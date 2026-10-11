@@ -21,15 +21,15 @@ export default function ProductsSidebar({
                 onClick={() => setActiveFilter(cat)}
                 className={`text-left py-3 border-b border-[hsl(var(--surface1))] flex items-center justify-between group transition-colors ${
                   activeFilter === cat
-                    ? "text-[hsl(var(--lavender))]"
-                    : "text-[hsl(var(--text))] hover:text-[hsl(var(--lavender))]"
+                    ? "text-[hsl(var(--highlight))]"
+                    : "text-[hsl(var(--text))] hover:text-[hsl(var(--highlight))]"
                 }`}
               >
                 <span className="font-Barlow text-xl font-bold uppercase tracking-tight">
                   {cat}
                 </span>
                 {activeFilter === cat && (
-                  <span className="w-2 h-2 bg-[hsl(var(--lavender))] flex-shrink-0" />
+                  <span className="w-2 h-2 bg-[hsl(var(--highlight))] flex-shrink-0" />
                 )}
               </button>
             ))}
@@ -43,7 +43,7 @@ export default function ProductsSidebar({
           <div className="font-Barlow text-5xl font-black tracking-tight mb-1 text-[hsl(var(--text))]">
             {filteredCount}
           </div>
-          <p className="font-barlow text-[11px] tracking-[0.2em] uppercase font-bold text-[hsl(var(--lavender))]">
+          <p className="font-barlow text-[11px] tracking-[0.2em] uppercase font-bold text-[hsl(var(--highlight))]">
             {activeFilter === "All" ? "All Products" : activeFilter}
           </p>
         </div>
@@ -54,7 +54,7 @@ export default function ProductsSidebar({
           </p>
           <Link
             to="/contact"
-            className="font-barlow text-[11px] tracking-[0.2em] uppercase font-bold border-b border-[hsl(var(--lavender))] text-[hsl(var(--lavender))] pb-0.5 hover:text-[hsl(var(--text))] hover:border-[hsl(var(--text))] transition-colors"
+            className="font-barlow text-[11px] tracking-[0.2em] uppercase font-bold border-b border-[hsl(var(--highlight))] text-[hsl(var(--highlight))] pb-0.5 hover:text-[hsl(var(--text))] hover:border-[hsl(var(--text))] transition-colors"
           >
             Talk to Us →
           </Link>

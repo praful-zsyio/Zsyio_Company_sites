@@ -2,18 +2,18 @@ import React, { useRef, useEffect } from 'react';
 import gsap from 'gsap';
 
 const PARTNERS = [
-  '✦ Google Cloud',
-  '✦ Amazon Web Services',
-  '✦ Microsoft Azure',
-  '✦ Vercel',
-  '✦ Stripe',
-  '✦ Cloudflare',
-  '✦ MongoDB',
-  '✦ OpenAI',
-  '✦ Figma',
-  '✦ GitHub',
-  '✦ Docker',
-  '✦ Datadog',
+  'Google Cloud',
+  'Amazon Web Services',
+  'Microsoft Azure',
+  'Vercel',
+  'Stripe',
+  'Cloudflare',
+  'MongoDB',
+  'OpenAI',
+  'Figma',
+  'GitHub',
+  'Docker',
+  'Datadog',
 ];
 
 const PartnerMarquee = () => {
@@ -36,7 +36,7 @@ const PartnerMarquee = () => {
 
     tweenRef.current = gsap.to([track, clone], {
       x: `-=${totalWidth}`,
-      duration: 35, // Slightly slower than the top marquee for variety
+      duration: totalWidth / 35, // Slightly different speed for variety
       ease: 'none',
       repeat: -1,
       modifiers: {
@@ -78,9 +78,9 @@ const PartnerMarquee = () => {
         overflow: 'hidden',
         display: 'flex',
         alignItems: 'center',
-        background: 'linear-gradient(90deg, hsla(var(--lavender)/0.04) 0%, hsla(var(--lavender)/0.08) 50%, hsla(var(--lavender)/0.04) 100%)',
-        borderTop: '1px solid hsla(var(--lavender))',
-        borderBottom: '1px solid hsla(var(--lavender))',
+        background: 'linear-gradient(90deg, hsla(var(--highlight)/0.04) 0%, hsla(var(--highlight)/0.08) 50%, hsla(var(--highlight)/0.04) 100%)',
+        borderTop: '1px solid hsla(var(--highlight))',
+        borderBottom: '1px solid hsla(var(--highlight))',
         position: 'relative',
         marginTop: '2rem',
         marginBottom: '2rem',
@@ -104,7 +104,7 @@ const PartnerMarquee = () => {
             fontWeight: 700,
             letterSpacing: '0.15em',
             textTransform: 'uppercase',
-            color: 'hsla(var(--lavender))',
+            color: 'hsla(var(--highlight))',
             padding: '0 2rem 0 3rem',
             fontFamily: 'var(--font-barlow, "Barlow", sans-serif)',
           }}
@@ -112,7 +112,7 @@ const PartnerMarquee = () => {
           Partnered With:
         </span>
         
-        {PARTNERS.map((text, i) => (
+        {Array(10).fill(PARTNERS).flat().map((text, i) => (
           <span
             key={i}
             style={{

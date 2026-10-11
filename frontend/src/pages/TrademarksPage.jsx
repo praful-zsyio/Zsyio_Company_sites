@@ -127,7 +127,7 @@ export default function TrademarksPage() {
               <ul className="space-y-0">
                 {PERMITTED.map((item) => (
                   <li key={item} className="border-t border-[hsl(var(--surface1))] py-4 flex items-start gap-4">
-                    <span className="text-[hsl(var(--lavender))] flex-shrink-0 mt-0.5 font-bold">✓</span>
+                    <span className="text-[hsl(var(--highlight))] flex-shrink-0 mt-0.5 font-bold">✓</span>
                     <span className="font-barlow text-[15px] leading-relaxed text-[hsla(var(--text)/0.8)]">{item}</span>
                   </li>
                 ))}
@@ -197,10 +197,10 @@ export default function TrademarksPage() {
             For brand licensing requests, press kit access, or legal inquiries regarding trademark use, contact our legal team. We respond within 2 business days.
           </p>
           <div className="flex flex-wrap gap-4">
-            <a href="mailto:legal@zsyio.com" className="bg-[hsl(var(--surface1))] flex justify-center items-center font-bold text-[14px] md:text-[15px] text-[hsl(var(--text))] px-8 py-3 rounded-xl transition-all duration-300 hover:bg-[hsl(var(--surface2))]">
+            <a href="mailto:legal@zsyio.com" className="bg-[hsl(var(--surface1))] flex justify-center items-center font-bold text-[14px] md:text-[15px] text-[hsl(var(--text))] px-8 py-3 transition-all duration-300 hover:bg-[hsl(var(--surface2))]">
               legal@zsyio.com
             </a>
-            <Link to="/contact" className="bg-[hsl(var(--lavender))] flex justify-center items-center font-bold text-[14px] md:text-[15px] text-[hsl(var(--base))] px-8 py-3 rounded-xl transition-all duration-300 hover:-translate-y-1 hover:shadow-lg shadow-[hsla(var(--lavender)/0.25)]">
+            <Link to="/contact" className="bg-[hsl(var(--highlight))] flex justify-center items-center font-bold text-[14px] md:text-[15px] text-[hsl(var(--base))] px-8 py-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg shadow-[hsla(var(--highlight)/0.25)]">
               Contact Form →
             </Link>
           </div>

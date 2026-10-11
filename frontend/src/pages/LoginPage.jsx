@@ -61,7 +61,7 @@ const LoginPage = () => {
 
                     <button
                         type="submit"
-                        className="w-full bg-[hsl(var(--blue))] hover:bg-[hsl(var(--sapphire))] text-white font-semibold py-3 rounded-xl transition-all shadow-[0_0_20px_rgba(56,189,248,0.3)] hover:shadow-[0_0_30px_rgba(56,189,248,0.5)]"
+                        className="w-full bg-[hsl(var(--blue))] hover:bg-[hsl(var(--sapphire))] text-white font-semibold py-3 transition-all shadow-[0_0_20px_rgba(56,189,248,0.3)] hover:shadow-[0_0_30px_rgba(56,189,248,0.5)]"
                     >
                         Sign In
                     </button>

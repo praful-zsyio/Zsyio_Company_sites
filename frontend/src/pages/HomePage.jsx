@@ -11,9 +11,16 @@ import NewsletterBox from '../components/globalComponents/NewsletterBox';
 import EnggExcell from '../components/home/EnggExcell';
 
 import StatsMarquee from '../components/home/StatsMarquee';
+import { usePageSEO } from '../utils/seo';
 
 const HomePage = () => {
   const mainRef = useRef(null);
+
+  usePageSEO({
+    title: "Enterprise Software Engineering & Digital Solutions",
+    description: "Zsyio engineers scalable digital systems, cloud architectures, AI/ML platforms, and high-performance custom applications for global enterprises.",
+    url: "/",
+  });
 
 
 

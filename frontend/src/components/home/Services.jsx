@@ -19,8 +19,8 @@ const Services = () => {
         scrollTrigger: {
           trigger: sectionRef.current,
           start: 'top 80%',
-          // play on scroll down, stay visible, reverse only on scroll back up
-          toggleActions: 'play none none reverse',
+          // play on scroll down, stay visible
+          toggleActions: 'play none none none',
         },
         defaults: { ease: 'power3.out' },
       });
@@ -64,7 +64,7 @@ const Services = () => {
       {/* ── Section header ── */}
       <div className='flex justify-between lg:items-center flex-col lg:flex-row mb-8 lg:mb-12'>
         <div>
-          <h3 ref={tagRef} className='text-[11px] md:text-[12px] font-medium text-[hsla(var(--lavender)/0.8)] uppercase flex flex-wrap gap-3 md:gap-5 pl-1 mb-2'>
+          <h3 ref={tagRef} className='text-[11px] md:text-[12px] font-medium text-[hsla(var(--highlight)/0.8)] uppercase flex flex-wrap gap-3 md:gap-5 pl-1 mb-2'>
             <span className='tracking-[.2rem]'>What </span>
             <span className='tracking-[.2rem]'>we </span>
             <span className='tracking-[.2rem]'>do</span>
@@ -74,7 +74,7 @@ const Services = () => {
           </h1>
         </div>
         <h6 ref={subRef} className='text-[0.8rem] font-Barlow uppercase mt-3 lg:mt-0 max-w-xs text-right'>
-          Multiple disciplines. One team.<br />everything built as a <span className='text-[hsl(var(--lavender))] font-medium'>masterpiece</span>.
+          Multiple disciplines. One team.<br />everything built as a <span className='text-[hsl(var(--highlight))] font-medium'>masterpiece</span>.
         </h6>
       </div>
 
@@ -85,7 +85,7 @@ const Services = () => {
       <div ref={linkRef} className='flex justify-center mb-16'>
         <a
           href='/services'
-          className='text-[0.8rem] font-Barlow uppercase tracking-[.15rem] text-[hsl(var(--lavender))] underline underline-offset-4 hover:opacity-70 transition-opacity'
+          className='text-[0.8rem] font-Barlow uppercase tracking-[.15rem] text-[hsl(var(--highlight))] underline underline-offset-4 hover:opacity-70 transition-opacity'
         >
           View All Services
         </a>

@@ -205,7 +205,7 @@ function Scene({ text }) {
 
   const uniforms = useMemo(() => {
     const base = cssHslToRgb('--text');
-    const accent = cssHslToRgb('--lavender');
+    const accent = cssHslToRgb('--highlight');
     return {
       uTime: { value: 0 },
       uMouse: { value: new THREE.Vector3(999, 999, 0) },
@@ -220,7 +220,7 @@ function Scene({ text }) {
   useEffect(() => {
     function syncColors() {
       const base = cssHslToRgb('--text');
-      const accent = cssHslToRgb('--lavender');
+      const accent = cssHslToRgb('--highlight');
       uniforms.uBaseColor.value.set(base.r, base.g, base.b);
       uniforms.uAccentColor.value.set(accent.r, accent.g, accent.b);
     }

@@ -19,22 +19,8 @@ export default function ProductDetailHero({
       transition={{ duration: 0.8 }}
       className="px-6 md:px-12 lg:px-20 pt-10 pb-12 border-b border-[hsl(var(--surface1))]"
     >
-      {/* Breadcrumb */}
-      <div className="flex items-center gap-2 mb-8">
-        <Link
-          to="/products"
-          className="font-barlow text-[10px] tracking-[0.2em] uppercase font-bold text-[hsl(var(--subtext1))] hover:text-[hsl(var(--lavender))] transition-colors"
-        >
-          Products
-        </Link>
-        <span className="text-[hsl(var(--subtext1))] text-[10px]">/</span>
-        <span className="font-barlow text-[10px] tracking-[0.2em] uppercase font-bold text-[hsl(var(--lavender))]">
-          {name}
-        </span>
-      </div>
-
       <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-10">
-        <div className="max-w-3xl">
+        <div className="max-w-3xl overflow-hidden">
           <div className="flex items-center gap-4 mb-4">
             <span className="font-barlow text-[11px] tracking-[0.25em] uppercase font-bold text-[hsl(var(--subtext1))]">
               {category}
@@ -49,15 +35,15 @@ export default function ProductDetailHero({
           </div>
 
           <h1
-            className="font-Barlow font-[900] uppercase tracking-[-0.05em] leading-[0.9] mb-4"
-            style={{ fontSize: "clamp(3rem, 8vw, 7rem)" }}
+            className="font-Barlow font-[900] uppercase tracking-[-0.05em] leading-[0.9] mb-4 truncate"
+            style={{ fontSize: "clamp(2rem, 5vw, 4.5rem)" }}
           >
             {name}
           </h1>
 
           {tagline && (
             <p
-              className="font-Barlow font-bold uppercase text-xl md:text-2xl italic opacity-85"
+              className="font-Barlow font-bold uppercase text-xl md:text-2xl italic opacity-85 truncate"
               style={{ color: accent }}
             >
               {tagline}
@@ -73,7 +59,7 @@ export default function ProductDetailHero({
             rel="noopener noreferrer"
             className={`font-barlow text-[11px] tracking-[0.2em] uppercase font-bold px-6 py-3 text-center transition-colors duration-300 ${
               liveUrl
-                ? "bg-[hsl(var(--text))] text-[hsl(var(--base))] hover:bg-[hsl(var(--lavender))]"
+                ? "bg-[hsl(var(--text))] text-[hsl(var(--base))] hover:bg-[hsl(var(--highlight))]"
                 : "bg-[hsl(var(--surface1))] text-[hsl(var(--subtext1))] cursor-not-allowed opacity-50"
             }`}
           >

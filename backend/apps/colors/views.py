@@ -63,14 +63,14 @@ class ColorSchemeViewSet(viewsets.ViewSet):
 
     def list(self, request):
         db = get_mongo_db()
-        if not db: return Response([])
+        if db is None: return Response([])
         return Response([serialize_mongo_doc(s) for s in db['color_schemes'].find()])
 
     @action(detail=False, methods=['get'])
     def by_theme(self, request):
         theme_type = request.query_params.get('type', 'light')
         db = get_mongo_db()
-        if not db: return Response([])
+        if db is None: return Response([])
         schemes = [serialize_mongo_doc(s) for s in db['color_schemes'].find({"theme_type": theme_type, "is_active": True})]
         return Response({"success": True, "theme_type": theme_type, "data": schemes})
 
@@ -79,13 +79,13 @@ class CustomColorViewSet(viewsets.ViewSet):
 
     def list(self, request):
         db = get_mongo_db()
-        if not db: return Response([])
+        if db is None: return Response([])
         return Response([serialize_mongo_doc(c) for c in db['custom_colors'].find()])
 
     @action(detail=False, methods=['css_variables'])
     def css_variables(self, request):
         db = get_mongo_db()
-        if not db: return Response({})
+        if db is None: return Response({})
         colors = db['custom_colors'].find({"is_active": True})
         css_vars = {c.get('css_variable'): {"value": c.get('color_value')} for c in colors}
         return Response({"success": True, "css_variables": css_vars})
@@ -95,11 +95,11 @@ class GradientPresetViewSet(viewsets.ViewSet):
 
     def list(self, request):
         db = get_mongo_db()
-        if not db: return Response([])
+        if db is None: return Response([])
         return Response([serialize_mongo_doc(g) for g in db['gradient_presets'].find()])
 
     @action(detail=False, methods=['get'])
     def active(self, request):
         db = get_mongo_db()
-        if not db: return Response([])
+        if db is None: return Response([])
         return Response([serialize_mongo_doc(g) for g in db['gradient_presets'].find({"is_active": True})])

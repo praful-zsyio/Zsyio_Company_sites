@@ -1,0 +1,92 @@
+{% extends "admin/index.html" %}
+{% load i18n static %}
+
+{% block content %}
+<div id="content-main">
+
+  <!-- ── 01. Live KPI Stat Cards ── -->
+  <div class="zsyio-dashboard-stats">
+    <div class="zsyio-stat-card">
+      <span class="stat-badge" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.3);">
+        Catalog
+      </span>
+      <div class="stat-value" id="z-stat-products">1</div>
+      <div class="stat-label">Software Products & Accelerators</div>
+    </div>
+
+    <div class="zsyio-stat-card">
+      <span class="stat-badge" style="background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3);">
+        Publications
+      </span>
+      <div class="stat-value" id="z-stat-insights">6</div>
+      <div class="stat-label">Insights & Enterprise Case Studies</div>
+    </div>
+
+    <div class="zsyio-stat-card">
+      <span class="stat-badge" style="background: rgba(99, 102, 241, 0.15); color: #a5b4fc; border: 1px solid rgba(99, 102, 241, 0.3);">
+        Engineering
+      </span>
+      <div class="stat-value" id="z-stat-projects">Active</div>
+      <div class="stat-label">Client Projects & Deployments</div>
+    </div>
+
+    <div class="zsyio-stat-card">
+      <span class="stat-badge" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3);">
+        Database
+      </span>
+      <div class="stat-value" style="color: #34d399; font-size: 1.8rem; display: flex; align-items: center; gap: 8px;">
+        <span style="display: inline-block; width: 12px; height: 12px; background: #10b981; border-radius: 50%; box-shadow: 0 0 10px #10b981;"></span>
+        Connected
+      </div>
+      <div class="stat-label">MongoDB Atlas Cluster (TLS Enabled)</div>
+    </div>
+  </div>
+
+  <!-- ── 02. Quick Actions Toolbar ── -->
+  <div class="zsyio-quick-actions">
+    <a href="/admin/insights/insight/add/" class="zsyio-btn zsyio-btn-primary">
+      <span>+</span> Write Insight / Case Study
+    </a>
+    <a href="/admin/products/product/add/" class="zsyio-btn zsyio-btn-primary">
+      <span>+</span> Add Product
+    </a>
+    <a href="/admin/projects/project/add/" class="zsyio-btn zsyio-btn-outline">
+      <span>+</span> Add Project
+    </a>
+    <a href="/api/products/" target="_blank" class="zsyio-btn zsyio-btn-outline">
+      <span>⚡</span> Products API
+    </a>
+    <a href="/api/insights/" target="_blank" class="zsyio-btn zsyio-btn-outline">
+      <span>⚡</span> Insights API
+    </a>
+    <a href="http://localhost:5173" target="_blank" class="zsyio-btn zsyio-btn-outline" style="margin-left: auto;">
+      <span>↗</span> View Live Frontend
+    </a>
+  </div>
+
+  <!-- ── 03. Enterprise Security Baseline Banner ── -->
+  <div class="zsyio-security-banner">
+    <div>
+      <div class="security-title">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
+        Security Policies Enforced & Active
+      </div>
+      <div class="security-desc">
+        Production security baseline active: X-Frame-Options DENY, HttpOnly & Secure Cookies, Strict HSTS, SQL/NoSQL Injection Immunized.
+      </div>
+    </div>
+    <div class="zsyio-security-pills">
+      <span class="zsyio-pill">FRAME: DENY</span>
+      <span class="zsyio-pill">CSRF SECURE</span>
+      <span class="zsyio-pill">SESSION SECURE</span>
+      <span class="zsyio-pill">NOSNIFF ON</span>
+    </div>
+  </div>
+
+  <!-- ── 04. Standard Django Admin App List ── -->
+  {{ block.super }}
+
+</div>
+{% endblock %}

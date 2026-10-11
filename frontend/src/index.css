@@ -18,6 +18,7 @@
   --sapphire: 199 77% 74%;
   --blue: 217 92% 76%;
   --lavender: 259 72% 70%;
+  --highlight: var(--green);
 
   --text: 234 16% 15%;
   --subtext1: 233 13% 27%;
@@ -28,7 +29,7 @@
   --surface2: 233 14% 82%;
   --surface1: 233 14% 88%;
   --surface0: 233 13% 92%;
-  --base: 0 0% 100%;
+  --base: 0 0% 98%;
   --mantle: 240 21% 99%;
   --crust: 240 23% 100%;
   --radius-xl: 1rem;
@@ -54,6 +55,7 @@
   --sapphire: 199 77% 74%;
   --blue: 217 92% 76%;
   --lavender: 259 72% 83%;
+  --highlight: var(--green);
 
   --text: 234 16% 92%;
   --subtext1: 233 13% 83%;
@@ -281,6 +283,8 @@ body {
   font-weight:    var(--fw-regular);
   letter-spacing: var(--tracking-body);
   line-height:    1.6;
+  background-color: hsl(var(--base));
+  color: hsl(var(--text));
 }
 
 /* ─── Utility helpers ────────────────────────────────────────────────────── */

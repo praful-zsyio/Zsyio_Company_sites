@@ -15,7 +15,7 @@ const RotatingShape = () => {
   return (
     <TorusKnot ref={meshRef} args={[10, 3, 100, 16]}>
       <meshStandardMaterial 
-        color="#8b5cf6" // Lavender approximation
+        color="#8b5cf6" // Highlight approximation
         wireframe={true}
         transparent={true}
         opacity={0.8}

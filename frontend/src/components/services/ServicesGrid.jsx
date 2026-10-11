@@ -46,26 +46,18 @@ const ServicesGrid = ({
       if (!cards.length) return;
 
       // Start hidden
-      gsap.set(cards, { opacity: 0, y: 48, willChange: "transform, opacity" });
+      gsap.set(cards, { opacity: 0, y: 30, willChange: "transform, opacity" });
 
       stRef.current = ScrollTrigger.create({
         trigger: gridRef.current,
         start: "top 85%",
-        // play on scroll down, stay visible, reverse only on scroll back up
+        once: true,
         onEnter: () =>
           gsap.to(cards, {
             opacity: 1, y: 0,
             duration: 0.6,
             stagger: { amount: 0.5, from: "start" },
             ease: "power3.out",
-            overwrite: "auto",
-          }),
-        onLeaveBack: () =>
-          gsap.to(cards, {
-            opacity: 0, y: 48,
-            duration: 0.4,
-            stagger: { amount: 0.3, from: "end" },
-            ease: "power2.in",
             overwrite: "auto",
           }),
       });
@@ -108,7 +100,7 @@ const ServicesGrid = ({
   return (
     <div
       ref={gridRef}
-      className={`grid ${cols} ${gap} mb-12 bg-[hsl(var(--lavender))]`}
+      className={`grid ${cols} ${gap} mb-12`}
     >
       {visibleServices.map((service, index) => {
         const key = service.slug || service.id || index;

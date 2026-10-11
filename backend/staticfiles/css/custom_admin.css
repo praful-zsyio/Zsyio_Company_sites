@@ -1,0 +1,475 @@
+/* ==========================================================================
+   ZSYIO ENTERPRISE ADMIN THEME - CUSTOM STYLESHEET
+   Curated Dark Aesthetics, Modern Typography, Glassmorphism, KPI Components
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,600;0,700;0,900;1,400&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+  --z-bg-base: #090d16;
+  --z-bg-surface: #101623;
+  --z-bg-card: #151d2d;
+  --z-bg-elevated: #1b2539;
+  --z-border: #222f47;
+  --z-border-highlight: #3b82f6;
+  --z-primary: #6366f1;
+  --z-primary-hover: #4f46e5;
+  --z-primary-glow: rgba(99, 102, 241, 0.25);
+  --z-accent: #38bdf8;
+  --z-emerald: #10b981;
+  --z-amber: #f59e0b;
+  --z-rose: #f43f5e;
+  --z-text: #f1f5f9;
+  --z-text-muted: #94a3b8;
+  --z-text-dim: #64748b;
+  --z-radius-sm: 6px;
+  --z-radius-md: 10px;
+  --z-radius-lg: 14px;
+}
+
+/* Global Reset & Typography */
+body, html {
+  background-color: var(--z-bg-base) !important;
+  color: var(--z-text) !important;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  letter-spacing: -0.01em;
+}
+
+/* Header / Branding Bar */
+#header {
+  background: linear-gradient(135deg, #0b0f19 0%, #111827 50%, #151d2f 100%) !important;
+  border-bottom: 1px solid var(--z-border) !important;
+  padding: 16px 28px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4) !important;
+}
+
+#header #branding h1,
+#header #branding h1 a {
+  font-family: 'Barlow', sans-serif !important;
+  font-weight: 900 !important;
+  font-size: 1.35rem !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  color: #ffffff !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+}
+
+#header #branding h1 a:hover {
+  color: var(--z-accent) !important;
+}
+
+#user-tools {
+  font-size: 0.85rem !important;
+  font-weight: 500 !important;
+  color: var(--z-text-muted) !important;
+}
+
+#user-tools a {
+  color: var(--z-accent) !important;
+  border-bottom: 1px dotted transparent !important;
+  transition: all 0.2s ease !important;
+}
+
+#user-tools a:hover {
+  color: #ffffff !important;
+  border-bottom-color: var(--z-accent) !important;
+}
+
+/* Breadcrumbs Bar */
+div.breadcrumbs {
+  background-color: var(--z-bg-surface) !important;
+  border-bottom: 1px solid var(--z-border) !important;
+  color: var(--z-text-muted) !important;
+  padding: 10px 28px !important;
+  font-size: 0.85rem !important;
+  font-weight: 500 !important;
+}
+
+div.breadcrumbs a {
+  color: var(--z-text) !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+}
+
+div.breadcrumbs a:hover {
+  color: var(--z-primary) !important;
+}
+
+/* Main Container & Content */
+#container {
+  background-color: var(--z-bg-base) !important;
+}
+
+#content {
+  padding: 28px !important;
+}
+
+#content h1 {
+  font-family: 'Barlow', sans-serif !important;
+  font-weight: 800 !important;
+  font-size: 2rem !important;
+  letter-spacing: -0.02em !important;
+  text-transform: uppercase !important;
+  color: #ffffff !important;
+  margin-bottom: 24px !important;
+}
+
+/* Custom Dashboard Component - KPI Stats Grid */
+.zsyio-dashboard-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+  margin-bottom: 28px;
+}
+
+.zsyio-stat-card {
+  background: var(--z-bg-card);
+  border: 1px solid var(--z-border);
+  border-radius: var(--z-radius-md);
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.zsyio-stat-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--z-primary);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.zsyio-stat-card .stat-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: inline-block;
+  margin-bottom: 12px;
+}
+
+.zsyio-stat-card .stat-value {
+  font-family: 'Barlow', sans-serif;
+  font-size: 2.2rem;
+  font-weight: 900;
+  line-height: 1;
+  color: #ffffff;
+  margin-bottom: 6px;
+}
+
+.zsyio-stat-card .stat-label {
+  font-size: 0.85rem;
+  color: var(--z-text-muted);
+  font-weight: 500;
+}
+
+/* Quick Actions Component */
+.zsyio-quick-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 28px;
+  padding: 16px 20px;
+  background: var(--z-bg-surface);
+  border: 1px solid var(--z-border);
+  border-radius: var(--z-radius-md);
+}
+
+.zsyio-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 18px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: var(--z-radius-sm);
+  text-decoration: none !important;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.zsyio-btn-primary {
+  background: var(--z-primary);
+  color: #ffffff !important;
+  border: 1px solid var(--z-primary);
+}
+
+.zsyio-btn-primary:hover {
+  background: var(--z-primary-hover);
+  box-shadow: 0 4px 14px var(--z-primary-glow);
+}
+
+.zsyio-btn-outline {
+  background: transparent;
+  color: var(--z-text) !important;
+  border: 1px solid var(--z-border);
+}
+
+.zsyio-btn-outline:hover {
+  border-color: var(--z-accent);
+  color: var(--z-accent) !important;
+}
+
+/* Security Posture Banner Component */
+.zsyio-security-banner {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(99, 102, 241, 0.05) 100%);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: var(--z-radius-md);
+  padding: 16px 20px;
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.zsyio-security-banner .security-title {
+  font-family: 'Barlow', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--z-emerald);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.zsyio-security-banner .security-desc {
+  font-size: 0.85rem;
+  color: var(--z-text-muted);
+  margin-top: 4px;
+}
+
+.zsyio-security-pills {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.zsyio-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  background: rgba(16, 185, 129, 0.15);
+  color: #6ee7b7;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+/* Module & App List Tables */
+.module {
+  background: var(--z-bg-card) !important;
+  border: 1px solid var(--z-border) !important;
+  border-radius: var(--z-radius-md) !important;
+  margin-bottom: 24px !important;
+  overflow: hidden !important;
+}
+
+.module caption,
+.module h2 {
+  background: var(--z-bg-surface) !important;
+  color: #ffffff !important;
+  font-family: 'Barlow', sans-serif !important;
+  font-size: 1.1rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase !important;
+  padding: 14px 20px !important;
+  border-bottom: 1px solid var(--z-border) !important;
+}
+
+.module caption a,
+.module h2 a {
+  color: #ffffff !important;
+}
+
+.module table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+}
+
+.module th,
+.module td {
+  padding: 12px 20px !important;
+  border-bottom: 1px solid var(--z-border) !important;
+  font-size: 0.9rem !important;
+}
+
+.module th a {
+  color: var(--z-text) !important;
+  font-weight: 600 !important;
+}
+
+.module th a:hover {
+  color: var(--z-primary) !important;
+}
+
+.module tr:hover {
+  background-color: var(--z-bg-elevated) !important;
+}
+
+/* Action Links (Add / Change) */
+a.addlink,
+a.changelink,
+a.viewlink {
+  font-size: 0.8rem !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  padding: 4px 10px !important;
+  border-radius: 4px !important;
+  transition: all 0.2s ease !important;
+}
+
+a.addlink {
+  color: var(--z-emerald) !important;
+  background: rgba(16, 185, 129, 0.1) !important;
+}
+
+a.addlink:hover {
+  background: rgba(16, 185, 129, 0.2) !important;
+}
+
+a.changelink {
+  color: var(--z-accent) !important;
+  background: rgba(56, 189, 248, 0.1) !important;
+}
+
+a.changelink:hover {
+  background: rgba(56, 189, 248, 0.2) !important;
+}
+
+/* Forms & Inputs */
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="url"],
+input[type="number"],
+textarea,
+select {
+  background-color: var(--z-bg-base) !important;
+  border: 1px solid var(--z-border) !important;
+  color: #ffffff !important;
+  border-radius: var(--z-radius-sm) !important;
+  padding: 8px 12px !important;
+  font-size: 0.9rem !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+textarea:focus,
+select:focus {
+  border-color: var(--z-primary) !important;
+  box-shadow: 0 0 0 3px var(--z-primary-glow) !important;
+  outline: none !important;
+}
+
+/* Submit Buttons */
+.button,
+input[type="submit"],
+input[type="button"],
+.submit-row input {
+  background: var(--z-primary) !important;
+  color: #ffffff !important;
+  border: 1px solid var(--z-primary) !important;
+  border-radius: var(--z-radius-sm) !important;
+  padding: 10px 22px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+}
+
+.button:hover,
+input[type="submit"]:hover,
+.submit-row input:hover {
+  background: var(--z-primary-hover) !important;
+  box-shadow: 0 4px 14px var(--z-primary-glow) !important;
+}
+
+.button.default,
+input[type="submit"].default,
+.submit-row input.default {
+  background: var(--z-primary) !important;
+}
+
+/* Object Tools (Add button on change lists) */
+ul.object-tools a {
+  background: var(--z-primary) !important;
+  color: #ffffff !important;
+  border-radius: var(--z-radius-sm) !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  padding: 8px 16px !important;
+  border: none !important;
+}
+
+ul.object-tools a:hover {
+  background: var(--z-primary-hover) !important;
+}
+
+/* Change List Results Table */
+#changelist {
+  background: var(--z-bg-card) !important;
+  border: 1px solid var(--z-border) !important;
+  border-radius: var(--z-radius-md) !important;
+  overflow: hidden !important;
+}
+
+#changelist table thead th {
+  background: var(--z-bg-surface) !important;
+  color: var(--z-text-muted) !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+  font-size: 0.78rem !important;
+  border-bottom: 1px solid var(--z-border) !important;
+}
+
+#changelist table tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.02) !important;
+}
+
+#changelist table tbody tr:hover {
+  background: var(--z-bg-elevated) !important;
+}
+
+/* Filter Sidebar */
+#changelist-filter {
+  background: var(--z-bg-surface) !important;
+  border-left: 1px solid var(--z-border) !important;
+}
+
+#changelist-filter h2 {
+  background: var(--z-bg-card) !important;
+  color: #ffffff !important;
+  font-family: 'Barlow', sans-serif !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  font-weight: 800 !important;
+}
+
+#changelist-filter h3 {
+  color: var(--z-accent) !important;
+}
+
+#changelist-filter a {
+  color: var(--z-text-muted) !important;
+}
+
+#changelist-filter a:hover,
+#changelist-filter li.selected a {
+  color: #ffffff !important;
+}

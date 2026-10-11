@@ -24,10 +24,53 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY') or os.getenv('Django_Key') or 'django-insecure-fallback-key-for-local-dev-only'
+SECRET_KEY = os.getenv('SECRET_KEY') or os.getenv('Django_Key')
+if not SECRET_KEY:
+    if not DEBUG:
+        raise ValueError("CRITICAL: SECRET_KEY environment variable is missing in production!")
+    SECRET_KEY = 'django-insecure-fallback-key-for-local-dev-only-change-in-env'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'False').lower() == 'true'
+
+# Specific allowed hosts configuration
+ALLOWED_HOSTS_ENV = os.getenv('ALLOWED_HOSTS')
+if ALLOWED_HOSTS_ENV:
+    ALLOWED_HOSTS = [h.strip() for h in ALLOWED_HOSTS_ENV.split(',') if h.strip()]
+else:
+    ALLOWED_HOSTS = [
+        'localhost',
+        '127.0.0.1',
+        '[::1]',
+        'testserver',
+        'zsyio.com',
+        'www.zsyio.com',
+        'company-sites11.vercel.app',
+        '.onrender.com',
+        '.netlify.app',
+    ]
+
+# Security Headers & Hardening (Prevent XSS, Clickjacking, MIME-Sniffing)
+X_FRAME_OPTIONS = 'DENY'
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_REFERRER_POLICY = 'strict-origin-when-cross-origin'
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# HTTPS Cookies & Transport Security
+CSRF_COOKIE_SECURE = os.getenv('CSRF_COOKIE_SECURE', str(not DEBUG)).lower() == 'true'
+SESSION_COOKIE_SECURE = os.getenv('SESSION_COOKIE_SECURE', str(not DEBUG)).lower() == 'true'
+SESSION_COOKIE_HTTPONLY = True
+CSRF_COOKIE_HTTPONLY = True
+SESSION_COOKIE_SAMESITE = 'Lax'
+CSRF_COOKIE_SAMESITE = 'Lax'
+
+# SSL Redirect & HSTS (Enable in production environment with HTTPS)
+SECURE_SSL_REDIRECT = os.getenv('SECURE_SSL_REDIRECT', 'False').lower() == 'true'
+SECURE_HSTS_SECONDS = 31536000 if (not DEBUG and os.getenv('SECURE_HSTS', 'False').lower() == 'true') else 0
+SECURE_HSTS_INCLUDE_SUBDOMAINS = not DEBUG and SECURE_HSTS_SECONDS > 0
+SECURE_HSTS_PRELOAD = not DEBUG and SECURE_HSTS_SECONDS > 0
+
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
@@ -35,12 +78,10 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 
-ALLOWED_HOSTS = ['*']
-
 CSRF_TRUSTED_ORIGINS = [
     "https://*.onrender.com",
+    "https://zsyio-company-1-4qcq.onrender.com",
     "https://*.netlify.app",
-    "https://zsyio-company-sites-scm2.onrender.com",
     "https://zsyio.com",
     "https://www.zsyio.com",
     "http://localhost:5173",
@@ -57,9 +98,8 @@ CORS_ALLOWED_ORIGINS = [
     "https://zsyio.com",
     "https://www.zsyio.com",
     "https://company-sites11.vercel.app",
-    "https://zsyio-company-sites-scm2.onrender.com",
+    "https://zsyio-company-1-4qcq.onrender.com"
 ]
-
 
 # Allow Netlify preview and Render.com deployments via regex
 CORS_ALLOWED_ORIGIN_REGEXES = [
@@ -126,6 +166,8 @@ INSTALLED_APPS = [
     'apps.theme',
     'apps.colors',
     'apps.newsletter',
+    'apps.careers',
+    'apps.insights',
 ]
 
 MIDDLEWARE = [
@@ -145,7 +187,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -181,6 +223,8 @@ MIGRATION_MODULES = {
     'theme': 'apps.no_migrations',
     'colors': 'apps.no_migrations',
     'newsletter': 'apps.no_migrations',
+    'careers': 'apps.no_migrations',
+    'insights': 'apps.no_migrations',
 }
 
 
@@ -225,6 +269,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'OPTIONS': {
+            'min_length': 10,
+        }
     },
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
@@ -252,6 +299,9 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
 
 # Use CompressedStaticFilesStorage to prevent 500 errors on missing files during collectstatic
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'

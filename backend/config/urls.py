@@ -18,6 +18,11 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 from apps.authentication.views import CustomTokenObtainPairView, CustomTokenRefreshView
 
+# Customize Django Admin Branding
+admin.site.site_header = "ZSYIO ENTERPRISE CONTROL CONSOLE"
+admin.site.site_title = "Zsyio Admin Portal"
+admin.site.index_title = "Operations, Content & Service Administration"
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/login/', CustomTokenObtainPairView.as_view(), name='login'),
@@ -42,4 +47,7 @@ urlpatterns = [
     path('api/colors/', include('apps.colors.urls')),
     path('api/newsletter/', include('apps.newsletter.urls')),
     path('api/newsletter', include('apps.newsletter.urls')),
+    path('api/careers/', include('apps.careers.urls')),
+    path('api/insights/', include('apps.insights.urls')),
+    path('api/insights', include('apps.insights.urls')),
 ]
