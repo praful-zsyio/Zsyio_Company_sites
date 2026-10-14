@@ -1,0 +1,175 @@
+{
+  "project": {
+    "id": 2,
+    "slug": "zsyio-suite",
+    "title": "Zsyio Enterprise Operating System",
+    "subtitle": "Unified Single-Pane-of-Glass Workspace for High-Performance Organizations",
+    "tagline": "Consolidating SaaS fragmentation into a unified monorepo ecosystem",
+    "category": "Enterprise Software / Operating System",
+    "client": "Enterprise Operational Infrastructure",
+    "timeline": "August 2026 – October 2026",
+    "status": "Production-Ready",
+    "live_url": "https://suite.zsyio.com",
+    "repository_url": "https://github.com/ayanmagardey/zsyio-suite",
+    "thumbnail": "https://res.cloudinary.com/damlvqiwv/image/upload/v1791785480/projects/zsyio-suite/dasboard1.png",
+    "architecture_type": "Turborepo Monorepo (pnpm workspaces)",
+    "images": [
+      "https://res.cloudinary.com/damlvqiwv/image/upload/v1791785480/projects/zsyio-suite/dasboard1.png",
+      "https://res.cloudinary.com/damlvqiwv/image/upload/v1791785497/projects/zsyio-suite/dashboard2.png",
+      "https://res.cloudinary.com/damlvqiwv/image/upload/v1791785515/projects/zsyio-suite/dashboard3.png",
+      "https://res.cloudinary.com/damlvqiwv/image/upload/v1791785530/projects/zsyio-suite/dashboard4.png",
+      "https://res.cloudinary.com/damlvqiwv/image/upload/v1791785550/projects/zsyio-suite/dashboard5.png"
+    ],
+    "screenshots": [
+      {
+        "url": "https://res.cloudinary.com/damlvqiwv/image/upload/v1791785480/projects/zsyio-suite/dasboard1.png",
+        "caption": "Zsyio Flow: Sprint, task & client delivery executive dashboard with real-time operational metrics"
+      },
+      {
+        "url": "https://res.cloudinary.com/damlvqiwv/image/upload/v1791785497/projects/zsyio-suite/dashboard2.png",
+        "caption": "Zsyio Flow: High-density interactive task board with multi-column sprint workflows and SLA alerts"
+      },
+      {
+        "url": "https://res.cloudinary.com/damlvqiwv/image/upload/v1791785515/projects/zsyio-suite/dashboard3.png",
+        "caption": "Zsyio Pulse: Commercial CRM and revenue pipeline tracking deal stage velocities and contract values"
+      },
+      {
+        "url": "https://res.cloudinary.com/damlvqiwv/image/upload/v1791785530/projects/zsyio-suite/dashboard4.png",
+        "caption": "Zsyio Pulse: Client touchpoint activity log recording multi-channel interactions and task completions"
+      },
+      {
+        "url": "https://res.cloudinary.com/damlvqiwv/image/upload/v1791785550/projects/zsyio-suite/dashboard5.png",
+        "caption": "Zsyio People: Workforce HRMS and monthly timesheet ledger tracking presence compliance and shift intervals"
+      }
+    ],
+    "overview": "Zsyio Suite is an integrated enterprise operational operating system engineered to eliminate corporate SaaS fragmentation. Instead of juggling disconnected silos across Jira, Notion, Salesforce, BambooHR, and Okta, Zsyio consolidates engineering sprint execution, knowledge documentation, sales CRM pipelines, workforce HRMS, and identity governance into a unified, high-density platform.",
+    "suite_applications": [
+      {
+        "name": "Zsyio Flow",
+        "domain": "Sprint, Task & Client Delivery (PMS)",
+        "icon": "Rocket",
+        "key_features": [
+          "Kanban and List task views",
+          "Stopwatch time tracking",
+          "AI task summaries",
+          "Git branch generator",
+          "Client delivery SLA pipelines"
+        ],
+        "screenshots_count": 13,
+        "primary_screenshot": "https://res.cloudinary.com/damlvqiwv/image/upload/v1791785480/projects/zsyio-suite/dasboard1.png",
+        "task_board_screenshot": "https://res.cloudinary.com/damlvqiwv/image/upload/v1791785497/projects/zsyio-suite/dashboard2.png"
+      },
+      {
+        "name": "Zsyio Canvas",
+        "domain": "Knowledge Base, RFCs & Architecture",
+        "icon": "FileCode2",
+        "key_features": [
+          "Tiptap GFM rich editor",
+          "Live Mermaid.js SVG architecture diagrams",
+          "Architecture Decision Record (ADR) templates",
+          "Incident response runbooks",
+          "Custom covers & icon styling"
+        ],
+        "screenshots_count": 6,
+        "primary_screenshot": "https://res.cloudinary.com/damlvqiwv/image/upload/v1791785480/projects/zsyio-suite/dasboard1.png"
+      },
+      {
+        "name": "Zsyio Pulse",
+        "domain": "Commercial CRM & Pipeline Hub",
+        "icon": "TrendingUp",
+        "key_features": [
+          "Multi-stage deals Kanban",
+          "Revenue velocity metrics",
+          "Prospective leads directory",
+          "Client touchpoint activity logs"
+        ],
+        "screenshots_count": 4,
+        "primary_screenshot": "https://res.cloudinary.com/damlvqiwv/image/upload/v1791785515/projects/zsyio-suite/dashboard3.png",
+        "activities_screenshot": "https://res.cloudinary.com/damlvqiwv/image/upload/v1791785530/projects/zsyio-suite/dashboard4.png"
+      },
+      {
+        "name": "Zsyio People",
+        "domain": "Workforce HRMS & Attendance",
+        "icon": "Users",
+        "key_features": [
+          "Digital punch station",
+          "Daily and monthly timesheet logs",
+          "Leave quota ledger & balances",
+          "Annual holiday calendar",
+          "Live presence roster and shift interval tracking"
+        ],
+        "screenshots_count": 12,
+        "primary_screenshot": "https://res.cloudinary.com/damlvqiwv/image/upload/v1791785550/projects/zsyio-suite/dashboard5.png"
+      },
+      {
+        "name": "Zsyio Console",
+        "domain": "Central Identity, RBAC & Governance",
+        "icon": "ShieldCheck",
+        "key_features": [
+          "Zero-Trust Identity and Access Management (IAM)",
+          "Corporate email domain restrictions",
+          "56-action RBAC matrix",
+          "Custom granular role builder",
+          "Multi-tier organizational department hierarchy"
+        ],
+        "screenshots_count": 8,
+        "primary_screenshot": "https://res.cloudinary.com/damlvqiwv/image/upload/v1791785480/projects/zsyio-suite/dasboard1.png"
+      }
+    ],
+    "cross_app_integrations": [
+      {
+        "flow": "Deal to Delivery",
+        "description": "Closed-Won deals in Zsyio Pulse automatically scaffold client accounts and delivery sprint backlogs in Zsyio Flow."
+      },
+      {
+        "flow": "Task to RFC",
+        "description": "Engineering tickets in Zsyio Flow embed and bi-directionally sync with technical specs and ADRs authored in Zsyio Canvas."
+      },
+      {
+        "flow": "Capacity-Aware Sprints",
+        "description": "Sprint workload distribution in Zsyio Flow factors in live team attendance, shift intervals, and approved leaves from Zsyio People."
+      },
+      {
+        "flow": "Unified Governance",
+        "description": "Tenant context, authentication, and the 56-action RBAC matrix are universally enforced across all ports by Zsyio Console."
+      }
+    ],
+    "tech_stack": {
+      "framework": [
+        "Next.js 15 (App Router)",
+        "React 19",
+        "Turborepo",
+        "pnpm Workspaces"
+      ],
+      "shared_packages": [
+        "@zsyio/ui (Token contract & design primitives)",
+        "@zsyio/editor (Tiptap v2, GFM & Mermaid SVG engine)",
+        "@zsyio/auth (Session middleware & RBAC capability evaluator)",
+        "@zsyio/validators (Zod schema validation & DTO inference)",
+        "@zsyio/database (Prisma ORM multi-client instance)"
+      ],
+      "database": [
+        "PostgreSQL",
+        "Prisma ORM"
+      ],
+      "styling_and_design": [
+        "Tailwind CSS",
+        "CSS Variable Design Tokens (tokens.css, primitives.json)",
+        "Lucide React"
+      ]
+    },
+    "metrics": {
+      "integrated_apps": 5,
+      "rbac_actions_supported": 56,
+      "ui_captured_screens": 43,
+      "shared_internal_packages": 5,
+      "saas_replacements": [
+        "Jira",
+        "Notion",
+        "Salesforce",
+        "BambooHR",
+        "Okta"
+      ]
+    }
+  }
+}

@@ -34,6 +34,15 @@ def serialize_mongo_doc(doc):
                 new_doc[k] = serialize_mongo_doc(v)
             else:
                 new_doc[k] = v
+
+        # If document was wrapped under 'project', hoist nested fields so title/name are always present
+        if 'project' in new_doc and isinstance(new_doc['project'], dict):
+            for pk, pv in new_doc['project'].items():
+                if pk not in new_doc:
+                    new_doc[pk] = pv
+
+        title = new_doc.get('title') or new_doc.get('name') or 'Untitled Project'
+        new_doc['title'] = title
         return new_doc
     return doc
 

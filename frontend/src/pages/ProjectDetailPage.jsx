@@ -109,7 +109,7 @@ export default function ProjectDetailPage() {
     stack = ["React", "Node.js", "PostgreSQL"];
   }
 
-  const year = project.year || project.date?.substring(0, 4) || "2024";
+  const year = project.year || project.date?.substring(0, 4) || "2026";
 
   return (
     <main className="pt-20 md:pt-28 text-[hsl(var(--text))] min-h-screen flex flex-col">

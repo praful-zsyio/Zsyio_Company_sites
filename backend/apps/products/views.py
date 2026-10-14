@@ -34,10 +34,18 @@ def serialize_doc(doc):
             else:
                 out[k] = v
 
+        # If document was wrapped under 'project', hoist nested fields
+        project_data = out.get('project')
+        if isinstance(project_data, dict):
+            for pk, pv in project_data.items():
+                if pk not in out or out[pk] is None:
+                    out[pk] = pv
+
         # Normalize title/name aliases
-        title = out.get('title') or out.get('name') or 'Untitled'
+        title = out.get('title') or out.get('name') or (project_data.get('title') if isinstance(project_data, dict) else None) or 'Untitled'
+        name = out.get('name') or out.get('title') or (project_data.get('name') if isinstance(project_data, dict) else None) or title
         out['title'] = title
-        out['name'] = title
+        out['name'] = name
 
         # Normalize status (default 'Live' if live_url is configured)
         if not out.get('status'):
@@ -133,7 +141,10 @@ class ProductViewSet(viewsets.ViewSet):
         if coll is None:
             return Response({'detail': 'DB unavailable.'}, status=503)
         try:
-            query = {'_id': ObjectId(pk)} if ObjectId.is_valid(pk) else {'_id': pk}
+            if ObjectId.is_valid(pk):
+                query = {'$or': [{'_id': ObjectId(pk)}, {'slug': pk}]}
+            else:
+                query = {'$or': [{'_id': pk}, {'slug': pk}]}
             doc = coll.find_one(query)
             if not doc:
                 return Response({'detail': 'Product not found.'}, status=404)

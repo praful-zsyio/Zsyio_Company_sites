@@ -3,6 +3,11 @@ from .models import Product
 
 class ProductSerializer(serializers.ModelSerializer):
     cloudinary_image_url = serializers.CharField(source='cloudinary_image', required=False, allow_null=True, allow_blank=True)
+    images = serializers.ListField(
+        child=serializers.CharField(),
+        required=False,
+        default=list
+    )
 
     class Meta:
         model = Product
@@ -29,6 +34,19 @@ class ProductSerializer(serializers.ModelSerializer):
                     parts = [p.strip() for p in parts[0].split(',') if p.strip()]
                 return parts
             return []
+
+        # Normalize images array
+        if 'images' in data_dict:
+            data_dict['images'] = normalize_list(data_dict['images'])
+
+        # Keep single image and images array in sync
+        if data_dict.get('images') and not data_dict.get('image'):
+            data_dict['image'] = data_dict['images'][0]
+            if not data_dict.get('cloudinary_image'):
+                data_dict['cloudinary_image'] = data_dict['images'][0]
+        elif (data_dict.get('image') or data_dict.get('cloudinary_image')) and not data_dict.get('images'):
+            primary = data_dict.get('image') or data_dict.get('cloudinary_image')
+            data_dict['images'] = [primary]
 
         for field in ['features', 'solutions']:
             if field in data_dict and not isinstance(data_dict[field], list):

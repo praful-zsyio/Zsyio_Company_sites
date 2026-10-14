@@ -230,7 +230,7 @@ function ProjectRow({ project, index, isLast }) {
   const isInView = useInView(ref, { once: true, amount: 0.15 });
 
   const num = String(index + 1).padStart(2, "0");
-  const year = project.year || project.date?.substring(0, 4) || "2024";
+  const year = project.year || project.date?.substring(0, 4) || "2026";
   const industry = project.industry || project.category || project.type || "General";
   const scope = project.scope || "Development";
   const title = project.title || "Untitled Project";

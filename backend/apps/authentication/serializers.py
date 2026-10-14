@@ -80,13 +80,6 @@ class AllowedEmailTokenObtainPairSerializer(serializers.Serializer):
 
         raw_password = attrs.get('password', '')
 
-        # ── Check allowed list ──────────────────────────────────────
-        allowed_emails = getattr(settings, 'ALLOWED_LOGIN_EMAILS', [])
-        if allowed_emails and email not in [e.lower() for e in allowed_emails]:
-            raise serializers.ValidationError(
-                {"detail": "This email is not authorised to log in."}
-            )
-
         # ── Look up user in MongoDB ─────────────────────────────────
         coll = _get_users_collection()
         if coll is None:
@@ -94,15 +87,27 @@ class AllowedEmailTokenObtainPairSerializer(serializers.Serializer):
                 {"detail": "Database not available. Please try again later."}
             )
 
-        doc = coll.find_one({"email": email})
-        if not doc:
-            # Also try case-insensitive match
-            import re
-            doc = coll.find_one({"email": re.compile(f"^{re.escape(email)}$", re.I)})
+        import re
+        doc = coll.find_one({
+            "$or": [
+                {"email": email},
+                {"username": email},
+                {"email": re.compile(f"^{re.escape(email)}$", re.I)},
+                {"username": re.compile(f"^{re.escape(email)}$", re.I)},
+            ]
+        })
 
         if not doc:
             raise serializers.ValidationError(
-                {"detail": "Invalid credentials. Please check your email and password."}
+                {"detail": "Invalid credentials. Please check your username/email and password."}
+            )
+
+        # ── Check allowed list (superusers and staff are always authorized) ───
+        allowed_emails = getattr(settings, 'ALLOWED_LOGIN_EMAILS', [])
+        is_admin_user = doc.get('is_superuser', False) or doc.get('is_staff', False)
+        if allowed_emails and not is_admin_user and email not in [e.lower() for e in allowed_emails]:
+            raise serializers.ValidationError(
+                {"detail": "This account is not authorised to log in."}
             )
 
         user = MongoUser(doc)
