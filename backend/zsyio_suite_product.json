@@ -203,7 +203,7 @@
     "backend_api_urls": {
       "local_127_api_url": "http://127.0.0.1:8000/api/products/",
       "local_localhost_api_url": "http://localhost:8000/api/products/",
-      "production_api_url": "https://zsyio-company-sites-scm2.onrender.com/api/products/"
+      "production_api_url": "https://zsyio-company-3-5ke3.onrender.com/api/products/"
     },
     "frontend_page_urls": {
       "local_frontend_products_url": "http://localhost:5173/products",

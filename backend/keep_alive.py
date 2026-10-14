@@ -1,10 +1,11 @@
+import os
 import threading
 import time
 import requests
 
 def ping_server():
     # Render URL
-    URL = "https://zsyio-company-2-wlgt.onrender.com/" 
+    URL = os.getenv("RENDER_EXTERNAL_URL", "https://zsyio-company-3-5ke3.onrender.com/") 
     
     while True:
         try:
