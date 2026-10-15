@@ -30,11 +30,12 @@ try:
         raise e
 
     USERS_CONFIG = {
+        "contact@zsyio.com": "Zsyio@Admin#2026",
         "praful@zsyio.com": "Praful@zsyio12s",
-        "abhishek@zsyio.com": "Abhishek@zsyio@12t",
+        "abhishek@zsyio.com": "Abhishek@zsyio12t",
         "arpit@zsyio.com": "Arpit@zsyio12n",
         "ayan@zsyio.com": "Ayan@zsyio12m",
-        "ashutosh@zsyio.com": "Ashutosh@zsyio12k"
+        "ashutosh@zsyio.com": "Ashutosh@zsyio12k",
     }
 
 

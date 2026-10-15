@@ -16,13 +16,22 @@ import datetime
 
 ZSYIO_USERS = [
     {
+        "email": "contact@zsyio.com",
+        "username": "zsyio_admin",
+        "password": "Zsyio@Admin#2026",
+        "first_name": "Zsyio",
+        "last_name": "Admin",
+        "is_staff": True,
+        "is_superuser": True,
+    },
+    {
         "email": "praful@zsyio.com",
         "username": "praful@zsyio.com",
         "password": "Praful@zsyio12s",
         "first_name": "Praful",
         "last_name": "",
         "is_staff": True,
-        "is_superuser": False,
+        "is_superuser": True,
     },
     {
         "email": "arpit@zsyio.com",

@@ -327,6 +327,7 @@ ALLOWED_LOGIN_EMAILS = [
     "ashutosh@zsyio.com",
     "ayan@zsyio.com",
     "arpit@zsyio.com",
+    "contact@zsyio.com",
 ]
 
 REST_FRAMEWORK = {
@@ -363,5 +364,17 @@ CLOUDINARY_STORAGE = {
 }
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+# Authentication backend for Django Admin using MongoDB
+AUTHENTICATION_BACKENDS = [
+    'apps.authentication.backends.MongoAdminAuthBackend',
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+# Session engine using signed cookies (avoids SQL session table in MongoDB environment)
+SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
+SESSION_COOKIE_HTTPONLY = True
+SESSION_COOKIE_AGE = 86400  # 1 day
+
 
 

@@ -4,28 +4,20 @@ import django
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
 django.setup()
 
-from django.contrib.auth.models import User
+from django.conf import settings
 
-print("Checking users in database...")
-try:
-    users = User.objects.all()
-    for user in users:
-        print(f"ID: {user.id}, Username: '{user.username}', Email: '{user.email}', Is Active: {user.is_active}")
-        
-    username_to_check = "praful@zsyio.com"
-    email_to_check = "praful@zsyio.com"
-    
-    u_by_username = User.objects.filter(username=username_to_check).first()
-    if u_by_username:
-        print(f"\nUser found by username '{username_to_check}': {u_by_username}")
-    else:
-        print(f"\nUser NOT found by username '{username_to_check}'")
-        
-    u_by_email = User.objects.filter(email=email_to_check).first()
-    if u_by_email:
-        print(f"User found by email '{email_to_check}': {u_by_email} (Username: {u_by_email.username})")
-    else:
-        print(f"User NOT found by email '{email_to_check}'")
-
-except Exception as e:
-    print(f"Error: {e}")
+print("Checking users in MongoDB database...")
+client = getattr(settings, 'MONGO_CLIENT', None)
+if client:
+    db = client['zsyio_db']
+    users = list(db['users'].find({}, {'password': 0}))
+    print(f"Total users found: {len(users)}\n")
+    for i, u in enumerate(users, 1):
+        print(f"{i}. Username:   {u.get('username')}")
+        print(f"   Email:      {u.get('email')}")
+        print(f"   Role:       {'Superuser Admin' if u.get('is_superuser') else 'Team Member'}")
+        print(f"   Active:     {u.get('is_active')}")
+        print(f"   Staff:      {u.get('is_staff')}")
+        print("-" * 45)
+else:
+    print("Error: MongoDB client not available.")
