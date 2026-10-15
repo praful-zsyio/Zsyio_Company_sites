@@ -176,6 +176,7 @@ INSTALLED_APPS = [
     'apps.newsletter',
     'apps.careers',
     'apps.insights',
+    'apps.founders',
 ]
 
 MIDDLEWARE = [
@@ -233,6 +234,7 @@ MIGRATION_MODULES = {
     'newsletter': 'apps.no_migrations',
     'careers': 'apps.no_migrations',
     'insights': 'apps.no_migrations',
+    'founders': 'apps.no_migrations',
 }
 
 

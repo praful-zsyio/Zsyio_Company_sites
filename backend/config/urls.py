@@ -50,4 +50,6 @@ urlpatterns = [
     path('api/careers/', include('apps.careers.urls')),
     path('api/insights/', include('apps.insights.urls')),
     path('api/insights', include('apps.insights.urls')),
+    path('api/founders/', include('apps.founders.urls')),
+    path('api/founders', include('apps.founders.urls')),
 ]

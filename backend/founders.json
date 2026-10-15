@@ -1,0 +1,72 @@
+[
+  {
+    "id": "ayan-magardey",
+    "name": "Ayan Magardey",
+    "position": "CEO & Co-Founder",
+    "department": "Executive Leadership",
+    "email": "ayan@zsyio.com",
+    "image": "https://res.cloudinary.com/damlvqiwv/image/upload/v1792045478/founders/ayan-magardey.jpg",
+    "cloudinary_public_id": "founders/ayan-magardey",
+    "bio": "Co-Founder and Chief Executive Officer steering Zsyio's strategic vision, global enterprise partnerships, and digital solutions.",
+    "quote": "Mediocrity ships on time. Excellence ships on purpose.",
+    "linkedin": "https://www.linkedin.com/company/zsyio/",
+    "is_founding_member": true,
+    "order": 1
+  },
+  {
+    "id": "praful-sonwane",
+    "name": "Praful Sonwane",
+    "position": "CTO & Co-Founder",
+    "department": "Engineering & Technology",
+    "email": "praful@zsyio.com",
+    "image": "https://res.cloudinary.com/damlvqiwv/image/upload/v1792045481/founders/praful-sonwane.jpg",
+    "cloudinary_public_id": "founders/praful-sonwane",
+    "bio": "Co-Founder and Chief Technology Officer architecting distributed cloud systems, scalable backend infrastructure, and enterprise AI engines.",
+    "quote": "Engineered for scale, resilience, and uncompromised precision.",
+    "linkedin": "https://www.linkedin.com/company/zsyio/",
+    "is_founding_member": true,
+    "order": 2
+  },
+  {
+    "id": "abhishek-tiwari",
+    "name": "Abhishek Tiwari",
+    "position": "COO & Co-Founder",
+    "department": "Operations & Execution",
+    "email": "abhishek@zsyio.com",
+    "image": "https://res.cloudinary.com/damlvqiwv/image/upload/v1792045487/founders/abhishek-tiwari.jpg",
+    "cloudinary_public_id": "founders/abhishek-tiwari",
+    "bio": "Co-Founder and Chief Operating Officer overseeing operational scaling, agile delivery excellence, and cross-functional project execution.",
+    "quote": "Seamless operations enable limitless engineering velocity.",
+    "linkedin": "https://www.linkedin.com/company/zsyio/",
+    "is_founding_member": true,
+    "order": 3
+  },
+  {
+    "id": "arpit-nigam",
+    "name": "Arpit Nigam",
+    "position": "CPO & Head of Product",
+    "department": "Product & Design",
+    "email": "arpit@zsyio.com",
+    "image": "https://res.cloudinary.com/damlvqiwv/image/upload/v1792045500/founders/arpit-nigam.jpg",
+    "cloudinary_public_id": "founders/arpit-nigam",
+    "bio": "Co-Founder and Chief Product Officer shaping user-first product strategy, design systems, and rapid prototyping workflows.",
+    "quote": "Great products live at the intersection of empathy and technical mastery.",
+    "linkedin": "https://www.linkedin.com/company/zsyio/",
+    "is_founding_member": true,
+    "order": 4
+  },
+  {
+    "id": "ashutosh-kumar",
+    "name": "Ashutosh Kumar",
+    "position": "Head of AI & Cloud & Co-Founder",
+    "department": "AI & Cloud Architecture",
+    "email": "ashutosh@zsyio.com",
+    "image": "https://res.cloudinary.com/damlvqiwv/image/upload/v1792045516/founders/ashutosh-kumar.jpg",
+    "cloudinary_public_id": "founders/ashutosh-kumar",
+    "bio": "Co-Founder and Head of AI & Cloud spearheading intelligent workflow automation, machine learning pipelines, and multi-cloud DevOps architectures.",
+    "quote": "Building intelligent systems that adapt and empower future enterprises.",
+    "linkedin": "https://www.linkedin.com/company/zsyio/",
+    "is_founding_member": true,
+    "order": 5
+  }
+]
