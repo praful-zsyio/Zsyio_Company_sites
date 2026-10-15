@@ -206,6 +206,41 @@ const ProjectRow = ({ project, index, isOpen, onToggle, isLast }) => {
   );
 };
 
+const FALLBACK_PROJECTS = [
+  {
+    id: "zsyio-suite",
+    title: "Zsyio Enterprise OS",
+    category: "Enterprise Software",
+    description: "Consolidating fragmented corporate software into a single unified monorepo system encompassing PMS, CRM, HRMS, and client delivery pipelines.",
+    image: "https://res.cloudinary.com/damlvqiwv/image/upload/v1791785480/projects/zsyio-suite/dasboard1.png",
+    tags: ["React", "Turborepo", "Enterprise", "Node.js"],
+  },
+  {
+    id: "writeanblog",
+    title: "WriteAnBlog Engine",
+    category: "AI Platform",
+    description: "Autonomous AI-powered technical content generation platform featuring streaming completions, markdown compilation, and automated publishing workflows.",
+    image: "https://res.cloudinary.com/damlvqiwv/image/upload/v1791782395/projects/writeanblog/blog1.png",
+    tags: ["Next.js", "AI/ML", "Cloudflare", "TailwindCSS"],
+  },
+  {
+    id: "apex-cloud-core",
+    title: "Apex Cloud Infrastructure",
+    category: "Cloud Architecture",
+    description: "Multi-cloud Kubernetes cluster deployment platform featuring automated traffic shifting, sub-10ms global edge caching, and zero-trust orchestration.",
+    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=1200&q=80",
+    tags: ["Kubernetes", "AWS", "Terraform", "Go"],
+  },
+  {
+    id: "fintech-ledger-pro",
+    title: "FinTech Settlement Ledger",
+    category: "Fintech Systems",
+    description: "High-throughput immutable double-entry ledger processing 100K+ transactional settlements per second with zero-reconciliation discrepancies.",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80",
+    tags: ["Distributed Systems", "PostgreSQL", "Kafka", "Python"],
+  },
+];
+
 /* ─────────────────────────────────────────────
    ProjectsGlimpse — main component
 ───────────────────────────────────────────── */
@@ -214,19 +249,25 @@ const ProjectsGlimpse = () => {
   const headerRef   = useRef(null);
   const rowsRef     = useRef(null);
   const [projectsData, setProjectsData] = useState([]);
-  const [loading,      setLoading]      = useState(true);
   const [open,         setOpen]         = useState(0);
 
   useEffect(() => {
     getProjects()
-      .then((res) => setProjectsData(Array.isArray(res.data) ? res.data : []))
-      .catch((err) => console.error("Error fetching projects:", err))
-      .finally(() => setLoading(false));
+      .then((res) => {
+        const data = Array.isArray(res.data) ? res.data : [];
+        if (data.length > 0) {
+          setProjectsData(data);
+        }
+      })
+      .catch((err) => console.error("Error fetching projects:", err));
   }, []);
+
+  const displayProjects = projectsData.length > 0 ? projectsData : FALLBACK_PROJECTS;
+  const preview = displayProjects.slice(0, 5);
 
   // ── Scroll-triggered entrance animations ──
   useEffect(() => {
-    if (loading || !sectionRef.current) return;
+    if (!sectionRef.current) return;
 
     const ctx = gsap.context(() => {
       // Header — tag + title + subtitle stagger up
@@ -245,26 +286,24 @@ const ProjectsGlimpse = () => {
 
       // Rows — stagger slide up from bottom
       const rows = gsap.utils.toArray(rowsRef.current?.querySelectorAll(".project-row") || []);
-      gsap.from(rows, {
-        opacity: 0,
-        y: 32,
-        duration: 0.6,
-        stagger: 0.08,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: rowsRef.current,
-          start: "top 85%",
-          toggleActions: "play none none none",
-        },
-      });
+      if (rows.length > 0) {
+        gsap.from(rows, {
+          opacity: 0,
+          y: 32,
+          duration: 0.6,
+          stagger: 0.08,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: rowsRef.current,
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+        });
+      }
     }, sectionRef);
 
     return () => ctx.revert();
-  }, [loading]);
-
-  if (loading || !projectsData.length) return null;
-
-  const preview = projectsData.slice(0, 5);
+  }, [preview.length]);
 
   return (
     <section
@@ -290,7 +329,7 @@ const ProjectsGlimpse = () => {
       {/* ── Accordion rows ── */}
       <div ref={rowsRef} className="flex flex-col mb-12">
         {preview.map((project, i) => (
-          <div key={project.id} className="project-row">
+          <div key={project.id || project._id || i} className="project-row">
             <ProjectRow
               project={project}
               index={i}
@@ -304,12 +343,12 @@ const ProjectsGlimpse = () => {
 
       {/* ── View all — same as Services ── */}
       <div className="flex justify-center mb-16">
-        <a
-          href="/projects"
+        <Link
+          to="/projects"
           className="text-[0.8rem] font-Barlow uppercase tracking-[.15rem] text-[hsl(var(--highlight))] underline underline-offset-4 hover:opacity-70 transition-opacity"
         >
           View All Projects
-        </a>
+        </Link>
       </div>
 
     </section>
